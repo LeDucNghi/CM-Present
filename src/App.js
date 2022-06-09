@@ -19,12 +19,12 @@ const About = React.lazy(() => {
 
 const Trash = React.lazy(() => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(import("pages/Trash")), 1000);
+    setTimeout(() => resolve(import("pages/Trash/trash")), 3000);
   });
 });
 const User = React.lazy(() => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(import("pages/")), 1000);
+    setTimeout(() => resolve(import("pages/Users/user")), 3000);
   });
 });
 
@@ -45,10 +45,28 @@ function App() {
         />
 
         <Route
-          path="/home"
+          path="/about"
           element={
             <Suspense fallback={<Loading />}>
               <About />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/trash"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Trash />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/user"
+          element={
+            <Suspense fallback={<Loading />}>
+              <User />
             </Suspense>
           }
         />
