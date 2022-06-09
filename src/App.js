@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import React, { Suspense } from "react";
 
+import Header from "components/Header/header";
 import { Loading } from "components/Loading";
 import SignIn from "pages/SignIn/signin";
 import SignUp from "pages/SignUp/signup";
@@ -33,6 +34,8 @@ const User = React.lazy(() => {
 function App() {
   return (
     <BrowserRouter>
+      <Header />
+
       <Routes>
         <Route path="/" element={<Navigate to="home" />} />
 
