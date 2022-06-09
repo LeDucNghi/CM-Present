@@ -1,0 +1,15 @@
+$bg-color : #000;
+$font-weight : 600;
+$text-color : #fff;
+$text-center : center;
+
+
+h1{
+    background: $bg-color;
+    font-weight: $font-weight;
+    color: $text-color;
+    text-align: $text-center;
+}
+
+
+
