@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import ThemeToggle from "components/ThemingToggle/themingToggle";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
@@ -124,6 +125,7 @@ const Header = () => {
                 {page}
               </Button>
             ))}
+            <ThemeToggle />
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
