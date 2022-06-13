@@ -1,4 +1,4 @@
-import "./home.scss";
+import "./main.scss";
 
 import React from "react";
 

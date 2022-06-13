@@ -3,14 +3,14 @@ import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import React, { Suspense } from "react";
 
-import Header from "components/Header/header";
 import { Loading } from "components/Loading";
+import MiniDrawer from "components/Drawer/drawer";
 import SignIn from "pages/SignIn/signin";
 import SignUp from "pages/SignUp/signup";
 
 const Home = React.lazy(() => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(import("pages/Home/home")), 1000);
+    setTimeout(() => resolve(import("pages/Main/main")), 1000);
   });
 });
 
@@ -34,7 +34,9 @@ const User = React.lazy(() => {
 function App() {
   return (
     <BrowserRouter>
-      <Header />
+      {/* <Header /> */}
+
+      <MiniDrawer />
 
       <Routes>
         <Route path="/" element={<Navigate to="home" />} />
