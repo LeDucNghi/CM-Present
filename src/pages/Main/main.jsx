@@ -1,18 +1,12 @@
-// import "./main.scss";
-
 import { Navigate, Route, Routes } from "react-router-dom";
 import React, { Suspense } from "react";
 
 import Box from "@mui/material/Box";
 import Dashboard from "pages/DashBoard/dashboard";
+import Error from "components/NotFound";
 import { Loading } from "components/Loading";
 import MiniDrawer from "components/Drawer/drawer";
 import { styled } from "@mui/material/styles";
-
-// import About from "pages/About/about";
-
-// import Trash from "pages/Trash/trash";
-// import User from "pages/Users/user";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -47,7 +41,7 @@ export default function Main() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Routes>
-          <Route path="/" element={<Navigate to="dashboard" />} />
+          <Route path="/" element={<Navigate to="user" />} />
 
           <Route
             path="dashboard"
@@ -59,7 +53,7 @@ export default function Main() {
           />
 
           <Route
-            path="about"
+            path="about/:userId"
             element={
               <Suspense fallback={<Loading />}>
                 <About />
@@ -84,6 +78,8 @@ export default function Main() {
               </Suspense>
             }
           />
+
+          <Route path="*" element={<Error />} />
         </Routes>
       </Box>
     </Box>

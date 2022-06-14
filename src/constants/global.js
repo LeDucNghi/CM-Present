@@ -1,7 +1,7 @@
-import PersonIcon from "@mui/icons-material/Person";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import InfoIcon from "@mui/icons-material/Info";
 import DeleteIcon from "@mui/icons-material/Delete";
+import InfoIcon from "@mui/icons-material/Info";
+import PersonIcon from "@mui/icons-material/Person";
 
 export const drawer = [
   {

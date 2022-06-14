@@ -1,18 +1,10 @@
 import "./assets/styles/GlobalStyles.scss";
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import React, { Suspense } from "react";
 
-import { Loading } from "components/Loading";
 import Main from "pages/Main/main";
 import SignIn from "pages/SignIn/signin";
 import SignUp from "pages/SignUp/signup";
-
-// const Home = React.lazy(() => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => resolve(import("pages/Main/main")), 1000);
-//   });
-// });
 
 function App() {
   return (
@@ -26,15 +18,7 @@ function App() {
 
         <Route path="/signup" element={<SignUp />} />
 
-        <Route
-          index
-          path="home/*"
-          element={
-            <Suspense fallback={<Loading />}>
-              <Main />
-            </Suspense>
-          }
-        />
+        <Route index path="home/*" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );

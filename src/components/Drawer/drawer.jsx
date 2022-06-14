@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
+import { useDispatch, useSelector } from "react-redux";
 
 import Box from "@mui/material/Box";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -21,6 +22,7 @@ import ThemeToggle from "components/ThemingToggle/themingToggle";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { drawer } from "constants/global";
+import { routesName } from "features/usersSlice";
 import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -92,10 +94,12 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer() {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const routeName = useSelector((state) => state.user.routeName);
+
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const navigate = useNavigate();
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -112,10 +116,22 @@ export default function MiniDrawer() {
       "🚀 ~ file: drawer.jsx ~ line 136 ~ handleRedirect ~ page",
       page
     );
-    if (page === "Users") navigate("/home/user");
-    if (page === "Profiles") navigate("/home/user");
-    if (page === "About") navigate("/home/about");
-    if (page === "Trash") navigate("/home/trash");
+    if (page === "Users") {
+      dispatch(routesName("Users"));
+      navigate("/home/user");
+    }
+    if (page === "Profiles") {
+      dispatch(routesName("Profiles"));
+      navigate("/home/user");
+    }
+    if (page === "About") {
+      dispatch(routesName("About"));
+      navigate("/home/about");
+    }
+    if (page === "Trash") {
+      dispatch(routesName("Trash"));
+      navigate("/home/trash");
+    }
   };
 
   const handleDrawerOpen = () => {
@@ -130,7 +146,10 @@ export default function MiniDrawer() {
     <>
       <CssBaseline />
       <AppBar
-        sx={{ display: "flex", justifyContent: "space-between" }}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
         position="fixed"
         open={open}
       >
@@ -147,18 +166,33 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-
           <Box
             sx={{
-              width: "200px",
-              //   marginRight: "2%",
+              width: "100%",
+              // marginLeft: "100px",
               display: "flex",
               justifyContent: "space-between",
+              // background: "#000",
               alignItems: "center",
             }}
           >
-            <ThemeToggle />
-            <LanguageMenus />
+            <Typography variant="h6" noWrap component="div">
+              {routeName}
+            </Typography>
+            <Box
+              sx={{
+                width: "250px",
+                marginLeft: "100px",
+                display: "flex",
+                justifyContent: "space-between",
+                // background: "violet",
+                alignItems: "center",
+                paddingRight: "20px",
+              }}
+            >
+              <ThemeToggle />
+              <LanguageMenus />
+            </Box>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -208,6 +242,7 @@ export default function MiniDrawer() {
               <ListItemButton
                 onClick={() => handleRedirect(text.name)}
                 sx={{
+                  background: "",
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
