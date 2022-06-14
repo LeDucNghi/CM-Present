@@ -1,6 +1,21 @@
+$width: 100%;
+$height: 100vh;
+$bg-color-test: #000;
+$font-weight: 600;
+$text-color-test: #fff;
+$text-center: center;
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 html,
 body {
-    overflow-x: hidden;
+    height: $height;
+    width: $width;
+    // overflow-x: hidden;
 }
 
 * {
@@ -9,11 +24,6 @@ body {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     scroll-behavior: smooth;
-}
-
-body {
-    height: 100vh;
-    width: 100%;
 }
 
 a {

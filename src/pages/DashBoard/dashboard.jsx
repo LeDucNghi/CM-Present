@@ -35,7 +35,7 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-export default function User() {
+export default function Dashboard() {
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid

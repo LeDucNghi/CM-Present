@@ -93,7 +93,6 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  // const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const navigate = useNavigate();
@@ -113,10 +112,10 @@ export default function MiniDrawer() {
       "🚀 ~ file: drawer.jsx ~ line 136 ~ handleRedirect ~ page",
       page
     );
-    if (page === "Users") navigate("/user");
-    if (page === "Profiles") navigate("/user");
-    if (page === "About") navigate("/about");
-    if (page === "Trash") navigate("/trash");
+    if (page === "Users") navigate("/home/user");
+    if (page === "Profiles") navigate("/home/user");
+    if (page === "About") navigate("/home/about");
+    if (page === "Trash") navigate("/home/trash");
   };
 
   const handleDrawerOpen = () => {
@@ -128,7 +127,7 @@ export default function MiniDrawer() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <>
       <CssBaseline />
       <AppBar
         sx={{ display: "flex", justifyContent: "space-between" }}
@@ -148,9 +147,6 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography> */}
 
           <Box
             sx={{
@@ -235,6 +231,6 @@ export default function MiniDrawer() {
           ))}
         </List>
       </Drawer>
-    </Box>
+    </>
   );
 }
