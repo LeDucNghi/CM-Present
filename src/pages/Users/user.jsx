@@ -1,20 +1,31 @@
 import * as React from "react";
 
+import { postUserList, routesName } from "features/slice";
+import { useDispatch, useSelector } from "react-redux";
+
+import AddUser from "components/AddUser/addUser";
 import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PreviewIcon from "@mui/icons-material/Preview";
 import Swal from "sweetalert2";
-import { routesName } from "features/usersSlice";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function User() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const userStorage = useSelector((state) => state.user.userInfo);
+  console.log(
+    "🚀 ~ file: user.jsx ~ line 20 ~ User ~ userStorage",
+    userStorage
+  );
+
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
+
+  const [open, setOpen] = React.useState(false);
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -164,14 +175,26 @@ export default function User() {
     setRow(rows);
   }, []);
 
-  const handleDeleteRow = () => {
-    // console.log(
-    //   "🚀 ~ file: user.jsx ~ line 12 ~ User ~ selectedRow",
-    //   selectedRow,
-    //   row
-    // );
+  React.useEffect(() => {
+    if (!userStorage) return;
+    else {
+      if (userStorage.id === 0) {
+        const newUser = { ...userStorage, id: row.length + 1 };
+        console.log(
+          "🚀 ~ file: user.jsx ~ line 197 ~ React.useEffect ~ newUser",
+          newUser
+        );
+        const newRow = [...row];
+        newRow.push(newUser);
+        setRow(newRow);
+      }
+    }
+  }, [userStorage]);
 
-    const index = row.filter((x) => !selectedRow.some((x1) => x.id === x1.id));
+  const handleDeleteUser = () => {
+    const checkSameElement = row.filter(
+      (x) => !selectedRow.some((x1) => x.id === x1.id)
+    );
 
     Swal.fire({
       title: `Are you sure to delete this ${
@@ -186,10 +209,21 @@ export default function User() {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
-        const newRow = index;
+        const newRow = checkSameElement;
         setRow(newRow);
       }
     });
+  };
+
+  const handleAddUser = () => {
+    setOpen(true);
+  };
+
+  const onSelectionModelChange = (id) => {
+    const selectedIDs = new Set(id);
+    const selectedRowData = rows.filter((row) => selectedIDs.has(row.id));
+    setSelectedRow(selectedRowData);
+    console.log(selectedRowData);
   };
   return (
     <div style={{ height: 400, width: "100%" }}>
@@ -207,12 +241,13 @@ export default function User() {
           variant="contained"
           color="success"
           sx={{ fontWeight: 600, marginRight: "1em" }}
+          onClick={() => handleAddUser()}
         >
           Add
         </Button>
         <Button
           startIcon={<DeleteIcon />}
-          onClick={() => handleDeleteRow()}
+          onClick={() => handleDeleteUser()}
           variant="contained"
           color="error"
           sx={{ fontWeight: 600 }}
@@ -221,13 +256,9 @@ export default function User() {
           Delete
         </Button>
       </div>
+      <AddUser open={open} setOpen={setOpen} />
       <DataGrid
-        onSelectionModelChange={(id) => {
-          const selectedIDs = new Set(id);
-          const selectedRowData = rows.filter((row) => selectedIDs.has(row.id));
-          setSelectedRow(selectedRowData);
-          console.log(selectedRowData);
-        }}
+        onSelectionModelChange={(id) => onSelectionModelChange(id)}
         rows={row}
         columns={columns}
         pageSize={5}

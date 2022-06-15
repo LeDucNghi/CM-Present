@@ -22,7 +22,7 @@ import ThemeToggle from "components/ThemingToggle/themingToggle";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { drawer } from "constants/global";
-import { routesName } from "features/usersSlice";
+import { routesName } from "features/slice";
 import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -111,6 +111,14 @@ export default function MiniDrawer() {
     setAnchorElUser(null);
   };
 
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   const handleRedirect = (page) => {
     console.log(
       "🚀 ~ file: drawer.jsx ~ line 136 ~ handleRedirect ~ page",
@@ -132,14 +140,6 @@ export default function MiniDrawer() {
       dispatch(routesName("Trash"));
       navigate("/home/trash");
     }
-  };
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
   };
 
   return (
