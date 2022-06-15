@@ -1,5 +1,6 @@
-import React from "react";
 import "./NotFound.css";
+
+import React from "react";
 
 function Error(props) {
   window.onload = function () {

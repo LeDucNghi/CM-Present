@@ -94,14 +94,10 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  const { pathname } = useLocation();
-  console.log(
-    "🚀 ~ file: drawer.jsx ~ line 98 ~ MiniDrawer ~ pathname",
-    pathname
-  );
+  // const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const routeName = useSelector((state) => state.user.routeName);
+  const routeName = useSelector((state) => state.app.routeName);
 
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);

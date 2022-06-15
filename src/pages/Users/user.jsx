@@ -16,7 +16,7 @@ export default function User() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const userStorage = useSelector((state) => state.user.userInfo);
+  const userStorage = useSelector((state) => state.app.userInfo);
   console.log(
     "🚀 ~ file: user.jsx ~ line 20 ~ User ~ userStorage",
     userStorage
@@ -84,8 +84,6 @@ export default function User() {
             onClick={() => {
               navigate(`/home/profile/${cellValues.row.id}`);
               dispatch(routesName("Profile"));
-
-              console.log(cellValues.row);
             }}
           >
             View

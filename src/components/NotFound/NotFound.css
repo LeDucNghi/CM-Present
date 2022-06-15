@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+@import "../../assets/styles/GlobalStyles.scss";
 
 .notfound {
   position: relative;
@@ -6,8 +7,9 @@
   height: 50vh;
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+
   flex-direction: column;
   background-color: #222;
   color: #555;
@@ -29,10 +31,8 @@ p#type-after {
   min-height: 1em;
   padding: 3px;
   border-right: 3px solid #222;
-  /* Adds flicker animation of the border to make it look like a typer */
   animation: flicker 1s linear 1s infinite;
 }
-/* Fickeranimation idles between foreground and background with 5% transition time */
 @keyframes flicker {
   0% {
     border-right-color: #555;

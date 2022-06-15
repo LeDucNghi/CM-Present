@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
+import Swal from "sweetalert2";
 import { TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { postUserInfo } from "features/slice";
@@ -34,6 +35,8 @@ export default function AddUser({ open, setOpen }) {
     dispatch(postUserInfo(values));
     setTimeout(() => {
       setSubmitting(false);
+      setOpen(false);
+      Swal.fire("Added user successfully!", "", "success");
     }, 1500);
   };
   return (
