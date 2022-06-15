@@ -34,6 +34,12 @@ const User = React.lazy(() => {
   });
 });
 
+const Profile = React.lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("pages/Profile/profile")), 3000);
+  });
+});
+
 export default function Main() {
   return (
     <Box sx={{ display: "flex" }}>
@@ -53,7 +59,7 @@ export default function Main() {
           />
 
           <Route
-            path="about/:userId"
+            path="about"
             element={
               <Suspense fallback={<Loading />}>
                 <About />
@@ -66,6 +72,15 @@ export default function Main() {
             element={
               <Suspense fallback={<Loading />}>
                 <Trash />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="profile/:userId"
+            element={
+              <Suspense fallback={<Loading />}>
+                <Profile />
               </Suspense>
             }
           />

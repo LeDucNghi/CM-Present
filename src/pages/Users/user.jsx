@@ -55,7 +55,7 @@ export default function User() {
         return (
           <Button
             onClick={() => {
-              navigate(`/home/about/${cellValues.row.id}`);
+              navigate(`/home/profile/${cellValues.row.id}`);
               console.log(cellValues.row);
             }}
           >
@@ -70,10 +70,9 @@ export default function User() {
       width: 150,
     },
     {
-      // headerName: "Full name",
+      field: "",
+      headerName: "",
       width: 200,
-      // valueGetter: (params) =>
-      //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
 
       renderCell: (cellValues) => {
         return (
@@ -83,8 +82,8 @@ export default function User() {
             color="success"
             sx={{ fontWeight: 600, margin: "0 auto" }}
             onClick={() => {
-              navigate(`/home/about/${cellValues.row.id}`);
-              dispatch(routesName("About"));
+              navigate(`/home/profile/${cellValues.row.id}`);
+              dispatch(routesName("Profile"));
 
               console.log(cellValues.row);
             }}

@@ -3,6 +3,7 @@ import * as React from "react";
 import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -23,7 +24,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { drawer } from "constants/global";
 import { routesName } from "features/slice";
-import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -94,6 +94,11 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer() {
   const theme = useTheme();
+  const { pathname } = useLocation();
+  console.log(
+    "🚀 ~ file: drawer.jsx ~ line 98 ~ MiniDrawer ~ pathname",
+    pathname
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const routeName = useSelector((state) => state.user.routeName);
@@ -120,17 +125,13 @@ export default function MiniDrawer() {
   };
 
   const handleRedirect = (page) => {
-    console.log(
-      "🚀 ~ file: drawer.jsx ~ line 136 ~ handleRedirect ~ page",
-      page
-    );
     if (page === "Users") {
       dispatch(routesName("Users"));
       navigate("/home/user");
     }
     if (page === "Profiles") {
       dispatch(routesName("Profiles"));
-      navigate("/home/user");
+      navigate("/home/profile");
     }
     if (page === "About") {
       dispatch(routesName("About"));
@@ -242,7 +243,6 @@ export default function MiniDrawer() {
               <ListItemButton
                 onClick={() => handleRedirect(text.name)}
                 sx={{
-                  background: "",
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
