@@ -5,11 +5,20 @@ $font-weight: 600;
 $text-color-test: #fff;
 $text-center: center;
 $font-roboto: "Roboto Mono", monospace;
+$circle-border: 50%;
+$white-bg: #fff;
 
 @mixin flexCenter {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@mixin posCenter {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 html,

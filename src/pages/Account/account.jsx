@@ -22,9 +22,9 @@ function Account(props) {
 
   return (
     <div className="account">
-      <div className="account_header">
+      {/* <div className="account_header">
         <h2>Account information</h2>
-      </div>
+      </div> */}
       <Formik
         enableReinitialize={true}
         validationSchema={validationSchema}
