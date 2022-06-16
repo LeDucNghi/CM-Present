@@ -82,7 +82,7 @@ export default function User() {
             color="success"
             sx={{ fontWeight: 600, margin: "0 auto" }}
             onClick={() => {
-              navigate(`/home/profile/${cellValues.row.id}`);
+              navigate(`/main/profile/${cellValues.row.id}`);
               dispatch(routesName("Profile"));
             }}
           >

@@ -123,19 +123,19 @@ export default function MiniDrawer() {
   const handleRedirect = (page) => {
     if (page === "Users") {
       dispatch(routesName("Users"));
-      navigate("/home/user");
+      navigate("/main/user");
     }
     if (page === "Profiles") {
       dispatch(routesName("Profiles"));
-      navigate("/home/profile");
+      navigate("/main/profile");
     }
     if (page === "About") {
       dispatch(routesName("About"));
-      navigate("/home/about");
+      navigate("/main/about");
     }
     if (page === "Trash") {
       dispatch(routesName("Trash"));
-      navigate("/home/trash");
+      navigate("/main/trash");
     }
   };
 

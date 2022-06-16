@@ -5,21 +5,20 @@
   position: relative;
   margin-top: 6em;
   height: 50vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: $width;
+
+  @include flexCenter;
 
   flex-direction: column;
   background-color: #222;
   color: #555;
-  font-family: "Roboto Mono", monospace;
+  font-family: $font-roboto;
 }
 
 p#type-in {
   margin: 0;
   font-size: 3em;
-  line-height: 100%;
+  line-height: $width;
   min-height: 1em;
   padding: 3px;
   border-right: 3px solid #555;
@@ -27,7 +26,7 @@ p#type-in {
 p#type-after {
   margin: 0;
   font-size: 1.5em;
-  line-height: 100%;
+  line-height: $width;
   min-height: 1em;
   padding: 3px;
   border-right: 3px solid #222;
@@ -59,14 +58,17 @@ p#type-after {
   border-bottom: 2px solid #222;
   transition: border 0.3s;
   cursor: pointer;
+
+  &:hover {
+    border-bottom: 2px solid #555;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
 }
-.back:hover {
-  border-bottom: 2px solid #555;
-}
-a {
-  color: inherit;
-  text-decoration: inherit;
-}
+
 ::selection {
   background-color: rgba(0, 0, 0, 0.2);
 }

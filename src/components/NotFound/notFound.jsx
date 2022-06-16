@@ -1,4 +1,4 @@
-import "./NotFound.css";
+import "./notFound.scss";
 
 import React from "react";
 

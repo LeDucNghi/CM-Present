@@ -1,9 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import React, { Suspense } from "react";
 
+import Account from "pages/Account/account";
 import Box from "@mui/material/Box";
 import Dashboard from "pages/DashBoard/dashboard";
-import Error from "components/NotFound";
+import Error from "components/NotFound/notFound";
 import { Loading } from "components/Loading";
 import MiniDrawer from "components/Drawer/drawer";
 import { styled } from "@mui/material/styles";
@@ -80,7 +81,8 @@ export default function Main() {
             path="profile/:userId"
             element={
               <Suspense fallback={<Loading />}>
-                <Profile />
+                {/* <Profile /> */}
+                <Account />
               </Suspense>
             }
           />
