@@ -18,16 +18,22 @@ export default function User() {
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-  console.log("RTK data", data);
 
   React.useEffect(() => {
-    setRow(rows);
-  }, []);
+    if (isSuccess) setRow(data);
+  }, [isSuccess]);
 
   React.useEffect(() => {
     if (!userStorage) return;
     else {
-      if (userStorage.id === 0) {
+      if (Array.isArray(userStorage)) {
+        userStorage.forEach((item) => {
+          const newUser = { ...item, id: row.length + 1 };
+          const newRow = [...row];
+          newRow.push(newUser);
+          setRow(newRow);
+        });
+      } else if (!Array.isArray(userStorage) || userStorage.id === 0) {
         const newUser = { ...userStorage, id: row.length + 1 };
         const newRow = [...row];
         newRow.push(newUser);
@@ -44,19 +50,28 @@ export default function User() {
     Swal.fire({
       title: `Are you sure to delete this ${
         selectedRow.length === 1 ? "" : selectedRow.length
-      } persons ?`,
+      } user ?`,
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
+      // showDenyButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
+      // denyButtonText: `Delete it permanently`,
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        Swal.fire(
+          "Deleted!",
+          "You can restore this user from trash!",
+          "success"
+        );
         const newRow = checkSameElement;
         setRow(newRow);
       }
+      // else if (result.isDenied) {
+      //   Swal.fire("Changes are not saved", "", "info");
+      // }
     });
   };
 

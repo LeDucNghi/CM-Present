@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import { TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { postUserInfo } from "features/slice";
+import { usePostNewUserMutation } from "services/user";
 
 const style = {
   position: "absolute",
@@ -30,9 +31,13 @@ const style = {
 export default function AddUser({ open, setOpen }) {
   const dispatch = useDispatch();
 
+  const [postNewUser] = usePostNewUserMutation();
+
   const handleClose = () => setOpen(false);
   const handleAddUser = (values, { setSubmitting }) => {
     dispatch(postUserInfo(values));
+    postNewUser(values);
+
     setTimeout(() => {
       setSubmitting(false);
       setOpen(false);

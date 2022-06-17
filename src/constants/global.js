@@ -133,7 +133,7 @@ export const columns = [
 
     renderCell: (cellValues) => {
       return (
-        <Link to={`/home/profile/${cellValues.row.id}`}>
+        <Link to={`/home/about/${cellValues.row.id}`}>
           <Button>
             {cellValues.row.firstName || ""} {cellValues.row.lastName || ""}
           </Button>
@@ -153,14 +153,14 @@ export const columns = [
 
     renderCell: (cellValues) => {
       return (
-        <Link to={`/main/profile/${cellValues.row.id}`}>
+        <Link to={`/main/about/${cellValues.row.id}`}>
           <Button
             startIcon={<PreviewIcon />}
             variant="contained"
             color="success"
             sx={{ fontWeight: 600, margin: "0 auto" }}
             onClick={() => {
-              store.dispatch(routesName("Profile"));
+              store.dispatch(routesName("About"));
             }}
           >
             View

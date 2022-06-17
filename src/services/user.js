@@ -10,9 +10,67 @@ export const userApi = createApi({
         method: "GET",
       }),
     }),
+
+    getDeletedUser: builder.query({
+      query: () => ({
+        url: `trash`,
+        method: "GET",
+      }),
+    }),
+
+    getDetaillUser: builder.query({
+      query: (userId) => ({
+        url: `users/${userId}`,
+        method: "GET",
+      }),
+    }),
+
+    deleteUser: builder.mutation({
+      query: (userId) => ({
+        url: `trash/${userId}`,
+        method: "DELETE",
+      }),
+    }),
+
+    postNewUser: builder.mutation({
+      query: (data) => {
+        console.log("🚀 ~ file: user.js ~ line 37 ~ data", data);
+
+        return {
+          url: `users`,
+          method: "POST",
+          body: data,
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        };
+      },
+    }),
+
+    updateUser: builder.mutation({
+      query: (data) => {
+        console.log("🚀 ~ file: user.js ~ line 52 ~ data", data);
+
+        return {
+          url: `users/${data.id}`,
+          method: "PUT",
+          body: data,
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        };
+      },
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllUserQuery } = userApi;
+export const {
+  useGetAllUserQuery,
+  useGetDetaillUserQuery,
+  useDeleteUserMutation,
+  useGetDeletedUserQuery,
+  usePostNewUserMutation,
+  useUpdateUserMutation,
+} = userApi;

@@ -8,6 +8,7 @@ import Error from "components/NotFound/notFound";
 import { Loading } from "components/Loading";
 import MiniDrawer from "components/Drawer/drawer";
 import { styled } from "@mui/material/styles";
+import { useGetAllUserQuery } from "services/user";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -42,6 +43,8 @@ const Profile = React.lazy(() => {
 });
 
 export default function Main() {
+  // const { data, error, isLoading, isSuccess } = useGetAllUserQuery();
+
   return (
     <Box sx={{ display: "flex" }}>
       <MiniDrawer />
@@ -78,7 +81,7 @@ export default function Main() {
           />
 
           <Route
-            path="profile/:userId"
+            path="about/:id"
             element={
               <Suspense fallback={<Loading />}>
                 {/* <Profile /> */}
