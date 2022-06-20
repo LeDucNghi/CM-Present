@@ -1,6 +1,7 @@
 import { columns, rows } from "constants/global";
 import {
   useDeleteUserMutation,
+  useDeleteUserPermanentlyMutation,
   useGetDeletedUserQuery,
   usePostNewUserMutation,
 } from "services/user";
@@ -18,14 +19,13 @@ function Trash(props) {
   const dispatch = useDispatch();
 
   const { data, error, isLoading, isSuccess } = useGetDeletedUserQuery();
-  const [deleteUser] = useDeleteUserMutation();
+  const [deleteUserPermanently] = useDeleteUserPermanentlyMutation();
   const [postNewUser] = usePostNewUserMutation();
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
 
   React.useEffect(() => {
     if (isSuccess) setRow(data);
-    console.log("🚀 ~ file: trash.jsx ~ line 24 ~ Trash ~ row", row);
   }, [isSuccess]);
 
   const checkDiffElement = row.filter(
@@ -54,7 +54,7 @@ function Trash(props) {
         dispatch(postUserInfo(sameElement));
         sameElement.forEach((item) => {
           const { id, ...rest } = item;
-          deleteUser(item.id);
+          deleteUserPermanently(item.id);
           postNewUser({ ...rest });
         });
         setRow(difElement);
@@ -80,7 +80,7 @@ function Trash(props) {
         const sameElement = checkSameElement;
         dispatch(postUserInfo(sameElement));
         sameElement.forEach((item) => {
-          deleteUser(item.id);
+          deleteUserPermanently(item.id);
         });
         setRow(difElement);
         Swal.fire("Deleted!", "", "success");
@@ -90,7 +90,7 @@ function Trash(props) {
 
   const onSelectionModelChange = (id) => {
     const selectedIDs = new Set(id);
-    const selectedRowData = rows.filter((row) => selectedIDs.has(row.id));
+    const selectedRowData = row.filter((row1) => selectedIDs.has(row1.id));
     setSelectedRow(selectedRowData);
     console.log("selectedRowData trash", selectedRowData);
   };

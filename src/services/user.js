@@ -25,9 +25,16 @@ export const userApi = createApi({
       }),
     }),
 
-    deleteUser: builder.mutation({
+    deleteUserPermanently: builder.mutation({
       query: (userId) => ({
         url: `trash/${userId}`,
+        method: "DELETE",
+      }),
+    }),
+
+    deleteUserFromList: builder.mutation({
+      query: (userId) => ({
+        url: `users/${userId}`,
         method: "DELETE",
       }),
     }),
@@ -38,6 +45,21 @@ export const userApi = createApi({
 
         return {
           url: `users`,
+          method: "POST",
+          body: data,
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        };
+      },
+    }),
+
+    postDeletedUser: builder.mutation({
+      query: (data) => {
+        console.log("🚀 ~ file: user.js ~ line 37 ~ data", data);
+
+        return {
+          url: `trash`,
           method: "POST",
           body: data,
           headers: {
@@ -69,8 +91,10 @@ export const userApi = createApi({
 export const {
   useGetAllUserQuery,
   useGetDetaillUserQuery,
-  useDeleteUserMutation,
+  useDeleteUserPermanentlyMutation,
   useGetDeletedUserQuery,
   usePostNewUserMutation,
   useUpdateUserMutation,
+  useDeleteUserFromListMutation,
+  usePostDeletedUserMutation,
 } = userApi;

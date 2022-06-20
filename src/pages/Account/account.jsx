@@ -9,6 +9,7 @@ import { useGetDetaillUserQuery, useUpdateUserMutation } from "services/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Images } from "constants/images";
 import { Loading } from "components/Loading";
+import Swal from "sweetalert2";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 
@@ -34,139 +35,141 @@ function Account(props) {
 
   const handleUpdateUser = (values, { setSubmitting }) => {
     console.log("🚀 ~ file: account.jsx ~ line 37 ~ handleUpdateUser ~ id", id);
-    updateUser({ ...values, id: id, userId: id });
+    updateUser({ ...values, id: id });
+    Swal.fire("Update user successfully!", "", "success");
   };
 
   if (isLoading) return <Loading />;
-  return (
-    <div className="account">
-      <Formik
-        enableReinitialize={true}
-        validationSchema={validationSchema}
-        initialValues={initialValues}
-        onSubmit={(values, { setSubmitting }) => {
-          handleUpdateUser(values, { setSubmitting });
-        }}
-        className="account"
-      >
-        {(formikProps) => {
-          const {
-            isSubmitting,
-            isValid,
-            values,
-            touched,
-            errors,
-            handleChange,
-          } = formikProps;
-          return (
-            <div>
-              <Form>
-                <div className="account_info">
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    name="firstName"
-                    label="firstName"
-                    type="text"
-                    id="outlined-error-helper-text"
-                    //   autoComplete="current-password"
-                    // value={data ? data.firstName : values.firstName}
-                    defaultValue={data.firstName}
-                    onChange={handleChange}
-                    error={touched.firstName && Boolean(errors.firstName)}
-                    helperText={errors.firstName && touched.firstName}
-                  />
-                  <ErrorMessage name="firstName" />
+  else
+    return (
+      <div className="account">
+        <Formik
+          enableReinitialize={true}
+          validationSchema={validationSchema}
+          initialValues={initialValues}
+          onSubmit={(values, { setSubmitting }) => {
+            handleUpdateUser(values, { setSubmitting });
+          }}
+          className="account"
+        >
+          {(formikProps) => {
+            const {
+              isSubmitting,
+              isValid,
+              values,
+              touched,
+              errors,
+              handleChange,
+            } = formikProps;
+            return (
+              <div>
+                <Form>
+                  <div className="account_info">
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      name="firstName"
+                      label="firstName"
+                      type="text"
+                      id="outlined-error-helper-text"
+                      //   autoComplete="current-password"
+                      // value={data ? data.firstName : values.firstName}
+                      defaultValue={data.firstName}
+                      onChange={handleChange}
+                      error={touched.firstName && Boolean(errors.firstName)}
+                      helperText={errors.firstName && touched.firstName}
+                    />
+                    <ErrorMessage name="firstName" />
 
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    name="lastName"
-                    label="lastName"
-                    type="text"
-                    id="outlined-error-helper-text"
-                    //   autoComplete="current-password"
-                    // value={data ? data.lastName : values.lastName}
-                    defaultValue={data.lastName}
-                    onChange={handleChange}
-                    error={touched.lastName && Boolean(errors.lastName)}
-                    helperText={errors.lastName && touched.lastName}
-                  />
-                  <ErrorMessage name="firstName" />
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      name="lastName"
+                      label="lastName"
+                      type="text"
+                      id="outlined-error-helper-text"
+                      //   autoComplete="current-password"
+                      // value={data ? data.lastName : values.lastName}
+                      defaultValue={data.lastName}
+                      onChange={handleChange}
+                      error={touched.lastName && Boolean(errors.lastName)}
+                      helperText={errors.lastName && touched.lastName}
+                    />
+                    <ErrorMessage name="firstName" />
 
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    name="email"
-                    label="email"
-                    type="text"
-                    id="outlined-error-helper-text"
-                    //   autoComplete="current-password"
-                    // value={data ? data.email : values.email}
-                    defaultValue={data.email}
-                    onChange={handleChange}
-                    error={touched.email && Boolean(errors.email)}
-                    helperText={errors.email && touched.email}
-                  />
-                  <ErrorMessage name="firstName" />
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      name="email"
+                      label="email"
+                      type="text"
+                      id="outlined-error-helper-text"
+                      //   autoComplete="current-password"
+                      // value={data ? data.email : values.email}
+                      defaultValue={data.email}
+                      onChange={handleChange}
+                      error={touched.email && Boolean(errors.email)}
+                      helperText={errors.email && touched.email}
+                    />
+                    <ErrorMessage name="firstName" />
 
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    name="age"
-                    label="age"
-                    type="text"
-                    id="outlined-error-helper-text"
-                    //   autoComplete="current-password"
-                    // value={data ? data.age : values.age}
-                    defaultValue={data.age}
-                    onChange={handleChange}
-                    error={touched.age && Boolean(errors.age)}
-                    helperText={errors.age && touched.age}
-                  />
-                  <ErrorMessage name="age" />
-                </div>
-
-                <div className="user_avatar">
-                  <div className="avatar">
-                    {image ? (
-                      <img
-                        className="preview_img"
-                        src={image}
-                        alt="preview_image"
-                      />
-                    ) : (
-                      <img src={Images.EMPTY} alt="user_avt" />
-                    )}
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      name="age"
+                      label="age"
+                      type="text"
+                      id="outlined-error-helper-text"
+                      //   autoComplete="current-password"
+                      // value={data ? data.age : values.age}
+                      defaultValue={data.age}
+                      onChange={handleChange}
+                      error={touched.age && Boolean(errors.age)}
+                      helperText={errors.age && touched.age}
+                    />
+                    <ErrorMessage name="age" />
                   </div>
-                  <label className="avatar_change_icon">
-                    <FontAwesomeIcon
-                      className="icon"
-                      icon={faCamera}
-                      size="3x"
-                      style={{ color: "#464646" }}
-                    />
-                    <input
-                      onChange={onImageChange}
-                      name="file_avt"
-                      type="file"
-                    />
-                  </label>
-                </div>
-                <div className="account_btn">
-                  <Button type="button" className="cancel">
-                    Cancel
-                  </Button>
-                  <Button type="submit" className="apply">
-                    Apply
-                  </Button>
-                </div>
-              </Form>
-            </div>
-          );
-        }}
-      </Formik>
-    </div>
-  );
+
+                  <div className="user_avatar">
+                    <div className="avatar">
+                      {image ? (
+                        <img
+                          className="preview_img"
+                          src={image}
+                          alt="preview_image"
+                        />
+                      ) : (
+                        <img src={Images.EMPTY} alt="user_avt" />
+                      )}
+                    </div>
+                    <label className="avatar_change_icon">
+                      <FontAwesomeIcon
+                        className="icon"
+                        icon={faCamera}
+                        size="3x"
+                        style={{ color: "#464646" }}
+                      />
+                      <input
+                        onChange={onImageChange}
+                        name="file_avt"
+                        type="file"
+                      />
+                    </label>
+                  </div>
+                  <div className="account_btn">
+                    <Button type="button" className="cancel">
+                      Cancel
+                    </Button>
+                    <Button type="submit" className="apply">
+                      Apply
+                    </Button>
+                  </div>
+                </Form>
+              </div>
+            );
+          }}
+        </Formik>
+      </div>
+    );
 }
 export default Account;
