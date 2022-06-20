@@ -7,13 +7,17 @@ import Main from "pages/Main/main";
 import SignIn from "pages/SignIn/signin";
 import SignUp from "pages/SignUp/signup";
 import moment from "moment";
+import { useEffect } from "react";
 
 function App() {
   const account = JSON.parse(localStorage.getItem("account"));
-  console.log(
-    "🚀 ~ file: App.js ~ line 11 ~ App ~ account",
-    moment(account).fromNow()
-  );
+  useEffect(() => {
+    if (!account) return;
+    else if (new Date().getTime() > account.expired) {
+      localStorage.removeItem("account");
+    }
+  }, [account]);
+
   return (
     <BrowserRouter>
       <Routes>

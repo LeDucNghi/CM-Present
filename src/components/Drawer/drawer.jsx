@@ -139,6 +139,11 @@ export default function MiniDrawer() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("account");
+    window.location.href = "/";
+  };
+
   return (
     <>
       <CssBaseline />
@@ -216,7 +221,11 @@ export default function MiniDrawer() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <ListItem
+                    onClick={setting === "Logout" ? () => handleLogout() : null}
+                  >
+                    <Typography textAlign="center">{setting}</Typography>
+                  </ListItem>
                 </MenuItem>
               ))}
             </Menu>

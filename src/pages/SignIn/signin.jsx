@@ -12,7 +12,7 @@ import Link from "@mui/material/Link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 function Copyright(props) {
   return (
@@ -35,7 +35,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const navigate = useNavigate();
   const handleSubmit = (values, { setSubmitting }) => {
     const email = "testing@gmail.com";
     const password = "123456789Test";
@@ -44,7 +43,15 @@ export default function SignIn() {
     const checkPass = password !== values.password;
 
     const now = new Date();
-    const expiredTime = now.getTime() + 24 * 3600;
+    console.log(
+      "🚀 ~ file: signin.jsx ~ line 45 ~ handleSubmit ~ now",
+      moment(now.getTime())
+    );
+    const expiredTime = now.getTime() + 86400000;
+    console.log(
+      "🚀 ~ file: signin.jsx ~ line 50 ~ handleSubmit ~ expiredTime",
+      moment(expiredTime).format("lll")
+    );
 
     const items = {
       values: values,
@@ -55,7 +62,7 @@ export default function SignIn() {
       console.log("invalid account!!");
       setSubmitting(false);
     } else {
-      navigate(`/main/`);
+      window.location.href = `/main/`;
       setSubmitting(false);
       localStorage.setItem("account", JSON.stringify(items));
     }
