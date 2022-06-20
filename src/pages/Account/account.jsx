@@ -62,7 +62,7 @@ function Account(props) {
               handleChange,
             } = formikProps;
             return (
-              <div>
+              <>
                 <Form>
                   <div className="account_info">
                     <TextField
@@ -165,7 +165,7 @@ function Account(props) {
                     </Button>
                   </div>
                 </Form>
-              </div>
+              </>
             );
           }}
         </Formik>
