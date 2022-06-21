@@ -1,14 +1,18 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 
+import About from "pages/About/about";
 import Account from "pages/Account/account";
 import Box from "@mui/material/Box";
 import Dashboard from "pages/DashBoard/dashboard";
 import Error from "components/NotFound/notFound";
 import { Loading } from "components/Loading";
 import MiniDrawer from "components/Drawer/drawer";
+import Trash from "pages/Trash/trash";
+import User from "pages/Users/user";
 import { styled } from "@mui/material/styles";
 import { useGetAllUserQuery } from "services/user";
+import { useSelector } from "react-redux";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -19,34 +23,44 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const About = React.lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(import("pages/About/about")), 1000);
-  });
-});
+// const About = React.lazy(() => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(import("pages/About/about")), 1000);
+//   });
+// });
 
-const Trash = React.lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(import("pages/Trash/trash")), 3000);
-  });
-});
-const User = React.lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(import("pages/Users/user")), 3000);
-  });
-});
+// const Trash = React.lazy(() => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(import("pages/Trash/trash")), 3000);
+//   });
+// });
+// const User = React.lazy(() => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(import("pages/Users/user")), 3000);
+//   });
+// });
 
-const Profile = React.lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(import("pages/Profile/profile")), 3000);
-  });
-});
+// const Profile = React.lazy(() => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(import("pages/Profile/profile")), 3000);
+//   });
+// });
 
 export default function Main() {
   // const { data, error, isLoading, isSuccess } = useGetAllUserQuery();
 
+  const mode = useSelector((state) => state.app.mode);
+
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      className={mode}
+      sx={{
+        display: "flex",
+        background: mode === "dark" ? "#121212" : "transparent",
+        width: "100%",
+        height: "100vh",
+      }}
+    >
       <MiniDrawer />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
@@ -75,7 +89,7 @@ export default function Main() {
             path="trash"
             element={
               <Suspense fallback={<Loading />}>
-                <Trash />
+                <Trash mode={mode} />
               </Suspense>
             }
           />
@@ -85,7 +99,7 @@ export default function Main() {
             element={
               <Suspense fallback={<Loading />}>
                 {/* <Profile /> */}
-                <Account />
+                <Account mode={mode} />
               </Suspense>
             }
           />
@@ -94,7 +108,7 @@ export default function Main() {
             path="user"
             element={
               <Suspense fallback={<Loading />}>
-                <User />
+                <User mode={mode} />
               </Suspense>
             }
           />

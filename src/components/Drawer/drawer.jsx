@@ -1,9 +1,9 @@
 import * as React from "react";
 
 import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -94,7 +94,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  // const { pathname } = useLocation();
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const routeName = useSelector((state) => state.app.routeName);
@@ -120,23 +120,9 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
-  const handleRedirect = (page) => {
-    if (page === "Users") {
-      dispatch(routesName("Users"));
-      navigate("/main/user");
-    }
-    if (page === "Profiles") {
-      dispatch(routesName("Profiles"));
-      navigate("/main/profile");
-    }
-    if (page === "About") {
-      dispatch(routesName("About"));
-      navigate("/main/about");
-    }
-    if (page === "Trash") {
-      dispatch(routesName("Trash"));
-      navigate("/main/trash");
-    }
+  const handleRedirect = (page, pathname) => {
+    dispatch(routesName(page));
+    navigate(pathname);
   };
 
   const handleLogout = () => {
@@ -243,31 +229,39 @@ export default function MiniDrawer() {
           </IconButton>
         </DrawerHeader>
         <List>
-          {drawer.map((text, index) => (
-            <ListItem key={index} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                onClick={() => handleRedirect(text.name)}
+          {drawer.map((item, index) => (
+            <>
+              <ListItem
+                disablePadding
                 sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
+                  display: "block",
+                  background: pathname === item.path ? "#ccc" : "",
                 }}
               >
-                <ListItemIcon
+                <ListItemButton
+                  onClick={() => handleRedirect(item.name, item.path)}
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
                   }}
                 >
-                  {text.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={text.name}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.name}
+                    sx={{ opacity: open ? 1 : 0 }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </>
           ))}
         </List>
       </Drawer>

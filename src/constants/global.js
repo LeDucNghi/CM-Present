@@ -12,24 +12,28 @@ export const drawer = [
   {
     id: 1,
     name: "Users",
+    path: "/main/user",
     icon: <PersonIcon />,
   },
 
   {
     id: 2,
     name: "Profiles",
+    path: "/main/profile",
     icon: <AssignmentIndIcon />,
   },
 
   {
     id: 3,
     name: "About",
+    path: "/main/about",
     icon: <InfoIcon />,
   },
 
   {
     id: 4,
     name: "Trash",
+    path: "/main/trash",
     icon: <DeleteIcon />,
   },
 ];

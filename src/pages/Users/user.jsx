@@ -17,7 +17,8 @@ import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function User() {
+export default function User({ mode }) {
+  console.log("🚀 ~ file: user.jsx ~ line 21 ~ User ~ mode", mode);
   const userStorage = useSelector((state) => state.app.userInfo);
   const { pathname } = useLocation();
   const { data, error, isLoading, isSuccess } = useGetAllUserQuery();
@@ -27,13 +28,6 @@ export default function User() {
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-
-  console.log("🚀 ~ file: user.jsx ~ line 29 ~ User ~ row", row);
-  console.log(
-    "🚀 ~ file: user.jsx ~ line 24 ~ User ~ isLoading, isSuccess",
-    isLoading,
-    isSuccess
-  );
 
   React.useEffect(() => {
     if (!userStorage) setRow(data);
@@ -57,10 +51,6 @@ export default function User() {
         setRow(newRow);
       }
     }
-    console.log(
-      "🚀 ~ file: user.jsx ~ line 49 ~ userStorage.forEach ~ row",
-      row
-    );
   }, [userStorage]);
 
   React.useEffect(() => {
@@ -135,13 +125,20 @@ export default function User() {
   if (isLoading) return <Loading />;
   else
     return (
-      <div style={{ height: 400, width: "100%" }}>
+      <div
+        style={{
+          height: 400,
+          width: "100%",
+          // background: mode === "light" ? "#ccc" : "#121212",
+        }}
+      >
         <div
           style={{
             width: "auto",
             display: "flex",
             justifyContent: "flex-end",
             marginBottom: "1em",
+            color: mode === "dark" ? "#fff" : "#ccc",
             // background: "#000",
           }}
         >
@@ -149,7 +146,11 @@ export default function User() {
             startIcon={<PersonAddIcon />}
             variant="contained"
             color="success"
-            sx={{ fontWeight: 600, marginRight: "1em" }}
+            sx={{
+              fontWeight: 600,
+              marginRight: "1em",
+              color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)",
+            }}
             onClick={() => handleAddUser()}
           >
             Add

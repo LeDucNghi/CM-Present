@@ -50,7 +50,6 @@ function Account(props) {
           onSubmit={(values, { setSubmitting }) => {
             handleUpdateUser(values, { setSubmitting });
           }}
-          className="account"
         >
           {(formikProps) => {
             const {

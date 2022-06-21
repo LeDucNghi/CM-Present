@@ -5,6 +5,7 @@ export const appSlice = createSlice({
   initialState: {
     routeName: "Users",
     userInfo: null,
+    mode: "light",
   },
   reducers: {
     routesName: (state, action) => {
@@ -22,9 +23,17 @@ export const appSlice = createSlice({
       );
       state.userInfo = action.payload;
     },
+
+    setMode: (state, action) => {
+      console.log(
+        "🚀 ~ file: slice.js ~ line 29 ~ action.payload",
+        action.payload
+      );
+      state.mode = action.payload;
+    },
   },
 });
 
-export const { routesName, postUserInfo } = appSlice.actions;
+export const { routesName, postUserInfo, setMode } = appSlice.actions;
 
 export default appSlice.reducer;
