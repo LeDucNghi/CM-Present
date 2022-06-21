@@ -14,11 +14,18 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Loading } from "components/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Swal from "sweetalert2";
+import { makeStyles } from "@mui/styles";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function User({ mode }) {
-  console.log("🚀 ~ file: user.jsx ~ line 21 ~ User ~ mode", mode);
+  const useStyles = makeStyles({
+    darkmode: {
+      color: "#000",
+      background: "#fff",
+    },
+  });
+
   const userStorage = useSelector((state) => state.app.userInfo);
   const { pathname } = useLocation();
   const { data, error, isLoading, isSuccess } = useGetAllUserQuery();
@@ -138,7 +145,7 @@ export default function User({ mode }) {
             display: "flex",
             justifyContent: "flex-end",
             marginBottom: "1em",
-            color: mode === "dark" ? "#fff" : "#ccc",
+            // color: mode === "dark" ? "#fff" : "#ccc",
             // background: "#000",
           }}
         >
@@ -149,7 +156,9 @@ export default function User({ mode }) {
             sx={{
               fontWeight: 600,
               marginRight: "1em",
-              color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)",
+              // cursor: "not-allowed",
+              // color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)",
+              // background :,
             }}
             onClick={() => handleAddUser()}
           >
@@ -160,14 +169,21 @@ export default function User({ mode }) {
             onClick={() => handleDeleteUser()}
             variant="contained"
             color="error"
-            sx={{ fontWeight: 600 }}
+            sx={{
+              fontWeight: 600,
+              // cursor: "not-allowed",
+              // color: mode === "dark" ? "rgba(255, 255, 255, 0.5)" : "",
+              // background: mode === "dark" ? "rgba(255, 255, 255, 0.3)" : "",
+            }}
             disabled={selectedRow.length === 0}
+            className={mode === "dark" ? "darkmode" : "lightmode"}
           >
             Delete
           </Button>
         </div>
         <AddUser open={open} setOpen={setOpen} />
         <DataGrid
+          sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
           onSelectionModelChange={(id) => onSelectionModelChange(id)}
           rows={row}
           columns={columns}

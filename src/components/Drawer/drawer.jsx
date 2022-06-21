@@ -92,7 +92,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer({ mode }) {
   const theme = useTheme();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -137,17 +137,23 @@ export default function MiniDrawer() {
         sx={{
           display: "flex",
           justifyContent: "space-between",
+          background: mode === "dark" ? "rgba(255, 255, 255, 0.12)" : "",
         }}
         position="fixed"
         open={open}
       >
-        <Toolbar>
+        <Toolbar
+          sx={{
+            background: mode === "dark" ? "rgba(255, 255, 255, 0.12)" : "",
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
+              // color: mode === "dark" ? "rgba(255, 255, 255, 0.12)" : "",
               marginRight: 5,
               ...(open && { display: "none" }),
             }}
