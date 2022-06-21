@@ -5,7 +5,7 @@ import {
   useDeleteUserFromListMutation,
   useGetAllUserQuery,
   usePostDeletedUserMutation,
-} from "services/user";
+} from "services/userServices";
 
 import AddUser from "components/AddUser/addUser";
 import { Button } from "@mui/material";
@@ -15,21 +15,20 @@ import { Loading } from "components/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Swal from "sweetalert2";
 import { makeStyles } from "@mui/styles";
+import moment from "moment";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function User({ mode }) {
-  const useStyles = makeStyles({
-    darkmode: {
-      color: "#000",
-      background: "#fff",
-    },
-  });
-
   const userStorage = useSelector((state) => state.app.userInfo);
-  const { pathname } = useLocation();
+  // const account = JSON.parse(localStorage.getItem("account"));
+  // console.log(
+  //   "🚀 ~ file: App.js ~ line 17 ~ useEffect ~ account",
+  //   moment(account.expired).format()
+  // );
+  // const { pathname } = useLocation();
   const { data, error, isLoading, isSuccess } = useGetAllUserQuery();
-  const [deleteUserFromList, responseInfo] = useDeleteUserFromListMutation();
+  const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();
 
   const [selectedRow, setSelectedRow] = React.useState([]);
@@ -130,6 +129,7 @@ export default function User({ mode }) {
   };
 
   if (isLoading) return <Loading />;
+  if (error) return console.log(error);
   else
     return (
       <div

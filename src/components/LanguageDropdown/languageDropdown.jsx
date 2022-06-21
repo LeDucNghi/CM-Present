@@ -7,6 +7,8 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LanguageIcon from "@mui/icons-material/Language";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { postLanguage } from "features/slice";
+import { useDispatch } from "react-redux";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -52,10 +54,29 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function LanguageMenus() {
+  const dispatch = useDispatch();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [language, setLanguage] = React.useState(null);
+  const [id, setId] = React.useState(null);
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  // React.useEffect(() => {
+  //   dispatch(postLanguage(language));
+  // }, [language]);
+
+  const handleChangeLanguage = (id) => {
+    console.log(
+      "🚀 ~ file: languageDropdown.jsx ~ line 73 ~ handleChangeLanguage ~ id",
+      id
+    );
+    if (id === 1) dispatch(postLanguage("VN"));
+    else dispatch(postLanguage("Eng"));
+    setAnchorEl(null);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -84,11 +105,11 @@ export default function LanguageMenus() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={() => handleChangeLanguage(1)} disableRipple>
           <LanguageIcon />
           VN
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={() => handleChangeLanguage(2)} disableRipple>
           <LanguageIcon />
           Eng
         </MenuItem>

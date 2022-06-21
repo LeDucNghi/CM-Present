@@ -11,7 +11,7 @@ import MiniDrawer from "components/Drawer/drawer";
 import Trash from "pages/Trash/trash";
 import User from "pages/Users/user";
 import { styled } from "@mui/material/styles";
-import { useGetAllUserQuery } from "services/user";
+import { useGetAllUserQuery } from "services/userServices";
 import { useSelector } from "react-redux";
 
 const DrawerHeader = styled("div")(({ theme }) => ({

@@ -4,7 +4,7 @@ import {
   useDeleteUserPermanentlyMutation,
   useGetDeletedUserQuery,
   usePostNewUserMutation,
-} from "services/user";
+} from "services/userServices";
 
 import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";

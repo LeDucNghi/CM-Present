@@ -43,15 +43,15 @@ export default function SignIn() {
     const checkPass = password !== values.password;
 
     const now = new Date();
-    console.log(
-      "🚀 ~ file: signin.jsx ~ line 45 ~ handleSubmit ~ now",
-      moment(now.getTime())
-    );
+    // console.log(
+    //   "🚀 ~ file: signin.jsx ~ line 45 ~ handleSubmit ~ now",
+    //   moment(now.getTime())
+    // );
     const expiredTime = now.getTime() + 86400000;
-    console.log(
-      "🚀 ~ file: signin.jsx ~ line 50 ~ handleSubmit ~ expiredTime",
-      moment(expiredTime).format("lll")
-    );
+    // console.log(
+    //   "🚀 ~ file: signin.jsx ~ line 50 ~ handleSubmit ~ expiredTime",
+    //   moment(expiredTime).format("lll")
+    // );
 
     const items = {
       values: values,

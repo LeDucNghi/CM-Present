@@ -31,6 +31,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
+    "redux-thunk": "^2.4.1",
     "simplebar-react": "^2.4.1",
     "styled-components": "^5.3.5",
     "sweetalert2": "^11.4.17",
@@ -40,7 +41,7 @@
   },
   "scripts": {
     "start": "run-p start-app start-api",
-    "start-app": "cross-env REACT_APP_API_BASE_URL=http://localhost:3001/ react-scripts start",
+    "start-app": "cross-env REACT_APP_API_BASE_URL=http://localhost:3004/ react-scripts start",
     "start-api": "json-server --port 3004 --watch src/data/db.json --delay 0",
     "build": "react-scripts build",
     "test": "react-scripts test",

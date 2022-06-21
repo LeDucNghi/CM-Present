@@ -1,16 +1,14 @@
 import "./themingToggle.scss";
 
-import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import { motion } from "framer-motion";
-import { setMode } from "features/slice";
+import { postMode } from "features/slice";
 import { styled } from "@mui/material/styles";
-import { useState } from "react";
 
-const MaterialUISwitch = styled(Switch)(({ theme, isOn }) => ({
+const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -71,8 +69,8 @@ export default function ThemeToggle() {
   const toggleSwitch = () => {
     setIsOn(!isOn);
 
-    if (isOn === false) dispatch(setMode("dark"));
-    if (isOn === true) dispatch(setMode("light"));
+    if (isOn === false) dispatch(postMode("dark"));
+    if (isOn === true) dispatch(postMode("light"));
   };
 
   return (

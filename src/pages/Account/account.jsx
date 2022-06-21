@@ -4,7 +4,10 @@ import { Button, TextField } from "@mui/material";
 import { ErrorMessage, Form, Formik } from "formik";
 import { initialValues, validationSchema } from "formik/profile";
 import { useEffect, useState } from "react";
-import { useGetDetaillUserQuery, useUpdateUserMutation } from "services/user";
+import {
+  useGetDetaillUserQuery,
+  useUpdateUserMutation,
+} from "services/userServices";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Images } from "constants/images";

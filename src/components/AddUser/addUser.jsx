@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
 import { TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { postUserInfo } from "features/slice";
-import { usePostNewUserMutation } from "services/user";
+import { usePostNewUserMutation } from "services/userServices";
 
 const style = {
   position: "absolute",

@@ -238,10 +238,12 @@ export default function MiniDrawer({ mode }) {
           {drawer.map((item, index) => (
             <>
               <ListItem
+                key={index}
                 disablePadding
                 sx={{
                   display: "block",
                   background: pathname === item.path ? "#ccc" : "",
+                  transition: "background 0.3s ease-in-out 0s",
                 }}
               >
                 <ListItemButton
