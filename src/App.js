@@ -1,5 +1,5 @@
-import "./assets/styles/GlobalStyles.scss";
 import "./assets/styles/darkmode.scss";
+import "./assets/styles/GlobalStyles.scss";
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
@@ -7,7 +7,6 @@ import Error from "components/NotFound/notFound";
 import Main from "pages/Main/main";
 import SignIn from "pages/SignIn/signin";
 import SignUp from "pages/SignUp/signup";
-import moment from "moment";
 import { useEffect } from "react";
 
 function App() {

@@ -86,15 +86,6 @@ export default function ThemeToggle() {
         }
         // label="MUI switch"
       />
-      {/* <div className="switch" data-ison={isOn} onClick={toggleSwitch}>
-        <motion.div className="handle" layout transition={spring} />
-      </div> */}
     </>
   );
 }
-
-// const spring = {
-//   type: "spring",
-//   stiffness: 700,
-//   damping: 30,
-// };

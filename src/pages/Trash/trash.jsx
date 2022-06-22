@@ -5,27 +5,38 @@ import {
   useGetDeletedUserQuery,
   usePostNewUserMutation,
 } from "services/userServices";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Loading } from "components/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import React from "react";
 import Swal from "sweetalert2";
 import { postUserInfo } from "features/slice";
-import { useDispatch } from "react-redux";
 
 function Trash(props) {
   const dispatch = useDispatch();
+  const trashListStorage = useSelector((state) => state.app.trashList);
 
   const { data, error, isLoading, isSuccess } = useGetDeletedUserQuery();
   const [deleteUserPermanently] = useDeleteUserPermanentlyMutation();
   const [postNewUser] = usePostNewUserMutation();
+
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
 
   React.useEffect(() => {
-    if (isSuccess) setRow(data);
+    if (isSuccess) {
+      setRow(data);
+      if (trashListStorage.length !== 0) {
+        trashListStorage.forEach((element) => {
+          const newRow = row.push(element);
+          setRow(newRow);
+        });
+      }
+    }
   }, [isSuccess]);
 
   const checkDiffElement = row.filter(
@@ -94,48 +105,51 @@ function Trash(props) {
     setSelectedRow(selectedRowData);
     console.log("selectedRowData trash", selectedRowData);
   };
-  return (
-    <div style={{ height: 400, width: "100%" }}>
-      <div
-        style={{
-          width: "auto",
-          display: "flex",
-          justifyContent: "flex-end",
-          marginBottom: "1em",
-          // background: "#000",
-        }}
-      >
-        <Button
-          startIcon={<PersonAddIcon />}
-          variant="contained"
-          color="success"
-          sx={{ fontWeight: 600, marginRight: "1em" }}
-          onClick={() => handleRestoreUser()}
-          disabled={selectedRow.length === 0}
+
+  if (isLoading) return <Loading />;
+  else
+    return (
+      <div style={{ height: 400, width: "100%" }}>
+        <div
+          style={{
+            width: "auto",
+            display: "flex",
+            justifyContent: "flex-end",
+            marginBottom: "1em",
+            // background: "#000",
+          }}
         >
-          Restore
-        </Button>
-        <Button
-          startIcon={<DeleteIcon />}
-          onClick={() => handleDeleteUser()}
-          variant="contained"
-          color="error"
-          sx={{ fontWeight: 600 }}
-          disabled={selectedRow.length === 0}
-        >
-          Delete
-        </Button>
+          <Button
+            startIcon={<PersonAddIcon />}
+            variant="contained"
+            color="success"
+            sx={{ fontWeight: 600, marginRight: "1em" }}
+            onClick={() => handleRestoreUser()}
+            disabled={selectedRow.length === 0}
+          >
+            Restore
+          </Button>
+          <Button
+            startIcon={<DeleteIcon />}
+            onClick={() => handleDeleteUser()}
+            variant="contained"
+            color="error"
+            sx={{ fontWeight: 600 }}
+            disabled={selectedRow.length === 0}
+          >
+            Delete
+          </Button>
+        </div>
+        <DataGrid
+          onSelectionModelChange={(id) => onSelectionModelChange(id)}
+          rows={row}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+        />
       </div>
-      <DataGrid
-        onSelectionModelChange={(id) => onSelectionModelChange(id)}
-        rows={row}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-    </div>
-  );
+    );
 }
 
 export default Trash;

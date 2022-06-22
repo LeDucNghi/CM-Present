@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import React, { Suspense, useEffect } from "react";
 
 import About from "pages/About/about";
 import Account from "pages/Account/account";
@@ -8,10 +7,10 @@ import Dashboard from "pages/DashBoard/dashboard";
 import Error from "components/NotFound/notFound";
 import { Loading } from "components/Loading";
 import MiniDrawer from "components/Drawer/drawer";
+import { Suspense } from "react";
 import Trash from "pages/Trash/trash";
 import User from "pages/Users/user";
 import { styled } from "@mui/material/styles";
-import { useGetAllUserQuery } from "services/userServices";
 import { useSelector } from "react-redux";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -47,8 +46,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 // });
 
 export default function Main() {
-  // const { data, error, isLoading, isSuccess } = useGetAllUserQuery();
-
   const mode = useSelector((state) => state.app.mode);
 
   return (

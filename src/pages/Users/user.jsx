@@ -1,11 +1,13 @@
 import * as React from "react";
 
 import { columns, rows } from "constants/global";
+import { postTrashList, postUserList } from "features/slice";
 import {
   useDeleteUserFromListMutation,
   useGetAllUserQuery,
   usePostDeletedUserMutation,
 } from "services/userServices";
+import { useDispatch, useSelector } from "react-redux";
 
 import AddUser from "components/AddUser/addUser";
 import { Button } from "@mui/material";
@@ -17,16 +19,10 @@ import Swal from "sweetalert2";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 export default function User({ mode }) {
+  const dispatch = useDispatch();
   const userStorage = useSelector((state) => state.app.userInfo);
-  // const account = JSON.parse(localStorage.getItem("account"));
-  // console.log(
-  //   "🚀 ~ file: App.js ~ line 17 ~ useEffect ~ account",
-  //   moment(account.expired).format()
-  // );
-  // const { pathname } = useLocation();
   const { data, error, isLoading, isSuccess } = useGetAllUserQuery();
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();
@@ -47,21 +43,31 @@ export default function User({ mode }) {
           const newUser = { ...item, id: row.length + 1 };
           const newRow = [...row];
           newRow.push(newUser);
+          console.log(
+            "🚀 ~ file: user.jsx ~ line 50 ~ userStorage.forEach ~ newRow",
+            newRow
+          );
           setRow(newRow);
         });
       }
-      if (userStorage.id === 0) {
+      if (!Array.isArray(userStorage) && userStorage.id === 0) {
         const newUser = { ...userStorage, id: row.length + 1 };
         const newRow = [...row];
         newRow.push(newUser);
+        console.log(
+          "🚀 ~ file: user.jsx ~ line 57 ~ React.useEffect ~ newRow",
+          newRow
+        );
         setRow(newRow);
       }
     }
   }, [userStorage]);
 
   React.useEffect(() => {
-    if (isSuccess && row.length === 0) setRow(data);
-    else setRow(row);
+    if (isSuccess && row.length === 0) {
+      dispatch(postUserList(data));
+      setRow(data);
+    } else setRow(row);
   }, [isSuccess]);
 
   const handleDeleteUser = () => {
@@ -100,6 +106,7 @@ export default function User({ mode }) {
 
           deleteUserFromList(id);
           postDeletedUser({ ...rest });
+          dispatch(postTrashList({ ...rest }));
         });
 
         const newRow = checkDiffElement;

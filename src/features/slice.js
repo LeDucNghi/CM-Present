@@ -7,6 +7,8 @@ export const appSlice = createSlice({
     userInfo: null,
     mode: "light",
     language: "",
+    userList: [],
+    trashList: [],
   },
   reducers: {
     routesName: (state, action) => {
@@ -40,10 +42,32 @@ export const appSlice = createSlice({
       );
       state.language = action.payload;
     },
+
+    postTrashList: (state, action) => {
+      console.log(
+        "🚀 ~ file: slice.js ~ line 48 ~ action.payload",
+        action.payload
+      );
+      state.trashList.push(action.payload);
+    },
+
+    postUserList: (state, action) => {
+      console.log(
+        "🚀 ~ file: slice.js ~ line 53 ~ action.payload",
+        action.payload
+      );
+      state.userList.push(action.payload);
+    },
   },
 });
 
-export const { routesName, postUserInfo, postMode, postLanguage } =
-  appSlice.actions;
+export const {
+  routesName,
+  postUserInfo,
+  postMode,
+  postLanguage,
+  postTrashList,
+  postUserList,
+} = appSlice.actions;
 
 export default appSlice.reducer;

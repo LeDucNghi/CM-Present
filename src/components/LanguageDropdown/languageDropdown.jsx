@@ -57,27 +57,18 @@ export default function LanguageMenus() {
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [language, setLanguage] = React.useState(null);
-  const [id, setId] = React.useState(null);
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  // React.useEffect(() => {
-  //   dispatch(postLanguage(language));
-  // }, [language]);
-
   const handleChangeLanguage = (id) => {
-    console.log(
-      "🚀 ~ file: languageDropdown.jsx ~ line 73 ~ handleChangeLanguage ~ id",
-      id
-    );
     if (id === 1) dispatch(postLanguage("VN"));
     else dispatch(postLanguage("Eng"));
     setAnchorEl(null);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
