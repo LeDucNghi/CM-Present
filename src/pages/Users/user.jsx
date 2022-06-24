@@ -1,10 +1,8 @@
 import * as React from "react";
 
-import { columns, rows } from "constants/global";
-import { postTrashList, postUserList } from "features/slice";
+import { postDeletedList, postUserList } from "features/slice";
 import {
   useDeleteUserFromListMutation,
-  useGetAllUserQuery,
   usePostDeletedUserMutation,
 } from "services/userServices";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,14 +14,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Loading } from "components/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Swal from "sweetalert2";
-import { makeStyles } from "@mui/styles";
-import moment from "moment";
-import { useLocation } from "react-router-dom";
+import { columns } from "constants/global";
 
-export default function User({ mode }) {
+export default function User({ mode, allUserLoading, allUserError }) {
   const dispatch = useDispatch();
-  const userStorage = useSelector((state) => state.app.userInfo);
-  const { data, error, isLoading, isSuccess } = useGetAllUserQuery();
+  const userListStorage = useSelector((state) => state.app.userList);
+  const deletedUserListStorage = useSelector(
+    (state) => state.app.deletedUserList
+  );
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();
 
@@ -32,59 +30,21 @@ export default function User({ mode }) {
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    if (!userStorage) setRow(data);
-    else {
-      if (Array.isArray(userStorage)) {
-        console.log(
-          "🚀 ~ file: user.jsx ~ line 40 ~ React.useEffect ~ userStorage",
-          userStorage
-        );
-        userStorage.forEach((item) => {
-          const newUser = { ...item, id: row.length + 1 };
-          const newRow = [...row];
-          newRow.push(newUser);
-          console.log(
-            "🚀 ~ file: user.jsx ~ line 50 ~ userStorage.forEach ~ newRow",
-            newRow
-          );
-          setRow(newRow);
-        });
-      }
-      if (!Array.isArray(userStorage) && userStorage.id === 0) {
-        const newUser = { ...userStorage, id: row.length + 1 };
-        const newRow = [...row];
-        newRow.push(newUser);
-        console.log(
-          "🚀 ~ file: user.jsx ~ line 57 ~ React.useEffect ~ newRow",
-          newRow
-        );
-        setRow(newRow);
-      }
-    }
-  }, [userStorage]);
-
-  React.useEffect(() => {
-    if (isSuccess && row.length === 0) {
-      dispatch(postUserList(data));
-      setRow(data);
-    } else setRow(row);
-  }, [isSuccess]);
+    console.log(
+      "🚀 ~ file: user.jsx ~ line 27 ~ User ~ userListStorage",
+      userListStorage
+    );
+    if (userListStorage && userListStorage.length !== 0)
+      setRow(userListStorage);
+  }, [userListStorage]);
 
   const handleDeleteUser = () => {
     const checkDiffElement = row.filter(
       (x) => !selectedRow.some((x1) => x.id === x1.id)
     );
-    console.log(
-      "🚀 ~ file: user.jsx ~ line 64 ~ handleDeleteUser ~ checkDiffElement",
-      checkDiffElement
-    );
 
     const checkSameElement = row.filter((x) =>
       selectedRow.some((x1) => x.id === x1.id)
-    );
-    console.log(
-      "🚀 ~ file: user.jsx ~ line 72 ~ handleDeleteUser ~ checkSameElement",
-      checkSameElement
     );
 
     Swal.fire({
@@ -106,11 +66,22 @@ export default function User({ mode }) {
 
           deleteUserFromList(id);
           postDeletedUser({ ...rest });
-          dispatch(postTrashList({ ...rest }));
+          const newDeletedUserList = [...deletedUserListStorage];
+          const lastIndex =
+            newDeletedUserList[newDeletedUserList.length - 1].id;
+          console.log(
+            "🚀 ~ file: user.jsx ~ line 117 ~ checkSameElement.forEach ~ lastIndex",
+            lastIndex
+          );
+          newDeletedUserList.push({
+            ...rest,
+            id: lastIndex + 1,
+          });
+          dispatch(postDeletedList(newDeletedUserList));
         });
 
-        const newRow = checkDiffElement;
-        setRow(newRow);
+        dispatch(postUserList(checkDiffElement));
+        setRow(userListStorage);
 
         Swal.fire(
           "Deleted!",
@@ -118,9 +89,6 @@ export default function User({ mode }) {
           "success"
         );
       }
-      // else if (result.isDenied) {
-      //   Swal.fire("Changes are not saved", "", "info");
-      // }
     });
   };
 
@@ -135,8 +103,8 @@ export default function User({ mode }) {
     console.log(selectedRowData);
   };
 
-  if (isLoading) return <Loading />;
-  if (error) return console.log(error);
+  if (allUserLoading) return <Loading />;
+  if (allUserError) return console.log(allUserError);
   else
     return (
       <div

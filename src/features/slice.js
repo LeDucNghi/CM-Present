@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 export const appSlice = createSlice({
   name: "appSlice",
@@ -7,8 +7,8 @@ export const appSlice = createSlice({
     userInfo: null,
     mode: "light",
     language: "",
-    userList: [],
-    trashList: [],
+    userList: null,
+    deletedUserList: null,
   },
   reducers: {
     routesName: (state, action) => {
@@ -43,20 +43,29 @@ export const appSlice = createSlice({
       state.language = action.payload;
     },
 
-    postTrashList: (state, action) => {
-      console.log(
-        "🚀 ~ file: slice.js ~ line 48 ~ action.payload",
-        action.payload
-      );
-      state.trashList.push(action.payload);
-    },
-
     postUserList: (state, action) => {
       console.log(
         "🚀 ~ file: slice.js ~ line 53 ~ action.payload",
         action.payload
       );
-      state.userList.push(action.payload);
+      state.userList = action.payload;
+      console.log(
+        "🚀 ~ file: slice.js ~ line 52 ~ state.userList",
+        state.userList
+      );
+    },
+
+    postDeletedList: (state, action) => {
+      console.log(
+        "🚀 ~ file: slice.js ~ line 53 ~ postDeletedList",
+        action.payload
+      );
+      // console.log("after", current(state.trashList));
+      state.deletedUserList = action.payload;
+      console.log(
+        "🚀 ~ file: slice.js ~ line 80 ~ state.deletedUserList",
+        state.deletedUserList
+      );
     },
   },
 });
@@ -66,8 +75,8 @@ export const {
   postUserInfo,
   postMode,
   postLanguage,
-  postTrashList,
   postUserList,
+  postDeletedList,
 } = appSlice.actions;
 
 export default appSlice.reducer;

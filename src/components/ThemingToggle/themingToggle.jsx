@@ -69,8 +69,14 @@ export default function ThemeToggle() {
   const toggleSwitch = () => {
     setIsOn(!isOn);
 
-    if (isOn === false) dispatch(postMode("dark"));
-    if (isOn === true) dispatch(postMode("light"));
+    if (isOn === false) {
+      dispatch(postMode("dark"));
+      localStorage.setItem("mode", "dark");
+    }
+    if (isOn === true) {
+      dispatch(postMode("light"));
+      localStorage.setItem("mode", "light");
+    }
   };
 
   return (

@@ -56,7 +56,11 @@ const StyledMenu = styled((props) => (
 export default function LanguageMenus() {
   const dispatch = useDispatch();
 
+  const mode = localStorage.getItem("mode");
+  const languages = localStorage.getItem("language");
+
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [language, setLanguage] = React.useState(null);
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -64,8 +68,13 @@ export default function LanguageMenus() {
   };
 
   const handleChangeLanguage = (id) => {
-    if (id === 1) dispatch(postLanguage("VN"));
-    else dispatch(postLanguage("Eng"));
+    if (id === 1) {
+      dispatch(postLanguage("VN"));
+      localStorage.setItem("language", "VN");
+    } else {
+      dispatch(postLanguage("Eng"));
+      localStorage.setItem("language", "Eng");
+    }
     setAnchorEl(null);
   };
 
