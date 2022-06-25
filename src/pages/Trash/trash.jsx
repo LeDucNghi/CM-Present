@@ -47,18 +47,18 @@ function Trash({ deletedUserLoading }) {
   );
 
   const handleRestoreUser = () => {
-    console.log(
-      "🚀 ~ file: trash.jsx ~ line 23 ~ Trash ~ userListStorage",
-      userListStorage
-    );
-    console.log(
-      "🚀 ~ file: trash.jsx ~ line 63 ~ handleRestoreUser ~ difElement",
-      checkDiffElement
-    );
-    console.log(
-      "🚀 ~ file: trash.jsx ~ line 65 ~ handleRestoreUser ~ sameElement",
-      checkSameElement
-    );
+    // console.log(
+    //   "🚀 ~ file: trash.jsx ~ line 23 ~ Trash ~ userListStorage",
+    //   userListStorage
+    // );
+    // console.log(
+    //   "🚀 ~ file: trash.jsx ~ line 63 ~ handleRestoreUser ~ difElement",
+    //   checkDiffElement
+    // );
+    // console.log(
+    //   "🚀 ~ file: trash.jsx ~ line 65 ~ handleRestoreUser ~ sameElement",
+    //   checkSameElement
+    // );
     const lastIndex = userListStorage[userListStorage.length - 1].id;
 
     Swal.fire({
@@ -172,7 +172,7 @@ function Trash({ deletedUserLoading }) {
           </Button>
         </div>
         <DataGrid
-          // getRowId={(row) => row.id}
+          getRowId={(row) => row.id}
           onSelectionModelChange={(id) => onSelectionModelChange(id)}
           rows={row}
           columns={columns}

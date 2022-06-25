@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { postDeletedList, postUserList } from "features/slice";
+import { postDeletedList, postTrashList, postUserList } from "features/slice";
 import {
   useDeleteUserFromListMutation,
   usePostDeletedUserMutation,
@@ -39,12 +39,21 @@ export default function User({ mode, allUserLoading, allUserError }) {
   }, [userListStorage]);
 
   const handleDeleteUser = () => {
+    console.log(
+      "🚀 ~ file: user.jsx ~ line 25 ~ User ~ deletedUserListStorage",
+      deletedUserListStorage
+    );
+
     const checkDiffElement = row.filter(
       (x) => !selectedRow.some((x1) => x.id === x1.id)
     );
 
     const checkSameElement = row.filter((x) =>
       selectedRow.some((x1) => x.id === x1.id)
+    );
+    console.log(
+      "🚀 ~ file: user.jsx ~ line 54 ~ handleDeleteUser ~ checkSameElement",
+      checkSameElement
     );
 
     Swal.fire({
@@ -64,20 +73,25 @@ export default function User({ mode, allUserLoading, allUserError }) {
         checkSameElement.forEach((item) => {
           const { id, ...rest } = item;
 
-          deleteUserFromList(id);
-          postDeletedUser({ ...rest });
-          const newDeletedUserList = [...deletedUserListStorage];
-          const lastIndex =
-            newDeletedUserList[newDeletedUserList.length - 1].id;
-          console.log(
-            "🚀 ~ file: user.jsx ~ line 117 ~ checkSameElement.forEach ~ lastIndex",
-            lastIndex
-          );
-          newDeletedUserList.push({
-            ...rest,
-            id: lastIndex + 1,
-          });
-          dispatch(postDeletedList(newDeletedUserList));
+          // deleteUserFromList(id);
+          // postDeletedUser({ ...rest });
+
+          // const newDeletedUserList = [...deletedUserListStorage];
+          // const lastIndex =
+          //   deletedUserListStorage[deletedUserListStorage.length - 1].id;
+          // console.log(
+          //   "🚀 ~ file: user.jsx ~ line 117 ~ checkSameElement.forEach ~ lastIndex",
+          //   lastIndex
+          // );
+          // deletedUserListStorage.push({
+          //   ...rest,
+          //   id: lastIndex + 1,
+          // });
+          // console.log(
+          //   "🚀 ~ file: user.jsx ~ line 80 ~ checkSameElement.forEach ~ deletedUserListStorage",
+          //   deletedUserListStorage
+          // );
+          dispatch(postTrashList({ ...rest }));
         });
 
         dispatch(postUserList(checkDiffElement));
