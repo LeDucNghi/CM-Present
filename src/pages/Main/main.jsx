@@ -23,32 +23,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
-
-// const About = React.lazy(() => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => resolve(import("pages/About/about")), 1000);
-//   });
-// });
-
-// const Trash = React.lazy(() => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => resolve(import("pages/Trash/trash")), 3000);
-//   });
-// });
-// const User = React.lazy(() => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => resolve(import("pages/Users/user")), 3000);
-//   });
-// });
-
-// const Profile = React.lazy(() => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => resolve(import("pages/Profile/profile")), 3000);
-//   });
-// });
 
 export default function Main() {
   const dispatch = useDispatch();

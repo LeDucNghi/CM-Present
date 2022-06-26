@@ -18,6 +18,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import React from "react";
 import Swal from "sweetalert2";
 import { columns } from "constants/global";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 function Trash({ deletedUserLoading }) {
   const dispatch = useDispatch();
@@ -140,6 +141,7 @@ function Trash({ deletedUserLoading }) {
             onClick={() => handleDeleteUser()}
             variant="contained"
             color="error"
+            // classes={ isDisabled ?  : }
             sx={{ fontWeight: 600 }}
             disabled={selectedRow.length === 0}
           >
