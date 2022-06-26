@@ -1,4 +1,9 @@
-import { postDeletedList, postUserInfo, postUserList } from "features/slice";
+import {
+  postDeletedList,
+  postUserInfo,
+  postUserList,
+  restoreUser,
+} from "features/slice";
 import {
   useDeleteUserPermanentlyMutation,
   usePostNewUserMutation,
@@ -47,19 +52,7 @@ function Trash({ deletedUserLoading }) {
   );
 
   const handleRestoreUser = () => {
-    // console.log(
-    //   "🚀 ~ file: trash.jsx ~ line 23 ~ Trash ~ userListStorage",
-    //   userListStorage
-    // );
-    // console.log(
-    //   "🚀 ~ file: trash.jsx ~ line 63 ~ handleRestoreUser ~ difElement",
-    //   checkDiffElement
-    // );
-    // console.log(
-    //   "🚀 ~ file: trash.jsx ~ line 65 ~ handleRestoreUser ~ sameElement",
-    //   checkSameElement
-    // );
-    const lastIndex = userListStorage[userListStorage.length - 1].id;
+    // const lastIndex = userListStorage[userListStorage.length - 1].id;
 
     Swal.fire({
       title: `Are you sure to restore this ${
@@ -75,31 +68,15 @@ function Trash({ deletedUserLoading }) {
       if (result.isConfirmed) {
         checkSameElement.forEach((el) => {
           const { id, ...rest } = el;
-          console.log(
-            "🚀 ~ file: trash.jsx ~ line 66 ~ checkSameElement.forEach ~ { id, ...rest } ",
-            { ...rest, id: lastIndex + 1 }
-          );
-          const newUserList = [...userListStorage];
-          console.log(
-            "🚀 ~ file: trash.jsx ~ line 83 ~ checkSameElement.forEach ~ newUserList",
-            newUserList
-          );
-          newUserList.push({ ...rest, id: lastIndex + 1 });
-          dispatch(postUserList(newUserList));
+          deleteUserPermanently(el.id);
+          postNewUser({ ...rest });
+          dispatch(restoreUser({ ...rest }));
         });
 
         // dispatch(postUserInfo(checkSameElement));
         dispatch(postDeletedList(checkDiffElement));
-        checkSameElement.forEach((item) => {
-          const { id, ...rest } = item;
-          deleteUserPermanently(item.id);
-          postNewUser({ ...rest });
-        });
         setRow(deletedUserListStorage);
-        console.log(
-          "🚀 ~ file: trash.jsx ~ line 77 ~ handleRestoreUser ~ Row",
-          row
-        );
+
         Swal.fire("Restored!", "", "success");
       }
     });
@@ -118,13 +95,11 @@ function Trash({ deletedUserLoading }) {
       confirmButtonText: "Yes, delete it permanently!",
     }).then((result) => {
       if (result.isConfirmed) {
-        const difElement = checkDiffElement;
-        const sameElement = checkSameElement;
-        dispatch(postUserInfo(sameElement));
-        sameElement.forEach((item) => {
+        dispatch(postUserInfo(checkSameElement));
+        checkSameElement.forEach((item) => {
           deleteUserPermanently(item.id);
         });
-        setRow(difElement);
+        setRow(deletedUserListStorage);
         Swal.fire("Deleted!", "", "success");
       }
     });

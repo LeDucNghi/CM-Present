@@ -1,6 +1,11 @@
 import * as React from "react";
 
-import { postDeletedList, postTrashList, postUserList } from "features/slice";
+import {
+  deleteUser,
+  postDeletedList,
+  postTrashList,
+  postUserList,
+} from "features/slice";
 import {
   useDeleteUserFromListMutation,
   usePostDeletedUserMutation,
@@ -19,9 +24,7 @@ import { columns } from "constants/global";
 export default function User({ mode, allUserLoading, allUserError }) {
   const dispatch = useDispatch();
   const userListStorage = useSelector((state) => state.app.userList);
-  const deletedUserListStorage = useSelector(
-    (state) => state.app.deletedUserList
-  );
+
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();
 
@@ -38,24 +41,15 @@ export default function User({ mode, allUserLoading, allUserError }) {
       setRow(userListStorage);
   }, [userListStorage]);
 
+  const checkDiffElement = row.filter(
+    (x) => !selectedRow.some((x1) => x.id === x1.id)
+  );
+
+  const checkSameElement = row.filter((x) =>
+    selectedRow.some((x1) => x.id === x1.id)
+  );
+
   const handleDeleteUser = () => {
-    console.log(
-      "🚀 ~ file: user.jsx ~ line 25 ~ User ~ deletedUserListStorage",
-      deletedUserListStorage
-    );
-
-    const checkDiffElement = row.filter(
-      (x) => !selectedRow.some((x1) => x.id === x1.id)
-    );
-
-    const checkSameElement = row.filter((x) =>
-      selectedRow.some((x1) => x.id === x1.id)
-    );
-    console.log(
-      "🚀 ~ file: user.jsx ~ line 54 ~ handleDeleteUser ~ checkSameElement",
-      checkSameElement
-    );
-
     Swal.fire({
       title: `Are you sure to delete this ${
         selectedRow.length === 1 ? "" : selectedRow.length
@@ -63,35 +57,18 @@ export default function User({ mode, allUserLoading, allUserError }) {
       text: "",
       icon: "warning",
       showCancelButton: true,
-      // showDenyButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-      // denyButtonText: `Delete it permanently`,
     }).then((result) => {
       if (result.isConfirmed) {
         checkSameElement.forEach((item) => {
           const { id, ...rest } = item;
 
-          // deleteUserFromList(id);
-          // postDeletedUser({ ...rest });
+          deleteUserFromList(id);
+          postDeletedUser({ ...rest });
 
-          // const newDeletedUserList = [...deletedUserListStorage];
-          // const lastIndex =
-          //   deletedUserListStorage[deletedUserListStorage.length - 1].id;
-          // console.log(
-          //   "🚀 ~ file: user.jsx ~ line 117 ~ checkSameElement.forEach ~ lastIndex",
-          //   lastIndex
-          // );
-          // deletedUserListStorage.push({
-          //   ...rest,
-          //   id: lastIndex + 1,
-          // });
-          // console.log(
-          //   "🚀 ~ file: user.jsx ~ line 80 ~ checkSameElement.forEach ~ deletedUserListStorage",
-          //   deletedUserListStorage
-          // );
-          dispatch(postTrashList({ ...rest }));
+          dispatch(deleteUser({ ...rest }));
         });
 
         dispatch(postUserList(checkDiffElement));

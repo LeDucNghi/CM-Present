@@ -7,9 +7,10 @@ export const appSlice = createSlice({
     userInfo: null,
     mode: "light",
     language: "",
-    userList: null,
+    userList: [],
     deletedUserList: [],
     trashList: [],
+    restoreList: [],
   },
   reducers: {
     routesName: (state, action) => {
@@ -56,13 +57,23 @@ export const appSlice = createSlice({
       );
     },
 
+    restoreUser: (state, action) => {
+      console.log(
+        "🚀 ~ file: slice.js ~ line 63 ~ action.payload",
+        action.payload
+      );
+      state.userList.push({ ...action.payload, id: state.userList.length + 1 });
+      console.log(
+        "🚀 ~ file: slice.js ~ line 52 ~ state.userList",
+        state.userList
+      );
+    },
+
     postDeletedList: (state, action) => {
       console.log(
         "🚀 ~ file: slice.js ~ line 53 ~ postDeletedList",
         action.payload
       );
-
-      // console.log("after", current(state.trashList));
       state.deletedUserList = action.payload;
       console.log(
         "🚀 ~ file: slice.js ~ line 80 ~ state.deletedUserList",
@@ -70,25 +81,11 @@ export const appSlice = createSlice({
       );
     },
 
-    postTrashList: (state, action) => {
-      console.log(
-        "🚀 ~ file: slice.js ~ line 78 ~ state.deletedUserList",
-        current(state.deletedUserList)
-      );
-      console.log(
-        "🚀 ~ file: slice.js ~ line 80 ~ action.payload",
-        action.payload
-      );
-
-      // state.deletedUserList.forEach((element) => {
-      //   console.log(
-      //     "🚀 ~ file: slice.js ~ line 84 ~ element",
-      //     current(element)
-      //   );
-      // });
-      const lastIndex =
-        state.deletedUserList[state.deletedUserList.length - 1].id;
-      state.deletedUserList.push({ ...action.payload, id: lastIndex + 1 });
+    deleteUser: (state, action) => {
+      state.deletedUserList.push({
+        ...action.payload,
+        id: state.deletedUserList.length + 1,
+      });
 
       console.log(
         "🚀 ~ file: slice.js ~ line 77 ~ state.trashList",
@@ -105,7 +102,8 @@ export const {
   postLanguage,
   postUserList,
   postDeletedList,
-  postTrashList,
+  deleteUser,
+  restoreUser,
 } = appSlice.actions;
 
 export default appSlice.reducer;
