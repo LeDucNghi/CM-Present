@@ -1,9 +1,4 @@
-import {
-  postDeletedList,
-  postUserInfo,
-  postUserList,
-  restoreUser,
-} from "features/slice";
+import { postDeletedList, postUserInfo, restoreUser } from "features/slice";
 import {
   useDeleteUserPermanentlyMutation,
   usePostNewUserMutation,
@@ -14,13 +9,13 @@ import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Loading } from "components/Loading";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import React from "react";
+import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import Swal from "sweetalert2";
 import { columns } from "constants/global";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 
-function Trash({ deletedUserLoading }) {
+function Trash({ mode, deletedUserLoading }) {
+  console.log("🚀 ~ file: trash.jsx ~ line 37 ~ Trash ~ mode", mode);
   const dispatch = useDispatch();
   const deletedUserListStorage = useSelector(
     (state) => state.app.deletedUserList
@@ -127,7 +122,7 @@ function Trash({ deletedUserLoading }) {
           }}
         >
           <Button
-            startIcon={<PersonAddIcon />}
+            startIcon={<RestoreFromTrashIcon />}
             variant="contained"
             color="success"
             sx={{ fontWeight: 600, marginRight: "1em" }}
@@ -141,9 +136,12 @@ function Trash({ deletedUserLoading }) {
             onClick={() => handleDeleteUser()}
             variant="contained"
             color="error"
-            // classes={ isDisabled ?  : }
-            sx={{ fontWeight: 600 }}
+            className={mode === "dark" ? classes.root : null}
+            // sx={mode === "dark" ? classes.darkmode : classes.root}
             disabled={selectedRow.length === 0}
+
+            // classes={classes.root}
+            // disableElevation={mode === "dark" ? classes.root : null}
           >
             Delete
           </Button>

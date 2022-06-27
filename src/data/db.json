@@ -71,30 +71,6 @@
       "age": 65,
       "email": "leducnghi28122000hiie@gmail.com",
       "role": "member"
-    },
-    {
-      "lastName": "Roxie",
-      "firstName": "Harvey",
-      "age": 65,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member",
-      "id": 10
-    },
-    {
-      "lastName": "Frances",
-      "firstName": "Rossini",
-      "age": 36,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member",
-      "id": 11
-    },
-    {
-      "lastName": "Roxie",
-      "firstName": "Harvey",
-      "age": 65,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member",
-      "id": 12
     }
   ],
   "trash": [
