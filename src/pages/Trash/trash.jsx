@@ -15,12 +15,10 @@ import Swal from "sweetalert2";
 import { columns } from "constants/global";
 
 function Trash({ mode, deletedUserLoading }) {
-  console.log("🚀 ~ file: trash.jsx ~ line 37 ~ Trash ~ mode", mode);
   const dispatch = useDispatch();
   const deletedUserListStorage = useSelector(
     (state) => state.app.deletedUserList
   );
-  const userListStorage = useSelector((state) => state.app.userList);
 
   const [deleteUserPermanently] = useDeleteUserPermanentlyMutation();
   const [postNewUser] = usePostNewUserMutation();
@@ -136,12 +134,7 @@ function Trash({ mode, deletedUserLoading }) {
             onClick={() => handleDeleteUser()}
             variant="contained"
             color="error"
-            className={mode === "dark" ? classes.root : null}
-            // sx={mode === "dark" ? classes.darkmode : classes.root}
             disabled={selectedRow.length === 0}
-
-            // classes={classes.root}
-            // disableElevation={mode === "dark" ? classes.root : null}
           >
             Delete
           </Button>

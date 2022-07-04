@@ -30,7 +30,7 @@ export default function Main() {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.app.mode);
   // const mode = localStorage.getItem("mode");
-  const language = localStorage.getItem("language");
+  // const language = localStorage.getItem("language");
 
   const {
     data: deletedUserList,
@@ -57,12 +57,15 @@ export default function Main() {
       className={mode}
       sx={{
         display: "flex",
-        background: mode === "dark" ? "#121212" : "transparent",
         width: "100%",
         height: "100vh",
       }}
     >
-      <MiniDrawer mode={mode} language={language} />
+      <MiniDrawer
+        mode={mode}
+
+        // language={language}
+      />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Routes>
@@ -92,7 +95,7 @@ export default function Main() {
               <Suspense fallback={<Loading />}>
                 <Trash
                   mode={mode}
-                  language={language}
+                  // language={language}
                   deletedUserLoading={deletedUserLoading}
                 />
               </Suspense>
@@ -104,7 +107,10 @@ export default function Main() {
             element={
               <Suspense fallback={<Loading />}>
                 {/* <Profile /> */}
-                <Account mode={mode} language={language} />
+                <Account
+                  mode={mode}
+                  // language={language}
+                />
               </Suspense>
             }
           />
