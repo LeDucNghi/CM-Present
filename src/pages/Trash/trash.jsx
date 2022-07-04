@@ -27,13 +27,8 @@ function Trash({ mode, deletedUserLoading }) {
   const [row, setRow] = React.useState([]);
 
   React.useEffect(() => {
-    console.log(
-      "🚀 ~ file: trash.jsx ~ line 22 ~ Trash ~ deletedUserListStorage",
-      deletedUserListStorage
-    );
     if (deletedUserListStorage && deletedUserListStorage.length !== 0) {
       setRow(deletedUserListStorage);
-      console.log("🚀 ~ file: trash.jsx ~ line 37 ~ Trash ~ row", row);
     }
   }, [deletedUserListStorage, row]);
 
@@ -67,7 +62,6 @@ function Trash({ mode, deletedUserLoading }) {
           dispatch(restoreUser({ ...rest }));
         });
 
-        // dispatch(postUserInfo(checkSameElement));
         dispatch(postDeletedList(checkDiffElement));
         setRow(deletedUserListStorage);
 
@@ -123,7 +117,14 @@ function Trash({ mode, deletedUserLoading }) {
             startIcon={<RestoreFromTrashIcon />}
             variant="contained"
             color="success"
-            sx={{ fontWeight: 600, marginRight: "1em" }}
+            sx={{
+              fontWeight: 600,
+              marginRight: "1em",
+              ":disabled": {
+                background: mode === "dark" ? "rgba(255, 255, 255, 0.3)" : "",
+                cursor: "not-allowed",
+              },
+            }}
             onClick={() => handleRestoreUser()}
             disabled={selectedRow.length === 0}
           >
@@ -135,6 +136,12 @@ function Trash({ mode, deletedUserLoading }) {
             variant="contained"
             color="error"
             disabled={selectedRow.length === 0}
+            sx={{
+              ":disabled": {
+                background: mode === "dark" ? "rgba(255, 255, 255, 0.3)" : "",
+                cursor: "not-allowed",
+              },
+            }}
           >
             Delete
           </Button>
@@ -147,6 +154,7 @@ function Trash({ mode, deletedUserLoading }) {
           pageSize={5}
           rowsPerPageOptions={[5]}
           checkboxSelection
+          sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
         />
       </div>
     );

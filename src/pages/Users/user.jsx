@@ -1,11 +1,7 @@
 import * as React from "react";
 
-import {
-  deleteUser,
-  postDeletedList,
-  postTrashList,
-  postUserList,
-} from "features/slice";
+import { columns, dark, light, theme } from "constants/global";
+import { deleteUser, postUserList } from "features/slice";
 import {
   useDeleteUserFromListMutation,
   usePostDeletedUserMutation,
@@ -19,7 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Loading } from "components/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Swal from "sweetalert2";
-import { columns } from "constants/global";
+import { ThemeProvider } from "@mui/styles";
 
 export default function User({ mode, allUserLoading, allUserError }) {
   const dispatch = useDispatch();
@@ -98,6 +94,7 @@ export default function User({ mode, allUserLoading, allUserError }) {
   if (allUserError) return console.log(allUserError);
   else
     return (
+      // <ThemeProvider theme={mode === "dark" ? dark : light}>
       <div
         style={{
           height: 400,
@@ -137,17 +134,19 @@ export default function User({ mode, allUserLoading, allUserError }) {
             color="error"
             sx={{
               fontWeight: 600,
-              // cursor: "not-allowed",
-              // color: mode === "dark" ? "rgba(255, 255, 255, 0.5)" : "",
-              // background: mode === "dark" ? "rgba(255, 255, 255, 0.3)" : "",
+              ":disabled": {
+                background: mode === "dark" ? "rgba(255, 255, 255, 0.3)" : "",
+                cursor: "not-allowed",
+              },
             }}
             disabled={selectedRow.length === 0}
-            className={mode === "dark" ? "darkmode" : "lightmode"}
           >
             Delete
           </Button>
         </div>
+
         <AddUser open={open} setOpen={setOpen} />
+
         <DataGrid
           sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
           onSelectionModelChange={(id) => onSelectionModelChange(id)}
@@ -158,5 +157,6 @@ export default function User({ mode, allUserLoading, allUserError }) {
           checkboxSelection
         />
       </div>
+      // </ThemeProvider>
     );
 }

@@ -1,8 +1,5 @@
-import * as React from "react";
-
 import { ErrorMessage, Form, Formik } from "formik";
 import { initialValues, validationSchema } from "formik/addUser";
-import { useDispatch, useSelector } from "react-redux";
 
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
@@ -12,8 +9,8 @@ import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
 import Swal from "sweetalert2";
 import { TextField } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import { postUserInfo } from "features/slice";
+import { addUser } from "features/slice";
+import { useDispatch } from "react-redux";
 import { usePostNewUserMutation } from "services/userServices";
 
 const style = {
@@ -35,7 +32,7 @@ export default function AddUser({ open, setOpen }) {
 
   const handleClose = () => setOpen(false);
   const handleAddUser = (values, { setSubmitting }) => {
-    dispatch(postUserInfo(values));
+    dispatch(addUser(values));
     postNewUser(values);
 
     setTimeout(() => {

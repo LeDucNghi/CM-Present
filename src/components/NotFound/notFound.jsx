@@ -2,7 +2,7 @@ import "./notFound.scss";
 
 import React from "react";
 
-function Error(props) {
+function Error({ mode }) {
   window.onload = function () {
     var paragraph = document.getElementById("type-in");
     var supparagraph = document.getElementById("type-after");
@@ -36,11 +36,11 @@ function Error(props) {
   return (
     <div className="notfound">
       <p class="back"></p>
-      <p id="type-in">
+      <p style={{ color: mode === "dark" ? "#fff" : "" }} id="type-in">
         Error 404
         {/* {account.permissionId >= 4 || account.permissionId <= 0 ? "403" : "404"}{" "} */}
       </p>
-      <p id="type-after">
+      <p style={{ color: mode === "dark" ? "#fff" : "" }} id="type-after">
         {/* {account.permissionId >= 4 || account.permissionId <= 0
           ? "Forbidden"
           : "Page not found"}{" "} */}

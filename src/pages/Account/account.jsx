@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 
-function Account(props) {
+function Account({ mode }) {
   const { id } = useParams();
   const { data, error, isLoading } = useGetDetaillUserQuery(id);
   const [updateUser] = useUpdateUserMutation();
@@ -68,6 +68,12 @@ function Account(props) {
                 <Form>
                   <div className="account_info">
                     <TextField
+                      sx={{
+                        "& .MuiTextField-root": {
+                          borderColor:
+                            mode === "dark" ? "rgba(255, 255, 255, 0.12)" : "",
+                        },
+                      }}
                       margin="normal"
                       fullWidth
                       name="firstName"
@@ -84,10 +90,16 @@ function Account(props) {
                     <ErrorMessage name="firstName" />
 
                     <TextField
+                      sx={{
+                        "& .MuiTextField-root": {
+                          borderColor:
+                            mode === "dark" ? "rgba(255, 255, 255, 0.12)" : "",
+                        },
+                      }}
                       margin="normal"
                       fullWidth
                       name="lastName"
-                      label="lastName"
+                      label="lastName success"
                       type="text"
                       id="outlined-error-helper-text"
                       //   autoComplete="current-password"
@@ -96,10 +108,18 @@ function Account(props) {
                       onChange={handleChange}
                       error={touched.lastName && Boolean(errors.lastName)}
                       helperText={errors.lastName && touched.lastName}
+                      // color={mode === "dark" ? "success" : ""}
+                      color="success"
                     />
                     <ErrorMessage name="firstName" />
 
                     <TextField
+                      sx={{
+                        // "& .MuiTextField-root": {
+                        //   borderColor: mode === "dark" ? "red" : "",
+                        // },
+                        borderColor: mode === "dark" ? "red" : "",
+                      }}
                       margin="normal"
                       fullWidth
                       name="email"
@@ -116,6 +136,12 @@ function Account(props) {
                     <ErrorMessage name="firstName" />
 
                     <TextField
+                      sx={{
+                        "& .MuiTextField-root": {
+                          borderColor:
+                            mode === "dark" ? "rgba(255, 255, 255, 0.12)" : "",
+                        },
+                      }}
                       margin="normal"
                       fullWidth
                       name="age"

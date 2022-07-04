@@ -5,6 +5,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import PreviewIcon from "@mui/icons-material/Preview";
+import { createTheme } from "@mui/material/styles";
 import { routesName } from "features/slice";
 import { store } from "store";
 
@@ -137,11 +138,11 @@ export const columns = [
 
     renderCell: (cellValues) => {
       return (
-        <Link to={`/home/about/${cellValues.row.id}`}>
-          <Button>
-            {cellValues.row.firstName || ""} {cellValues.row.lastName || ""}
-          </Button>
-        </Link>
+        // <Link to={`/home/about/${cellValues.row.id}`}>
+        <Button>
+          {cellValues.row.firstName || ""} {cellValues.row.lastName || ""}
+        </Button>
+        // </Link>
       );
     },
   },
@@ -174,3 +175,26 @@ export const columns = [
     },
   },
 ];
+
+export const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#0052cc",
+    },
+    secondary: {
+      main: "#edf2ff",
+    },
+  },
+});
+
+export const dark = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
+export const light = createTheme({
+  palette: {
+    mode: "light",
+  },
+});

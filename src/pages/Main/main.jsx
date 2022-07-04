@@ -61,11 +61,8 @@ export default function Main() {
         height: "100vh",
       }}
     >
-      <MiniDrawer
-        mode={mode}
+      <MiniDrawer mode={mode} />
 
-        // language={language}
-      />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Routes>
@@ -106,11 +103,7 @@ export default function Main() {
             path="about/:id"
             element={
               <Suspense fallback={<Loading />}>
-                {/* <Profile /> */}
-                <Account
-                  mode={mode}
-                  // language={language}
-                />
+                <Account mode={mode} />
               </Suspense>
             }
           />
@@ -128,7 +121,7 @@ export default function Main() {
             }
           />
 
-          <Route path="*" element={<Error />} />
+          <Route path="*" element={<Error mode={mode} />} />
         </Routes>
       </Box>
     </Box>
