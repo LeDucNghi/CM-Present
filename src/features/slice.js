@@ -6,7 +6,7 @@ export const appSlice = createSlice({
     routeName: "Users",
     userInfo: null,
     mode: "light",
-    language: "",
+    language: "Eng",
     userList: [],
     deletedUserList: [],
     trashList: [],

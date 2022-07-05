@@ -60,7 +60,7 @@ export default function LanguageMenus() {
   const languages = localStorage.getItem("language");
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [language, setLanguage] = React.useState(null);
+  const [language, setLanguage] = React.useState("Eng");
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -70,9 +70,11 @@ export default function LanguageMenus() {
   const handleChangeLanguage = (id) => {
     if (id === 1) {
       dispatch(postLanguage("VN"));
+      setLanguage("VN");
       localStorage.setItem("language", "VN");
     } else {
       dispatch(postLanguage("Eng"));
+      setLanguage("Eng");
       localStorage.setItem("language", "Eng");
     }
     setAnchorEl(null);
@@ -94,7 +96,7 @@ export default function LanguageMenus() {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        Languages
+        {language}
       </Button>
       <StyledMenu
         id="demo-customized-menu"

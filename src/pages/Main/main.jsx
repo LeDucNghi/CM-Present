@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Suspense, useEffect } from "react";
+import { createTheme, styled } from "@mui/material/styles";
 import { postDeletedList, postUserList } from "features/slice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,9 +15,10 @@ import Dashboard from "pages/DashBoard/dashboard";
 import Error from "components/NotFound/notFound";
 import { Loading } from "components/Loading";
 import MiniDrawer from "components/Drawer/drawer";
+import { ThemeProvider } from "@mui/styles";
 import Trash from "pages/Trash/trash";
 import User from "pages/Users/user";
-import { styled } from "@mui/material/styles";
+import { zhCN } from "@mui/x-data-grid";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -29,6 +31,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function Main() {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.app.mode);
+  const languages = useSelector((state) => state.app.language);
   // const mode = localStorage.getItem("mode");
   // const language = localStorage.getItem("language");
 
@@ -52,6 +55,15 @@ export default function Main() {
     }
   }, [getDeletedUserSuccess, getAllUserSuccess]);
 
+  const theme = createTheme(
+    {
+      palette: {
+        primary: { main: "#1976d2" },
+      },
+    },
+    zhCN
+  );
+
   return (
     <Box
       className={mode}
@@ -72,7 +84,7 @@ export default function Main() {
             path="dashboard"
             element={
               <Suspense fallback={<Loading />}>
-                <Dashboard />
+                <Dashboard languages={languages} />
               </Suspense>
             }
           />
@@ -92,7 +104,7 @@ export default function Main() {
               <Suspense fallback={<Loading />}>
                 <Trash
                   mode={mode}
-                  // language={language}
+                  languages={languages}
                   deletedUserLoading={deletedUserLoading}
                 />
               </Suspense>
@@ -103,7 +115,7 @@ export default function Main() {
             path="about/:id"
             element={
               <Suspense fallback={<Loading />}>
-                <Account mode={mode} />
+                <Account mode={mode} languages={languages} />
               </Suspense>
             }
           />
@@ -116,12 +128,16 @@ export default function Main() {
                   mode={mode}
                   allUserLoading={allUserLoading}
                   allUserError={allUserError}
+                  languages={languages}
                 />
               </Suspense>
             }
           />
 
-          <Route path="*" element={<Error mode={mode} />} />
+          <Route
+            path="*"
+            element={<Error mode={mode} languages={languages} />}
+          />
         </Routes>
       </Box>
     </Box>

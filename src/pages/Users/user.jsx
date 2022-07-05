@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { DataGrid, daDK, enUS } from "@mui/x-data-grid";
 import { columns, dark, light, theme } from "constants/global";
 import { deleteUser, postUserList } from "features/slice";
 import {
@@ -10,14 +11,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import AddUser from "components/AddUser/addUser";
 import { Button } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Loading } from "components/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Swal from "sweetalert2";
 import { ThemeProvider } from "@mui/styles";
 
-export default function User({ mode, allUserLoading, allUserError }) {
+export default function User({
+  mode,
+  allUserLoading,
+  allUserError,
+  languages,
+}) {
   const dispatch = useDispatch();
   const userListStorage = useSelector((state) => state.app.userList);
 
@@ -125,7 +130,7 @@ export default function User({ mode, allUserLoading, allUserError }) {
             }}
             onClick={() => handleAddUser()}
           >
-            Add
+            {languages === "VN" ? "Thêm" : "Add"}
           </Button>
           <Button
             startIcon={<DeleteIcon />}
@@ -141,7 +146,7 @@ export default function User({ mode, allUserLoading, allUserError }) {
             }}
             disabled={selectedRow.length === 0}
           >
-            Delete
+            {languages === "VN" ? "Xóa" : "Delete"}
           </Button>
         </div>
 
@@ -155,6 +160,7 @@ export default function User({ mode, allUserLoading, allUserError }) {
           pageSize={5}
           rowsPerPageOptions={[5]}
           checkboxSelection
+          localeText={daDK.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>
       // </ThemeProvider>

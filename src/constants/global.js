@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import PreviewIcon from "@mui/icons-material/Preview";
 import { createTheme } from "@mui/material/styles";
+import { current } from "@reduxjs/toolkit";
 import { routesName } from "features/slice";
 import { store } from "store";
 
@@ -76,7 +77,7 @@ export const rows = [
     id: 5,
     lastName: "Targaryen",
     firstName: "Daenerys",
-    age: null,
+    age: 16,
     email: "leducnghi28122000hiie@gmail.com",
     role: "member",
   },
@@ -84,7 +85,7 @@ export const rows = [
     id: 6,
     lastName: "Melisandre",
     firstName: null,
-    age: 150,
+    age: 15,
     email: "leducnghi28122000hiie@gmail.com",
     role: "member",
   },
@@ -115,23 +116,58 @@ export const rows = [
 ];
 
 export const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 150 },
-  { field: "lastName", headerName: "Last name", width: 150 },
+  {
+    field: "id",
+    renderHeader: () => {
+      const languages = store.getState().app.language;
+      return <p>{languages === "VN" ? "STT" : "ID"} </p>;
+    },
+    width: 70,
+  },
+
+  {
+    field: "firstName",
+    renderHeader: () => {
+      const languages = store.getState().app.language;
+      return <p>{languages === "VN" ? "Tên họ" : "First name"} </p>;
+    },
+    width: 150,
+  },
+
+  {
+    field: "lastName",
+    renderHeader: () => {
+      const languages = store.getState().app.language;
+      return <p>{languages === "VN" ? "Tên cuối" : "Last name"} </p>;
+    },
+    width: 150,
+  },
+
   {
     field: "email",
-    headerName: "Email",
+    renderHeader: () => {
+      const languages = store.getState().app.language;
+      return <p>{languages === "VN" ? "Email" : "Email"} </p>;
+    },
     width: 250,
   },
+
   {
     field: "age",
-    headerName: "Age",
+    renderHeader: () => {
+      const languages = store.getState().app.language;
+      return <p>{languages === "VN" ? "Tuổi" : "Age"} </p>;
+    },
     // type: "number",
     width: 100,
   },
+
   {
     field: "fullName",
-    headerName: "Full name",
+    renderHeader: () => {
+      const languages = store.getState().app.language;
+      return <p>{languages === "VN" ? "Tên đầy đủ" : "Full name"} </p>;
+    },
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     width: 300,
@@ -146,17 +182,23 @@ export const columns = [
       );
     },
   },
+
   {
     field: "role",
-    headerName: "Role",
+    renderHeader: () => {
+      const languages = store.getState().app.language;
+      return <p>{languages === "VN" ? "Chức vụ" : "Role"} </p>;
+    },
     width: 150,
   },
+
   {
     field: "",
     headerName: "",
     width: 200,
 
     renderCell: (cellValues) => {
+      const languages = store.getState().app.language;
       return (
         <Link to={`/main/about/${cellValues.row.id}`}>
           <Button
@@ -168,7 +210,7 @@ export const columns = [
               store.dispatch(routesName("About"));
             }}
           >
-            View
+            {languages === "Eng" ? "View" : "Xem chi tiết"}
           </Button>
         </Link>
       );

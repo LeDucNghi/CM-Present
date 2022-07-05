@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 
-function Account({ mode }) {
+function Account({ mode, languages }) {
   const { id } = useParams();
   const { data, error, isLoading } = useGetDetaillUserQuery(id);
   const [updateUser] = useUpdateUserMutation();

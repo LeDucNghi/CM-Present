@@ -14,7 +14,7 @@ import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import Swal from "sweetalert2";
 import { columns } from "constants/global";
 
-function Trash({ mode, deletedUserLoading }) {
+function Trash({ mode, languages, deletedUserLoading }) {
   const dispatch = useDispatch();
   const deletedUserListStorage = useSelector(
     (state) => state.app.deletedUserList
