@@ -71,22 +71,6 @@
       "age": 65,
       "email": "leducnghi28122000hiie@gmail.com",
       "role": "member"
-    },
-    {
-      "id": 10,
-      "firstName": "Phung",
-      "lastName": "Hung",
-      "email": "phunghung210@gmail.com",
-      "age": "22",
-      "role": "member"
-    },
-    {
-      "id": 11,
-      "firstName": "Duc",
-      "lastName": "Nghi",
-      "email": "leducnghi28122000@gmail.com",
-      "age": "28",
-      "role": "member"
     }
   ],
   "trash": [

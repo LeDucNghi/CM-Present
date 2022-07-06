@@ -1,21 +1,21 @@
 import * as React from "react";
 
-import { DataGrid, daDK, enUS } from "@mui/x-data-grid";
-import { columns, dark, light, theme } from "constants/global";
+import { DataGrid } from "@mui/x-data-grid";
+import { columns } from "constants/global";
 import { deleteUser, postUserList } from "features/slice";
+import { useDispatch, useSelector } from "react-redux";
 import {
   useDeleteUserFromListMutation,
-  usePostDeletedUserMutation,
+  useDeleteUserPermanentlyMutation,
+  usePostDeletedUserMutation
 } from "services/userServices";
-import { useDispatch, useSelector } from "react-redux";
 
-import AddUser from "components/AddUser/addUser";
-import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Loading } from "components/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { Button } from "@mui/material";
+import AddUser from "components/AddUser/addUser";
+import { Loading } from "components/Loading";
 import Swal from "sweetalert2";
-import { ThemeProvider } from "@mui/styles";
 
 export default function User({
   mode,
@@ -28,16 +28,13 @@ export default function User({
 
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();
+  const [deleteUserPermanently, responseInfo] = useDeleteUserPermanentlyMutation();
 
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    console.log(
-      "🚀 ~ file: user.jsx ~ line 27 ~ User ~ userListStorage",
-      userListStorage
-    );
     if (userListStorage && userListStorage.length !== 0)
       setRow(userListStorage);
   }, [userListStorage]);
@@ -51,38 +48,56 @@ export default function User({
   );
 
   const handleDeleteUser = () => {
+    
     Swal.fire({
       title: `Are you sure to delete this ${
         selectedRow.length === 1 ? "" : selectedRow.length
       } user ?`,
-      text: "",
-      icon: "warning",
+      showDenyButton: true,
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: 'Just remove to trash!',
+      denyButtonText: `Delete it permanently!`,
     }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         checkSameElement.forEach((item) => {
           const { id, ...rest } = item;
-
+  
           deleteUserFromList(id);
           postDeletedUser({ ...rest });
-
+  
           dispatch(deleteUser({ ...rest }));
         });
-
+  
         dispatch(postUserList(checkDiffElement));
         setRow(userListStorage);
-
+  
         Swal.fire(
           "Deleted!",
           "You can restore this user from trash!",
           "success"
         );
+      } else if (result.isDenied) {
+        checkSameElement.forEach((el) => {
+          const { id, ...rest } = el;
+  
+          deleteUserFromList(id);  
+          dispatch(deleteUser({ ...rest }));
+
+        });
+        dispatch(postUserList(checkDiffElement));
+        setRow(userListStorage);
+        
+        Swal.fire(
+          "Deleted!",
+          "",
+          "success"
+        );
       }
-    });
+    })
   };
+
+  
 
   const handleAddUser = () => {
     setOpen(true);
@@ -99,12 +114,10 @@ export default function User({
   if (allUserError) return console.log(allUserError);
   else
     return (
-      // <ThemeProvider theme={mode === "dark" ? dark : light}>
       <div
         style={{
           height: 400,
           width: "100%",
-          // background: mode === "light" ? "#ccc" : "#121212",
         }}
       >
         <div
@@ -113,8 +126,6 @@ export default function User({
             display: "flex",
             justifyContent: "flex-end",
             marginBottom: "1em",
-            // color: mode === "dark" ? "#fff" : "#ccc",
-            // background: "#000",
           }}
         >
           <Button
@@ -124,9 +135,6 @@ export default function User({
             sx={{
               fontWeight: 600,
               marginRight: "1em",
-              // cursor: "not-allowed",
-              // color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)",
-              // background :,
             }}
             onClick={() => handleAddUser()}
           >
@@ -160,9 +168,7 @@ export default function User({
           pageSize={5}
           rowsPerPageOptions={[5]}
           checkboxSelection
-          localeText={daDK.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>
-      // </ThemeProvider>
     );
 }

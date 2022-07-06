@@ -86,7 +86,7 @@ export default function ThemeToggle() {
           <MaterialUISwitch
             sx={{ m: 1 }}
             checked={isOn}
-            isOn={isOn}
+            ison={isOn}
             onClick={() => toggleSwitch()}
           />
         }

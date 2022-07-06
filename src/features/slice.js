@@ -18,7 +18,15 @@ export const appSlice = createSlice({
     },
 
     postUserInfo: (state, action) => {
+      console.log(
+        "🚀 ~ file: slice.js ~ line 22 ~ action.payload",
+        action.payload
+      );
       state.userInfo = action.payload;
+      // console.log(
+      //   "🚀 ~ file: slice.js ~ line 23 ~ state.userInfo",
+      //   current(state.userInfo)
+      // );
     },
 
     postMode: (state, action) => {

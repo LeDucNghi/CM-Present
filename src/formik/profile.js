@@ -1,10 +1,14 @@
+import { store } from "store";
 import * as Yup from "yup";
 
+const userInfo = store.getState().app.userInfo;
+console.log("🚀 ~ file: profile.js ~ line 5 ~ userInfo", userInfo);
+
 export const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  age: "",
+  firstName: `${userInfo ? userInfo.firstName : ""}`,
+  lastName: `${userInfo ? userInfo.lastName : ""}`,
+  email: `${userInfo ? userInfo.email : ""}`,
+  age: `${userInfo ? userInfo.age : ""}`,
 };
 
 export const validationSchema = Yup.object({

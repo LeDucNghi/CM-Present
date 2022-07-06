@@ -1,24 +1,22 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import { Suspense, useEffect } from "react";
-import { createTheme, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { postDeletedList, postUserList } from "features/slice";
+import { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate, Route, Routes } from "react-router-dom";
 import {
   useGetAllUserQuery,
-  useGetDeletedUserQuery,
+  useGetDeletedUserQuery
 } from "services/userServices";
 
+import Box from "@mui/material/Box";
+import MiniDrawer from "components/Drawer/drawer";
+import { Loading } from "components/Loading";
+import Error from "components/NotFound/notFound";
 import About from "pages/About/about";
 import Account from "pages/Account/account";
-import Box from "@mui/material/Box";
 import Dashboard from "pages/DashBoard/dashboard";
-import Error from "components/NotFound/notFound";
-import { Loading } from "components/Loading";
-import MiniDrawer from "components/Drawer/drawer";
-import { ThemeProvider } from "@mui/styles";
 import Trash from "pages/Trash/trash";
 import User from "pages/Users/user";
-import { zhCN } from "@mui/x-data-grid";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -54,15 +52,6 @@ export default function Main() {
       dispatch(postDeletedList(deletedUserList));
     }
   }, [getDeletedUserSuccess, getAllUserSuccess]);
-
-  const theme = createTheme(
-    {
-      palette: {
-        primary: { main: "#1976d2" },
-      },
-    },
-    zhCN
-  );
 
   return (
     <Box
