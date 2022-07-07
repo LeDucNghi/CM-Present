@@ -1,28 +1,27 @@
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import { Button } from "@mui/material";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import DeleteIcon from "@mui/icons-material/Delete";
 import InfoIcon from "@mui/icons-material/Info";
-import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import PreviewIcon from "@mui/icons-material/Preview";
+import { Button } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-import { current } from "@reduxjs/toolkit";
 import { routesName } from "features/slice";
+import { Link } from "react-router-dom";
 import { store } from "store";
 
 export const drawer = [
   {
     id: 1,
-    name: "Users",
-    path: "/main/user",
-    icon: <PersonIcon />,
+    name: "Dashboard",
+    path: "/main/dashboard",
+    icon: <DashboardIcon />,
   },
 
   {
     id: 2,
-    name: "Profiles",
-    path: "/main/profile",
-    icon: <AssignmentIndIcon />,
+    name: "Users",
+    path: "/main/user",
+    icon: <PersonIcon />,
   },
 
   {

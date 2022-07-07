@@ -1,12 +1,11 @@
 {
   "users": [
     {
-      "id": 1,
+      "firstName": "John cena",
       "lastName": "Snow",
-      "firstName": "Jon",
-      "age": 35,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "age": "35",
+      "id": 1
     },
     {
       "id": 2,

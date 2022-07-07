@@ -120,9 +120,13 @@ export default function MiniDrawer({ mode }) {
     setOpen(false);
   };
 
-  const handleRedirect = (page, pathname) => {
-    dispatch(routesName(page));
-    navigate(pathname);
+  const handleRedirect = (pageName, pathName) => {
+    console.log(
+      "🚀 ~ file: drawer.jsx ~ line 124 ~ handleRedirect ~ pathName",
+      pathName
+    );
+    dispatch(routesName(pageName));
+    navigate(pathName);
   };
 
   const handleLogout = () => {

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import {
   useGetAllUserQuery,
-  useGetDeletedUserQuery
+  useGetDeletedUserQuery,
 } from "services/userServices";
 
 import Box from "@mui/material/Box";
@@ -13,7 +13,6 @@ import MiniDrawer from "components/Drawer/drawer";
 import { Loading } from "components/Loading";
 import Error from "components/NotFound/notFound";
 import About from "pages/About/about";
-import Account from "pages/Account/account";
 import Dashboard from "pages/DashBoard/dashboard";
 import Trash from "pages/Trash/trash";
 import User from "pages/Users/user";
@@ -79,15 +78,6 @@ export default function Main() {
           />
 
           <Route
-            path="about"
-            element={
-              <Suspense fallback={<Loading />}>
-                <About />
-              </Suspense>
-            }
-          />
-
-          <Route
             path="trash"
             element={
               <Suspense fallback={<Loading />}>
@@ -104,7 +94,7 @@ export default function Main() {
             path="about/:id"
             element={
               <Suspense fallback={<Loading />}>
-                <Account mode={mode} languages={languages} />
+                <About mode={mode} languages={languages} />
               </Suspense>
             }
           />
