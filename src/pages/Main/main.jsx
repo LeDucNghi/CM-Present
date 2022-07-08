@@ -1,21 +1,22 @@
-import { styled } from "@mui/material/styles";
-import { postDeletedList, postUserList } from "features/slice";
-import { Suspense, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Suspense, useEffect, useState } from "react";
+import { postDeletedList, postUserList } from "features/slice";
+import { useDispatch, useSelector } from "react-redux";
 import {
   useGetAllUserQuery,
   useGetDeletedUserQuery,
 } from "services/userServices";
 
-import Box from "@mui/material/Box";
-import MiniDrawer from "components/Drawer/drawer";
-import { Loading } from "components/Loading";
-import Error from "components/NotFound/notFound";
 import About from "pages/About/about";
+import Box from "@mui/material/Box";
 import Dashboard from "pages/DashBoard/dashboard";
+import Error from "components/NotFound/notFound";
+import { Loading } from "components/Loading";
+import MiniDrawer from "components/Drawer/drawer";
 import Trash from "pages/Trash/trash";
 import User from "pages/Users/user";
+import { styled } from "@mui/material/styles";
+import { userData } from "constants/global";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -29,8 +30,6 @@ export default function Main() {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.app.mode);
   const languages = useSelector((state) => state.app.language);
-  // const mode = localStorage.getItem("mode");
-  // const language = localStorage.getItem("language");
 
   const {
     data: deletedUserList,
@@ -44,6 +43,25 @@ export default function Main() {
     isLoading: allUserLoading,
     isSuccess: getAllUserSuccess,
   } = useGetAllUserQuery();
+
+  const chartData = {
+    labels: userData.map((data) => data.year),
+    datasets: [
+      {
+        label: "User Register",
+        data: userData.map((data) => data.userRegister),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+          "#ecf0f1",
+          "#50AF95",
+          "f3ba2f",
+          "#2a71d0",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
+  };
 
   useEffect(() => {
     if (getDeletedUserSuccess && getAllUserSuccess) {
@@ -72,7 +90,7 @@ export default function Main() {
             path="dashboard"
             element={
               <Suspense fallback={<Loading />}>
-                <Dashboard languages={languages} />
+                <Dashboard languages={languages} chartData={chartData} />
               </Suspense>
             }
           />

@@ -1,12 +1,12 @@
+import { Button } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DeleteIcon from "@mui/icons-material/Delete";
 import InfoIcon from "@mui/icons-material/Info";
+import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import PreviewIcon from "@mui/icons-material/Preview";
-import { Button } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { routesName } from "features/slice";
-import { Link } from "react-router-dom";
 import { store } from "store";
 
 export const drawer = [
@@ -157,7 +157,6 @@ export const columns = [
       const languages = store.getState().app.language;
       return <p>{languages === "VN" ? "Tuổi" : "Age"} </p>;
     },
-    // type: "number",
     width: 100,
   },
 
@@ -214,6 +213,39 @@ export const columns = [
         </Link>
       );
     },
+  },
+];
+
+export const userData = [
+  {
+    id: 1,
+    year: 2016,
+    userRegister: 80000,
+    userLost: 823,
+  },
+  {
+    id: 2,
+    year: 2017,
+    userRegister: 45677,
+    userLost: 345,
+  },
+  {
+    id: 3,
+    year: 2018,
+    userRegister: 78888,
+    userLost: 555,
+  },
+  {
+    id: 4,
+    year: 2019,
+    userRegister: 90000,
+    userLost: 200,
+  },
+  {
+    id: 5,
+    year: 2020,
+    userRegister: 85000,
+    userLost: 500,
   },
 ];
 
