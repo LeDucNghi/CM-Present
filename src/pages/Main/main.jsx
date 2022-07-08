@@ -50,13 +50,10 @@ export default function Main() {
       {
         label: "User Register",
         data: userData.map((data) => data.userRegister),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "f3ba2f",
-          "#2a71d0",
-        ],
+        backgroundColor:
+          mode === "dark"
+            ? ["rgba(75,192,192,1)", "#ecf0f1", "#50AF95", "f3ba2f", "#2a71d0"]
+            : ["rgba(75,192,192,1)", "#ecf0f1", "#50AF95", "f3ba2f", "#2a71d0"],
         borderColor: "black",
         borderWidth: 2,
       },
@@ -90,7 +87,11 @@ export default function Main() {
             path="dashboard"
             element={
               <Suspense fallback={<Loading />}>
-                <Dashboard languages={languages} chartData={chartData} />
+                <Dashboard
+                  mode={mode}
+                  languages={languages}
+                  chartData={chartData}
+                />
               </Suspense>
             }
           />
