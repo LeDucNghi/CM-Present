@@ -94,9 +94,8 @@ const InputInformation = ({ values, touched, errors, handleChange }) => {
   );
 };
 
-const Avatar = () => {
+const Avatar = ({ setFieldValue }) => {
   const [image, setImage] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
 
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -106,7 +105,7 @@ const Avatar = () => {
         img
       );
       setImage(img);
-      setSelectedFile(e.target.files[0]);
+      setFieldValue("image", e.target.files[0]);
     }
   };
   return (
@@ -140,6 +139,7 @@ export const ProfileForm = ({
   touched,
   errors,
   handleChange,
+  setFieldValue,
 }) => {
   return (
     <>
@@ -156,7 +156,7 @@ export const ProfileForm = ({
       </div>
 
       <div className="user_avatar">
-        <Avatar />
+        <Avatar setFieldValue={setFieldValue} />
       </div>
 
       <div className="account_btn">

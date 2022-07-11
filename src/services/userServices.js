@@ -11,6 +11,16 @@ export const userApi = createApi({
       }),
     }),
 
+    getUserTeam: builder.query({
+      query: (team) => {
+        console.log("🚀 ~ file: userServices.js ~ line 16 ~ team", team);
+        return {
+          url: `users?team=${team}`,
+          method: "GET",
+        };
+      },
+    }),
+
     getDeletedUser: builder.query({
       query: () => ({
         url: `trash`,
@@ -97,4 +107,5 @@ export const {
   useUpdateUserMutation,
   useDeleteUserFromListMutation,
   usePostDeletedUserMutation,
+  useGetUserTeamQuery,
 } = userApi;

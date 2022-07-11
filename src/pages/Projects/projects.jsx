@@ -3,7 +3,7 @@ import * as React from "react";
 import { deleteUser, postUserList } from "features/slice";
 import {
   useDeleteUserFromListMutation,
-  useDeleteUserPermanentlyMutation,
+  useGetUserTeamQuery,
   usePostDeletedUserMutation,
 } from "services/userServices";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Loading } from "components/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import SelectAutoWidth from "components/ProjectFilter/projectFilter";
 import Swal from "sweetalert2";
 import { columns } from "constants/global";
 
@@ -24,12 +25,11 @@ export default function Projects({
   languages,
 }) {
   const dispatch = useDispatch();
+
   const userListStorage = useSelector((state) => state.app.userList);
 
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();
-  const [deleteUserPermanently, responseInfo] =
-    useDeleteUserPermanentlyMutation();
 
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
@@ -116,9 +116,11 @@ export default function Projects({
         <div
           style={{
             width: "auto",
+            height: "3rem",
             display: "flex",
             justifyContent: "flex-end",
             marginBottom: "1em",
+            // background: "#000",
           }}
         >
           <Button
@@ -149,6 +151,7 @@ export default function Projects({
           >
             {languages === "VN" ? "Xóa" : "Delete"}
           </Button>
+          <SelectAutoWidth />
         </div>
 
         <AddUser open={open} setOpen={setOpen} />

@@ -257,25 +257,17 @@ export const userData = [
   },
 ];
 
-export const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#0052cc",
-    },
-    secondary: {
-      main: "#edf2ff",
-    },
+export const teamMenu = [
+  {
+    id: 1,
+    teamName: "React",
   },
-});
-
-export const dark = createTheme({
-  palette: {
-    mode: "dark",
+  {
+    id: 2,
+    teamName: "Vue",
   },
-});
-
-export const light = createTheme({
-  palette: {
-    mode: "light",
+  {
+    id: 3,
+    teamName: "Angular",
   },
-});
+];

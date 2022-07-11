@@ -1,7 +1,6 @@
 import "./about.scss";
 
-import { Button, CircularProgress, TextField } from "@mui/material";
-import { ErrorMessage, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import {
   useGetDetaillUserQuery,
   useUpdateUserMutation,
@@ -41,6 +40,7 @@ function About({ mode, languages }) {
             age: `${data ? data.age : ""}`,
             team: `${data ? data.team : ""}`,
             role: `${data ? data.role : ""}`,
+            image: null,
           }}
           onSubmit={(values, { setSubmitting }) => {
             handleUpdateUser(values, { setSubmitting });
@@ -54,12 +54,8 @@ function About({ mode, languages }) {
               touched,
               errors,
               handleChange,
+              setFieldValue,
             } = formikProps;
-            console.log("🚀 ~ file: about.jsx ~ line 57 ~ About ~ values,", {
-              values,
-              touched,
-              errors,
-            });
             return (
               <Form>
                 <ProfileForm
@@ -71,6 +67,7 @@ function About({ mode, languages }) {
                   touched={touched}
                   errors={errors}
                   handleChange={handleChange}
+                  setFieldValue={setFieldValue}
                 />
               </Form>
             );
