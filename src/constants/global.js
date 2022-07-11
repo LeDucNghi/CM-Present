@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DeleteIcon from "@mui/icons-material/Delete";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import InfoIcon from "@mui/icons-material/Info";
 import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
@@ -9,7 +10,7 @@ import { createTheme } from "@mui/material/styles";
 import { routesName } from "features/slice";
 import { store } from "store";
 
-export const drawer = [
+export const engDrawer = [
   {
     id: 1,
     name: "Dashboard",
@@ -26,13 +27,20 @@ export const drawer = [
 
   {
     id: 3,
+    name: "Projects",
+    path: "/main/project",
+    icon: <FolderOpenIcon />,
+  },
+
+  {
+    id: 4,
     name: "About",
     path: "/main/about",
     icon: <InfoIcon />,
   },
 
   {
-    id: 4,
+    id: 5,
     name: "Trash",
     path: "/main/trash",
     icon: <DeleteIcon />,

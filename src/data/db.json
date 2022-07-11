@@ -1,10 +1,12 @@
 {
   "users": [
     {
-      "firstName": "John cena",
-      "lastName": "Snow",
+      "firstName": "b",
+      "lastName": "a",
       "email": "leducnghi28122000hiie@gmail.com",
       "age": "35",
+      "team": "React",
+      "role": "member",
       "id": 1
     },
     {
@@ -13,7 +15,9 @@
       "firstName": "Cersei",
       "age": 42,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "role": "member",
+      "team": "React",
+      "project": "Error"
     },
     {
       "id": 3,
@@ -21,7 +25,9 @@
       "firstName": "Jaime",
       "age": 45,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "role": "member",
+      "team": "React",
+      "project": "Error"
     },
     {
       "id": 4,
@@ -29,7 +35,9 @@
       "firstName": "Arya",
       "age": 16,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "role": "member",
+      "team": "React",
+      "project": "Error"
     },
     {
       "id": 5,
@@ -37,7 +45,9 @@
       "firstName": "Daenerys",
       "age": null,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "role": "member",
+      "team": "React",
+      "project": "Error"
     },
     {
       "id": 6,
@@ -45,7 +55,9 @@
       "firstName": null,
       "age": 150,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "role": "member",
+      "team": "React",
+      "project": "Error"
     },
     {
       "id": 7,
@@ -53,7 +65,9 @@
       "firstName": "Ferrara",
       "age": 44,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "role": "member",
+      "team": "React",
+      "project": "Error"
     },
     {
       "id": 8,
@@ -61,7 +75,9 @@
       "firstName": "Rossini",
       "age": 36,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "role": "member",
+      "team": "React",
+      "project": "Error"
     },
     {
       "id": 9,
@@ -69,7 +85,9 @@
       "firstName": "Harvey",
       "age": 65,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "role": "member",
+      "team": "React",
+      "project": "Error"
     }
   ],
   "trash": [
@@ -79,7 +97,9 @@
       "firstName": "Hung",
       "age": 69,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "role": "member",
+      "team": "React",
+      "project": "Error"
     },
     {
       "id": 2,
@@ -87,7 +107,9 @@
       "firstName": "Hung",
       "age": 69,
       "email": "leducnghi28122000hiie@gmail.com",
-      "role": "member"
+      "role": "member",
+      "team": "React",
+      "project": "Error"
     }
   ]
 }

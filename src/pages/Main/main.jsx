@@ -13,10 +13,10 @@ import Dashboard from "pages/DashBoard/dashboard";
 import Error from "components/NotFound/notFound";
 import { Loading } from "components/Loading";
 import MiniDrawer from "components/Drawer/drawer";
+import Projects from "pages/Projects/projects";
 import Trash from "pages/Trash/trash";
 import User from "pages/Users/user";
 import { styled } from "@mui/material/styles";
-import { userData } from "constants/global";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -44,22 +44,6 @@ export default function Main() {
     isSuccess: getAllUserSuccess,
   } = useGetAllUserQuery();
 
-  const chartData = {
-    labels: userData.map((data) => data.year),
-    datasets: [
-      {
-        label: "User Register",
-        data: userData.map((data) => data.userRegister),
-        backgroundColor:
-          mode === "dark"
-            ? ["rgba(75,192,192,1)", "#ecf0f1", "#50AF95", "f3ba2f", "#2a71d0"]
-            : ["rgba(75,192,192,1)", "#ecf0f1", "#50AF95", "f3ba2f", "#2a71d0"],
-        borderColor: "black",
-        borderWidth: 2,
-      },
-    ],
-  };
-
   useEffect(() => {
     if (getDeletedUserSuccess && getAllUserSuccess) {
       dispatch(postUserList(allUserList));
@@ -85,50 +69,39 @@ export default function Main() {
 
           <Route
             path="dashboard"
-            element={
-              <Suspense fallback={<Loading />}>
-                <Dashboard
-                  mode={mode}
-                  languages={languages}
-                  chartData={chartData}
-                />
-              </Suspense>
-            }
+            element={<Dashboard mode={mode} languages={languages} />}
           />
 
           <Route
             path="trash"
             element={
-              <Suspense fallback={<Loading />}>
-                <Trash
-                  mode={mode}
-                  languages={languages}
-                  deletedUserLoading={deletedUserLoading}
-                />
-              </Suspense>
+              <Trash
+                mode={mode}
+                languages={languages}
+                deletedUserLoading={deletedUserLoading}
+              />
             }
           />
 
           <Route
             path="about/:id"
-            element={
-              <Suspense fallback={<Loading />}>
-                <About mode={mode} languages={languages} />
-              </Suspense>
-            }
+            element={<About mode={mode} languages={languages} />}
+          />
+
+          <Route
+            path="project"
+            element={<Projects mode={mode} languages={languages} />}
           />
 
           <Route
             path="user"
             element={
-              <Suspense fallback={<Loading />}>
-                <User
-                  mode={mode}
-                  allUserLoading={allUserLoading}
-                  allUserError={allUserError}
-                  languages={languages}
-                />
-              </Suspense>
+              <User
+                mode={mode}
+                allUserLoading={allUserLoading}
+                allUserError={allUserError}
+                languages={languages}
+              />
             }
           />
 

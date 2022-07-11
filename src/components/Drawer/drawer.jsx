@@ -22,7 +22,7 @@ import MuiDrawer from "@mui/material/Drawer";
 import ThemeToggle from "components/ThemingToggle/themingToggle";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { drawer } from "constants/global";
+import { engDrawer } from "constants/global";
 import { routesName } from "features/slice";
 
 const drawerWidth = 240;
@@ -239,7 +239,7 @@ export default function MiniDrawer({ mode }) {
           </IconButton>
         </DrawerHeader>
         <List>
-          {drawer.map((item, index) => (
+          {engDrawer.map((item, index) => (
             <>
               <ListItem
                 key={index}

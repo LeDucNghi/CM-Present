@@ -3,15 +3,35 @@ import * as React from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
 import { Chart as ChartJS } from "chart.js/auto";
+import { userData } from "constants/global";
 
-export default function Dashboard({ mode, languages, chartData }) {
+export default function Dashboard({ mode, languages }) {
   const options = {
     responsive: true,
     color: mode === "dark" ? "#fff" : "black",
     scales: {
       y: { ticks: { color: mode === "dark" ? "#00ff00" : "black" } },
-      x: { ticks: { color: mode === "dark" ? "#ff0000" : "black" } },
+      x: { ticks: { color: mode === "dark" ? "#8a3ffc" : "black" } },
     },
+  };
+
+  const chartData = {
+    labels: userData.map((data) => data.year),
+    datasets: [
+      {
+        label: "User Register",
+        data: userData.map((data) => data.userRegister),
+        backgroundColor: [
+          "#8a3ffc",
+          "#33b1ff",
+          "#007d79",
+          "#ff7eb6",
+          "#fa4d56",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
   };
 
   return (

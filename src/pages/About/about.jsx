@@ -1,40 +1,22 @@
 import "./about.scss";
 
 import { Button, CircularProgress, TextField } from "@mui/material";
-import { Form, Formik } from "formik";
-import { validationSchema } from "formik/profile";
-import { useState } from "react";
+import { ErrorMessage, Form, Formik } from "formik";
 import {
   useGetDetaillUserQuery,
   useUpdateUserMutation,
 } from "services/userServices";
 
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Loading } from "components/Loading";
-import { Images } from "constants/images";
-import { useParams } from "react-router-dom";
+import { ProfileForm } from "components/ProfileForm/profileForm";
 import Swal from "sweetalert2";
+import { useParams } from "react-router-dom";
+import { validationSchema } from "formik/profile";
 
 function About({ mode, languages }) {
   const { id } = useParams();
   const { data, error, isLoading } = useGetDetaillUserQuery(id);
-  const [updateUser, responseInfo] = useUpdateUserMutation();
-
-  const [image, setImage] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
-
-  const onImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const img = URL.createObjectURL(e.target.files[0]);
-      console.log(
-        "🚀 ~ file: account.jsx ~ line 49 ~ onImageChange ~ img",
-        img
-      );
-      setImage(img);
-      setSelectedFile(e.target.files[0]);
-    }
-  };
+  const [updateUser] = useUpdateUserMutation();
 
   const handleUpdateUser = (values, { setSubmitting }) => {
     updateUser({ ...values, id: id });
@@ -57,6 +39,8 @@ function About({ mode, languages }) {
             lastName: `${data ? data.lastName : ""}`,
             email: `${data ? data.email : ""}`,
             age: `${data ? data.age : ""}`,
+            team: `${data ? data.team : ""}`,
+            role: `${data ? data.role : ""}`,
           }}
           onSubmit={(values, { setSubmitting }) => {
             handleUpdateUser(values, { setSubmitting });
@@ -71,114 +55,23 @@ function About({ mode, languages }) {
               errors,
               handleChange,
             } = formikProps;
+            console.log("🚀 ~ file: about.jsx ~ line 57 ~ About ~ values,", {
+              values,
+              touched,
+              errors,
+            });
             return (
               <Form>
-                <div
-                  className="account_info"
-                  style={{ color: mode === "dark" ? "#fff" : "" }}
-                >
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    name="firstName"
-                    label="firstName"
-                    type="text"
-                    id="outlined-error-helper-text"
-                    value={values.firstName}
-                    onChange={handleChange}
-                    error={touched.firstName && Boolean(errors.firstName)}
-                    helperText={errors.firstName && touched.firstName}
-                  />
-
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    name="lastName"
-                    label="lastName"
-                    type="text"
-                    id="outlined-error-helper-text"
-                    value={values.lastName}
-                    onChange={handleChange}
-                    error={touched.lastName && Boolean(errors.lastName)}
-                    helperText={errors.lastName && touched.lastName}
-                  />
-
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    name="email"
-                    label="email"
-                    type="text"
-                    id="outlined-error-helper-text"
-                    value={values.email}
-                    onChange={handleChange}
-                    error={touched.email && Boolean(errors.email)}
-                    helperText={errors.email && touched.email}
-                  />
-
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    name="age"
-                    label="age"
-                    type="text"
-                    id="outlined-error-helper-text"
-                    value={values.age}
-                    onChange={handleChange}
-                    error={touched.age && Boolean(errors.age)}
-                    helperText={errors.age && touched.age}
-                  />
-                </div>
-
-                <div className="user_avatar">
-                  <div className="avatar">
-                    {image ? (
-                      <img
-                        className="preview_img"
-                        src={image}
-                        alt="preview_image"
-                      />
-                    ) : (
-                      <img src={Images.EMPTY} alt="user_avt" />
-                    )}
-                  </div>
-                  <label className="avatar_change_icon">
-                    <FontAwesomeIcon
-                      className="icon"
-                      icon={faCamera}
-                      size="3x"
-                      style={{ color: "#464646" }}
-                    />
-                    <input
-                      onChange={onImageChange}
-                      name="file_avt"
-                      type="file"
-                    />
-                  </label>
-                </div>
-                <div className="account_btn">
-                  <Button
-                    disabled={isSubmitting || !isValid}
-                    type="button"
-                    className="cancel"
-                  >
-                    {languages === "Eng" ? "Cancel" : "Huy"}
-                  </Button>
-
-                  <Button
-                    disabled={isSubmitting || !isValid}
-                    type="submit"
-                    className="apply"
-                  >
-                    {isSubmitting ? (
-                      <CircularProgress color="success" />
-                    ) : languages === "Eng" ? (
-                      "Apply"
-                    ) : (
-                      "Luu"
-                    )}
-                  </Button>
-                </div>
+                <ProfileForm
+                  mode={mode}
+                  languages={languages}
+                  values={values}
+                  isSubmitting={isSubmitting}
+                  isValid={isValid}
+                  touched={touched}
+                  errors={errors}
+                  handleChange={handleChange}
+                />
               </Form>
             );
           }}
