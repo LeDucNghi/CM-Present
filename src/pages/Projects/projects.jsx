@@ -123,7 +123,7 @@ export default function Projects({
             // background: "#000",
           }}
         >
-          <Button
+          {/* <Button
             startIcon={<PersonAddIcon />}
             variant="contained"
             color="success"
@@ -150,7 +150,7 @@ export default function Projects({
             disabled={selectedRow.length === 0}
           >
             {languages === "VN" ? "Xóa" : "Delete"}
-          </Button>
+          </Button> */}
           <SelectAutoWidth />
         </div>
 

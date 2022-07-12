@@ -1,8 +1,11 @@
 @import "../../assets/styles/GlobalStyles.scss";
 
 .account {
-  @include posCenter;
+  // @include posCenter;
 
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   // background: red;
   width: calc($width - 200px);
   height: 650px;
@@ -54,9 +57,11 @@
   border: 5px solid #464646;
   /* background: red; */
 
+  @include flexCenter;
+
   & img {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
     border-radius: $circle-border;
     object-fit: cover;
   }

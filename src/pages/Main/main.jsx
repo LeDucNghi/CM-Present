@@ -60,7 +60,7 @@ export default function Main() {
         height: "100vh",
       }}
     >
-      <MiniDrawer mode={mode} />
+      <MiniDrawer mode={mode} languages={languages} />
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />

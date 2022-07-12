@@ -92,11 +92,9 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer({ mode }) {
+export default function MiniDrawer({ mode, languages }) {
   const theme = useTheme();
-  const { pathname } = useLocation();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const routeName = useSelector((state) => state.app.routeName);
 
   const [open, setOpen] = React.useState(false);
@@ -118,15 +116,6 @@ export default function MiniDrawer({ mode }) {
 
   const handleDrawerClose = () => {
     setOpen(false);
-  };
-
-  const handleRedirect = (pageName, pathName) => {
-    console.log(
-      "🚀 ~ file: drawer.jsx ~ line 124 ~ handleRedirect ~ pathName",
-      pathName
-    );
-    dispatch(routesName(pageName));
-    navigate(pathName);
   };
 
   const handleLogout = () => {
@@ -238,45 +227,67 @@ export default function MiniDrawer({ mode }) {
             )}
           </IconButton>
         </DrawerHeader>
-        <List>
-          {engDrawer.map((item, index) => (
-            <>
-              <ListItem
-                key={index}
-                disablePadding
-                sx={{
-                  display: "block",
-                  background: pathname === item.path ? "#ccc" : "",
-                  transition: "background 0.3s ease-in-out 0s",
-                }}
-              >
-                <ListItemButton
-                  onClick={() => handleRedirect(item.name, item.path)}
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item.name}
-                    sx={{ opacity: open ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            </>
-          ))}
-        </List>
+
+        <ListDrawer languages={languages} open={open} />
       </Drawer>
     </>
   );
 }
+
+const ListDrawer = ({ languages, open }) => {
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleRedirect = (pageName, pathName) => {
+    console.log(
+      "🚀 ~ file: drawer.jsx ~ line 124 ~ handleRedirect ~ pathName",
+      pathName
+    );
+    dispatch(routesName(pageName));
+    navigate(pathName);
+  };
+
+  return (
+    <>
+      <List>
+        {engDrawer.map((item, index) => (
+          <>
+            <ListItem
+              key={index}
+              disablePadding
+              sx={{
+                display: "block",
+                background: pathname === item.path ? "#ccc" : "",
+                transition: "background 0.3s ease-in-out 0s",
+              }}
+            >
+              <ListItemButton
+                onClick={() => handleRedirect(item.name, item.path)}
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText
+                  primary={item.name}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </>
+        ))}
+      </List>
+    </>
+  );
+};

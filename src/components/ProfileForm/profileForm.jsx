@@ -1,5 +1,6 @@
 import { Button, CircularProgress, TextField } from "@mui/material";
 import React, { useState } from "react";
+import "../../pages/About/about.scss";
 
 import { ErrorMessage } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -114,7 +115,7 @@ const Avatar = ({ setFieldValue }) => {
         {image ? (
           <img className="preview_img" src={image} alt="preview_image" />
         ) : (
-          <img src={Images.EMPTY} alt="user_avt" />
+          <img src={Images.DEFAULTUSER} alt="user_avt" />
         )}
       </div>
       <label className="avatar_change_icon">
@@ -126,6 +127,34 @@ const Avatar = ({ setFieldValue }) => {
         />
         <input onChange={onImageChange} name="file_avt" type="file" />
       </label>
+    </>
+  );
+};
+
+const SubmitButton = ({ languages, isSubmitting, isValid }) => {
+  return (
+    <>
+      <Button
+        disabled={isSubmitting || !isValid}
+        type="button"
+        className="cancel"
+      >
+        {languages === "Eng" ? "Cancel" : "Huy"}
+      </Button>
+
+      <Button
+        disabled={isSubmitting || !isValid}
+        type="submit"
+        className="apply"
+      >
+        {isSubmitting ? (
+          <CircularProgress color="success" />
+        ) : languages === "Eng" ? (
+          "Apply"
+        ) : (
+          "Luu"
+        )}
+      </Button>
     </>
   );
 };
@@ -160,27 +189,11 @@ export const ProfileForm = ({
       </div>
 
       <div className="account_btn">
-        <Button
-          disabled={isSubmitting || !isValid}
-          type="button"
-          className="cancel"
-        >
-          {languages === "Eng" ? "Cancel" : "Huy"}
-        </Button>
-
-        <Button
-          disabled={isSubmitting || !isValid}
-          type="submit"
-          className="apply"
-        >
-          {isSubmitting ? (
-            <CircularProgress color="success" />
-          ) : languages === "Eng" ? (
-            "Apply"
-          ) : (
-            "Luu"
-          )}
-        </Button>
+        <SubmitButton
+          isSubmitting={isSubmitting}
+          isValid={isValid}
+          languages={languages}
+        />
       </div>
     </>
   );

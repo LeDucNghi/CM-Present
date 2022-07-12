@@ -47,6 +47,43 @@ export const engDrawer = [
   },
 ];
 
+export const vnDrawer = [
+  {
+    id: 1,
+    name: "Bảng điều khiển",
+    path: "/main/dashboard",
+    icon: <DashboardIcon />,
+  },
+
+  {
+    id: 2,
+    name: "Người dùng",
+    path: "/main/user",
+    icon: <PersonIcon />,
+  },
+
+  {
+    id: 3,
+    name: "Dự án",
+    path: "/main/project",
+    icon: <FolderOpenIcon />,
+  },
+
+  {
+    id: 4,
+    name: "Giới thiệu",
+    path: "/main/about",
+    icon: <InfoIcon />,
+  },
+
+  {
+    id: 5,
+    name: "Thùng rác",
+    path: "/main/trash",
+    icon: <DeleteIcon />,
+  },
+];
+
 export const rows = [
   {
     id: 1,

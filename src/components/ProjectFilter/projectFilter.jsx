@@ -11,25 +11,23 @@ export default function SelectAutoWidth() {
   const [teamName, setTeamName] = React.useState("");
 
   const { data, isSuccess } = useGetUserTeamQuery(teamName);
-
-  React.useEffect(() => {
-    console.log(
-      "🚀 ~ file: projectFilter.jsx ~ line 14 ~ SelectAutoWidth ~ data",
-      data
-    );
-  }, [isSuccess]);
+  console.log(
+    "🚀 ~ file: projectFilter.jsx ~ line 14 ~ SelectAutoWidth ~ data, isSuccess",
+    data,
+    isSuccess
+  );
 
   return (
     <div>
       <FormControl sx={{ minWidth: 80 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">Team</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           value={teamName}
           onChange={(e) => setTeamName(e.target.value)}
           autoWidth
-          label="Age"
+          label="Team"
         >
           {teamMenu.map((item, key) => {
             return (
