@@ -10,6 +10,9 @@ import { createTheme } from "@mui/material/styles";
 import { routesName } from "features/slice";
 import { store } from "store";
 
+const languages = store.getState().app.language;
+console.log("🚀 ~ file: global.js ~ line 14 ~ languages", languages);
+
 export const engDrawer = [
   {
     id: 1,
