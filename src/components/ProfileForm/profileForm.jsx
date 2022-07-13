@@ -3,9 +3,10 @@ import "../../pages/About/about.scss";
 import { Avatar } from "./avatar";
 import React from "react";
 import { SubmitButton } from "./submitButton";
-import { TextField } from "./textField";
+import { InputField } from "./inputField";
 
 export const ProfileForm = ({
+  data,
   mode,
   languages,
   isSubmitting,
@@ -22,7 +23,7 @@ export const ProfileForm = ({
         className="account_info"
         style={{ color: mode === "dark" ? "#fff" : "" }}
       >
-        <TextField
+        <InputField
           values={values}
           touched={touched}
           errors={errors}
@@ -31,7 +32,7 @@ export const ProfileForm = ({
       </div>
 
       <div className="user_avatar">
-        <Avatar setFieldValue={setFieldValue} />
+        <Avatar data={data} setFieldValue={setFieldValue} />
       </div>
 
       <div className="account_btn">

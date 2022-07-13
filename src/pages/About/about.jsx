@@ -59,6 +59,7 @@ function About({ mode, languages }) {
             return (
               <Form>
                 <ProfileForm
+                  data={data}
                   mode={mode}
                   languages={languages}
                   values={values}
