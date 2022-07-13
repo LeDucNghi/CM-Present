@@ -26,9 +26,9 @@ export const validationSchema = Yup.object({
 
   age: Yup.string().required("Please enter your age 🤔"),
 
-  role: Yup.string().required("Please enter your age 🤔"),
+  role: Yup.string().required("Please enter your role 🤔"),
 
-  team: Yup.string().required("Please enter your age 🤔"),
+  team: Yup.string().required("Please enter your team 🤔"),
 
-  project: Yup.string().required("Please enter your age 🤔"),
+  project: Yup.string().required("Please enter your project 🤔"),
 });

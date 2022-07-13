@@ -99,22 +99,22 @@
       "project": "Zalo App"
     },
     {
-      "id": 10,
-      "firstName": "Phung",
-      "lastName": "Hung",
-      "email": "leducnghi28122000@gmail.com",
-      "age": "22",
-      "role": "member"
-    },
-    {
-      "id": 11,
       "firstName": "Duc",
       "lastName": "Nghi",
       "email": "leducnghi28122000@gmail.com",
       "age": "22",
       "role": "member",
       "team": "React Native",
-      "project": "Zalo App"
+      "project": "Zalo App",
+      "id": 10
+    },
+    {
+      "firstName": "Phung",
+      "lastName": "Hung",
+      "email": "leducnghi28122000@gmail.com",
+      "age": "22",
+      "role": "member",
+      "id": 11
     }
   ],
   "trash": [
