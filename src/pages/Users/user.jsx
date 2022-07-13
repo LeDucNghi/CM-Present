@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { DataGrid } from "@mui/x-data-grid";
-import { columns } from "constants/global";
+import { columns, StyledDataGrid } from "constants/global";
 import { useSelector } from "react-redux";
 
 import AddUserButton from "components/AddUser/addUserButton";
@@ -55,8 +55,18 @@ export default function User({ mode, allUserLoading, allUserError }) {
 
         <AddUserForm open={open} setOpen={setOpen} />
 
-        <DataGrid
+        {/* <DataGrid
           sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
+          onSelectionModelChange={(id) => onSelectionModelChange(id)}
+          rows={row}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+        /> */}
+
+        <StyledDataGrid
+          // sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
           onSelectionModelChange={(id) => onSelectionModelChange(id)}
           rows={row}
           columns={columns}
