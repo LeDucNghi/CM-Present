@@ -1,91 +1,10 @@
-import { Button } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FolderOpenIcon from "@mui/icons-material/FolderOpen";
-import InfoIcon from "@mui/icons-material/Info";
-import { Link } from "react-router-dom";
-import PersonIcon from "@mui/icons-material/Person";
 import PreviewIcon from "@mui/icons-material/Preview";
-import { createTheme } from "@mui/material/styles";
+import { Button } from "@mui/material";
 import { routesName } from "features/slice";
+import { Link } from "react-router-dom";
 import { store } from "store";
-
-const languages = store.getState().app.language;
-console.log("🚀 ~ file: global.js ~ line 14 ~ languages", languages);
-
-export const engDrawer = [
-  {
-    id: 1,
-    name: "Dashboard",
-    path: "/main/dashboard",
-    icon: <DashboardIcon />,
-  },
-
-  {
-    id: 2,
-    name: "Users",
-    path: "/main/user",
-    icon: <PersonIcon />,
-  },
-
-  {
-    id: 3,
-    name: "Projects",
-    path: "/main/project",
-    icon: <FolderOpenIcon />,
-  },
-
-  {
-    id: 4,
-    name: "About",
-    path: "/main/about",
-    icon: <InfoIcon />,
-  },
-
-  {
-    id: 5,
-    name: "Trash",
-    path: "/main/trash",
-    icon: <DeleteIcon />,
-  },
-];
-
-export const vnDrawer = [
-  {
-    id: 1,
-    name: "Bảng điều khiển",
-    path: "/main/dashboard",
-    icon: <DashboardIcon />,
-  },
-
-  {
-    id: 2,
-    name: "Người dùng",
-    path: "/main/user",
-    icon: <PersonIcon />,
-  },
-
-  {
-    id: 3,
-    name: "Dự án",
-    path: "/main/project",
-    icon: <FolderOpenIcon />,
-  },
-
-  {
-    id: 4,
-    name: "Giới thiệu",
-    path: "/main/about",
-    icon: <InfoIcon />,
-  },
-
-  {
-    id: 5,
-    name: "Thùng rác",
-    path: "/main/trash",
-    icon: <DeleteIcon />,
-  },
-];
+import { styled } from "@mui/material/styles";
+import { DataGrid } from "@mui/x-data-grid";
 
 export const rows = [
   {
@@ -220,11 +139,9 @@ export const columns = [
 
     renderCell: (cellValues) => {
       return (
-        // <Link to={`/home/about/${cellValues.row.id}`}>
         <Button>
           {cellValues.row.firstName || ""} {cellValues.row.lastName || ""}
         </Button>
-        // </Link>
       );
     },
   },
@@ -311,3 +228,96 @@ export const teamMenu = [
     teamName: "Angular",
   },
 ];
+
+function customCheckbox(theme) {
+  return {
+    "& .MuiCheckbox-root svg": {
+      width: 16,
+      height: 16,
+      backgroundColor: "transparent",
+      border: `2px solid ${
+        theme.palette.mode === "light" ? "red" : "rgb(67, 67, 67)"
+      }`,
+      borderRadius: 2,
+    },
+    "& .MuiCheckbox-root svg path": {
+      display: "none",
+    },
+    "& .MuiCheckbox-root.Mui-checked:not(.MuiCheckbox-indeterminate) svg": {
+      backgroundColor: "#1890ff",
+      borderColor: "#1890ff",
+    },
+    "& .MuiCheckbox-root.Mui-checked .MuiIconButton-label:after": {
+      position: "absolute",
+      display: "table",
+      border: "2px solid #fff",
+      borderTop: 0,
+      borderLeft: 0,
+      transform: "rotate(45deg) translate(-50%,-50%)",
+      opacity: 1,
+      transition: "all .2s cubic-bezier(.12,.4,.29,1.46) .1s",
+      content: '""',
+      top: "50%",
+      left: "39%",
+      width: 5.71428571,
+      height: 9.14285714,
+    },
+    "& .MuiCheckbox-root.MuiCheckbox-indeterminate .MuiIconButton-label:after":
+      {
+        width: 8,
+        height: 8,
+        backgroundColor: "#1890ff",
+        transform: "none",
+        top: "39%",
+        border: 0,
+      },
+  };
+}
+
+const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
+  border: 0,
+  color:
+    theme.palette.mode === "light"
+      ? "rgba(0,0,0,.85)"
+      : "rgba(255,255,255,0.85)",
+  fontFamily: [
+    "-apple-system",
+    "BlinkMacSystemFont",
+    '"Segoe UI"',
+    "Roboto",
+    '"Helvetica Neue"',
+    "Arial",
+    "sans-serif",
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(","),
+  WebkitFontSmoothing: "auto",
+  letterSpacing: "normal",
+  "& .MuiDataGrid-columnsContainer": {
+    backgroundColor: theme.palette.mode === "light" ? "#fafafa" : "#1d1d1d",
+  },
+  "& .MuiDataGrid-iconSeparator": {
+    display: "none",
+  },
+  "& .MuiDataGrid-columnHeader, .MuiDataGrid-cell": {
+    borderRight: `1px solid ${
+      theme.palette.mode === "light" ? "#f0f0f0" : "#303030"
+    }`,
+  },
+  "& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell": {
+    borderBottom: `1px solid ${
+      theme.palette.mode === "light" ? "#f0f0f0" : "#303030"
+    }`,
+  },
+  "& .MuiDataGrid-cell": {
+    color:
+      theme.palette.mode === "light"
+        ? "rgba(0,0,0,.85)"
+        : "rgba(255,255,255,0.65)",
+  },
+  "& .MuiPaginationItem-root": {
+    borderRadius: 0,
+  },
+  ...customCheckbox(theme),
+}));

@@ -13,13 +13,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import IconButton from "@mui/material/IconButton";
 import LanguageMenus from "components/LanguageDropdown/languageDropdown";
 import { ListDrawer } from "./drawerList";
-import ListItem from "@mui/material/ListItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
 import ThemeToggle from "components/ThemingToggle/themingToggle";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import BoxSetting from "./boxSetting";
 
 const drawerWidth = 240;
 
@@ -94,17 +94,6 @@ export default function MiniDrawer({ mode, languages }) {
   const routeName = useSelector((state) => state.app.routeName);
 
   const [open, setOpen] = React.useState(false);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -112,11 +101,6 @@ export default function MiniDrawer({ mode, languages }) {
 
   const handleDrawerClose = () => {
     setOpen(false);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("account");
-    window.location.href = "/";
   };
 
   return (
@@ -142,7 +126,6 @@ export default function MiniDrawer({ mode, languages }) {
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              // color: mode === "dark" ? "rgba(255, 255, 255, 0.12)" : "",
               marginRight: 5,
               ...(open && { display: "none" }),
             }}
@@ -152,10 +135,8 @@ export default function MiniDrawer({ mode, languages }) {
           <Box
             sx={{
               width: "100%",
-              // marginLeft: "100px",
               display: "flex",
               justifyContent: "space-between",
-              // background: "#000",
               alignItems: "center",
             }}
           >
@@ -168,7 +149,6 @@ export default function MiniDrawer({ mode, languages }) {
                 marginLeft: "100px",
                 display: "flex",
                 justifyContent: "space-between",
-                // background: "violet",
                 alignItems: "center",
                 paddingRight: "20px",
               }}
@@ -178,39 +158,7 @@ export default function MiniDrawer({ mode, languages }) {
             </Box>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <ListItem
-                    onClick={setting === "Logout" ? () => handleLogout() : null}
-                  >
-                    <Typography textAlign="center">{setting}</Typography>
-                  </ListItem>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          <BoxSetting />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

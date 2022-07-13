@@ -7,6 +7,8 @@ export const initialValues = {
   email: "",
   age: "",
   role: "",
+  team: "",
+  project: "",
 };
 
 export const validationSchema = Yup.object({
@@ -25,4 +27,8 @@ export const validationSchema = Yup.object({
   age: Yup.string().required("Please enter your age 🤔"),
 
   role: Yup.string().required("Please enter your age 🤔"),
+
+  team: Yup.string().required("Please enter your age 🤔"),
+
+  project: Yup.string().required("Please enter your age 🤔"),
 });

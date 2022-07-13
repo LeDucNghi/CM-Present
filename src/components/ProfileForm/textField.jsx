@@ -11,9 +11,9 @@ export const TextField = ({ values, touched, errors, handleChange }) => {
         margin="normal"
         type="text"
         id="outlined-error-helper-text"
-        value={values.firstName}
+        value={values ? values.firstName : ""}
         onChange={handleChange}
-        error={touched.firstName && Boolean(errors.firstName)}
+        error={errors ? touched.firstName && Boolean(errors.firstName) : null}
       />
 
       <ErrorMessage name="firstName" />
@@ -25,9 +25,9 @@ export const TextField = ({ values, touched, errors, handleChange }) => {
         margin="normal"
         type="text"
         id="outlined-error-helper-text"
-        value={values.lastName}
+        value={values ? values.lastName : ""}
         onChange={handleChange}
-        error={touched.lastName && Boolean(errors.lastName)}
+        error={errors ? Boolean(errors.lastName) : null}
       />
 
       <ErrorMessage name="lastName" />
@@ -39,9 +39,9 @@ export const TextField = ({ values, touched, errors, handleChange }) => {
         margin="normal"
         type="text"
         id="outlined-error-helper-text"
-        value={values.email}
+        value={values ? values.email : ""}
         onChange={handleChange}
-        error={touched.email && Boolean(errors.email)}
+        error={errors ? touched.email && Boolean(errors.email) : null}
       />
 
       <ErrorMessage name="email" />
@@ -53,9 +53,9 @@ export const TextField = ({ values, touched, errors, handleChange }) => {
         label="age"
         type="text"
         id="outlined-error-helper-text"
-        value={values.age}
+        value={values ? values.age : ""}
         onChange={handleChange}
-        error={touched.age && Boolean(errors.age)}
+        error={errors ? touched.age && Boolean(errors.age) : null}
       />
       <ErrorMessage name="age" />
 
@@ -66,9 +66,9 @@ export const TextField = ({ values, touched, errors, handleChange }) => {
         label="team"
         type="text"
         id="outlined-error-helper-text"
-        value={values.team}
+        value={values ? values.team : ""}
         onChange={handleChange}
-        error={touched.team && Boolean(errors.team)}
+        error={errors ? touched.team && Boolean(errors.team) : null}
       />
       <ErrorMessage name="team" />
 
@@ -79,9 +79,9 @@ export const TextField = ({ values, touched, errors, handleChange }) => {
         label="role"
         type="text"
         id="outlined-error-helper-text"
-        value={values.role}
+        value={values ? values.role : ""}
         onChange={handleChange}
-        error={touched.role && Boolean(errors.role)}
+        error={errors ? touched.role && Boolean(errors.role) : null}
       />
 
       <ErrorMessage name="role" />

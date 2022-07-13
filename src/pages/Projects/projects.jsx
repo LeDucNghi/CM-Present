@@ -8,13 +8,13 @@ import {
 } from "services/userServices";
 import { useDispatch, useSelector } from "react-redux";
 
-import AddUser from "components/AddUser/addUser";
+import AddUser from "components/AddUser/addUserForm";
 import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Loading } from "components/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import SelectAutoWidth from "components/ProjectFilter/projectFilter";
+import TeamFilter from "components/ProjectFilter/projectFilter";
 import Swal from "sweetalert2";
 import { columns } from "constants/global";
 
@@ -123,7 +123,7 @@ export default function Projects({
             // background: "#000",
           }}
         >
-          {/* <Button
+          <Button
             startIcon={<PersonAddIcon />}
             variant="contained"
             color="success"
@@ -150,8 +150,8 @@ export default function Projects({
             disabled={selectedRow.length === 0}
           >
             {languages === "VN" ? "Xóa" : "Delete"}
-          </Button> */}
-          <SelectAutoWidth />
+          </Button>
+          <TeamFilter />
         </div>
 
         <AddUser open={open} setOpen={setOpen} />

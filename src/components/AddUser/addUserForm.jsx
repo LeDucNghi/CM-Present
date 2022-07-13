@@ -25,7 +25,7 @@ const style = {
   p: 4,
 };
 
-export default function AddUser({ open, setOpen }) {
+export default function AddUserForm({ open, setOpen }) {
   const dispatch = useDispatch();
 
   const [postNewUser] = usePostNewUserMutation();
@@ -149,6 +149,36 @@ export default function AddUser({ open, setOpen }) {
                       helperText={errors.role && touched.role}
                     />
                     <ErrorMessage name="role" />
+
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      name="team"
+                      label="team"
+                      type="text"
+                      id="outlined-error-helper-text"
+                      //   autoComplete="current-password"
+                      value={values.team}
+                      onChange={handleChange}
+                      error={touched.team && Boolean(errors.team)}
+                      helperText={errors.team && touched.team}
+                    />
+                    <ErrorMessage name="team" />
+
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      name="project"
+                      label="project"
+                      type="text"
+                      id="outlined-error-helper-text"
+                      //   autoComplete="current-password"
+                      value={values.project}
+                      onChange={handleChange}
+                      error={touched.project && Boolean(errors.project)}
+                      helperText={errors.project && touched.project}
+                    />
+                    <ErrorMessage name="project" />
 
                     <Box
                       sx={{

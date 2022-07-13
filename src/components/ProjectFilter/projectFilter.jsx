@@ -7,7 +7,7 @@ import Select from "@mui/material/Select";
 import { teamMenu } from "constants/global";
 import { useGetUserTeamQuery } from "services/userServices";
 
-export default function SelectAutoWidth() {
+export default function TeamFilter() {
   const [teamName, setTeamName] = React.useState("");
 
   const { data, isSuccess } = useGetUserTeamQuery(teamName);

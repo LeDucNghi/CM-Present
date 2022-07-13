@@ -6,8 +6,9 @@
       "email": "leducnghi28122000hiie@gmail.com",
       "age": "35",
       "team": "React",
-      "role": "member",
       "image": null,
+      "role": "member",
+      "project": "Facebook App",
       "id": 1
     },
     {
@@ -16,9 +17,10 @@
       "firstName": "Cersei",
       "age": 42,
       "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
       "role": "member",
       "team": "React",
-      "project": "Error"
+      "project": "Facebook App"
     },
     {
       "id": 3,
@@ -26,9 +28,10 @@
       "firstName": "Jaime",
       "age": 45,
       "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
       "role": "member",
       "team": "React",
-      "project": "Error"
+      "project": "Facebook App"
     },
     {
       "id": 4,
@@ -36,9 +39,10 @@
       "firstName": "Arya",
       "age": 16,
       "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
       "role": "member",
       "team": "Vue",
-      "project": "Error"
+      "project": "Instagram App"
     },
     {
       "id": 5,
@@ -46,9 +50,10 @@
       "firstName": "Daenerys",
       "age": null,
       "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
       "role": "member",
       "team": "Vue",
-      "project": "Error"
+      "project": "Instagram App"
     },
     {
       "id": 6,
@@ -56,9 +61,10 @@
       "firstName": null,
       "age": 150,
       "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
       "role": "member",
       "team": "Vue",
-      "project": "Error"
+      "project": "Instagram App"
     },
     {
       "id": 7,
@@ -66,9 +72,10 @@
       "firstName": "Ferrara",
       "age": 44,
       "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
       "role": "member",
       "team": "Angular",
-      "project": "Error"
+      "project": "Zalo App"
     },
     {
       "id": 8,
@@ -76,9 +83,10 @@
       "firstName": "Rossini",
       "age": 36,
       "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
       "role": "member",
       "team": "Angular",
-      "project": "Error"
+      "project": "Zalo App"
     },
     {
       "id": 9,
@@ -86,9 +94,28 @@
       "firstName": "Harvey",
       "age": 65,
       "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
       "role": "member",
       "team": "Angular",
-      "project": "Error"
+      "project": "Zalo App"
+    },
+    {
+      "id": 10,
+      "firstName": "Phung",
+      "lastName": "Hung",
+      "email": "leducnghi28122000@gmail.com",
+      "age": "22",
+      "role": "member"
+    },
+    {
+      "id": 11,
+      "firstName": "Duc",
+      "lastName": "Nghi",
+      "email": "leducnghi28122000@gmail.com",
+      "age": "22",
+      "role": "member",
+      "team": "React Native",
+      "project": "Zalo App"
     }
   ],
   "trash": [
@@ -98,6 +125,7 @@
       "firstName": "Hung",
       "age": 69,
       "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
       "role": "member",
       "team": "React",
       "project": "Error"
@@ -108,6 +136,7 @@
       "firstName": "Hung",
       "age": 69,
       "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
       "role": "member",
       "team": "React",
       "project": "Error"
