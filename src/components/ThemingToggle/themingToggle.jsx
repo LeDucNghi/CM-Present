@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { MaterialUISwitch } from "constants/styledMUI";
 import { postMode } from "features/slice";
-import { MaterialUISwitch } from "constants/global";
 
 export default function ThemeToggle() {
   const dispatch = useDispatch();

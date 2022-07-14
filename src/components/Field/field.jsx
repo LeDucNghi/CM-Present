@@ -1,7 +1,7 @@
+import { CssTextField } from "constants/styledMUI";
 import { ErrorMessage } from "formik";
 import React from "react";
 import { useSelector } from "react-redux";
-import { CssTextField } from "constants/global";
 
 export const Field = ({ name, type, value, onChange, error }) => {
   const mode = useSelector((state) => state.app.mode);

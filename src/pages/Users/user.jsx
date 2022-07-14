@@ -1,13 +1,11 @@
 import * as React from "react";
 
-import { columns, CustomDataGrid } from "constants/global";
-
 import AddUserButton from "components/AddUser/addUserButton";
 import AddUserForm from "components/AddUser/addUserForm";
-import { DataGrid } from "@mui/x-data-grid";
+import { CustomDataGrid } from "constants/styledMUI";
 import { Loading } from "components/Loading";
+import { columns } from "constants/global";
 import { useSelector } from "react-redux";
-// import { styled } from "@mui/material/styles";
 
 export default function User({ mode, allUserLoading, allUserError }) {
   const userListStorage = useSelector((state) => state.app.userList);

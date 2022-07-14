@@ -1,12 +1,9 @@
 import * as React from "react";
 
-// import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
-// import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
-// import { engDrawer, vnDrawer } from "constants/global";
-import { styled, useTheme } from "@mui/material/styles";
-import { useDispatch, useSelector } from "react-redux";
+import { AppBar, Drawer, DrawerHeader } from "constants/styledMUI";
 
 import Box from "@mui/material/Box";
+import BoxSetting from "./boxSetting";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,82 +11,11 @@ import IconButton from "@mui/material/IconButton";
 import LanguageMenus from "components/LanguageDropdown/languageDropdown";
 import { ListDrawer } from "./drawerList";
 import MenuIcon from "@mui/icons-material/Menu";
-import MuiAppBar from "@mui/material/AppBar";
-import MuiDrawer from "@mui/material/Drawer";
 import ThemeToggle from "components/ThemingToggle/themingToggle";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import BoxSetting from "./boxSetting";
-
-const drawerWidth = 240;
-
-const openedMixin = (theme) => ({
-  width: drawerWidth,
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: "hidden",
-});
-
-const closedMixin = (theme) => ({
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-  "&  .MuiDrawer-paper": {
-    backgroundColor: "#000",
-  },
-  ...(open && {
-    ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme),
-  }),
-  ...(!open && {
-    ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme),
-  }),
-}));
+import { useSelector } from "react-redux";
+import { useTheme } from "@mui/material/styles";
 
 export default function MiniDrawer({ mode, languages }) {
   const theme = useTheme();
@@ -117,6 +43,7 @@ export default function MiniDrawer({ mode, languages }) {
         }}
         position="fixed"
         open={open}
+        mode={mode}
       >
         <Toolbar
           sx={{
@@ -164,7 +91,7 @@ export default function MiniDrawer({ mode, languages }) {
           <BoxSetting />
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer mode={mode} variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (

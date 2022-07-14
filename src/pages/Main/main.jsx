@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Suspense, useEffect, useState } from "react";
 import { postDeletedList, postUserList } from "features/slice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,12 +10,12 @@ import About from "pages/About/about";
 import Box from "@mui/material/Box";
 import Dashboard from "pages/DashBoard/dashboard";
 import Error from "components/NotFound/notFound";
-import { Loading } from "components/Loading";
 import MiniDrawer from "components/Drawer/drawer";
 import Projects from "pages/Projects/projects";
 import Trash from "pages/Trash/trash";
 import User from "pages/Users/user";
 import { styled } from "@mui/material/styles";
+import { useEffect } from "react";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
