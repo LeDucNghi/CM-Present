@@ -5,7 +5,7 @@ import { Loading } from "components/Loading";
 import React from "react";
 
 import DeleteUser from "components/DeleteUser/deleteUser";
-import { columns } from "constants/global";
+import { columns, CustomDataGrid } from "constants/global";
 
 function Trash({ mode, languages, deletedUserLoading }) {
   const deletedUserListStorage = useSelector(
@@ -43,7 +43,7 @@ function Trash({ mode, languages, deletedUserLoading }) {
           <DeleteUser row={row} setRow={setRow} selectedRow={selectedRow} />
         </div>
 
-        <DataGrid
+        <CustomDataGrid
           getRowId={(row) => row.id}
           onSelectionModelChange={(id) => onSelectionModelChange(id)}
           rows={row}

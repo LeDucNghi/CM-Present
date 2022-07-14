@@ -1,25 +1,5 @@
-import { TextField } from "@mui/material";
-import { ErrorMessage } from "formik";
+import { Field } from "components/Field/field";
 import React from "react";
-
-const Field = ({ name, type, value, onChange, error }) => {
-  return (
-    <>
-      <TextField
-        fullWidth
-        name={name}
-        label={name}
-        margin="normal"
-        type={type}
-        id="outlined-error-helper-text"
-        value={value}
-        onChange={onChange}
-        error={error}
-      />
-      <ErrorMessage name={name} />
-    </>
-  );
-};
 
 export const InputField = ({ values, touched, errors, handleChange }) => {
   return (

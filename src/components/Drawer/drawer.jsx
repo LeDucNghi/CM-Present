@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
-import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
-import { engDrawer, vnDrawer } from "constants/global";
+// import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
+// import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
+// import { engDrawer, vnDrawer } from "constants/global";
 import { styled, useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -78,6 +78,9 @@ const Drawer = styled(MuiDrawer, {
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
+  "&  .MuiDrawer-paper": {
+    backgroundColor: "#000",
+  },
   ...(open && {
     ...openedMixin(theme),
     "& .MuiDrawer-paper": openedMixin(theme),

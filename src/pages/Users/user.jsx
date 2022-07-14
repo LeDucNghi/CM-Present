@@ -1,12 +1,13 @@
 import * as React from "react";
 
-import { StyledDataGrid, columns } from "constants/global";
+import { columns, CustomDataGrid } from "constants/global";
 
 import AddUserButton from "components/AddUser/addUserButton";
 import AddUserForm from "components/AddUser/addUserForm";
 import { DataGrid } from "@mui/x-data-grid";
 import { Loading } from "components/Loading";
 import { useSelector } from "react-redux";
+// import { styled } from "@mui/material/styles";
 
 export default function User({ mode, allUserLoading, allUserError }) {
   const userListStorage = useSelector((state) => state.app.userList);
@@ -55,7 +56,7 @@ export default function User({ mode, allUserLoading, allUserError }) {
 
         <AddUserForm open={open} setOpen={setOpen} />
 
-        <DataGrid
+        <CustomDataGrid
           sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
           onSelectionModelChange={(id) => onSelectionModelChange(id)}
           rows={row}
@@ -63,17 +64,8 @@ export default function User({ mode, allUserLoading, allUserError }) {
           pageSize={5}
           rowsPerPageOptions={[5]}
           checkboxSelection
+          mode={mode}
         />
-
-        {/* <StyledDataGrid
-          // sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
-          onSelectionModelChange={(id) => onSelectionModelChange(id)}
-          rows={row}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-        /> */}
       </div>
     );
 }
