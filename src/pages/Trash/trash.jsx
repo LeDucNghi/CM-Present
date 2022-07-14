@@ -51,7 +51,8 @@ function Trash({ mode, languages, deletedUserLoading }) {
           pageSize={5}
           rowsPerPageOptions={[5]}
           checkboxSelection
-          sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
+          // sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
+          mode={mode}
         />
       </div>
     );
