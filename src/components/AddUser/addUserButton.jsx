@@ -11,11 +11,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, postUserList } from "features/slice";
 import Swal from "sweetalert2";
 
-export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
+export default function AddUserButton({
+  mode,
+  languages,
+  row,
+  setRow,
+  setOpen,
+  selectedRow,
+}) {
   const dispatch = useDispatch();
   const userListStorage = useSelector((state) => state.app.userList);
-  const mode = useSelector((state) => state.app.mode);
-  const languages = useSelector((state) => state.app.language);
 
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();
@@ -37,8 +42,14 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
       } user ?`,
       showDenyButton: true,
       showCancelButton: true,
+
       confirmButtonText: "Just remove to trash!",
       denyButtonText: `Delete it permanently!`,
+
+      // confirmButtonColor : `${mode === "dark" ?  : }`,
+      // denyButtonColor : `${mode === "dark" ?  : }`,
+      background: `${mode === "dark" ? "#121212" : ""}`,
+      color: `${mode === "dark" ? "#fff" : ""}`,
     }).then((result) => {
       if (result.isConfirmed) {
         checkSameElement.forEach((item) => {

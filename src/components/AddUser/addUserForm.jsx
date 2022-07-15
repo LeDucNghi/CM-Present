@@ -1,4 +1,4 @@
-import { ErrorMessage, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { initialValues, validationSchema } from "formik/addUser";
 
 import Backdrop from "@mui/material/Backdrop";
@@ -8,13 +8,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
 import Swal from "sweetalert2";
-import { TextField } from "@mui/material";
 import { addUser } from "features/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { usePostNewUserMutation } from "services/userServices";
 import { Field } from "components/Field/field";
 
-export default function AddUserForm({ open, setOpen }) {
+export default function AddUserForm({ languages, open, setOpen }) {
   const dispatch = useDispatch();
 
   const mode = useSelector((state) => state.app.mode);
@@ -80,6 +79,7 @@ export default function AddUserForm({ open, setOpen }) {
                   <Form>
                     <Field
                       name="firstName"
+                      label={languages === "VN" ? "Tên họ" : "First name"}
                       type="text"
                       value={values.firstName}
                       onChange={handleChange}
@@ -88,6 +88,7 @@ export default function AddUserForm({ open, setOpen }) {
 
                     <Field
                       name="lastName"
+                      label={languages === "VN" ? "Tên cuối" : "Last name"}
                       type="text"
                       value={values.lastName}
                       onChange={handleChange}
@@ -96,6 +97,7 @@ export default function AddUserForm({ open, setOpen }) {
 
                     <Field
                       name="email"
+                      label="email"
                       type="text"
                       value={values.email}
                       onChange={handleChange}
@@ -104,6 +106,7 @@ export default function AddUserForm({ open, setOpen }) {
 
                     <Field
                       name="age"
+                      label={languages === "VN" ? "Tuổi" : "Age"}
                       type="text"
                       value={values.age}
                       onChange={handleChange}
@@ -112,6 +115,7 @@ export default function AddUserForm({ open, setOpen }) {
 
                     <Field
                       name="role"
+                      label={languages === "VN" ? "Chức vụ" : "Role"}
                       type="text"
                       value={values.role}
                       onChange={handleChange}
@@ -120,6 +124,7 @@ export default function AddUserForm({ open, setOpen }) {
 
                     <Field
                       name="team"
+                      label={languages === "VN" ? "Nhóm" : "Team"}
                       type="text"
                       value={values.team}
                       onChange={handleChange}
@@ -128,6 +133,7 @@ export default function AddUserForm({ open, setOpen }) {
 
                     <Field
                       name="project"
+                      label={languages === "VN" ? "Dự án" : "Projects"}
                       type="text"
                       value={values.project}
                       onChange={handleChange}

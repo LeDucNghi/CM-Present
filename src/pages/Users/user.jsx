@@ -7,7 +7,12 @@ import { Loading } from "components/Loading";
 import { columns } from "constants/global";
 import { useSelector } from "react-redux";
 
-export default function User({ mode, allUserLoading, allUserError }) {
+export default function User({
+  mode,
+  allUserLoading,
+  allUserError,
+  languages,
+}) {
   const userListStorage = useSelector((state) => state.app.userList);
 
   const [selectedRow, setSelectedRow] = React.useState([]);
@@ -45,6 +50,8 @@ export default function User({ mode, allUserLoading, allUserError }) {
           }}
         >
           <AddUserButton
+            mode={mode}
+            languages={languages}
             row={row}
             setRow={setRow}
             setOpen={setOpen}
@@ -52,7 +59,7 @@ export default function User({ mode, allUserLoading, allUserError }) {
           />
         </div>
 
-        <AddUserForm open={open} setOpen={setOpen} />
+        <AddUserForm languages={languages} open={open} setOpen={setOpen} />
 
         <CustomDataGrid
           sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}

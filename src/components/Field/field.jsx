@@ -3,7 +3,7 @@ import { ErrorMessage } from "formik";
 import React from "react";
 import { useSelector } from "react-redux";
 
-export const Field = ({ name, type, value, onChange, error }) => {
+export const Field = ({ name, label, type, value, onChange, error }) => {
   const mode = useSelector((state) => state.app.mode);
 
   return (
@@ -11,7 +11,7 @@ export const Field = ({ name, type, value, onChange, error }) => {
       <StyledTextField
         fullWidth
         name={name}
-        label={name}
+        label={label ? label : name}
         margin="normal"
         type={type}
         id="outlined-error-helper-text"

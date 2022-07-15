@@ -93,7 +93,7 @@ const styledDataGrid = (mode) => {
   return {
     // datagrid above footer
     "& .MuiDataGrid-main": {
-      backgroundColor: `${mode === "dark" ? "transparent" : ""}`,
+      backgroundColor: "transparent",
     },
 
     // datagrid footer

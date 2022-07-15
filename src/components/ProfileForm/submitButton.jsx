@@ -5,13 +5,13 @@ import React from "react";
 export const SubmitButton = ({ languages, isSubmitting, isValid }) => {
   return (
     <>
-      <Button
+      {/* <Button
         disabled={isSubmitting || !isValid}
         type="button"
         className="cancel"
       >
         {languages === "Eng" ? "Cancel" : "Huy"}
-      </Button>
+      </Button> */}
 
       <Button
         disabled={isSubmitting || !isValid}
@@ -21,9 +21,9 @@ export const SubmitButton = ({ languages, isSubmitting, isValid }) => {
         {isSubmitting ? (
           <CircularProgress color="success" />
         ) : languages === "Eng" ? (
-          "Apply"
+          "Save"
         ) : (
-          "Luu"
+          "Lưu"
         )}
       </Button>
     </>
