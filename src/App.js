@@ -1,4 +1,3 @@
-import "./assets/styles/darkmode.scss";
 import "./assets/styles/GlobalStyles.scss";
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";

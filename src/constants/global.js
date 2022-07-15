@@ -84,6 +84,7 @@ export const columns = [
     field: "id",
     renderHeader: () => {
       const languages = store.getState().app.language;
+      console.log("🚀 ~ file: global.js ~ line 87 ~ languages", languages);
       return <p>{languages === "VN" ? "STT" : "ID"} </p>;
     },
     width: 70,

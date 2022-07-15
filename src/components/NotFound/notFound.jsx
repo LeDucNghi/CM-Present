@@ -2,7 +2,7 @@ import "./notFound.scss";
 
 import React from "react";
 
-function Error({ mode }) {
+function Error({ mode, languages }) {
   window.onload = function () {
     var paragraph = document.getElementById("type-in");
     var supparagraph = document.getElementById("type-after");
@@ -37,14 +37,10 @@ function Error({ mode }) {
     <div className="notfound">
       <p class="back"></p>
       <p style={{ color: mode === "dark" ? "#fff" : "" }} id="type-in">
-        Error 404
-        {/* {account.permissionId >= 4 || account.permissionId <= 0 ? "403" : "404"}{" "} */}
+        {languages === "VN" ? `Lỗi 404` : `Error 404`}
       </p>
       <p style={{ color: mode === "dark" ? "#fff" : "" }} id="type-after">
-        {/* {account.permissionId >= 4 || account.permissionId <= 0
-          ? "Forbidden"
-          : "Page not found"}{" "} */}
-        Page not found
+        {languages === "VN" ? `Không tìm thấy trang` : `Page not found`}
       </p>
     </div>
   );

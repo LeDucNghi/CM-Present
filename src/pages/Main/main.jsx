@@ -51,14 +51,7 @@ export default function Main() {
   }, [getDeletedUserSuccess, getAllUserSuccess]);
 
   return (
-    <Box
-      className={mode}
-      sx={{
-        display: "flex",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
+    <Box className={mode}>
       <MiniDrawer mode={mode} languages={languages} />
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

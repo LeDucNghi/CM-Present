@@ -20,6 +20,10 @@ export default function ThemeToggle() {
 
   const toggleSwitch = () => {
     setIsOn(!isOn);
+    console.log(
+      "🚀 ~ file: themingToggle.jsx ~ line 24 ~ toggleSwitch ~ isOn",
+      isOn
+    );
 
     if (isOn === false) {
       dispatch(postMode("dark"));

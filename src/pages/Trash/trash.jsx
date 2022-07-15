@@ -1,9 +1,12 @@
-import { CustomDataGrid } from "constants/styledMUI";
-import DeleteUser from "components/DeleteUser/deleteUser";
+import { useSelector } from "react-redux";
+
+import { DataGrid } from "@mui/x-data-grid";
 import { Loading } from "components/Loading";
 import React from "react";
+
+import DeleteUser from "components/DeleteUser/deleteUser";
 import { columns } from "constants/global";
-import { useSelector } from "react-redux";
+import { CustomDataGrid } from "constants/styledMUI";
 
 function Trash({ mode, languages, deletedUserLoading }) {
   const deletedUserListStorage = useSelector(

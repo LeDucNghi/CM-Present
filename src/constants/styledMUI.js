@@ -52,8 +52,7 @@ export const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export const CssTextField = styled(TextField, {
-  // Configure which props should be forwarded on DOM
+export const StyledTextField = styled(TextField, {
   shouldForwardProp: (prop) => prop !== "mode",
 })(({ mode }) => ({
   "& label.Mui-focused": {
@@ -94,7 +93,7 @@ const styledDataGrid = (mode) => {
   return {
     // datagrid above footer
     "& .MuiDataGrid-main": {
-      backgroundColor: `${mode === "dark" ? "#000" : ""}`,
+      backgroundColor: `${mode === "dark" ? "transparent" : ""}`,
     },
 
     // datagrid footer
@@ -239,7 +238,7 @@ export const Drawer = styled(MuiDrawer, {
   },
 
   "& .MuiPaper-root .MuiList-root": {
-    color: `${mode === "dark" ? "#fff" : ""}`,
+    color: `${mode === "dark" ? "rgba(255, 255, 255, 0.7)" : ""}`,
   },
   ...(open && {
     ...openedMixin(theme),

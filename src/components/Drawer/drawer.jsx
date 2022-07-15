@@ -102,7 +102,7 @@ export default function MiniDrawer({ mode, languages }) {
           </IconButton>
         </DrawerHeader>
 
-        <ListDrawer languages={languages} open={open} />
+        <ListDrawer mode={mode} languages={languages} open={open} />
       </Drawer>
     </>
   );

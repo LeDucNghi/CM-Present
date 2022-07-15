@@ -1,4 +1,4 @@
-import { CssTextField } from "constants/styledMUI";
+import { StyledTextField } from "constants/styledMUI";
 import { ErrorMessage } from "formik";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -8,7 +8,7 @@ export const Field = ({ name, type, value, onChange, error }) => {
 
   return (
     <>
-      <CssTextField
+      <StyledTextField
         fullWidth
         name={name}
         label={name}
