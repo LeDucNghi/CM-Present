@@ -6,10 +6,10 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  // background: red;
   width: calc($width - 200px);
-  height: 650px;
+  height: 600px;
   display: block;
+  // background: #000;
 }
 
 .disable_account {
