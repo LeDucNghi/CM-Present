@@ -1,3 +1,5 @@
+import "./main.scss";
+
 import { Navigate, Route, Routes } from "react-router-dom";
 import { postDeletedList, postUserList } from "features/slice";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,7 +53,15 @@ export default function Main() {
   }, [getDeletedUserSuccess, getAllUserSuccess]);
 
   return (
-    <Box className={mode}>
+    <Box
+      style={{
+        position: "relative",
+        display: "flex",
+        width: "100%",
+        height: "100vh",
+      }}
+      className={mode}
+    >
       <MiniDrawer />
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

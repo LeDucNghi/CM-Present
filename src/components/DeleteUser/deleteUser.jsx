@@ -130,7 +130,7 @@ export default function DeleteUser({ row, setRow, selectedRow }) {
         onClick={() => handleRestoreUser()}
         disabled={selectedRow.length === 0}
       >
-        Restore
+        {languages === "VN" ? `Khôi phục!` : `Restore!`}
       </Button>
       <Button
         startIcon={<DeleteIcon />}
@@ -145,7 +145,7 @@ export default function DeleteUser({ row, setRow, selectedRow }) {
           },
         }}
       >
-        Delete
+        {languages === "VN" ? `Xóa` : `Delete`}
       </Button>
     </div>
   );
