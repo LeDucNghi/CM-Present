@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import React from "react";
+import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 const LoadingDot = {
@@ -61,7 +61,14 @@ export const Loading = () => {
   return (
     <div
       style={{
-        ...containerStyle,
+        // ...containerStyle,
+        width: "100%",
+        height: "100vh",
+        background: "transparent",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
         color: `${mode === "dark" ? "#fff" : ""}`,
       }}
     >

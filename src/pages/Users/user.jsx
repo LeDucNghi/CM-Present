@@ -43,10 +43,11 @@ export default function User({
       >
         <div
           style={{
-            width: "auto",
+            width: "100%",
             display: "flex",
             justifyContent: "flex-end",
             marginBottom: "1em",
+            position: "relative",
           }}
         >
           <AddUserButton
@@ -62,7 +63,7 @@ export default function User({
         <AddUserForm languages={languages} open={open} setOpen={setOpen} />
 
         <CustomDataGrid
-          sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
+          // sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
           onSelectionModelChange={(id) => onSelectionModelChange(id)}
           rows={row}
           columns={columns}
