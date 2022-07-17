@@ -1,17 +1,16 @@
-import { useSelector } from "react-redux";
-
-import { DataGrid } from "@mui/x-data-grid";
+import { CustomDataGrid } from "constants/styledMUI";
+import DeleteUser from "components/DeleteUser/deleteUser";
 import { Loading } from "components/Loading";
 import React from "react";
-
-import DeleteUser from "components/DeleteUser/deleteUser";
 import { columns } from "constants/global";
-import { CustomDataGrid } from "constants/styledMUI";
+import { useSelector } from "react-redux";
 
-function Trash({ mode, languages, deletedUserLoading }) {
+function Trash({ deletedUserLoading }) {
   const deletedUserListStorage = useSelector(
     (state) => state.app.deletedUserList
   );
+  const mode = useSelector((state) => state.app.mode);
+  // const languages = useSelector((state) => state.app.language);
 
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
@@ -52,7 +51,6 @@ function Trash({ mode, languages, deletedUserLoading }) {
           pageSize={5}
           rowsPerPageOptions={[5]}
           checkboxSelection
-          // sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
           mode={mode}
         />
       </div>

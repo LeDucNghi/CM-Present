@@ -17,10 +17,12 @@ import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { useTheme } from "@mui/material/styles";
 
-export default function MiniDrawer({ mode, languages }) {
+export default function MiniDrawer() {
   const theme = useTheme();
 
   const routeName = useSelector((state) => state.app.routeName);
+  const mode = useSelector((state) => state.app.mode);
+  const languages = useSelector((state) => state.app.language);
 
   const [open, setOpen] = React.useState(false);
 

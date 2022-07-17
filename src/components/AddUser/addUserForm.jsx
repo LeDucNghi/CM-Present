@@ -1,22 +1,23 @@
 import { Form, Formik } from "formik";
 import { initialValues, validationSchema } from "formik/addUser";
+import { useDispatch, useSelector } from "react-redux";
 
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Fade from "@mui/material/Fade";
+import { Field } from "components/Field/field";
 import Modal from "@mui/material/Modal";
 import Swal from "sweetalert2";
 import { addUser } from "features/slice";
-import { useDispatch, useSelector } from "react-redux";
 import { usePostNewUserMutation } from "services/userServices";
-import { Field } from "components/Field/field";
 
-export default function AddUserForm({ languages, open, setOpen }) {
+export default function AddUserForm({ open, setOpen }) {
   const dispatch = useDispatch();
 
   const mode = useSelector((state) => state.app.mode);
+  const languages = useSelector((state) => state.app.language);
 
   const style = {
     position: "absolute",

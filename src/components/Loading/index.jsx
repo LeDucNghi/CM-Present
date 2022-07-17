@@ -61,14 +61,7 @@ export const Loading = () => {
   return (
     <div
       style={{
-        // ...containerStyle,
-        width: "100%",
-        height: "100vh",
-        background: "transparent",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
+        ...containerStyle,
         color: `${mode === "dark" ? "#fff" : ""}`,
       }}
     >

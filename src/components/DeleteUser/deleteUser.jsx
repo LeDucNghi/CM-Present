@@ -1,8 +1,3 @@
-import React from "react";
-import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
-import Swal from "sweetalert2";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Button } from "@mui/material";
 import { postDeletedList, postUserInfo, restoreUser } from "features/slice";
 import {
   useDeleteUserPermanentlyMutation,
@@ -10,12 +5,19 @@ import {
 } from "services/userServices";
 import { useDispatch, useSelector } from "react-redux";
 
+import { Button } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import React from "react";
+import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
+import Swal from "sweetalert2";
+
 export default function DeleteUser({ row, setRow, selectedRow }) {
   const dispatch = useDispatch();
   const deletedUserListStorage = useSelector(
     (state) => state.app.deletedUserList
   );
   const mode = useSelector((state) => state.app.mode);
+  const languages = useSelector((state) => state.app.language);
 
   const [deleteUserPermanently] = useDeleteUserPermanentlyMutation();
   const [postNewUser] = usePostNewUserMutation();
@@ -31,15 +33,24 @@ export default function DeleteUser({ row, setRow, selectedRow }) {
     // const lastIndex = userListStorage[userListStorage.length - 1].id;
 
     Swal.fire({
-      title: `Are you sure to restore this ${
-        selectedRow.length === 1 ? "" : selectedRow.length
-      } user?`,
+      title: `Are you sure you want to restore ${
+        selectedRow.length === 1 ? `this` : `these`
+      }  ${selectedRow.length === 1 ? "" : selectedRow.length} user${
+        selectedRow.length === 1 ? `` : `s`
+      }?`,
       text: "",
       icon: "warning",
       showCancelButton: true,
+
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, restore it!",
+
+      confirmButtonText: `${
+        languages === "VN" ? `Có, khôi phục chúng!` : `Yes, restore it!`
+      }`,
+
+      background: `${mode === "dark" ? "#121212" : ""}`,
+      color: `${mode === "dark" ? "#fff" : ""}`,
     }).then((result) => {
       if (result.isConfirmed) {
         checkSameElement.forEach((el) => {
@@ -52,30 +63,52 @@ export default function DeleteUser({ row, setRow, selectedRow }) {
         dispatch(postDeletedList(checkDiffElement));
         setRow(deletedUserListStorage);
 
-        Swal.fire("Restored!", "", "success");
+        Swal.fire(
+          `${languages === "VN" ? `Đã khôi phục!` : `Restored!`}`,
+          "",
+          "success"
+        );
       }
     });
   };
 
   const handleDeleteUser = () => {
     Swal.fire({
-      title: `Are you sure to delete this ${
-        selectedRow.length === 1 ? "" : selectedRow.length
-      } user permanently?`,
+      title: `${
+        languages === "VN"
+          ? `Bạn có chắc chắn muốn xóa ${
+              selectedRow.length === 1 ? "" : selectedRow.length
+            } người dùng này vĩnh viễn không?`
+          : `Are you sure you want to delete ${
+              selectedRow.length === 1 ? `this` : `these`
+            } ${selectedRow.length === 1 ? "" : selectedRow.length} user${
+              selectedRow.length === 1 ? `` : `s`
+            } permanently ?`
+      }`,
       text: "",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it permanently!",
+      confirmButtonText: `${
+        languages === "VN"
+          ? `Có, hãy xóa vĩnh viễn`
+          : `Yes, delete it permanently!`
+      }`,
+      background: `${mode === "dark" ? "#121212" : ""}`,
+      color: `${mode === "dark" ? "#fff" : ""}`,
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(postUserInfo(checkSameElement));
         checkSameElement.forEach((item) => {
           deleteUserPermanently(item.id);
         });
+        dispatch(postDeletedList(checkDiffElement));
         setRow(deletedUserListStorage);
-        Swal.fire("Deleted!", "", "success");
+        Swal.fire(
+          `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
+          "",
+          "success"
+        );
       }
     });
   };

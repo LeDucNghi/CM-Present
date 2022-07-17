@@ -14,19 +14,16 @@ import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Loading } from "components/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TeamFilter from "components/ProjectFilter/projectFilter";
 import Swal from "sweetalert2";
+import TeamFilter from "components/ProjectFilter/projectFilter";
 import { columns } from "constants/global";
 
-export default function Projects({
-  mode,
-  allUserLoading,
-  allUserError,
-  languages,
-}) {
+export default function Projects({ allUserLoading, allUserError }) {
   const dispatch = useDispatch();
 
   const userListStorage = useSelector((state) => state.app.userList);
+  const mode = useSelector((state) => state.app.mode);
+  const languages = useSelector((state) => state.app.language);
 
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();

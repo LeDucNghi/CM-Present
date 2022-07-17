@@ -10,9 +10,10 @@ import { Loading } from "components/Loading";
 import { ProfileForm } from "components/ProfileForm/profileForm";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { validationSchema } from "formik/profile";
 
-function About({ mode, languages }) {
+function About() {
   const { id } = useParams();
   const { data, error, isLoading } = useGetDetaillUserQuery(id);
   const [updateUser] = useUpdateUserMutation();
@@ -60,8 +61,6 @@ function About({ mode, languages }) {
               <Form>
                 <ProfileForm
                   data={data}
-                  mode={mode}
-                  languages={languages}
                   values={values}
                   isSubmitting={isSubmitting}
                   isValid={isValid}

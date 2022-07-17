@@ -1,14 +1,12 @@
 import "../../pages/About/about.scss";
 
 import { Avatar } from "./avatar";
+import { InputField } from "./inputField";
 import React from "react";
 import { SubmitButton } from "./submitButton";
-import { InputField } from "./inputField";
 
 export const ProfileForm = ({
   data,
-  mode,
-  languages,
   isSubmitting,
   isValid,
   values,
@@ -17,11 +15,13 @@ export const ProfileForm = ({
   handleChange,
   setFieldValue,
 }) => {
+  // const mode = useSelector((state) => state.app.mode);
+  // const languages = useSelector((state) => state.app.language);
   return (
     <>
       <div
         className="account_info"
-        style={{ color: mode === "dark" ? "#fff" : "" }}
+        // style={{ color: mode === "dark" ? "#fff" : "" }}
       >
         <InputField
           values={values}
@@ -36,11 +36,7 @@ export const ProfileForm = ({
       </div>
 
       <div className="account_btn">
-        <SubmitButton
-          isSubmitting={isSubmitting}
-          isValid={isValid}
-          languages={languages}
-        />
+        <SubmitButton isSubmitting={isSubmitting} isValid={isValid} />
       </div>
     </>
   );

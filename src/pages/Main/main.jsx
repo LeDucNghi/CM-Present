@@ -52,55 +52,35 @@ export default function Main() {
 
   return (
     <Box className={mode}>
-      <MiniDrawer mode={mode} languages={languages} />
+      <MiniDrawer />
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Routes>
           <Route path="/" element={<Navigate to="user" />} />
 
-          <Route
-            path="dashboard"
-            element={<Dashboard mode={mode} languages={languages} />}
-          />
+          <Route path="dashboard" element={<Dashboard />} />
 
           <Route
             path="trash"
-            element={
-              <Trash
-                mode={mode}
-                languages={languages}
-                deletedUserLoading={deletedUserLoading}
-              />
-            }
+            element={<Trash deletedUserLoading={deletedUserLoading} />}
           />
 
-          <Route
-            path="about/:id"
-            element={<About mode={mode} languages={languages} />}
-          />
+          <Route path="about/:id" element={<About />} />
 
-          <Route
-            path="project"
-            element={<Projects mode={mode} languages={languages} />}
-          />
+          <Route path="project" element={<Projects />} />
 
           <Route
             path="user"
             element={
               <User
-                mode={mode}
                 allUserLoading={allUserLoading}
                 allUserError={allUserError}
-                languages={languages}
               />
             }
           />
 
-          <Route
-            path="*"
-            element={<Error mode={mode} languages={languages} />}
-          />
+          <Route path="*" element={<Error />} />
         </Routes>
       </Box>
     </Box>

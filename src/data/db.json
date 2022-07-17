@@ -115,16 +115,6 @@
       "age": "22",
       "role": "member",
       "id": 11
-    },
-    {
-      "id": 12,
-      "firstName": "The",
-      "lastName": "Rock",
-      "email": "therock@gmail.com",
-      "age": "40",
-      "role": "leader",
-      "team": "React",
-      "project": "Mercon"
     }
   ],
   "trash": [

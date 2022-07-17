@@ -1,31 +1,24 @@
-import React from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { Button } from "@mui/material";
+import { deleteUser, postUserList } from "features/slice";
 import {
   useDeleteUserFromListMutation,
-  //   useDeleteUserPermanentlyMutation,
   usePostDeletedUserMutation,
 } from "services/userServices";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, postUserList } from "features/slice";
+
+import { Button } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import React from "react";
 import Swal from "sweetalert2";
 
-export default function AddUserButton({
-  mode,
-  languages,
-  row,
-  setRow,
-  setOpen,
-  selectedRow,
-}) {
+export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
   const dispatch = useDispatch();
   const userListStorage = useSelector((state) => state.app.userList);
+  const mode = useSelector((state) => state.app.mode);
+  const languages = useSelector((state) => state.app.language);
 
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();
-  //   const [deleteUserPermanently, responseInfo] =
-  //     useDeleteUserPermanentlyMutation();
 
   const checkDiffElement = row.filter(
     (x) => !selectedRow.some((x1) => x.id === x1.id)
@@ -37,14 +30,28 @@ export default function AddUserButton({
 
   const handleDeleteUser = () => {
     Swal.fire({
-      title: `Are you sure to delete this ${
-        selectedRow.length === 1 ? "" : selectedRow.length
-      } user ?`,
+      title: `${
+        languages === "VN"
+          ? `Bạn có chắc chắn muốn xóa ${
+              selectedRow.length === 1 ? "" : selectedRow.length
+            } người dùng này vĩnh viễn không?`
+          : `Are you sure you want to delete ${
+              selectedRow.length === 1 ? `this` : `these`
+            } ${selectedRow.length === 1 ? "" : selectedRow.length} user${
+              selectedRow.length === 1 ? `` : `s`
+            } permanently ?`
+      }`,
       showDenyButton: true,
       showCancelButton: true,
 
-      confirmButtonText: "Just remove to trash!",
-      denyButtonText: `Delete it permanently!`,
+      confirmButtonText: `${
+        languages === "VN"
+          ? `Chỉ cần chuyển vào thùng rác!`
+          : `Just move to the trash!`
+      }`,
+      denyButtonText: `${
+        languages === "VN" ? `Xóa vĩnh viễn!` : `Delete it permanently!`
+      }`,
 
       // confirmButtonColor : `${mode === "dark" ?  : }`,
       // denyButtonColor : `${mode === "dark" ?  : }`,

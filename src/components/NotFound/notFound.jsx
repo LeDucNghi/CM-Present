@@ -1,8 +1,12 @@
 import "./notFound.scss";
 
 import React from "react";
+import { useSelector } from "react-redux";
 
-function Error({ mode, languages }) {
+function Error() {
+  const mode = useSelector((state) => state.app.mode);
+  const languages = useSelector((state) => state.app.language);
+
   window.onload = function () {
     var paragraph = document.getElementById("type-in");
     var supparagraph = document.getElementById("type-after");
