@@ -22,6 +22,72 @@
       "project": "Facebook App"
     },
     {
+      "id": 3,
+      "lastName": "Lannister",
+      "firstName": "Jaime",
+      "age": 45,
+      "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
+      "role": "member",
+      "team": "React",
+      "project": "Facebook App"
+    },
+    {
+      "id": 4,
+      "lastName": "Stark",
+      "firstName": "Arya",
+      "age": 16,
+      "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
+      "role": "member",
+      "team": "Vue",
+      "project": "Instagram App"
+    },
+    {
+      "id": 5,
+      "lastName": "Targaryen",
+      "firstName": "Daenerys",
+      "age": null,
+      "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
+      "role": "member",
+      "team": "Vue",
+      "project": "Instagram App"
+    },
+    {
+      "id": 6,
+      "lastName": "Melisandre",
+      "firstName": null,
+      "age": 150,
+      "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
+      "role": "member",
+      "team": "Vue",
+      "project": "Instagram App"
+    },
+    {
+      "id": 7,
+      "lastName": "Clifford",
+      "firstName": "Ferrara",
+      "age": 44,
+      "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
+      "role": "member",
+      "team": "Angular",
+      "project": "Zalo App"
+    },
+    {
+      "id": 8,
+      "lastName": "Frances",
+      "firstName": "Rossini",
+      "age": 36,
+      "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
+      "role": "member",
+      "team": "Angular",
+      "project": "Zalo App"
+    },
+    {
       "id": 9,
       "lastName": "Roxie",
       "firstName": "Harvey",
@@ -59,30 +125,11 @@
       "age": "22",
       "role": "member",
       "id": 12
-    },
+    }
+  ],
+  "trash": [
     {
-      "lastName": "Melisandre",
-      "firstName": null,
-      "age": 150,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "image": null,
-      "role": "member",
-      "team": "Vue",
-      "project": "Instagram App",
-      "id": 15
-    },
-    {
-      "lastName": "Clifford",
-      "firstName": "Ferrara",
-      "age": 44,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "image": null,
-      "role": "member",
-      "team": "Angular",
-      "project": "Zalo App",
-      "id": 16
-    },
-    {
+      "id": 1,
       "lastName": "Phung",
       "firstName": "Hung",
       "age": 69,
@@ -90,57 +137,10 @@
       "image": null,
       "role": "member",
       "team": "React",
-      "project": "Error",
-      "id": 17
+      "project": "Error"
     },
     {
-      "lastName": "Targaryen",
-      "firstName": "Daenerys",
-      "age": null,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "image": null,
-      "role": "member",
-      "team": "Vue",
-      "project": "Instagram App",
-      "id": 18
-    },
-    {
-      "lastName": "Frances",
-      "firstName": "Rossini",
-      "age": 36,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "image": null,
-      "role": "member",
-      "team": "Angular",
-      "project": "Zalo App",
-      "id": 19
-    },
-    {
-      "lastName": "Lannister",
-      "firstName": "Jaime",
-      "age": 45,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "image": null,
-      "role": "member",
-      "team": "React",
-      "project": "Facebook App",
-      "id": 20
-    },
-    {
-      "lastName": "Stark",
-      "firstName": "Arya",
-      "age": 16,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "image": null,
-      "role": "member",
-      "team": "Vue",
-      "project": "Instagram App",
-      "id": 21
-    }
-  ],
-  "trash": [
-    {
-      "id": 1,
+      "id": 2,
       "lastName": "Phung",
       "firstName": "Hung",
       "age": 69,
