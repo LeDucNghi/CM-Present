@@ -1,18 +1,18 @@
 import { deleteUser, postUserList } from "features/slice";
+import { useDispatch, useSelector } from "react-redux";
 import {
   useDeleteUserFromListMutation,
   usePostDeletedUserMutation,
 } from "services/userServices";
-import { useDispatch, useSelector } from "react-redux";
 
-import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import React from "react";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 
 export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
   const dispatch = useDispatch();
+
   const userListStorage = useSelector((state) => state.app.userList);
   const mode = useSelector((state) => state.app.mode);
   const languages = useSelector((state) => state.app.language);
@@ -85,10 +85,10 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
         );
       } else if (result.isDenied) {
         checkSameElement.forEach((el) => {
-          const { id, ...rest } = el;
+          // const { id, ...rest } = el;
+          // dispatch(deleteUser({ ...rest }));
 
-          deleteUserFromList(id);
-          dispatch(deleteUser({ ...rest }));
+          deleteUserFromList(el.id);
         });
         dispatch(postUserList(checkDiffElement));
         setRow(userListStorage);
@@ -111,8 +111,13 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
         sx={{
           fontWeight: 600,
           marginRight: "1em",
+          ":disabled": {
+            background: mode === "dark" ? "rgba(255, 255, 255, 0.3)" : "",
+            cursor: "not-allowed",
+          },
         }}
         onClick={() => setOpen(true)}
+        disabled={selectedRow.length > 0}
       >
         {languages === "VN" ? "Thêm" : "Add"}
       </Button>

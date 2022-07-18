@@ -1,14 +1,13 @@
 import { postDeletedList, restoreUser } from "features/slice";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  useDeleteUserPermanentlyMutation,
+  useDeleteUserFromTrashMutation,
   usePostNewUserMutation,
 } from "services/userServices";
-import { useDispatch, useSelector } from "react-redux";
 
-import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import React from "react";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 
 export default function DeleteUser({ row, setRow, selectedRow }) {
@@ -19,7 +18,7 @@ export default function DeleteUser({ row, setRow, selectedRow }) {
   const mode = useSelector((state) => state.app.mode);
   const languages = useSelector((state) => state.app.language);
 
-  const [deleteUserPermanently] = useDeleteUserPermanentlyMutation();
+  const [deleteUserPermanently] = useDeleteUserFromTrashMutation();
   const [postNewUser] = usePostNewUserMutation();
   const checkDiffElement = row.filter(
     (x) => !selectedRow.some((x1) => x.id === x1.id)

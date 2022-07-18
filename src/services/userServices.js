@@ -35,7 +35,7 @@ export const userApi = createApi({
       }),
     }),
 
-    deleteUserPermanently: builder.mutation({
+    deleteUserFromTrash: builder.mutation({
       query: (userId) => ({
         url: `trash/${userId}`,
         method: "DELETE",
@@ -101,7 +101,7 @@ export const userApi = createApi({
 export const {
   useGetAllUserQuery,
   useGetDetaillUserQuery,
-  useDeleteUserPermanentlyMutation,
+  useDeleteUserFromTrashMutation,
   useGetDeletedUserQuery,
   usePostNewUserMutation,
   useUpdateUserMutation,

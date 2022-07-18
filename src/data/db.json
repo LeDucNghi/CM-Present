@@ -107,14 +107,6 @@
       "team": "React Native",
       "project": "Zalo App",
       "id": 10
-    },
-    {
-      "firstName": "Phung",
-      "lastName": "Hung",
-      "email": "leducnghi28122000@gmail.com",
-      "age": "22",
-      "role": "member",
-      "id": 11
     }
   ],
   "trash": [
@@ -139,6 +131,14 @@
       "role": "member",
       "team": "React",
       "project": "Error"
+    },
+    {
+      "firstName": "Phung",
+      "lastName": "Hung",
+      "email": "leducnghi28122000@gmail.com",
+      "age": "22",
+      "role": "member",
+      "id": 3
     }
   ]
 }
