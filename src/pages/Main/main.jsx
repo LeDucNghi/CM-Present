@@ -30,11 +30,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function Main() {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.app.mode);
-  const languages = useSelector((state) => state.app.language);
 
   const {
     data: deletedUserList,
-    error: deletedUserError,
+    // error: deletedUserError,
     isLoading: deletedUserLoading,
     isSuccess: getDeletedUserSuccess,
   } = useGetDeletedUserQuery();

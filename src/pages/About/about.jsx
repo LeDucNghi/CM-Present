@@ -10,7 +10,6 @@ import { Loading } from "components/Loading";
 import { ProfileForm } from "components/ProfileForm/profileForm";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { validationSchema } from "formik/profile";
 
 function About() {

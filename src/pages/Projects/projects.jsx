@@ -3,7 +3,6 @@ import * as React from "react";
 import { deleteUser, postUserList } from "features/slice";
 import {
   useDeleteUserFromListMutation,
-  useGetUserTeamQuery,
   usePostDeletedUserMutation,
 } from "services/userServices";
 import { useDispatch, useSelector } from "react-redux";

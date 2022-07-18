@@ -56,8 +56,8 @@ const StyledMenu = styled((props) => (
 export default function LanguageMenus() {
   const dispatch = useDispatch();
 
-  const mode = localStorage.getItem("mode");
-  const languages = localStorage.getItem("language");
+  // const mode = localStorage.getItem("mode");
+  // const languages = localStorage.getItem("language");
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [language, setLanguage] = React.useState("Eng");

@@ -84,7 +84,6 @@ export const columns = [
     field: "id",
     renderHeader: () => {
       const languages = store.getState().app.language;
-      console.log("🚀 ~ file: global.js ~ line 87 ~ languages", languages);
       return <p>{languages === "VN" ? "STT" : "ID"} </p>;
     },
     width: 70,
@@ -96,7 +95,7 @@ export const columns = [
       const languages = store.getState().app.language;
       return <p>{languages === "VN" ? "Tên họ" : "First name"} </p>;
     },
-    width: 150,
+    width: 200,
   },
 
   {
@@ -105,7 +104,7 @@ export const columns = [
       const languages = store.getState().app.language;
       return <p>{languages === "VN" ? "Tên cuối" : "Last name"} </p>;
     },
-    width: 150,
+    width: 200,
   },
 
   {
@@ -114,7 +113,7 @@ export const columns = [
       const languages = store.getState().app.language;
       return <p>{languages === "VN" ? "Email" : "Email"} </p>;
     },
-    width: 250,
+    width: 300,
   },
 
   {
@@ -123,27 +122,27 @@ export const columns = [
       const languages = store.getState().app.language;
       return <p>{languages === "VN" ? "Tuổi" : "Age"} </p>;
     },
-    width: 100,
+    width: 150,
   },
 
-  {
-    field: "fullName",
-    renderHeader: () => {
-      const languages = store.getState().app.language;
-      return <p>{languages === "VN" ? "Tên đầy đủ" : "Full name"} </p>;
-    },
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 300,
+  // {
+  //   field: "fullName",
+  //   renderHeader: () => {
+  //     const languages = store.getState().app.language;
+  //     return <p>{languages === "VN" ? "Tên đầy đủ" : "Full name"} </p>;
+  //   },
+  //   description: "This column has a value getter and is not sortable.",
+  //   sortable: false,
+  //   width: 300,
 
-    renderCell: (cellValues) => {
-      return (
-        <Button>
-          {cellValues.row.firstName || ""} {cellValues.row.lastName || ""}
-        </Button>
-      );
-    },
-  },
+  //   renderCell: (cellValues) => {
+  //     return (
+  //       <Button>
+  //         {cellValues.row.firstName || ""} {cellValues.row.lastName || ""}
+  //       </Button>
+  //     );
+  //   },
+  // },
 
   {
     field: "role",
@@ -151,13 +150,13 @@ export const columns = [
       const languages = store.getState().app.language;
       return <p>{languages === "VN" ? "Chức vụ" : "Role"} </p>;
     },
-    width: 150,
+    width: 200,
   },
 
   {
-    field: "",
+    field: " ",
     headerName: "",
-    width: 200,
+    width: 250,
 
     renderCell: (cellValues) => {
       const languages = store.getState().app.language;
