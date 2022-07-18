@@ -52,6 +52,7 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
       denyButtonText: `${
         languages === "VN" ? `Xóa vĩnh viễn!` : `Delete it permanently!`
       }`,
+      cancelButtonText: `${languages === "VN" ? `Hủy` : `Cancel`}`,
 
       // confirmButtonColor : `${mode === "dark" ?  : }`,
       // denyButtonColor : `${mode === "dark" ?  : }`,
@@ -72,8 +73,14 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
         setRow(userListStorage);
 
         Swal.fire(
-          "Deleted!",
-          "You can restore this user from trash!",
+          `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
+          `${
+            languages === `VN`
+              ? `Bạn có thể khôi phục ${
+                  selectedRow.length === 1 ? `` : `những`
+                } người dùng này ở thùng rác`
+              : `You can restore this user from trash!`
+          }`,
           "success"
         );
       } else if (result.isDenied) {
@@ -86,7 +93,11 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
         dispatch(postUserList(checkDiffElement));
         setRow(userListStorage);
 
-        Swal.fire("Deleted!", "", "success");
+        Swal.fire(
+          `${languages === "VN" ? `Đã xóa!` : `Deleted!`}`,
+          "",
+          "success"
+        );
       }
     });
   };

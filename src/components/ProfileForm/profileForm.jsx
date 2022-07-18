@@ -19,10 +19,7 @@ export const ProfileForm = ({
   // const languages = useSelector((state) => state.app.language);
   return (
     <>
-      <div
-        className="account_info"
-        // style={{ color: mode === "dark" ? "#fff" : "" }}
-      >
+      <div className="account_info">
         <InputField
           values={values}
           touched={touched}

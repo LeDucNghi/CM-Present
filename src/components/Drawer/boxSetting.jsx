@@ -18,7 +18,8 @@ export default function BoxSetting() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("account");
+    // localStorage.removeItem("account");
+    localStorage.clear();
     window.location.href = "/";
   };
   return (

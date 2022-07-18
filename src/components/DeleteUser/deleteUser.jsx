@@ -1,4 +1,4 @@
-import { postDeletedList, postUserInfo, restoreUser } from "features/slice";
+import { postDeletedList, restoreUser } from "features/slice";
 import {
   useDeleteUserPermanentlyMutation,
   usePostNewUserMutation,
@@ -33,11 +33,17 @@ export default function DeleteUser({ row, setRow, selectedRow }) {
     // const lastIndex = userListStorage[userListStorage.length - 1].id;
 
     Swal.fire({
-      title: `Are you sure you want to restore ${
-        selectedRow.length === 1 ? `this` : `these`
-      }  ${selectedRow.length === 1 ? "" : selectedRow.length} user${
-        selectedRow.length === 1 ? `` : `s`
-      }?`,
+      title: `${
+        languages === "VN"
+          ? `Bạn có chắc chắn muốn khôi phục ${
+              selectedRow.length === 1 ? "" : selectedRow.length
+            } người dùng này không ?`
+          : `Are you sure you want to restore ${
+              selectedRow.length === 1 ? `this` : `these`
+            }  ${selectedRow.length === 1 ? "" : selectedRow.length} user${
+              selectedRow.length === 1 ? `` : `s`
+            }?`
+      }`,
       text: "",
       icon: "warning",
       showCancelButton: true,
@@ -46,8 +52,9 @@ export default function DeleteUser({ row, setRow, selectedRow }) {
       cancelButtonColor: "#d33",
 
       confirmButtonText: `${
-        languages === "VN" ? `Có, khôi phục chúng!` : `Yes, restore it!`
+        languages === "VN" ? `Có, hãy khôi phục!` : `Yes, restore it!`
       }`,
+      cancelButtonText: `${languages === "VN" ? `Hủy` : `Cancel`}`,
 
       background: `${mode === "dark" ? "#121212" : ""}`,
       color: `${mode === "dark" ? "#fff" : ""}`,
@@ -95,6 +102,8 @@ export default function DeleteUser({ row, setRow, selectedRow }) {
           ? `Có, hãy xóa vĩnh viễn`
           : `Yes, delete it permanently!`
       }`,
+      cancelButtonText: `${languages === "VN" ? `Hủy` : `Cancel`}`,
+
       background: `${mode === "dark" ? "#121212" : ""}`,
       color: `${mode === "dark" ? "#fff" : ""}`,
     }).then((result) => {
