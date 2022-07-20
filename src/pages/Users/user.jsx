@@ -57,7 +57,6 @@ export default function User({ allUserLoading, allUserError }) {
         <AddUserForm open={open} setOpen={setOpen} />
 
         <CustomDataGrid
-          // sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}
           onSelectionModelChange={(id) => onSelectionModelChange(id)}
           rows={row}
           columns={columns}
