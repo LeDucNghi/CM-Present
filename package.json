@@ -1,6 +1,7 @@
 {
   "name": "exercise",
   "version": "0.1.0",
+  "homepage": "https://kendumboiz.github.io/CM-Present",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -43,6 +44,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "run-p start-app start-api",
     "start-app": "cross-env REACT_APP_API_BASE_URL=http://localhost:3005/ react-scripts start",
     "start-api": "json-server --host 127.0.0.1 --port 3005 --watch src/data/db.json --delay 0",
