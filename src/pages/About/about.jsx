@@ -6,7 +6,7 @@ import {
   useUpdateUserMutation,
 } from "services/userServices";
 
-import { Loading } from "components/Loading";
+import { Loading } from "components/Common/Loading";
 import { ProfileForm } from "components/ProfileForm/profileForm";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";

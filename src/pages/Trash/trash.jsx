@@ -1,13 +1,13 @@
+import Box from "@mui/material/Box";
 import { CustomDataGrid } from "constants/styledMUI";
 import DeleteUser from "components/DeleteUser/deleteUser";
-import { Loading } from "components/Loading";
+import { Loading } from "components/Common/Loading";
 import React from "react";
+import Tab from "@mui/material/Tab";
+import TabPanel from "components/TabPanel/tabPanel";
+import Tabs from "@mui/material/Tabs";
 import { columns } from "constants/global";
 import { useSelector } from "react-redux";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
-import TabPanel from "components/TabPanel/tabPanel";
 
 const a11yProps = (index) => {
   return {

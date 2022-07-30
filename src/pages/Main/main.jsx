@@ -11,7 +11,7 @@ import {
 import About from "pages/About/about";
 import Box from "@mui/material/Box";
 import Dashboard from "pages/DashBoard/dashboard";
-import Error from "components/NotFound/notFound";
+import Error from "components/Common/NotFound/notFound";
 import MiniDrawer from "components/Drawer/drawer";
 import Projects from "pages/Projects/projects";
 import Trash from "pages/Trash/trash";

@@ -2,7 +2,7 @@ import "./assets/styles/GlobalStyles.scss";
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import Error from "components/NotFound/notFound";
+import Error from "components/Common/NotFound/notFound";
 import Main from "pages/Main/main";
 import SignIn from "pages/SignIn/signin";
 import SignUp from "pages/SignUp/signup";

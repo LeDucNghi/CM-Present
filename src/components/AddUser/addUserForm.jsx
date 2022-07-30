@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Fade from "@mui/material/Fade";
-import { Field } from "components/Field/field";
+import { Field } from "components/Common/Field/field";
 import Modal from "@mui/material/Modal";
 import Swal from "sweetalert2";
 import { addUser } from "features/slice";

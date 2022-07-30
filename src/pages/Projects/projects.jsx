@@ -11,7 +11,7 @@ import AddUser from "components/AddUser/addUserForm";
 import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Loading } from "components/Loading";
+import { Loading } from "components/Common/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Swal from "sweetalert2";
 import TeamFilter from "components/ProjectFilter/projectFilter";

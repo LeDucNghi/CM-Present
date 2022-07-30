@@ -3,7 +3,7 @@ import * as React from "react";
 import AddUserButton from "components/AddUser/addUserButton";
 import AddUserForm from "components/AddUser/addUserForm";
 import { CustomDataGrid } from "constants/styledMUI";
-import { Loading } from "components/Loading";
+import { Loading } from "components/Common/Loading";
 import { columns } from "constants/global";
 import { useSelector } from "react-redux";
 
