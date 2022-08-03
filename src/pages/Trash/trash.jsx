@@ -1,4 +1,4 @@
-import DataGrid from "components/FormField/CustomDataGrid";
+import DataGrid from "components/Custom/CustomDataGrid";
 import DeleteUser from "features/trash/components/DeleteUser";
 import { Loading } from "components/Common/Loading/Loading";
 import React from "react";

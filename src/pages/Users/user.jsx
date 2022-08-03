@@ -2,7 +2,7 @@ import * as React from "react";
 
 import AddUserButton from "features/user/components/AddUserButton";
 import AddUserForm from "features/user/components/AddUserForm";
-import DataGrid from "components/FormField/CustomDataGrid";
+import DataGrid from "components/Custom/CustomDataGrid";
 import { Loading } from "components/Common/Loading/Loading";
 
 export default function User({ allUserLoading, allUserError }) {
