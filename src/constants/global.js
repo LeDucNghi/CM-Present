@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import PreviewIcon from "@mui/icons-material/Preview";
 import { routesName } from "features/slice";
-import { store } from "store";
+import { store } from "app/store";
 
 export const rows = [
   {

@@ -1,13 +1,7 @@
-import Box from "@mui/material/Box";
-import { CustomDataGrid } from "constants/styledMUI";
-import DeleteUser from "components/DeleteUser/deleteUser";
-import { Loading } from "components/Common/Loading";
+import DataGrid from "components/FormField/CustomDataGrid";
+import DeleteUser from "features/trash/components/DeleteUser";
+import { Loading } from "components/Common/Loading/Loading";
 import React from "react";
-import Tab from "@mui/material/Tab";
-import TabPanel from "components/TabPanel/tabPanel";
-import Tabs from "@mui/material/Tabs";
-import { columns } from "constants/global";
-import { useSelector } from "react-redux";
 
 const a11yProps = (index) => {
   return {
@@ -17,31 +11,12 @@ const a11yProps = (index) => {
 };
 
 function Trash({ deletedUserLoading }) {
-  const deletedUserListStorage = useSelector(
-    (state) => state.app.deletedUserList
-  );
-  const mode = useSelector((state) => state.app.mode);
-  // const languages = useSelector((state) => state.app.language);
-
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  React.useEffect(() => {
-    if (deletedUserListStorage && deletedUserListStorage.length !== 0) {
-      setRow(deletedUserListStorage);
-    }
-  }, [deletedUserListStorage, row]);
-
-  const onSelectionModelChange = (id) => {
-    const selectedIDs = new Set(id);
-    const selectedRowData = row.filter((row1) => selectedIDs.has(row1.id));
-    setSelectedRow(selectedRowData);
-    console.log("selectedRowData trash", selectedRowData);
   };
 
   if (deletedUserLoading) return <Loading />;
@@ -58,7 +33,7 @@ function Trash({ deletedUserLoading }) {
         >
           <DeleteUser row={row} setRow={setRow} selectedRow={selectedRow} />
         </div>
-
+        {/* 
         <Box
           sx={{
             flexGrow: 1,
@@ -80,15 +55,16 @@ function Trash({ deletedUserLoading }) {
             <Tab label="Item Three" {...a11yProps(2)} disabled />
           </Tabs>
           <TabPanel value={value} index={0}>
-            <CustomDataGrid
-              getRowId={(row) => row.id}
-              onSelectionModelChange={(id) => onSelectionModelChange(id)}
-              rows={row}
-              columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
-              checkboxSelection
-              mode={mode}
+            <DataGrid
+              // getRowId={(row) => row.id}
+              // onSelectionModelChange={(id) => onSelectionModelChange(id)}
+              // rows={row}
+              // columns={columns}
+              // pageSize={5}
+              // rowsPerPageOptions={[5]}
+              // checkboxSelection
+              // mode={mode}
+              selectedRow={setSelectedRow}
             />
           </TabPanel>
           <TabPanel value={value} index={1}>
@@ -97,18 +73,8 @@ function Trash({ deletedUserLoading }) {
           <TabPanel value={value} index={2}>
             Item Three
           </TabPanel>
-        </Box>
-
-        {/* <CustomDataGrid
-          getRowId={(row) => row.id}
-          onSelectionModelChange={(id) => onSelectionModelChange(id)}
-          rows={row}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-          mode={mode}
-        /> */}
+        </Box> */}
+        <DataGrid selectedRow={setSelectedRow} />
       </div>
     );
 }

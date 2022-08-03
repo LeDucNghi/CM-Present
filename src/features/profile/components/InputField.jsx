@@ -1,4 +1,4 @@
-import { Field } from "components/Common/Field/field";
+import { Field } from "components/FormField/InputField";
 import React from "react";
 import { useSelector } from "react-redux";
 

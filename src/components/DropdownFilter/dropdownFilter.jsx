@@ -18,12 +18,7 @@ DropdownFilter.defaultProps = {
 export default function DropdownFilter({ options }) {
   const [teamName, setTeamName] = React.useState("");
 
-  const { data, isSuccess } = useGetUserTeamQuery(teamName);
-
-  useEffect(() => {
-    if (isSuccess) {
-    }
-  }, [data, isSuccess]);
+  // const { data, isSuccess } = useGetUserTeamQuery(teamName);
 
   return (
     <FormControl sx={{ minWidth: 80 }}>

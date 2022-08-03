@@ -1,9 +1,9 @@
-import "../../pages/About/about.scss";
+import "../../../pages/About/About.scss";
 
-import { Avatar } from "./avatar";
-import { InputField } from "./inputField";
+import { Avatar } from "./Avatar";
+import { InputField } from "./InputField";
 import React from "react";
-import { SubmitButton } from "./submitButton";
+import { SubmitButton } from "./SubmitButton";
 
 export const ProfileForm = ({
   data,

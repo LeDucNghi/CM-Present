@@ -1,15 +1,16 @@
-import appReducer from "features/slice";
+import rootSaga, { sagaMiddleware } from "./rootSaga";
+
 import { configureStore } from "@reduxjs/toolkit";
+import { rootReducer } from "./rootReducer";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { userApi } from "services/userServices";
 
 export const store = configureStore({
-  reducer: {
-    app: appReducer,
-    [userApi.reducerPath]: userApi.reducer,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(userApi.middleware),
+    getDefaultMiddleware().concat(sagaMiddleware, userApi.middleware),
 });
+
+sagaMiddleware.run(rootSaga);
 
 setupListeners(store.dispatch);

@@ -1,4 +1,4 @@
-import "./about.scss";
+import "./About.scss";
 
 import { Form, Formik } from "formik";
 import {
@@ -6,8 +6,8 @@ import {
   useUpdateUserMutation,
 } from "services/userServices";
 
-import { Loading } from "components/Common/Loading";
-import { ProfileForm } from "components/ProfileForm/profileForm";
+import { Loading } from "components/Common/Loading/Loading";
+import { ProfileForm } from "features/profile/components/ProfileForm";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 import { validationSchema } from "formik/profile";

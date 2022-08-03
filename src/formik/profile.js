@@ -1,17 +1,5 @@
 import * as Yup from "yup";
 
-import { store } from "store";
-
-const userInfo = store.getState().app.userInfo;
-console.log("🚀 ~ file: profile.js ~ line 5 ~ userInfo", userInfo);
-
-// export const initialValues = {
-//   firstName: `${userInfo ? userInfo.firstName : ""}`,
-//   lastName: `${userInfo ? userInfo.lastName : ""}`,
-//   email: `${userInfo ? userInfo.email : ""}`,
-//   age: `${userInfo ? userInfo.age : ""}`,
-// };
-
 export const validationSchema = Yup.object({
   firstName: Yup.string()
     .min(1, "Please enter your real name 😒")

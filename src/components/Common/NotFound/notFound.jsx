@@ -1,4 +1,4 @@
-import "./notFound.scss";
+import "./NotFound.scss";
 
 import React from "react";
 import { useSelector } from "react-redux";
@@ -39,7 +39,7 @@ function Error() {
 
   return (
     <div className="notfound">
-      <p class="back"></p>
+      <p className="back"></p>
       <p style={{ color: mode === "dark" ? "#fff" : "" }} id="type-in">
         {languages === "VN" ? `Lỗi 404` : `Error 404`}
       </p>

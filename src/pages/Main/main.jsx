@@ -1,4 +1,4 @@
-import "./main.scss";
+import "./Main.scss";
 
 import { Navigate, Route, Routes } from "react-router-dom";
 import { postDeletedList, postUserList } from "features/slice";
@@ -8,14 +8,14 @@ import {
   useGetDeletedUserQuery,
 } from "services/userServices";
 
-import About from "pages/About/about";
+import About from "pages/About/About";
 import Box from "@mui/material/Box";
-import Dashboard from "pages/DashBoard/dashboard";
-import Error from "components/Common/NotFound/notFound";
-import MiniDrawer from "components/Drawer/drawer";
-import Projects from "pages/Projects/projects";
-import Trash from "pages/Trash/trash";
-import User from "pages/Users/user";
+import Dashboard from "pages/DashBoard/Dashboard";
+import Error from "components/Common/NotFound/NotFound";
+import MiniDrawer from "features/drawer/components/Drawer";
+import Projects from "pages/Projects/Projects";
+import Trash from "pages/Trash/Trash";
+import User from "pages/Users/User";
 import { styled } from "@mui/material/styles";
 import { useEffect } from "react";
 
@@ -66,7 +66,7 @@ export default function Main() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Routes>
-          <Route path="/" element={<Navigate to="user" />} />
+          <Route path="/" element={<Navigate to="user" replace />} />
 
           <Route path="dashboard" element={<Dashboard />} />
 

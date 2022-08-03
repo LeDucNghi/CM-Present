@@ -1,11 +1,12 @@
 import "./assets/styles/GlobalStyles.scss";
 
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import Error from "components/Common/NotFound/notFound";
-import Main from "pages/Main/main";
-import SignIn from "pages/SignIn/signin";
-import SignUp from "pages/SignUp/signup";
+import Error from "components/Common/NotFound/NotFound";
+import Main from "pages/Main/Main";
+import PrivateRoute from "components/Common/PrivateRoute/PrivateRoute";
+import SignIn from "pages/SignIn/Signin";
+import SignUp from "pages/SignUp/Signup";
 import { useEffect } from "react";
 
 function App() {
@@ -18,23 +19,16 @@ function App() {
   }, [account]);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<Navigate to={account ? "main" : "signin"} />}
-        />
+    <Routes>
+      <Route element={<PrivateRoute />}>
+        <Route path="main/*" element={<Main />} />
+      </Route>
 
-        {account ? (
-          <Route index path="main/*" element={<Main />} />
-        ) : (
-          <Route index path="signin" element={<SignIn />} />
-        )}
+      <Route index path="signin" element={<SignIn />} />
+      <Route index path="signup" element={<SignUp />} />
 
-        <Route path="signup" element={<SignUp />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </BrowserRouter>
+      <Route path="*" element={<Error />} />
+    </Routes>
   );
 }
 

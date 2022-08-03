@@ -7,11 +7,11 @@ import {
 } from "services/userServices";
 import { useDispatch, useSelector } from "react-redux";
 
-import AddUser from "components/AddUser/addUserForm";
+import AddUserForm from "features/user/components/AddUserForm";
 import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Loading } from "components/Common/Loading";
+import { Loading } from "components/Common/Loading/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Swal from "sweetalert2";
 import TeamFilter from "components/ProjectFilter/projectFilter";
@@ -150,7 +150,7 @@ export default function Projects({ allUserLoading, allUserError }) {
           <TeamFilter />
         </div>
 
-        <AddUser open={open} setOpen={setOpen} />
+        <AddUserForm open={open} setOpen={setOpen} />
 
         <DataGrid
           sx={{ color: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)" }}

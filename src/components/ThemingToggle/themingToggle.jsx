@@ -1,4 +1,4 @@
-import "./themingToggle.scss";
+import "./ThemingToggle.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";

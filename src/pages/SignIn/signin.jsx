@@ -12,6 +12,8 @@ import Link from "@mui/material/Link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
+
 // import moment from "moment";
 
 function Copyright(props) {
@@ -35,6 +37,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const handleSubmit = (values, { setSubmitting }) => {
     const email = "testing@gmail.com";
     const password = "123456789Test";
@@ -54,7 +57,7 @@ export default function SignIn() {
       console.log("invalid account!!");
       setSubmitting(false);
     } else {
-      window.location.href = `/main/`;
+      navigate(`/main/user`);
       setSubmitting(false);
       localStorage.setItem("account", JSON.stringify(items));
     }
