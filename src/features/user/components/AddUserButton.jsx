@@ -1,30 +1,30 @@
 import { deleteUser, postUserList } from "features/slice";
-import { useDispatch, useSelector } from "react-redux";
 import {
   useDeleteUserFromListMutation,
   usePostDeletedUserMutation,
 } from "services/userServices";
+import { useDispatch, useSelector } from "react-redux";
 
+import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 
 export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
   const dispatch = useDispatch();
 
-  const userListStorage = useSelector((state) => state.app.userList);
+  const userList = useSelector((state) => state.app.userList);
   const mode = useSelector((state) => state.app.mode);
   const languages = useSelector((state) => state.app.language);
 
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();
 
-  const checkDiffElement = row.filter(
+  const checkDiffElement = userList.filter(
     (x) => !selectedRow.some((x1) => x.id === x1.id)
   );
 
-  const checkSameElement = row.filter((x) =>
+  const checkSameElement = userList.filter((x) =>
     selectedRow.some((x1) => x.id === x1.id)
   );
 
@@ -54,8 +54,6 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
       }`,
       cancelButtonText: `${languages === "VN" ? `Hủy` : `Cancel`}`,
 
-      // confirmButtonColor : `${mode === "dark" ?  : }`,
-      // denyButtonColor : `${mode === "dark" ?  : }`,
       background: `${mode === "dark" ? "#121212" : ""}`,
       color: `${mode === "dark" ? "#fff" : ""}`,
     }).then((result) => {
@@ -68,9 +66,13 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
 
           dispatch(deleteUser({ ...rest }));
         });
+        console.log(
+          "🚀 ~ file: AddUserButton.jsx ~ line 75 ~ checkSameElement.forEach ~ checkSameElement",
+          checkSameElement
+        );
 
         dispatch(postUserList(checkDiffElement));
-        setRow(userListStorage);
+        setRow(userList);
 
         Swal.fire(
           `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
@@ -91,7 +93,7 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
           deleteUserFromList(el.id);
         });
         dispatch(postUserList(checkDiffElement));
-        setRow(userListStorage);
+        setRow(userList);
 
         Swal.fire(
           `${languages === "VN" ? `Đã xóa!` : `Deleted!`}`,
@@ -123,7 +125,7 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
       </Button>
       <Button
         startIcon={<DeleteIcon />}
-        onClick={() => handleDeleteUser()}
+        onClick={handleDeleteUser}
         variant="contained"
         color="error"
         sx={{
