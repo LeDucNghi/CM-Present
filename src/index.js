@@ -14,7 +14,7 @@ import { store } from "app/store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter history={history}>
+    <BrowserRouter>
       <ErrorBoundary>
         <CssBaseline />
         <App />

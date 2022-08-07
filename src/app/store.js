@@ -9,11 +9,9 @@ import { userApi } from "services/userServices";
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      sagaMiddleware,
-      userApi.middleware,
-      routerMiddleware(history)
-    ),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(sagaMiddleware, userApi.middleware, routerMiddleware(history)),
 });
 
 sagaMiddleware.run(rootSaga);

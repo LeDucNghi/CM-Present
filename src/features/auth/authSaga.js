@@ -8,39 +8,43 @@ function* handleLogin(payload) {
     "🚀 ~ file: authSaga.js ~ line 7 ~ function*handleLogin ~ payload",
     payload
   );
-  // try {
-  //   console.log("vào handleLogin thành công");
-  //   const email = "testing@gmail.com";
-  //   const password = "123456789Test";
+  try {
+    console.log("vào handleLogin thành công");
+    const email = "testing@gmail.com";
+    const password = "123456789Test";
 
-  //   const checkMail = email !== payload.email;
-  //   const checkPass = password !== payload.password;
+    const checkMail = email !== payload.values.email;
+    const checkPass = password !== payload.values.password;
 
-  //   const now = new Date();
-  //   const expiredTime = now.getTime() + 86400000;
+    const now = new Date();
+    const expiredTime = now.getTime() + 86400000;
 
-  //   const items = {
-  //     values: payload,
-  //     expired: expiredTime,
-  //   };
+    const items = {
+      values: payload,
+      expired: expiredTime,
+    };
 
-  //   if (checkMail || checkPass) {
-  //     console.log("invalid account!!");
-  //     // setSubmitting(false);
-  //   } else {
-  //     localStorage.setItem("account", JSON.stringify(items));
+    if (checkMail) {
+      console.log("invalid mail!!");
+      yield put(authActions.loginFailed());
+    } else if (checkPass) {
+      console.log("invalid mail!!");
+      yield put(authActions.loginFailed());
+    } else {
+      localStorage.setItem("account", JSON.stringify(items));
 
-  //     yield delay(2000);
-  //     history.push(`/main/user`);
-  //     // setSubmitting(false);
-  //   }
-  // } catch (error) {
-  //   yield put(authActions.loginFailed(error.message));
-  // }
+      yield delay(2000);
+      yield put(payload.navigate(`/main/user`));
+      // setSubmitting(false);
+    }
+  } catch (error) {
+    yield put(authActions.loginFailed());
+  }
 }
 
 function* handleLogout() {
-  localStorage.removeItem("account");
+  localStorage.clear();
+  window.location.href = "/signin";
   yield put(history.push("/signin"));
 }
 

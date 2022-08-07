@@ -1,4 +1,4 @@
-import { ErrorMessage, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { authActions, selectIsLogging } from "features/auth/authSlice";
 import { initialValues, validationSchema } from "formik/signIn";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import { CircularProgress } from "@mui/material";
 import { Field } from "components/Custom/InputField";
-import React from "react";
-import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 
 export default function SigninForm() {
@@ -15,7 +13,7 @@ export default function SigninForm() {
   const dispatch = useDispatch();
   const isLogging = useSelector(selectIsLogging);
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = (values) => {
     const value = {
       values,
       navigate,
@@ -27,8 +25,8 @@ export default function SigninForm() {
       enableReinitialize={true}
       validationSchema={validationSchema}
       initialValues={initialValues}
-      onSubmit={(values, { setSubmitting }) => {
-        handleSubmit(values, { setSubmitting });
+      onSubmit={(values) => {
+        handleSubmit(values);
       }}
     >
       {(formikProps) => {
@@ -36,19 +34,6 @@ export default function SigninForm() {
         return (
           <Form>
             <Field
-              // margin="normal"
-              // required
-              // fullWidth
-              // id="email"
-              // label="Email Address"
-              // name="email"
-              // autoComplete="email"
-              // autoFocus
-              // value={values.email}
-              // onChange={handleChange}
-              // error={touched.email && Boolean(errors.email)}
-              // helperText={errors.email && touched.email}
-
               name="email"
               label="Email"
               type="text"
@@ -59,30 +44,14 @@ export default function SigninForm() {
                   ? touched.email && Boolean(errors.email)
                   : null
               }
+              autoFocus={true}
+              autoComplete="email"
             />
-            {/* <ErrorMessage name="email">
-              {(msg) => (
-                <p style={{ color: "red", fontSize: "12px" }}>{msg} </p>
-              )}
-            </ErrorMessage> */}
 
             <Field
-              // margin="normal"
-              // required
-              // fullWidth
-              // name="password"
-              // label="Password"
-              // type="password"
-              // id="password"
-              // autoComplete="current-password"
-              // value={values.password}
-              // onChange={handleChange}
-              // error={touched.password && Boolean(errors.password)}
-              // helperText={errors.password && touched.password}
-
               name="password"
               label="Password"
-              type="text"
+              type="password"
               value={values.password}
               onChange={handleChange}
               error={
@@ -90,12 +59,9 @@ export default function SigninForm() {
                   ? touched.password && Boolean(errors.password)
                   : null
               }
+              autoFocus={true}
+              autoComplete="current-password"
             />
-            {/* <ErrorMessage name="password">
-              {(msg) => (
-                <p style={{ color: "red", fontSize: "12px" }}>{msg} </p>
-              )}
-            </ErrorMessage> */}
 
             <Button
               type="submit"
@@ -103,7 +69,6 @@ export default function SigninForm() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              {/* Sign In */}
               {isLogging ? (
                 <CircularProgress size={20} color="secondary" />
               ) : (
