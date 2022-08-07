@@ -2,25 +2,24 @@ import "./index.css";
 
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
+import CssBaseline from "@mui/material/CssBaseline";
 import ErrorBoundary from "app/errorBoundary";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { history } from "app/rootReducer";
+import history from "utils/history";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "app/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    {/* <BrowserRouter> */}
-    <ErrorBoundary>
-      <ConnectedRouter history={history}>
+    <BrowserRouter history={history}>
+      <ErrorBoundary>
+        <CssBaseline />
         <App />
-      </ConnectedRouter>
-    </ErrorBoundary>
-    {/* </BrowserRouter> */}
+      </ErrorBoundary>
+    </BrowserRouter>
   </Provider>
 );
 

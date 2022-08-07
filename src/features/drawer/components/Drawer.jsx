@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 import BoxSetting from "./BoxSetting";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import CssBaseline from "@mui/material/CssBaseline";
 import IconButton from "@mui/material/IconButton";
 import LanguageMenus from "components/LanguageDropdown/LanguageDropdown";
 import { ListDrawer } from "./DrawerList";
@@ -36,7 +35,6 @@ export default function MiniDrawer() {
 
   return (
     <>
-      <CssBaseline />
       <AppBar
         sx={{
           display: "flex",
