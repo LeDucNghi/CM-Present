@@ -8,14 +8,6 @@ export const SubmitButton = ({ isSubmitting, isValid }) => {
   const languages = useSelector((state) => state.app.language);
   return (
     <>
-      {/* <Button
-        disabled={isSubmitting || !isValid}
-        type="button"
-        className="cancel"
-      >
-        {languages === "Eng" ? "Cancel" : "Huy"}
-      </Button> */}
-
       <Button
         disabled={isSubmitting || !isValid}
         type="submit"

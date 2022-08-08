@@ -10,7 +10,7 @@ const a11yProps = (index) => {
   };
 };
 
-function Trash({ deletedUserLoading }) {
+function Trash() {
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
   const [value, setValue] = React.useState(0);
@@ -19,21 +19,19 @@ function Trash({ deletedUserLoading }) {
     setValue(newValue);
   };
 
-  if (deletedUserLoading) return <Loading />;
-  else
-    return (
-      <div style={{ height: 400, width: "100%" }}>
-        <div
-          style={{
-            width: "auto",
-            display: "flex",
-            justifyContent: "flex-end",
-            marginBottom: "1em",
-          }}
-        >
-          <DeleteUser row={row} setRow={setRow} selectedRow={selectedRow} />
-        </div>
-        {/* 
+  return (
+    <div style={{ height: 400, width: "100%" }}>
+      <div
+        style={{
+          width: "auto",
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: "1em",
+        }}
+      >
+        <DeleteUser row={row} setRow={setRow} selectedRow={selectedRow} />
+      </div>
+      {/* 
         <Box
           sx={{
             flexGrow: 1,
@@ -74,9 +72,9 @@ function Trash({ deletedUserLoading }) {
             Item Three
           </TabPanel>
         </Box> */}
-        <DataGrid selectedRow={setSelectedRow} />
-      </div>
-    );
+      <DataGrid row={row} setRow={setRow} setSelectedRow={setSelectedRow} />
+    </div>
+  );
 }
 
 export default Trash;

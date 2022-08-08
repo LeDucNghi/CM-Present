@@ -1,28 +1,19 @@
-import { selectUserList, userActions } from "features/user/userSlice";
-import { useDispatch, useSelector } from "react-redux";
-
 import { CustomDataGrid } from "constants/styledMUI";
+import PropTypes from "prop-types";
 import React from "react";
 import { columns } from "constants/global";
-import { postUserList } from "features/slice";
+import { selectDeletedList } from "features/trash/trashSlice";
+import { selectUserList } from "features/user/userSlice";
+import { useSelector } from "react-redux";
 
-export default function DataGrid({ setSelectedRow }) {
-  const location = window.location.pathname;
-  const dispatch = useDispatch();
-
+export default function DataGrid({ row, setRow, setSelectedRow }) {
   const mode = useSelector((state) => state.app.mode);
   const userList = useSelector(selectUserList);
-  const deletedUserList = useSelector((state) => state.app.deletedUserList);
+  const deletedUserList = useSelector(selectDeletedList);
 
+  const location = window.location.pathname;
   const checkUserList = userList && userList.length !== 0;
   const checkDeletedList = deletedUserList && deletedUserList.length !== 0;
-
-  const [row, setRow] = React.useState([]);
-
-  React.useEffect(() => {
-    if (location === "/main/user") dispatch(userActions.postUserList());
-    // if (location === "/main/trash") dispatch(userActions.postUserList());
-  }, [location, dispatch]);
 
   React.useEffect(() => {
     if (location === "/main/user" && checkUserList) {
@@ -42,7 +33,7 @@ export default function DataGrid({ setSelectedRow }) {
   return (
     <CustomDataGrid
       onSelectionModelChange={(id) => onSelectionModelChange(id)}
-      rows={row ? row : []}
+      rows={row}
       columns={columns}
       pageSize={5}
       rowsPerPageOptions={[5]}
@@ -51,3 +42,13 @@ export default function DataGrid({ setSelectedRow }) {
     />
   );
 }
+
+DataGrid.propTypes = {
+  row: PropTypes.array.isRequired,
+  setRow: PropTypes.func.isRequired,
+  setSelectedRow: PropTypes.func.isRequired,
+};
+
+DataGrid.defaultProps = {
+  row: [],
+};

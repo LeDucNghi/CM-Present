@@ -16,7 +16,6 @@ export const Avatar = ({ data, setFieldValue }) => {
       reader.onload = () => {
         image = reader.result;
         setImage(image);
-        console.log("🚀 ~ file: avatar.jsx ~ line 9 ~ Avatar ~ image", image);
         setFieldValue("image", image);
       };
     }

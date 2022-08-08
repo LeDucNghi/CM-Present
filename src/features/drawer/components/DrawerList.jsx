@@ -91,48 +91,43 @@ export const ListDrawer = ({ mode, languages, open }) => {
   };
 
   return (
-    <>
-      <List>
-        {drawer.map((item) => (
-          <ListItem
-            // components=
-            component="div"
-            key={item.id}
-            disablePadding
+    <List>
+      {drawer.map((item) => (
+        <ListItem
+          // components=
+          component="div"
+          key={item.id}
+          disablePadding
+          sx={{
+            display: "block",
+            background:
+              pathname === item.path
+                ? `${mode === "dark" ? "rgba(255, 255, 255, 0.16)" : "#ccc"}`
+                : "",
+            transition: "background 0.3s ease-in-out 0s",
+          }}
+        >
+          <ListItemButton
+            onClick={() => handleRedirect(item.name, item.path)}
             sx={{
-              display: "block",
-              background:
-                pathname === item.path
-                  ? `${mode === "dark" ? "rgba(255, 255, 255, 0.16)" : "#ccc"}`
-                  : "",
-              transition: "background 0.3s ease-in-out 0s",
+              minHeight: 48,
+              justifyContent: open ? "initial" : "center",
+              px: 2.5,
             }}
           >
-            <ListItemButton
-              onClick={() => handleRedirect(item.name, item.path)}
+            <ListItemIcon
               sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
+                minWidth: 0,
+                mr: open ? 3 : "auto",
+                justifyContent: "center",
               }}
             >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={item.name}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </List>
   );
 };

@@ -1,55 +1,30 @@
 import "./Main.scss";
 
 import { Navigate, Route, Routes } from "react-router-dom";
-import { postDeletedList, postUserList } from "features/slice";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useGetAllUserQuery,
-  useGetDeletedUserQuery,
-} from "services/userServices";
 
 import About from "pages/About/About";
 import Box from "@mui/material/Box";
 import Dashboard from "pages/DashBoard/Dashboard";
+import { DrawerHeader } from "constants/styledMUI";
 import Error from "components/Common/NotFound/NotFound";
 import MiniDrawer from "features/drawer/components/Drawer";
 import Projects from "pages/Projects/Projects";
 import Trash from "pages/Trash/Trash";
 import User from "pages/Users/User";
 import { styled } from "@mui/material/styles";
+import { trashActions } from "features/trash/trashSlice";
 import { useEffect } from "react";
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  ...theme.mixins.toolbar,
-}));
+import { userActions } from "features/user/userSlice";
 
 export default function Main() {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.app.mode);
 
-  const {
-    data: deletedUserList,
-    // error: deletedUserError,
-    isLoading: deletedUserLoading,
-    isSuccess: getDeletedUserSuccess,
-  } = useGetDeletedUserQuery();
-  const {
-    data: allUserList,
-    error: allUserError,
-    isLoading: allUserLoading,
-    isSuccess: getAllUserSuccess,
-  } = useGetAllUserQuery();
-
   useEffect(() => {
-    if (getDeletedUserSuccess && getAllUserSuccess) {
-      dispatch(postUserList(allUserList));
-      dispatch(postDeletedList(deletedUserList));
-    }
-  }, [getDeletedUserSuccess, getAllUserSuccess]);
+    dispatch(userActions.postUserList());
+    dispatch(trashActions.postDeletedList());
+  }, [dispatch]);
 
   return (
     <Box
@@ -70,24 +45,13 @@ export default function Main() {
 
           <Route path="dashboard" element={<Dashboard />} />
 
-          <Route
-            path="trash"
-            element={<Trash deletedUserLoading={deletedUserLoading} />}
-          />
+          <Route path="trash" element={<Trash />} />
 
           <Route path="about/:id" element={<About />} />
 
           <Route path="project" element={<Projects />} />
 
-          <Route
-            path="user"
-            element={
-              <User
-                allUserLoading={allUserLoading}
-                allUserError={allUserError}
-              />
-            }
-          />
+          <Route path="user" element={<User />} />
 
           <Route path="*" element={<Error />} />
         </Routes>

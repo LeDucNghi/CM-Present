@@ -1,22 +1,27 @@
 import { postDeletedList, restoreUser } from "features/slice";
-import { useDispatch, useSelector } from "react-redux";
 import {
   useDeleteUserFromTrashMutation,
   usePostNewUserMutation,
 } from "services/userServices";
+import { useDispatch, useSelector } from "react-redux";
 
+import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
-import { Button } from "@mui/material";
 import Swal from "sweetalert2";
+import { selectUserList } from "features/user/userSlice";
+import { trashActions } from "../trashSlice";
 
 export default function DeleteUser({ row, setRow, selectedRow }) {
+  console.log("🚀 ~ file: DeleteUser.jsx ~ line 15 ~ DeleteUser ~ row", row);
+
   const dispatch = useDispatch();
   const deletedUserListStorage = useSelector(
     (state) => state.app.deletedUserList
   );
   const mode = useSelector((state) => state.app.mode);
   const languages = useSelector((state) => state.app.language);
+  const userList = useSelector(selectUserList);
 
   const [deleteUserPermanently] = useDeleteUserFromTrashMutation();
   const [postNewUser] = usePostNewUserMutation();
@@ -29,100 +34,115 @@ export default function DeleteUser({ row, setRow, selectedRow }) {
   );
 
   const handleRestoreUser = () => {
+    dispatch(
+      trashActions.restoreUser({
+        row,
+        selectedRow,
+        list: userList,
+      })
+    );
     // const lastIndex = userListStorage[userListStorage.length - 1].id;
 
-    Swal.fire({
-      title: `${
-        languages === "VN"
-          ? `Bạn có chắc chắn muốn khôi phục ${
-              selectedRow.length === 1 ? "" : selectedRow.length
-            } người dùng này không ?`
-          : `Are you sure you want to restore ${
-              selectedRow.length === 1 ? `this` : `these`
-            }  ${selectedRow.length === 1 ? "" : selectedRow.length} user${
-              selectedRow.length === 1 ? `` : `s`
-            }?`
-      }`,
-      text: "",
-      icon: "warning",
-      showCancelButton: true,
+    // Swal.fire({
+    //   title: `${
+    //     languages === "VN"
+    //       ? `Bạn có chắc chắn muốn khôi phục ${
+    //           selectedRow.length === 1 ? "" : selectedRow.length
+    //         } người dùng này không ?`
+    //       : `Are you sure you want to restore ${
+    //           selectedRow.length === 1 ? `this` : `these`
+    //         }  ${selectedRow.length === 1 ? "" : selectedRow.length} user${
+    //           selectedRow.length === 1 ? `` : `s`
+    //         }?`
+    //   }`,
+    //   text: "",
+    //   icon: "warning",
+    //   showCancelButton: true,
 
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+    //   confirmButtonColor: "#3085d6",
+    //   cancelButtonColor: "#d33",
 
-      confirmButtonText: `${
-        languages === "VN" ? `Có, hãy khôi phục!` : `Yes, restore it!`
-      }`,
-      cancelButtonText: `${languages === "VN" ? `Hủy` : `Cancel`}`,
+    //   confirmButtonText: `${
+    //     languages === "VN" ? `Có, hãy khôi phục!` : `Yes, restore it!`
+    //   }`,
+    //   cancelButtonText: `${languages === "VN" ? `Hủy` : `Cancel`}`,
 
-      background: `${mode === "dark" ? "#121212" : ""}`,
-      color: `${mode === "dark" ? "#fff" : ""}`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        checkSameElement.forEach((el) => {
-          const { id, ...rest } = el;
-          deleteUserPermanently(el.id);
-          postNewUser({ ...rest });
-          dispatch(restoreUser({ ...rest }));
-        });
+    //   background: `${mode === "dark" ? "#121212" : ""}`,
+    //   color: `${mode === "dark" ? "#fff" : ""}`,
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     checkSameElement.forEach((el) => {
+    //       const { id, ...rest } = el;
+    //       deleteUserPermanently(el.id);
+    //       postNewUser({ ...rest });
+    //       dispatch(restoreUser({ ...rest }));
+    //     });
 
-        dispatch(postDeletedList(checkDiffElement));
-        setRow(deletedUserListStorage);
+    //     dispatch(postDeletedList(checkDiffElement));
+    //     setRow(deletedUserListStorage);
 
-        Swal.fire(
-          `${languages === "VN" ? `Đã khôi phục!` : `Restored!`}`,
-          "",
-          "success"
-        );
-      }
-    });
+    //     Swal.fire(
+    //       `${languages === "VN" ? `Đã khôi phục!` : `Restored!`}`,
+    //       "",
+    //       "success"
+    //     );
+    //   }
+    // });
   };
 
   const handleDeleteUser = () => {
-    Swal.fire({
-      title: `${
-        languages === "VN"
-          ? `Bạn có chắc chắn muốn xóa ${
-              selectedRow.length === 1 ? "" : selectedRow.length
-            } người dùng này vĩnh viễn không?`
-          : `Are you sure you want to delete ${
-              selectedRow.length === 1 ? `this` : `these`
-            } ${selectedRow.length === 1 ? "" : selectedRow.length} user${
-              selectedRow.length === 1 ? `` : `s`
-            } permanently ?`
-      }`,
-      text: "",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: `${
-        languages === "VN"
-          ? `Có, hãy xóa vĩnh viễn`
-          : `Yes, delete it permanently!`
-      }`,
-      cancelButtonText: `${languages === "VN" ? `Hủy` : `Cancel`}`,
+    dispatch(
+      trashActions.deleteUser({
+        row,
+        selectedRow,
+        list: deletedUserListStorage,
+      })
+    );
 
-      background: `${mode === "dark" ? "#121212" : ""}`,
-      color: `${mode === "dark" ? "#fff" : ""}`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        checkSameElement.forEach((item) => {
-          deleteUserPermanently(item.id);
-        });
-        dispatch(postDeletedList(checkDiffElement));
-        setRow(deletedUserListStorage);
-        Swal.fire(
-          `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
-          "",
-          "success"
-        );
-      }
-    });
+    // Swal.fire({
+    //   title: `${
+    //     languages === "VN"
+    //       ? `Bạn có chắc chắn muốn xóa ${
+    //           selectedRow.length === 1 ? "" : selectedRow.length
+    //         } người dùng này vĩnh viễn không?`
+    //       : `Are you sure you want to delete ${
+    //           selectedRow.length === 1 ? `this` : `these`
+    //         } ${selectedRow.length === 1 ? "" : selectedRow.length} user${
+    //           selectedRow.length === 1 ? `` : `s`
+    //         } permanently ?`
+    //   }`,
+    //   text: "",
+    //   icon: "warning",
+    //   showCancelButton: true,
+    //   confirmButtonColor: "#3085d6",
+    //   cancelButtonColor: "#d33",
+    //   confirmButtonText: `${
+    //     languages === "VN"
+    //       ? `Có, hãy xóa vĩnh viễn`
+    //       : `Yes, delete it permanently!`
+    //   }`,
+    //   cancelButtonText: `${languages === "VN" ? `Hủy` : `Cancel`}`,
+
+    //   background: `${mode === "dark" ? "#121212" : ""}`,
+    //   color: `${mode === "dark" ? "#fff" : ""}`,
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     checkSameElement.forEach((item) => {
+    //       deleteUserPermanently(item.id);
+    //     });
+    //     dispatch(postDeletedList(checkDiffElement));
+    //     setRow(deletedUserListStorage);
+    //     Swal.fire(
+    //       `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
+    //       "",
+    //       "success"
+    //     );
+    //   }
+    // });
   };
 
   return (
-    <div>
+    <>
       <Button
         startIcon={<RestoreFromTrashIcon />}
         variant="contained"
@@ -155,6 +175,6 @@ export default function DeleteUser({ row, setRow, selectedRow }) {
       >
         {languages === "VN" ? `Xóa` : `Delete`}
       </Button>
-    </div>
+    </>
   );
 }
