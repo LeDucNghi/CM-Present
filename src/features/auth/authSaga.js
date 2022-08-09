@@ -34,7 +34,7 @@ function* handleLogin(payload) {
       localStorage.setItem("account", JSON.stringify(items));
 
       yield delay(2000);
-      yield put(payload.navigate(`/main/user`));
+      yield put(history.push(`/main/user`));
       // setSubmitting(false);
     }
   } catch (error) {

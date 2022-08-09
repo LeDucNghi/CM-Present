@@ -18,10 +18,6 @@ export const userSlice = createSlice({
     postUserListSuccess: (state, action) => {
       state.loading = "idle";
       state.userList = action.payload;
-      console.log(
-        "🚀 ~ file: userSlice.js ~ line 21 ~ action.payload",
-        action.payload
-      );
     },
 
     postUserListFailed: (state, action) => {

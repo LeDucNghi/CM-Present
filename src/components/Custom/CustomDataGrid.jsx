@@ -9,6 +9,10 @@ import { useSelector } from "react-redux";
 export default function DataGrid({ row, setRow, setSelectedRow }) {
   const mode = useSelector((state) => state.app.mode);
   const userList = useSelector(selectUserList);
+  console.log(
+    "🚀 ~ file: CustomDataGrid.jsx ~ line 12 ~ DataGrid ~ userList",
+    userList
+  );
   const deletedUserList = useSelector(selectDeletedList);
 
   const location = window.location.pathname;

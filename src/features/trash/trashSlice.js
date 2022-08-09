@@ -31,10 +31,7 @@ export const trashSlice = createSlice({
     },
 
     deleteUser: (state, action) => {
-      state.deletedUserList.push({
-        ...action.payload,
-        id: state.deletedUserList.length + 1,
-      });
+      state.loading = true;
     },
   },
 });

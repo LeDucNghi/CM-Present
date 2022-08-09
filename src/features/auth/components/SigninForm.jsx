@@ -6,19 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import { CircularProgress } from "@mui/material";
 import { Field } from "components/Custom/InputField";
-import { useNavigate } from "react-router-dom";
 
 export default function SigninForm() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLogging = useSelector(selectIsLogging);
 
   const handleSubmit = (values) => {
-    const value = {
-      values,
-      navigate,
-    };
-    dispatch(authActions.login(value));
+    dispatch(authActions.login(values));
   };
   return (
     <Formik

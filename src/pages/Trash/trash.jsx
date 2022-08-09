@@ -2,6 +2,7 @@ import DataGrid from "components/Custom/CustomDataGrid";
 import DeleteUser from "features/trash/components/DeleteUser";
 import { Loading } from "components/Common/Loading/Loading";
 import React from "react";
+import RestoreUser from "features/trash/components/RestoreUser";
 
 const a11yProps = (index) => {
   return {
@@ -29,7 +30,8 @@ function Trash() {
           marginBottom: "1em",
         }}
       >
-        <DeleteUser row={row} setRow={setRow} selectedRow={selectedRow} />
+        <RestoreUser row={row} selectedRow={selectedRow} />
+        <DeleteUser row={row} selectedRow={selectedRow} />
       </div>
       {/* 
         <Box

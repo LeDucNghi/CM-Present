@@ -10,16 +10,17 @@ import ReactDOM from "react-dom/client";
 import history from "utils/history";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "app/store";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <ErrorBoundary>
+    <ErrorBoundary>
+      <HistoryRouter history={history}>
         <CssBaseline />
         <App />
-      </ErrorBoundary>
-    </BrowserRouter>
+      </HistoryRouter>
+    </ErrorBoundary>
   </Provider>
 );
 
