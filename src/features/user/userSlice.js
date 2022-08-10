@@ -4,6 +4,7 @@ const initialState = {
   userList: [],
   message: "",
   loading: false,
+  success: false,
 };
 
 export const userSlice = createSlice({
@@ -16,8 +17,9 @@ export const userSlice = createSlice({
     },
 
     postUserListSuccess: (state, action) => {
-      state.loading = "idle";
+      state.loading = false;
       state.userList = action.payload;
+      state.success = true;
     },
 
     postUserListFailed: (state, action) => {
@@ -30,6 +32,10 @@ export const userSlice = createSlice({
         id: state.userList.length + 1,
       });
     },
+
+    deleteFromUserList: (state) => {
+      state.loading = true;
+    },
   },
 });
 
@@ -38,10 +44,12 @@ export const {
   addUser,
   postUserListFailed,
   postUserListSuccess,
+  deleteFromUserList,
 } = userSlice.actions;
 
 export const selectUserList = (state) => state.user.userList;
 export const selectMessage = (state) => state.user.message;
 export const selectIsLoading = (state) => state.user.loading;
+export const selectSuccess = (state) => state.user.success;
 
 export const userReducer = userSlice.reducer;

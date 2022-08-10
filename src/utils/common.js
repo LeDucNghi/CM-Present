@@ -1,3 +1,4 @@
+import { deleteFromUserList, postUserList } from "features/user/userSlice";
 import { deleteUser, restoreUser } from "features/trash/trashSlice";
 
 import Swal from "sweetalert2";
@@ -52,9 +53,10 @@ export const handleRestoreUser = ({ row, selectedRow, list }) => {
   });
 };
 
-export const handleDeleteUser = ({ row, selectedRow, list }) => {
+export const handleDeleteUser = ({ row, selectedRow, list, isDenied }) => {
   const languages = store.getState().drawer.language;
   const mode = store.getState().drawer.mode;
+  const success = store.getState().user.success;
 
   Swal.fire({
     title: `${
@@ -71,13 +73,25 @@ export const handleDeleteUser = ({ row, selectedRow, list }) => {
     text: "",
     icon: "warning",
     showCancelButton: true,
+    showDenyButton: isDenied,
+
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: `${
-      languages === "VN"
-        ? `Có, hãy xóa vĩnh viễn`
-        : `Yes, delete it permanently!`
+
+    denyButtonText: `${
+      languages === "VN" ? `Xóa vĩnh viễn!` : `Delete it permanently!`
     }`,
+    confirmButtonText: isDenied
+      ? `${
+          languages === "VN"
+            ? `Chỉ cần chuyển vào thùng rác!`
+            : `Just move to the trash!`
+        }`
+      : `${
+          languages === "VN"
+            ? `Có, hãy xóa vĩnh viễn`
+            : `Yes, delete it permanently!`
+        }`,
     cancelButtonText: `${languages === "VN" ? `Hủy` : `Cancel`}`,
 
     background: `${mode === "dark" ? "#121212" : ""}`,
@@ -89,9 +103,31 @@ export const handleDeleteUser = ({ row, selectedRow, list }) => {
           row,
           selectedRow,
           list,
+          isDenied,
         })
       );
+      Swal.fire(
+        `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
+        "",
+        "success"
+      );
+    } else if (result.isDenied) {
+      // delete permanently
+
+      store.dispatch(
+        deleteFromUserList({
+          row,
+          selectedRow,
+        })
+      );
+
+      if (success) {
+        Swal.fire(
+          `${languages === "VN" ? `Đã xóa!` : `Deleted!`}`,
+          "",
+          "success"
+        );
+      }
     }
-    Swal.fire(`${languages === `VN` ? `Đã xóa!` : `Deleted!`}`, "", "success");
   });
 };

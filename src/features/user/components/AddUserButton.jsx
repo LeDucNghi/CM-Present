@@ -60,6 +60,7 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
       color: `${mode === "dark" ? "#fff" : ""}`,
     }).then((result) => {
       if (result.isConfirmed) {
+        // move to trash
         checkSameElement.forEach((item) => {
           const { id, ...rest } = item;
 
@@ -88,10 +89,8 @@ export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
           "success"
         );
       } else if (result.isDenied) {
+        // delete permanently
         checkSameElement.forEach((el) => {
-          // const { id, ...rest } = el;
-          // dispatch(deleteUser({ ...rest }));
-
           deleteUserFromList(el.id);
         });
         dispatch(postUserList(checkDiffElement));
