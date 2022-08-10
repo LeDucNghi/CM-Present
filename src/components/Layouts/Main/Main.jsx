@@ -12,18 +12,18 @@ import MiniDrawer from "features/drawer/components/Drawer";
 import Projects from "pages/Projects/Projects";
 import Trash from "pages/Trash/Trash";
 import User from "pages/Users/User";
-import { styled } from "@mui/material/styles";
-import { trashActions } from "features/trash/trashSlice";
+import { postDeletedList } from "features/trash/trashSlice";
+import { postUserList } from "features/user/userSlice";
+import { selectMode } from "features/drawer/drawerSlice";
 import { useEffect } from "react";
-import { userActions } from "features/user/userSlice";
 
 export default function Main() {
   const dispatch = useDispatch();
-  const mode = useSelector((state) => state.app.mode);
+  const mode = useSelector(selectMode);
 
   useEffect(() => {
-    dispatch(userActions.postUserList());
-    dispatch(trashActions.postDeletedList());
+    dispatch(postUserList());
+    dispatch(postDeletedList());
   }, [dispatch]);
 
   return (

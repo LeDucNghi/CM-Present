@@ -36,7 +36,13 @@ export const trashSlice = createSlice({
   },
 });
 
-export const trashActions = trashSlice.actions;
+export const {
+  restoreUser,
+  postDeletedList,
+  postDeletedListFailed,
+  postDeletedListSuccess,
+  deleteUser,
+} = trashSlice.actions;
 
 // export const selectTrashList = (state) => state.trash.trashList;
 export const selectDeletedList = (state) => state.trash.deletedUserList;

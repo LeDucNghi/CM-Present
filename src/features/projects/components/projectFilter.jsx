@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import DropdownFilter from "components/DropdownFilter/DropdownFilter";
+import DropdownFilter from "features/projects/components/DropdownFilter";
 
 export default function TeamFilter() {
   const teamMenu = [

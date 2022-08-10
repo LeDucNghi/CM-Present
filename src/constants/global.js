@@ -83,7 +83,7 @@ export const columns = [
   {
     field: "id",
     renderHeader: () => {
-      const languages = store.getState().app.language;
+      const languages = store.getState().drawer.language;
       return <p>{languages === "VN" ? "STT" : "ID"} </p>;
     },
     width: 70,
@@ -92,7 +92,7 @@ export const columns = [
   {
     field: "firstName",
     renderHeader: () => {
-      const languages = store.getState().app.language;
+      const languages = store.getState().drawer.language;
       return <p>{languages === "VN" ? "Tên họ" : "First name"} </p>;
     },
     width: 200,
@@ -101,7 +101,7 @@ export const columns = [
   {
     field: "lastName",
     renderHeader: () => {
-      const languages = store.getState().app.language;
+      const languages = store.getState().drawer.language;
       return <p>{languages === "VN" ? "Tên cuối" : "Last name"} </p>;
     },
     width: 200,
@@ -110,7 +110,7 @@ export const columns = [
   {
     field: "email",
     renderHeader: () => {
-      const languages = store.getState().app.language;
+      const languages = store.getState().drawer.language;
       return <p>{languages === "VN" ? "Email" : "Email"} </p>;
     },
     width: 300,
@@ -119,7 +119,7 @@ export const columns = [
   {
     field: "age",
     renderHeader: () => {
-      const languages = store.getState().app.language;
+      const languages = store.getState().drawer.language;
       return <p>{languages === "VN" ? "Tuổi" : "Age"} </p>;
     },
     width: 150,
@@ -128,7 +128,7 @@ export const columns = [
   // {
   //   field: "fullName",
   //   renderHeader: () => {
-  //     const languages = store.getState().app.language;
+  //     const languages = store.getState().drawer.language;
   //     return <p>{languages === "VN" ? "Tên đầy đủ" : "Full name"} </p>;
   //   },
   //   description: "This column has a value getter and is not sortable.",
@@ -147,7 +147,7 @@ export const columns = [
   {
     field: "role",
     renderHeader: () => {
-      const languages = store.getState().app.language;
+      const languages = store.getState().drawer.language;
       return <p>{languages === "VN" ? "Chức vụ" : "Role"} </p>;
     },
     width: 200,
@@ -159,7 +159,7 @@ export const columns = [
     width: 250,
 
     renderCell: (cellValues) => {
-      const languages = store.getState().app.language;
+      const languages = store.getState().drawer.language;
       return (
         <Link to={`/main/about/${cellValues.row.id}`}>
           <Button

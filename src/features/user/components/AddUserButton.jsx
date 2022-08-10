@@ -1,4 +1,5 @@
 import { deleteUser, postUserList } from "features/slice";
+import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
 import {
   useDeleteUserFromListMutation,
   usePostDeletedUserMutation,
@@ -9,13 +10,14 @@ import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Swal from "sweetalert2";
+import { selectUserList } from "../userSlice";
 
 export default function AddUserButton({ row, setRow, setOpen, selectedRow }) {
   const dispatch = useDispatch();
 
-  const userList = useSelector((state) => state.app.userList);
-  const mode = useSelector((state) => state.app.mode);
-  const languages = useSelector((state) => state.app.language);
+  const userList = useSelector(selectUserList);
+  const mode = useSelector(selectMode);
+  const languages = useSelector(selectLanguage);
 
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();

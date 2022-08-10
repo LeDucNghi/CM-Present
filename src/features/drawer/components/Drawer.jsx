@@ -1,16 +1,17 @@
 import * as React from "react";
 
 import { AppBar, Drawer, DrawerHeader } from "constants/styledMUI";
+import { selectLanguage, selectMode, selectRoutesName } from "../drawerSlice";
 
 import Box from "@mui/material/Box";
 import BoxSetting from "./BoxSetting";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import IconButton from "@mui/material/IconButton";
-import LanguageMenus from "components/LanguageDropdown/LanguageDropdown";
+import LanguageMenus from "features/drawer/components/LanguageDropdown";
 import { ListDrawer } from "./DrawerList";
 import MenuIcon from "@mui/icons-material/Menu";
-import ThemeToggle from "components/ThemingToggle/ThemingToggle";
+import ThemeToggle from "features/drawer/components/ThemingToggle";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
@@ -19,9 +20,9 @@ import { useTheme } from "@mui/material/styles";
 export default function MiniDrawer() {
   const theme = useTheme();
 
-  const routeName = useSelector((state) => state.app.routeName);
-  const mode = useSelector((state) => state.app.mode);
-  const languages = useSelector((state) => state.app.language);
+  const routeName = useSelector(selectRoutesName);
+  const mode = useSelector(selectMode);
+  const languages = useSelector(selectLanguage);
 
   const [open, setOpen] = React.useState(false);
 

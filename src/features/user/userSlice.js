@@ -33,16 +33,15 @@ export const userSlice = createSlice({
   },
 });
 
-export const userActions = userSlice.actions;
-// {
-//   postUserList,
-//   addUser,
-//   postUserListFailed,
-//   postUserListSuccess,
-// }
+export const {
+  postUserList,
+  addUser,
+  postUserListFailed,
+  postUserListSuccess,
+} = userSlice.actions;
 
 export const selectUserList = (state) => state.user.userList;
-export const selectAddUser = (state) => state.user.addUser;
-export const selectGetUserListFailed = (state) => state.user.postUserListFailed;
+export const selectMessage = (state) => state.user.message;
+export const selectIsLoading = (state) => state.user.loading;
 
 export const userReducer = userSlice.reducer;

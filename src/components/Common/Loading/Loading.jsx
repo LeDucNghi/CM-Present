@@ -1,3 +1,5 @@
+import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
+
 import React from "react";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
@@ -55,8 +57,8 @@ const containerStyle = {
 };
 
 export const Loading = () => {
-  const mode = useSelector((state) => state.app.mode);
-  const languages = useSelector((state) => state.app.language);
+  const mode = useSelector(selectMode);
+  const languages = useSelector(selectLanguage);
 
   return (
     <div

@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
-import { authActions, selectIsLogging } from "features/auth/authSlice";
 import { initialValues, validationSchema } from "formik/signIn";
+import { login, selectIsLogging } from "features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "@mui/material/Button";
@@ -12,7 +12,7 @@ export default function SigninForm() {
   const isLogging = useSelector(selectIsLogging);
 
   const handleSubmit = (values) => {
-    dispatch(authActions.login(values));
+    dispatch(login(values));
   };
   return (
     <Formik

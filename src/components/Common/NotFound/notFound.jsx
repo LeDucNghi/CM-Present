@@ -1,11 +1,13 @@
 import "./NotFound.scss";
 
+import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
+
 import React from "react";
 import { useSelector } from "react-redux";
 
 function Error() {
-  const mode = useSelector((state) => state.app.mode);
-  const languages = useSelector((state) => state.app.language);
+  const mode = useSelector(selectMode);
+  const languages = useSelector(selectLanguage);
 
   window.onload = function () {
     var paragraph = document.getElementById("type-in");

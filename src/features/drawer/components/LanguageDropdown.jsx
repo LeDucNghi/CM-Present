@@ -5,14 +5,11 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LanguageIcon from "@mui/icons-material/Language";
 import MenuItem from "@mui/material/MenuItem";
 import { StyledMenu } from "constants/styledMUI";
-import { postLanguage } from "features/slice";
+import { postLanguage } from "../drawerSlice";
 import { useDispatch } from "react-redux";
 
 export default function LanguageMenus() {
   const dispatch = useDispatch();
-
-  // const mode = localStorage.getItem("mode");
-  // const languages = localStorage.getItem("language");
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [language, setLanguage] = React.useState("Eng");

@@ -3,16 +3,13 @@ import PropTypes from "prop-types";
 import React from "react";
 import { columns } from "constants/global";
 import { selectDeletedList } from "features/trash/trashSlice";
+import { selectMode } from "features/drawer/drawerSlice";
 import { selectUserList } from "features/user/userSlice";
 import { useSelector } from "react-redux";
 
 export default function DataGrid({ row, setRow, setSelectedRow }) {
-  const mode = useSelector((state) => state.app.mode);
+  const mode = useSelector(selectMode);
   const userList = useSelector(selectUserList);
-  console.log(
-    "🚀 ~ file: CustomDataGrid.jsx ~ line 12 ~ DataGrid ~ userList",
-    userList
-  );
   const deletedUserList = useSelector(selectDeletedList);
 
   const location = window.location.pathname;

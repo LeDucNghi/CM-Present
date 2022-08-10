@@ -1,3 +1,5 @@
+import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
+
 import { Button } from "@mui/material";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import { handleRestoreUser } from "utils";
@@ -6,8 +8,8 @@ import { useSelector } from "react-redux";
 
 export default function RestoreUser({ row, selectedRow }) {
   const userList = useSelector(selectUserList);
-  const mode = useSelector((state) => state.app.mode);
-  const languages = useSelector((state) => state.app.language);
+  const mode = useSelector(selectMode);
+  const languages = useSelector(selectLanguage);
 
   const handleRestoreArgs = {
     row,

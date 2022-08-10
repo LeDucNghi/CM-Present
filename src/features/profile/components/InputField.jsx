@@ -1,9 +1,10 @@
 import { Field } from "components/Custom/InputField";
 import React from "react";
+import { selectLanguage } from "features/drawer/drawerSlice";
 import { useSelector } from "react-redux";
 
 export const InputField = ({ values, touched, errors, handleChange }) => {
-  const languages = useSelector((state) => state.app.language);
+  const languages = useSelector(selectLanguage);
 
   return (
     <>

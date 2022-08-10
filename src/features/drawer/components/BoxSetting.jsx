@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import React from "react";
 import Typography from "@mui/material/Typography";
-import { authActions } from "features/auth/authSlice";
+import { logout } from "features/auth/authSlice";
 
 export default function BoxSetting() {
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -20,8 +20,7 @@ export default function BoxSetting() {
   };
 
   const handleLogout = () => {
-    // localStorage.removeItem("account");
-    authActions.logout();
+    logout();
   };
   return (
     <>

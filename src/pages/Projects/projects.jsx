@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { deleteUser, postUserList } from "features/slice";
+import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
 import {
   useDeleteUserFromListMutation,
   usePostDeletedUserMutation,
@@ -14,15 +15,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Loading } from "components/Common/Loading/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Swal from "sweetalert2";
-import TeamFilter from "components/ProjectFilter/projectFilter";
+import TeamFilter from "features/projects/components/projectFilter";
 import { columns } from "constants/global";
+import { selectUserList } from "features/user/userSlice";
 
 export default function Projects({ allUserLoading, allUserError }) {
   const dispatch = useDispatch();
 
-  const userListStorage = useSelector((state) => state.app.userList);
-  const mode = useSelector((state) => state.app.mode);
-  const languages = useSelector((state) => state.app.language);
+  const userListStorage = useSelector(selectUserList);
+  const mode = useSelector(selectMode);
+  const languages = useSelector(selectLanguage);
 
   const [deleteUserFromList] = useDeleteUserFromListMutation();
   const [postDeletedUser] = usePostDeletedUserMutation();

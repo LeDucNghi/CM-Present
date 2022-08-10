@@ -3,7 +3,7 @@ import "./assets/styles/GlobalStyles.scss";
 import { Route, Routes } from "react-router-dom";
 
 import Error from "components/Common/NotFound/NotFound";
-import Main from "pages/Main/Main";
+import Main from "components/Layouts/Main/Main";
 import PrivateRoute from "components/Common/PrivateRoute/PrivateRoute";
 import SignIn from "pages/SignIn/Signin";
 import SignUp from "pages/SignUp/Signup";

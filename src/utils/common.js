@@ -1,10 +1,11 @@
+import { deleteUser, restoreUser } from "features/trash/trashSlice";
+
 import Swal from "sweetalert2";
 import { store } from "app/store";
-import { trashActions } from "features/trash/trashSlice";
 
 export const handleRestoreUser = ({ row, selectedRow, list }) => {
-  const mode = store.getState().app.mode;
-  const languages = store.getState().app.language;
+  const mode = store.getState().drawer.mode;
+  const languages = store.getState().drawer.language;
 
   Swal.fire({
     title: `${
@@ -35,7 +36,7 @@ export const handleRestoreUser = ({ row, selectedRow, list }) => {
   }).then((result) => {
     if (result.isConfirmed) {
       store.dispatch(
-        trashActions.restoreUser({
+        restoreUser({
           row,
           selectedRow,
           list,
@@ -52,8 +53,8 @@ export const handleRestoreUser = ({ row, selectedRow, list }) => {
 };
 
 export const handleDeleteUser = ({ row, selectedRow, list }) => {
-  const languages = store.getState().app.language;
-  const mode = store.getState().app.mode;
+  const languages = store.getState().drawer.language;
+  const mode = store.getState().drawer.mode;
 
   Swal.fire({
     title: `${
@@ -84,7 +85,7 @@ export const handleDeleteUser = ({ row, selectedRow, list }) => {
   }).then((result) => {
     if (result.isConfirmed) {
       store.dispatch(
-        trashActions.deleteUser({
+        deleteUser({
           row,
           selectedRow,
           list,

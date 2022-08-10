@@ -1,15 +1,15 @@
 import "./ThemingToggle.scss";
 
+import { postMode, selectMode } from "../drawerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { MaterialUISwitch } from "constants/styledMUI";
-import { postMode } from "features/slice";
 
 export default function ThemeToggle() {
   const dispatch = useDispatch();
-  const mode = useSelector((state) => state.app.mode);
+  const mode = useSelector(selectMode);
 
   const [isOn, setIsOn] = useState(true);
 

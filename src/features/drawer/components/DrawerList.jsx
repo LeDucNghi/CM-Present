@@ -10,7 +10,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import PersonIcon from "@mui/icons-material/Person";
-import { routesName } from "features/slice";
+import { routesName } from "../drawerSlice";
 import { useDispatch } from "react-redux";
 
 export const ListDrawer = ({ mode, languages, open }) => {
@@ -94,7 +94,6 @@ export const ListDrawer = ({ mode, languages, open }) => {
     <List>
       {drawer.map((item) => (
         <ListItem
-          // components=
           component="div"
           key={item.id}
           disablePadding

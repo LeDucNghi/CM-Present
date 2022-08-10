@@ -1,5 +1,6 @@
 import { Form, Formik } from "formik";
 import { initialValues, validationSchema } from "formik/addUser";
+import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import Backdrop from "@mui/material/Backdrop";
@@ -16,8 +17,8 @@ import { usePostNewUserMutation } from "services/userServices";
 export default function AddUserForm({ open, setOpen }) {
   const dispatch = useDispatch();
 
-  const mode = useSelector((state) => state.app.mode);
-  const languages = useSelector((state) => state.app.language);
+  const mode = useSelector(selectMode);
+  const languages = useSelector(selectLanguage);
 
   const style = {
     position: "absolute",

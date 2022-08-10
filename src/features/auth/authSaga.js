@@ -1,6 +1,6 @@
-import { call, delay, fork, put, take } from "redux-saga/effects";
+import { call, fork, put, take } from "redux-saga/effects";
+import { login, loginFailed, loginSuccess, logout } from "./authSlice";
 
-import { authActions } from "./authSlice";
 import history from "utils/history";
 
 function* handleLogin(payload) {
@@ -13,8 +13,8 @@ function* handleLogin(payload) {
     const email = "testing@gmail.com";
     const password = "123456789Test";
 
-    const checkMail = email !== payload.values.email;
-    const checkPass = password !== payload.values.password;
+    const checkMail = email !== payload.email;
+    const checkPass = password !== payload.password;
 
     const now = new Date();
     const expiredTime = now.getTime() + 86400000;
@@ -24,21 +24,23 @@ function* handleLogin(payload) {
       expired: expiredTime,
     };
 
-    if (checkMail) {
-      console.log("invalid mail!!");
-      yield put(authActions.loginFailed());
+    if (checkMail || checkPass) {
+      console.log("invalid account!!");
+      yield put(loginFailed());
     } else if (checkPass) {
-      console.log("invalid mail!!");
-      yield put(authActions.loginFailed());
+      console.log("invalid password!!");
+      yield put(loginFailed());
     } else {
+      console.log("login success");
+
       localStorage.setItem("account", JSON.stringify(items));
 
-      yield delay(2000);
+      // yield delay(2000);
+      yield put(loginSuccess());
       yield put(history.push(`/main/user`));
-      // setSubmitting(false);
     }
   } catch (error) {
-    yield put(authActions.loginFailed());
+    yield put(loginFailed());
   }
 }
 
@@ -55,11 +57,11 @@ function* watchLoginFlow() {
     const isLoggedIn = Boolean(localStorage.getItem("account"));
 
     if (!isLoggedIn) {
-      const action = yield take(authActions.login.type);
+      const action = yield take(login.type);
       yield fork(handleLogin, action.payload);
     }
 
-    yield take(authActions.logout.type);
+    yield take(logout.type);
     yield call(handleLogout);
   }
 }

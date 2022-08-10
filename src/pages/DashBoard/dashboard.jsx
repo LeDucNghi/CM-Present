@@ -3,12 +3,13 @@ import * as React from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
 import { Chart as ChartJS } from "chart.js/auto";
+import { selectMode } from "features/drawer/drawerSlice";
 import { useSelector } from "react-redux";
 import { userData } from "constants/global";
 
 export default function Dashboard() {
-  const mode = useSelector((state) => state.app.mode);
-  const languages = useSelector((state) => state.app.language);
+  const mode = useSelector(selectMode);
+  // const languages = useSelector(selectLanguage);
 
   const options = {
     responsive: true,

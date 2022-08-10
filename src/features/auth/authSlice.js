@@ -10,7 +10,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login(state, action) {
+    login(state) {
       state.logging = true;
     },
     loginSuccess(state, action) {
@@ -30,7 +30,7 @@ const authSlice = createSlice({
 });
 
 // Actions
-export const authActions = authSlice.actions;
+export const { login, loginSuccess, loginFailed, logout } = authSlice.actions;
 
 // Selectors
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
