@@ -1,15 +1,7 @@
-import {
-  deleteFromUserList,
-  postUserListSuccess,
-} from "features/user/userSlice";
-import {
-  deleteUser,
-  postDeletedListSuccess,
-  restoreUser,
-} from "features/trash/trashSlice";
+import { postDeletedListSuccess, restoreUser } from "features/trash/trashSlice";
 
 import Swal from "sweetalert2";
-import axios from "axios";
+import { fetchUserListSuccess } from "features/user/userSlice";
 import { trashApi } from "api/trashApi";
 import { userApi } from "api/userApi";
 
@@ -18,8 +10,8 @@ import { userApi } from "api/userApi";
 export const fetchTrashList = () => async (dispatch, getState) => {
   const teamName = getState().trash.tabs;
   try {
-    const res = await trashApi.getDeletedList;
-    dispatch(postDeletedListSuccess(res.data));
+    const res = await trashApi.getDeletedList();
+    dispatch(postDeletedListSuccess(res));
   } catch (error) {
     console.log("🚀 ~ file: trashThunk.js ~ line 20 ~ error", error);
   }
@@ -140,9 +132,6 @@ export const handleDeleteUser =
           checkSameElement.forEach((element) => {
             const { id, ...rest } = element;
 
-            // axios.post(`${trashBaseApi}`, { ...rest });
-            // axios.delete(`${userBaseApi}/${id}`);
-
             trashApi.addNewUser({ ...rest });
             userApi.deleteUser(id);
 
@@ -152,7 +141,7 @@ export const handleDeleteUser =
             });
           });
           dispatch(postDeletedListSuccess(newDeletedList));
-          dispatch(postUserListSuccess(checkDiffElement));
+          dispatch(fetchUserListSuccess(checkDiffElement));
         }
 
         Swal.fire(
@@ -168,7 +157,7 @@ export const handleDeleteUser =
 
           userApi.deleteUser(id);
         });
-        dispatch(postUserListSuccess(checkDiffElement));
+        dispatch(fetchUserListSuccess(checkDiffElement));
       }
     });
   };

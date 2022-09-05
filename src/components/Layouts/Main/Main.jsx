@@ -12,8 +12,8 @@ import MiniDrawer from "features/drawer/components/Drawer";
 import Projects from "pages/Projects/Projects";
 import Trash from "pages/Trash/Trash";
 import User from "pages/Users/User";
-import { postDeletedList } from "features/trash/trashSlice";
-import { postUserList } from "features/user/userSlice";
+import { fetchTrashList } from "features/trash/trashThunk";
+import { fetchUserList } from "features/user/userThunk";
 import { selectMode } from "features/drawer/drawerSlice";
 import { useEffect } from "react";
 
@@ -22,8 +22,8 @@ export default function Main() {
   const mode = useSelector(selectMode);
 
   useEffect(() => {
-    dispatch(postUserList());
-    dispatch(postDeletedList());
+    dispatch(fetchUserList());
+    dispatch(fetchTrashList());
   }, [dispatch]);
 
   return (

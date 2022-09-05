@@ -11,18 +11,18 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    postUserList: (state) => {
+    fetchUserList: (state) => {
       state.loading = true;
       //   state.userList = action.payload;
     },
 
-    postUserListSuccess: (state, action) => {
+    fetchUserListSuccess: (state, action) => {
       state.loading = false;
       state.userList = action.payload;
       state.success = true;
     },
 
-    postUserListFailed: (state, action) => {
+    fetchUserListFailed: (state, action) => {
       state.message = action.payload;
     },
 
@@ -45,11 +45,11 @@ export const userSlice = createSlice({
 });
 
 export const {
-  postUserList,
+  fetchUserList,
   addUser,
   addUserSuccess,
-  postUserListFailed,
-  postUserListSuccess,
+  fetchUserListFailed,
+  fetchUserListSuccess,
   deleteFromUserList,
 } = userSlice.actions;
 

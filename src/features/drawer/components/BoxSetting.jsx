@@ -5,9 +5,13 @@ import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import React from "react";
 import Typography from "@mui/material/Typography";
+import { handleLogout } from "features/auth/authThunk";
 import { logout } from "features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 export default function BoxSetting() {
+  const dispatch = useDispatch();
+
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -19,9 +23,9 @@ export default function BoxSetting() {
     setAnchorElUser(null);
   };
 
-  const handleLogout = () => {
-    logout();
-  };
+  // const handleLogout = () => {
+  //   logout();
+  // };
   return (
     <>
       <Box sx={{ flexGrow: 0 }}>
@@ -49,7 +53,9 @@ export default function BoxSetting() {
           {settings.map((setting) => (
             <MenuItem key={setting} onClick={handleCloseUserMenu}>
               <ListItem
-                onClick={setting === "Logout" ? () => handleLogout() : null}
+                onClick={
+                  setting === "Logout" ? () => dispatch(handleLogout()) : null
+                }
               >
                 <Typography textAlign="center">{setting}</Typography>
               </ListItem>

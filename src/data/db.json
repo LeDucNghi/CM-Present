@@ -109,22 +109,14 @@
       "id": 10
     },
     {
-      "firstName": "Hoang",
-      "lastName": "Bao",
-      "email": "lehoangbao@gmail.com",
-      "age": "20",
-      "role": "member",
-      "team": "Angular",
-      "project": "Zalo App",
-      "id": 11
-    },
-    {
-      "firstName": "Phung",
-      "lastName": "Hung",
-      "email": "leducnghi28122000@gmail.com",
-      "age": "22",
-      "role": "member",
-      "id": 12
+      "id": 11,
+      "firstName": "Quang",
+      "lastName": "Hoang",
+      "email": "lequanghoang2011@gmail.com",
+      "age": "23",
+      "role": "leader",
+      "team": "Vue",
+      "project": "Zalo app"
     }
   ],
   "trash": [
@@ -159,6 +151,24 @@
       "team": "React",
       "project": "Cake website",
       "id": 3
+    },
+    {
+      "firstName": "Hoang",
+      "lastName": "Bao",
+      "email": "lehoangbao@gmail.com",
+      "age": "20",
+      "role": "member",
+      "team": "Angular",
+      "project": "Zalo App",
+      "id": 4
+    },
+    {
+      "firstName": "Phung",
+      "lastName": "Hung",
+      "email": "leducnghi28122000@gmail.com",
+      "age": "22",
+      "role": "member",
+      "id": 5
     }
   ]
 }
