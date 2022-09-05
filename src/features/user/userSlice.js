@@ -13,7 +13,6 @@ export const userSlice = createSlice({
   reducers: {
     fetchUserList: (state) => {
       state.loading = true;
-      //   state.userList = action.payload;
     },
 
     fetchUserListSuccess: (state, action) => {

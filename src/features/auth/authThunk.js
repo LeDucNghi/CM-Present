@@ -23,7 +23,7 @@ export const handleLogin = (payload) => (dispatch, getState) => {
       expired: expiredTime,
     };
 
-    if (checkMail || checkPass) {
+    if (checkMail) {
       console.log("invalid account!!");
       dispatch(loginFailed());
     } else if (checkPass) {

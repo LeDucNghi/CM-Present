@@ -24,17 +24,16 @@ export const fetchUserList = () => async (dispatch, getState) => {
 export const handleAddUser =
   (values, setOpen) => async (dispatch, getState) => {
     try {
-      dispatch(addUser(values));
-
       //   call api
       const res = await userApi.addNewUser(values);
+      console.log("🚀 ~ file: userThunk.js ~ line 31 ~ res", res.status);
 
-      setTimeout(() => {
-        // setSubmitting(false);
+      if (res) {
+        dispatch(addUser(values));
         dispatch(addUserSuccess());
         setOpen(false);
         Swal.fire("Added user successfully!", "", "success");
-      }, 1500);
+      }
     } catch (error) {
       console.log("🚀 ~ file: userThunk.js ~ line 45 ~ error", error);
     }

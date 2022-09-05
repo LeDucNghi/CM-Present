@@ -5,7 +5,7 @@ import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { selectMode } from "features/drawer/drawerSlice";
 import { useSelector } from "react-redux";
-import { userData } from "constants/global";
+import { userData } from "mock/user";
 
 export default function Dashboard() {
   const mode = useSelector(selectMode);

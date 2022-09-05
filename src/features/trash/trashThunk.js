@@ -1,17 +1,14 @@
-import { postDeletedListSuccess, restoreUser } from "features/trash/trashSlice";
-
 import Swal from "sweetalert2";
+import { fetchDeletedListSuccess } from "features/trash/trashSlice";
 import { fetchUserListSuccess } from "features/user/userSlice";
 import { trashApi } from "api/trashApi";
 import { userApi } from "api/userApi";
 
-// import { trashBaseApi, userBaseApi } from "constants";
-
 export const fetchTrashList = () => async (dispatch, getState) => {
-  const teamName = getState().trash.tabs;
+  // const teamName = getState().trash.tabs;
   try {
     const res = await trashApi.getDeletedList();
-    dispatch(postDeletedListSuccess(res));
+    dispatch(fetchDeletedListSuccess(res));
   } catch (error) {
     console.log("🚀 ~ file: trashThunk.js ~ line 20 ~ error", error);
   }
@@ -22,6 +19,16 @@ export const handleRestoreUser =
   (dispatch, getState) => {
     const mode = getState().drawer.mode;
     const languages = getState().drawer.language;
+    // const deletedList = getState().trash.deletedUserList;
+    // const userList = getState().user.userList;
+
+    const checkDiffElement = row.filter(
+      (x) => !selectedRow.some((x1) => x.id === x1.id)
+    );
+
+    const checkSameElement = row.filter((x) =>
+      selectedRow.some((x1) => x.id === x1.id)
+    );
 
     Swal.fire({
       title: `${
@@ -51,13 +58,16 @@ export const handleRestoreUser =
       color: `${mode === "dark" ? "#fff" : ""}`,
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(
-          restoreUser({
-            row,
-            selectedRow,
-            list,
-          })
-        );
+        checkSameElement.forEach((element) => {
+          const { id, ...rest } = element;
+
+          trashApi.deleteUser(id);
+          userApi.addNewUser({ ...rest });
+
+          dispatch(fetchUserListSuccess({ element }));
+        });
+
+        dispatch(fetchDeletedListSuccess(checkDiffElement));
 
         Swal.fire(
           `${languages === "VN" ? `Đã khôi phục!` : `Restored!`}`,
@@ -73,7 +83,6 @@ export const handleDeleteUser =
   (dispatch, getState) => {
     const languages = getState().drawer.language;
     const mode = getState().drawer.mode;
-    // const success = getState().user.success;
     const deletedList = getState().trash.deletedUserList;
 
     const checkDiffElement = row.filter(
@@ -140,7 +149,7 @@ export const handleDeleteUser =
               id: newDeletedList.length + 1,
             });
           });
-          dispatch(postDeletedListSuccess(newDeletedList));
+          dispatch(fetchDeletedListSuccess(newDeletedList));
           dispatch(fetchUserListSuccess(checkDiffElement));
         }
 

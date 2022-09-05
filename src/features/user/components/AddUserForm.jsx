@@ -146,7 +146,13 @@ export default function AddUserForm({ open, setOpen }) {
                         variant="contained"
                         type="submit"
                       >
-                        {isLoading ? <CircularProgress size={25} /> : "Add"}
+                        {isLoading ? (
+                          <CircularProgress size={25} />
+                        ) : mode === "dark" ? (
+                          "Thêm"
+                        ) : (
+                          "Add"
+                        )}
                       </Button>
                     </Box>
                   </Form>

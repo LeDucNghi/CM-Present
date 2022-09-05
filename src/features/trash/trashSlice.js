@@ -16,16 +16,16 @@ export const trashSlice = createSlice({
       // state.userList.push({ ...action.payload, id: state.userList.length + 1 });
     },
 
-    postDeletedList: (state, action) => {
+    fetchDeletedList: (state, action) => {
       state.loading = true;
     },
 
-    postDeletedListSuccess: (state, action) => {
+    fetchDeletedListSuccess: (state, action) => {
       state.deletedUserList = action.payload;
       state.loading = false;
     },
 
-    postDeletedListFailed: (state, action) => {
+    fetchDeletedListFailed: (state, action) => {
       state.loading = false;
       state.message = action.payload;
     },
@@ -42,9 +42,9 @@ export const trashSlice = createSlice({
 
 export const {
   restoreUser,
-  postDeletedList,
-  postDeletedListFailed,
-  postDeletedListSuccess,
+  fetchDeletedList,
+  fetchDeletedListFailed,
+  fetchDeletedListSuccess,
   deleteUser,
   setTabs,
 } = trashSlice.actions;

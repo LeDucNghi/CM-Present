@@ -117,6 +117,44 @@
       "role": "leader",
       "team": "Vue",
       "project": "Zalo app"
+    },
+    {
+      "firstName": "Hoang",
+      "lastName": "Bao",
+      "email": "lehoangbao@gmail.com",
+      "age": "20",
+      "role": "member",
+      "team": "Angular",
+      "project": "Zalo App",
+      "id": 12
+    },
+    {
+      "firstName": "Phung",
+      "lastName": "Hung",
+      "email": "phunghung210@gmail.com",
+      "age": "22",
+      "role": "member",
+      "team": "React",
+      "project": "Cake website",
+      "id": 13
+    },
+    {
+      "firstName": "Phung",
+      "lastName": "Hung",
+      "email": "leducnghi28122000@gmail.com",
+      "age": "22",
+      "role": "member",
+      "id": 14
+    },
+    {
+      "id": 15,
+      "firstName": "Đình",
+      "lastName": "Trung",
+      "email": "trandinhtrung@gmail.com",
+      "age": "29",
+      "role": "member",
+      "team": "React",
+      "project": "Facebook app"
     }
   ],
   "trash": [
@@ -141,34 +179,6 @@
       "role": "member",
       "team": "React",
       "project": "Error"
-    },
-    {
-      "firstName": "Phung",
-      "lastName": "Hung",
-      "email": "phunghung210@gmail.com",
-      "age": "22",
-      "role": "member",
-      "team": "React",
-      "project": "Cake website",
-      "id": 3
-    },
-    {
-      "firstName": "Hoang",
-      "lastName": "Bao",
-      "email": "lehoangbao@gmail.com",
-      "age": "20",
-      "role": "member",
-      "team": "Angular",
-      "project": "Zalo App",
-      "id": 4
-    },
-    {
-      "firstName": "Phung",
-      "lastName": "Hung",
-      "email": "leducnghi28122000@gmail.com",
-      "age": "22",
-      "role": "member",
-      "id": 5
     }
   ]
 }
