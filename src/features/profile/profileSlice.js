@@ -2,6 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   image: null,
+  loading: false,
+  userProfile: null,
+  message: "",
+  error: false,
+  isFetching: false,
 };
 
 export const profileSlice = createSlice({
@@ -11,11 +16,55 @@ export const profileSlice = createSlice({
     setImage: (state, action) => {
       state.image = action.payload;
     },
+
+    updateUser: (state) => {
+      state.loading = true;
+    },
+
+    updateUserSuccess: (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.message = action.payload;
+    },
+
+    fetchingUser: (state) => {
+      state.isFetching = true;
+    },
+
+    fetchUserByIdSuccess: (state, action) => {
+      state.isFetching = false;
+      state.userProfile = action.payload;
+    },
+
+    fetchUserByIdFailed: (state, action) => {
+      state.isFetching = false;
+      state.error = true;
+      state.message = action.payload;
+    },
+
+    updateUserFailed: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.message = action.payload;
+    },
   },
 });
 
-export const { setImage } = profileSlice.actions;
+export const {
+  setImage,
+  updateUser,
+  updateUserSuccess,
+  fetchingUser,
+  fetchUserByIdSuccess,
+  fetchUserByIdFailed,
+  updateUserFailed,
+} = profileSlice.actions;
 
 export const selectImage = (state) => state.profile.image;
+export const selectLoading = (state) => state.profile.loading;
+export const selectFetching = (state) => state.profile.isFetching;
+export const selectUserProfile = (state) => state.profile.userProfile;
+export const selectMessage = (state) => state.profile.message;
+export const selectError = (state) => state.profile.error;
 
 export const profileReducer = profileSlice.reducer;

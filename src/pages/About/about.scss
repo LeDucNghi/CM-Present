@@ -136,3 +136,11 @@
   color: #fff;
   background: #0c7d97;
 }
+
+.not_found {
+  @include posCenter;
+  @include flexCenter;
+
+  width: 40%;
+  flex-wrap: wrap;
+}

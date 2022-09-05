@@ -5,11 +5,11 @@ import { Button, CircularProgress } from "@mui/material";
 import { Avatar } from "./Avatar";
 import { InputField } from "./InputField";
 import { selectLanguage } from "features/drawer/drawerSlice";
+import { selectLoading } from "features/profile/profileSlice";
 import { useSelector } from "react-redux";
 
 export const ProfileForm = ({
   data,
-  isSubmitting,
   isValid,
   values,
   touched,
@@ -18,6 +18,7 @@ export const ProfileForm = ({
   setFieldValue,
 }) => {
   // const mode = useSelector(selectMode);
+  const isLoading = useSelector(selectLoading);
   const languages = useSelector(selectLanguage);
   return (
     <>
@@ -36,11 +37,11 @@ export const ProfileForm = ({
 
       <div className="account_btn">
         <Button
-          disabled={isSubmitting || !isValid}
+          disabled={isLoading || !isValid}
           type="submit"
           className="apply"
         >
-          {isSubmitting ? (
+          {isLoading ? (
             <CircularProgress color="success" />
           ) : languages === "Eng" ? (
             "Save"

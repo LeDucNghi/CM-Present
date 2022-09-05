@@ -15,6 +15,7 @@ export const userApi = {
   getUserById: (userId) => {
     console.log("🚀 ~ file: userApi.js ~ line 16 ~ userId", userId);
     const url = `users/${userId}`;
+
     return axiosClient.get(url);
   },
 
@@ -25,9 +26,8 @@ export const userApi = {
   },
 
   updateUser: (data) => {
-    console.log("🚀 ~ file: userApi.js ~ line 28 ~ data", data);
     const url = `users/${data.id}`;
-    return axiosClient.put(url);
+    return axiosClient.put(url, data);
   },
 
   deleteUser: (id) => {

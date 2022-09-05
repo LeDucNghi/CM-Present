@@ -12,7 +12,7 @@ export const Avatar = ({ data, setFieldValue }) => {
   const image = useSelector(selectImage);
 
   useEffect(() => {
-    setFieldValue("image", image);
+    if (image) setFieldValue("image", image);
   }, [image]);
 
   // var [image, setImage] = useState(null);
@@ -23,7 +23,10 @@ export const Avatar = ({ data, setFieldValue }) => {
         {image ? (
           <img className="preview_img" src={image} alt="preview_image" />
         ) : (
-          <img src={data ? data.image : Images.DEFAULTUSER} alt="user_avt" />
+          <img
+            src={data && data.image ? data.image : Images.DEFAULTUSER}
+            alt="user_avt"
+          />
         )}
       </div>
       <label className="avatar_change_icon">

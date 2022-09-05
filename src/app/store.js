@@ -11,9 +11,13 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(sagaMiddleware, userApi.middleware, thunk),
+    }).concat(
+      // sagaMiddleware,
+      userApi.middleware,
+      thunk
+    ),
 });
 
-sagaMiddleware.run(rootSaga);
+// sagaMiddleware.run(rootSaga);
 
 setupListeners(store.dispatch);

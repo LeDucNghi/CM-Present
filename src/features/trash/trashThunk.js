@@ -10,16 +10,15 @@ import {
 
 import Swal from "sweetalert2";
 import axios from "axios";
+import { trashApi } from "api/trashApi";
+import { userApi } from "api/userApi";
 
 // import { trashBaseApi, userBaseApi } from "constants";
-
-
-
 
 export const fetchTrashList = () => async (dispatch, getState) => {
   const teamName = getState().trash.tabs;
   try {
-    const res = await axios.get(`http://localhost:3005/trash`);
+    const res = await trashApi.getDeletedList;
     dispatch(postDeletedListSuccess(res.data));
   } catch (error) {
     console.log("🚀 ~ file: trashThunk.js ~ line 20 ~ error", error);
@@ -140,15 +139,12 @@ export const handleDeleteUser =
           const newDeletedList = [...deletedList];
           checkSameElement.forEach((element) => {
             const { id, ...rest } = element;
-            // if in user page
-            // use user api to delete by id
-            // then post new user's info to trash list
-
-            // if in trash page
-            // use trash api to delete user permanently by id like normal
 
             // axios.post(`${trashBaseApi}`, { ...rest });
             // axios.delete(`${userBaseApi}/${id}`);
+
+            trashApi.addNewUser({ ...rest });
+            userApi.deleteUser(id);
 
             newDeletedList.push({
               ...rest,
@@ -169,27 +165,10 @@ export const handleDeleteUser =
 
         checkSameElement.forEach((element) => {
           const { id, ...rest } = element;
-          //   const res = axios.post(`${userBaseApi}/${id}`);
-          //   console.log(
-          //     "🚀 ~ file: trashThunk.js ~ line 144 ~ checkSameElement.forEach ~ res",
-          //     res
-          //   );
+
+          userApi.deleteUser(id);
         });
         dispatch(postUserListSuccess(checkDiffElement));
-        // dispatch(
-        //   deleteFromUserList({
-        //     row,
-        //     selectedRow,
-        //   })
-        // );
-
-        // if (success) {
-        //   Swal.fire(
-        //     `${languages === "VN" ? `Đã xóa!` : `Deleted!`}`,
-        //     "",
-        //     "success"
-        //   );
-        // }
       }
     });
   };

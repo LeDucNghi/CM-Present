@@ -1,0 +1,25 @@
+@baseUrl = http://localhost:3005
+@resourceName = users
+
+# @name getAllUser
+GET {{baseUrl}}/{{resourceName}}
+
+###
+
+# @name getUserById
+GET {{baseUrl}}/{{resourceName}}/1
+
+###
+
+# @name updateUser
+PATCH {{baseUrl}}/{{resourceName}}/1
+Content-Type: application/json
+
+{
+    "name" : "Johnnnn"
+}
+
+###
+
+# @name removeUser
+DELETE {{baseUrl}}/{{resourceName}}/2

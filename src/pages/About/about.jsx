@@ -1,54 +1,66 @@
 import "./About.scss";
 
 import { Form, Formik } from "formik";
+import { fetchUserById, handleUpdateUser } from "features/profile/profileThunk";
 import {
-  useGetDetaillUserQuery,
-  useUpdateUserMutation,
-} from "services/userServices";
+  selectError,
+  selectFetching,
+  selectMessage,
+  selectUserProfile,
+} from "features/profile/profileSlice";
+import { useDispatch, useSelector } from "react-redux";
 
+import { Images } from "constants/images";
 import { Loading } from "components/Common/Loading/Loading";
 import { ProfileForm } from "features/profile/components/ProfileForm";
-import Swal from "sweetalert2";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { validationSchema } from "formik/profile";
 
 function About() {
   const { id } = useParams();
-  const { data, error, isLoading } = useGetDetaillUserQuery(id);
-  const [updateUser] = useUpdateUserMutation();
+  const dispatch = useDispatch();
 
-  const handleUpdateUser = (values, { setSubmitting }) => {
-    updateUser({ ...values, id: id });
-    setTimeout(() => {
-      setSubmitting(false);
-      Swal.fire("Update user successfully!", "", "success");
-    }, 2000);
+  const error = useSelector(selectError);
+  const message = useSelector(selectMessage);
+  const data = useSelector(selectUserProfile);
+  const isFetching = useSelector(selectFetching);
+
+  useEffect(() => {
+    dispatch(fetchUserById(id));
+  }, [dispatch, id]);
+
+  const initialValues = {
+    firstName: `${data ? data.firstName : ""}`,
+    lastName: `${data ? data.lastName : ""}`,
+    email: `${data ? data.email : ""}`,
+    age: `${data ? data.age : ""}`,
+    team: `${data ? data.team : ""}`,
+    role: `${data ? data.role : ""}`,
+    image: `${data ? data.image : null}`,
   };
 
-  if (isLoading) return <Loading />;
-  if (error) console.log(error);
+  if (isFetching) return <Loading />;
+  else if (error)
+    return (
+      <div className="not_found">
+        <img src={Images.EMPTY} alt="" />
+        <p>{message} </p>
+      </div>
+    );
   else
     return (
       <div className="account">
         <Formik
           enableReinitialize={true}
           validationSchema={validationSchema}
-          initialValues={{
-            firstName: `${data ? data.firstName : ""}`,
-            lastName: `${data ? data.lastName : ""}`,
-            email: `${data ? data.email : ""}`,
-            age: `${data ? data.age : ""}`,
-            team: `${data ? data.team : ""}`,
-            role: `${data ? data.role : ""}`,
-            image: null,
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            handleUpdateUser(values, { setSubmitting });
+          initialValues={initialValues}
+          onSubmit={(values) => {
+            dispatch(handleUpdateUser(id, values));
           }}
         >
           {(formikProps) => {
             const {
-              isSubmitting,
               isValid,
               values,
               touched,
@@ -61,7 +73,6 @@ function About() {
                 <ProfileForm
                   data={data}
                   values={values}
-                  isSubmitting={isSubmitting}
                   isValid={isValid}
                   touched={touched}
                   errors={errors}
