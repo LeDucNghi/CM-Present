@@ -10,15 +10,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Fade from "@mui/material/Fade";
 import { Field } from "components/Custom/InputField";
 import Modal from "@mui/material/Modal";
-import Swal from "sweetalert2";
-import { addUser } from "features/slice";
-import { usePostNewUserMutation } from "services/userServices";
+import { handleAddUser } from "../userThunk";
+import { selectIsLoading } from "../userSlice";
 
 export default function AddUserForm({ open, setOpen }) {
   const dispatch = useDispatch();
 
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
+  const isLoading = useSelector(selectIsLoading);
 
   const style = {
     position: "absolute",
@@ -32,26 +32,15 @@ export default function AddUserForm({ open, setOpen }) {
     p: 4,
   };
 
-  const [postNewUser] = usePostNewUserMutation();
+  // const [postNewUser] = usePostNewUserMutation();
 
-  const handleClose = () => setOpen(false);
-  const handleAddUser = (values, { setSubmitting }) => {
-    dispatch(addUser(values));
-    postNewUser(values);
-
-    setTimeout(() => {
-      setSubmitting(false);
-      setOpen(false);
-      Swal.fire("Added user successfully!", "", "success");
-    }, 1500);
-  };
   return (
     <>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -64,19 +53,13 @@ export default function AddUserForm({ open, setOpen }) {
               enableReinitialize={true}
               validationSchema={validationSchema}
               initialValues={initialValues}
-              onSubmit={(values, { setSubmitting }) => {
-                handleAddUser(values, { setSubmitting });
+              onSubmit={(values) => {
+                dispatch(handleAddUser(values, setOpen));
               }}
             >
               {(formikProps) => {
-                const {
-                  isSubmitting,
-                  isValid,
-                  values,
-                  touched,
-                  errors,
-                  handleChange,
-                } = formikProps;
+                const { isValid, values, touched, errors, handleChange } =
+                  formikProps;
                 return (
                   <Form>
                     <Field
@@ -159,11 +142,11 @@ export default function AddUserForm({ open, setOpen }) {
                       }}
                     >
                       <Button
-                        disabled={isSubmitting || !isValid}
+                        disabled={isLoading || !isValid}
                         variant="contained"
                         type="submit"
                       >
-                        {isSubmitting ? <CircularProgress size={25} /> : "Add"}
+                        {isLoading ? <CircularProgress size={25} /> : "Add"}
                       </Button>
                     </Box>
                   </Form>

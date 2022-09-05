@@ -1,21 +1,18 @@
 import * as React from "react";
 
 import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-import AddUserButton from "features/user/components/AddUserButton";
 import AddUserForm from "features/user/components/AddUserForm";
 import { Button } from "@mui/material";
 import DataGrid from "components/Custom/CustomDataGrid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Loading } from "components/Common/Loading/Loading";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { handleDeleteUser } from "utils";
+import { handleDeleteUser } from "features/trash/trashThunk";
 import { selectDeletedList } from "features/trash/trashSlice";
-import { selectUserList } from "features/user/userSlice";
-import { useSelector } from "react-redux";
 
 export default function User() {
-  const userList = useSelector(selectUserList);
+  const dispatch = useDispatch();
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
   const deletedUserList = useSelector(selectDeletedList);
@@ -47,13 +44,6 @@ export default function User() {
           position: "relative",
         }}
       >
-        {/* <AddUserButton
-          row={row}
-          setRow={setRow}
-          setOpen={setOpen}
-          selectedRow={selectedRow}
-        /> */}
-
         <Button
           startIcon={<PersonAddIcon />}
           variant="contained"
@@ -73,7 +63,7 @@ export default function User() {
         </Button>
         <Button
           startIcon={<DeleteIcon />}
-          onClick={() => handleDeleteUser(handleDeleteUserArgs)}
+          onClick={() => dispatch(handleDeleteUser(handleDeleteUserArgs))}
           variant="contained"
           color="error"
           sx={{

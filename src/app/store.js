@@ -1,10 +1,9 @@
 import rootSaga, { sagaMiddleware } from "./rootSaga";
 
 import { configureStore } from "@reduxjs/toolkit";
-import history from "utils/history";
 import { rootReducer } from "./rootReducer";
-import { routerMiddleware } from "connected-react-router";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import thunk from "redux-thunk";
 import { userApi } from "services/userServices";
 
 export const store = configureStore({
@@ -12,7 +11,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(sagaMiddleware, userApi.middleware, routerMiddleware(history)),
+    }).concat(sagaMiddleware, userApi.middleware, thunk),
 });
 
 sagaMiddleware.run(rootSaga);

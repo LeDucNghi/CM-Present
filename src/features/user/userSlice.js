@@ -27,10 +27,15 @@ export const userSlice = createSlice({
     },
 
     addUser: (state, action) => {
+      state.loading = true;
       state.userList.push({
         ...action.payload,
         id: state.userList.length + 1,
       });
+    },
+
+    addUserSuccess: (state, action) => {
+      state.loading = false;
     },
 
     deleteFromUserList: (state) => {
@@ -42,6 +47,7 @@ export const userSlice = createSlice({
 export const {
   postUserList,
   addUser,
+  addUserSuccess,
   postUserListFailed,
   postUserListSuccess,
   deleteFromUserList,

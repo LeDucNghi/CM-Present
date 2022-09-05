@@ -1,11 +1,12 @@
 import "./ThemingToggle.scss";
 
-import { postMode, selectMode } from "../drawerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { MaterialUISwitch } from "constants/styledMUI";
+import { selectMode } from "../drawerSlice";
+import { toggleSwitch } from "../drawerThunk";
 
 export default function ThemeToggle() {
   const dispatch = useDispatch();
@@ -18,23 +19,6 @@ export default function ThemeToggle() {
     if (mode === "dark") setIsOn(true);
   }, [mode]);
 
-  const toggleSwitch = () => {
-    setIsOn(!isOn);
-    console.log(
-      "🚀 ~ file: themingToggle.jsx ~ line 24 ~ toggleSwitch ~ isOn",
-      isOn
-    );
-
-    if (isOn === false) {
-      dispatch(postMode("dark"));
-      localStorage.setItem("mode", "dark");
-    }
-    if (isOn === true) {
-      dispatch(postMode("light"));
-      localStorage.setItem("mode", "light");
-    }
-  };
-
   return (
     <>
       <FormControlLabel
@@ -43,7 +27,7 @@ export default function ThemeToggle() {
             sx={{ m: 1 }}
             checked={isOn}
             ison={isOn}
-            onClick={() => toggleSwitch()}
+            onClick={() => dispatch(toggleSwitch(isOn, setIsOn))}
           />
         }
         // label="MUI switch"

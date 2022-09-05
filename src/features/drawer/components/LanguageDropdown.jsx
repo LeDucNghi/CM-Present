@@ -5,7 +5,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LanguageIcon from "@mui/icons-material/Language";
 import MenuItem from "@mui/material/MenuItem";
 import { StyledMenu } from "constants/styledMUI";
-import { postLanguage } from "../drawerSlice";
+import { handleChangeLanguage } from "../drawerThunk";
 import { useDispatch } from "react-redux";
 
 export default function LanguageMenus() {
@@ -14,38 +14,16 @@ export default function LanguageMenus() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [language, setLanguage] = React.useState("Eng");
 
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleChangeLanguage = (id) => {
-    if (id === 1) {
-      dispatch(postLanguage("VN"));
-      setLanguage("VN");
-      localStorage.setItem("language", "VN");
-    } else {
-      dispatch(postLanguage("Eng"));
-      setLanguage("Eng");
-      localStorage.setItem("language", "Eng");
-    }
-    setAnchorEl(null);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   return (
     <div>
       <Button
         id="demo-customized-button"
-        aria-controls={open ? "demo-customized-menu" : undefined}
+        aria-controls={Boolean(anchorEl) ? "demo-customized-menu" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
+        aria-expanded={Boolean(anchorEl) ? "true" : undefined}
         variant="contained"
         disableElevation
-        onClick={handleClick}
+        onClick={(event) => setAnchorEl(event.currentTarget)}
         endIcon={<KeyboardArrowDownIcon />}
       >
         {language}
@@ -56,14 +34,24 @@ export default function LanguageMenus() {
           "aria-labelledby": "demo-customized-button",
         }}
         anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
+        open={Boolean(anchorEl)}
+        onClose={() => setAnchorEl(null)}
       >
-        <MenuItem onClick={() => handleChangeLanguage(1)} disableRipple>
+        <MenuItem
+          onClick={() =>
+            dispatch(handleChangeLanguage(1, setLanguage, setAnchorEl))
+          }
+          disableRipple
+        >
           <LanguageIcon />
           VN
         </MenuItem>
-        <MenuItem onClick={() => handleChangeLanguage(2)} disableRipple>
+        <MenuItem
+          onClick={() =>
+            dispatch(handleChangeLanguage(2, setLanguage, setAnchorEl))
+          }
+          disableRipple
+        >
           <LanguageIcon />
           Eng
         </MenuItem>

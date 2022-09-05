@@ -1,16 +1,6 @@
-import {
-  all,
-  call,
-  delay,
-  fork,
-  put,
-  take,
-  takeEvery,
-  takeLatest,
-} from "redux-saga/effects";
+import { all, call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import {
   deleteFromUserList,
-  postUserList,
   postUserListSuccess,
 } from "features/user/userSlice";
 import {
@@ -39,10 +29,6 @@ function* handleDeleteFromUserList({ payload }) {
 }
 
 function* handleDeleteUser({ payload }) {
-  console.log(
-    "🚀 ~ file: trashSaga.js ~ line 24 ~ function*handleDeleteUser ~ { payload }",
-    { payload }
-  );
   const checkDiffElement = payload.row.filter(
     (x) => !payload.selectedRow.some((x1) => x.id === x1.id)
   );
@@ -96,8 +82,6 @@ function* handleDeleteUser({ payload }) {
 }
 
 function* handleRestoreUser({ payload }) {
-  yield delay(2000);
-
   const checkDiffElement = payload.row.filter(
     (x) => !payload.selectedRow.some((x1) => x.id === x1.id)
   );

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { deleteUser, postUserList } from "features/slice";
+import { postUserList, selectUserList } from "features/user/userSlice";
 import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
 import {
   useDeleteUserFromListMutation,
@@ -17,7 +17,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Swal from "sweetalert2";
 import TeamFilter from "features/projects/components/projectFilter";
 import { columns } from "constants/global";
-import { selectUserList } from "features/user/userSlice";
+import { deleteUser } from "features/trash/trashSlice";
 
 export default function Projects({ allUserLoading, allUserError }) {
   const dispatch = useDispatch();

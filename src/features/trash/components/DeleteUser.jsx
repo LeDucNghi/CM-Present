@@ -1,13 +1,14 @@
 import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { handleDeleteUser } from "utils";
+import { handleDeleteUser } from "../trashThunk";
 import { selectDeletedList } from "../trashSlice";
 import { selectUserList } from "features/user/userSlice";
-import { useSelector } from "react-redux";
 
 export default function DeleteUser({ row, selectedRow }) {
+  const dispatch = useDispatch();
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
   const userList = useSelector(selectUserList);
@@ -24,7 +25,7 @@ export default function DeleteUser({ row, selectedRow }) {
     <>
       <Button
         startIcon={<DeleteIcon />}
-        onClick={() => handleDeleteUser(handleDeleteArgs)}
+        onClick={() => dispatch(handleDeleteUser(handleDeleteArgs))}
         variant="contained"
         color="error"
         disabled={selectedRow.length === 0}

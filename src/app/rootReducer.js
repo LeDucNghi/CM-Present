@@ -1,8 +1,7 @@
 import authReducer from "features/auth/authSlice";
 import { combineReducers } from "@reduxjs/toolkit";
-import { connectRouter } from "connected-react-router";
 import { drawerReducer } from "features/drawer/drawerSlice";
-import history from "utils/history";
+import { profileReducer } from "features/profile/profileSlice";
 import { trashReducer } from "features/trash/trashSlice";
 import { userApi } from "services/userServices";
 import { userReducer } from "features/user/userSlice";
@@ -12,6 +11,6 @@ export const rootReducer = combineReducers({
   user: userReducer,
   trash: trashReducer,
   drawer: drawerReducer,
-  router: connectRouter(history),
+  profile: profileReducer,
   [userApi.reducerPath]: userApi.reducer,
 });

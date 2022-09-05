@@ -33,6 +33,10 @@ export const trashSlice = createSlice({
     deleteUser: (state, action) => {
       state.loading = true;
     },
+
+    setTabs: (state, action) => {
+      state.tabs = action.payload;
+    },
   },
 });
 
@@ -42,11 +46,13 @@ export const {
   postDeletedListFailed,
   postDeletedListSuccess,
   deleteUser,
+  setTabs,
 } = trashSlice.actions;
 
 // export const selectTrashList = (state) => state.trash.trashList;
 export const selectDeletedList = (state) => state.trash.deletedUserList;
 export const selectIsLoading = (state) => state.trash.loading;
 export const selectMessage = (state) => state.trash.message;
+export const selectTabs = (state) => state.trash.tabs;
 
 export const trashReducer = trashSlice.reducer;
