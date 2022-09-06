@@ -44,7 +44,7 @@ export default function LanguageMenus() {
           disableRipple
         >
           <LanguageIcon />
-          VN
+          <p>VN</p>
         </MenuItem>
         <MenuItem
           onClick={() =>
@@ -53,7 +53,7 @@ export default function LanguageMenus() {
           disableRipple
         >
           <LanguageIcon />
-          Eng
+          <p>Eng</p>
         </MenuItem>
       </StyledMenu>
     </div>

@@ -6,31 +6,22 @@ import ListItem from "@mui/material/ListItem";
 import React from "react";
 import Typography from "@mui/material/Typography";
 import { handleLogout } from "features/auth/authThunk";
-import { logout } from "features/auth/authSlice";
+import { settings } from "constants/global";
 import { useDispatch } from "react-redux";
 
 export default function BoxSetting() {
   const dispatch = useDispatch();
 
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  // const handleLogout = () => {
-  //   logout();
-  // };
   return (
     <>
       <Box sx={{ flexGrow: 0 }}>
         <Tooltip title="Open settings">
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <IconButton
+            onClick={(event) => setAnchorElUser(event.currentTarget)}
+            sx={{ p: 0 }}
+          >
             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
           </IconButton>
         </Tooltip>
@@ -48,10 +39,10 @@ export default function BoxSetting() {
             horizontal: "right",
           }}
           open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
+          onClose={() => setAnchorElUser(null)}
         >
           {settings.map((setting) => (
-            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+            <MenuItem key={setting} onClick={() => setAnchorElUser(null)}>
               <ListItem
                 onClick={
                   setting === "Logout" ? () => dispatch(handleLogout()) : null

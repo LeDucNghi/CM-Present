@@ -179,6 +179,8 @@ export const columns = [
   },
 ];
 
+export const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
 export const teamMenu = [
   {
     id: 1,
