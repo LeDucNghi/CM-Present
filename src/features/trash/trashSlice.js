@@ -21,6 +21,10 @@ export const trashSlice = createSlice({
     },
 
     fetchDeletedListSuccess: (state, action) => {
+      console.log(
+        "🚀 ~ file: trashSlice.js ~ line 25 ~ action.payload",
+        action.payload
+      );
       state.deletedUserList = action.payload;
       state.loading = false;
     },

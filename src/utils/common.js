@@ -1,6 +1,9 @@
 import Swal from "sweetalert2";
 
 export const Toast = Swal.mixin({
+  // customClass : {
+  //   container : ''
+  // },
   toast: true,
   position: "top-end",
   showConfirmButton: false,
