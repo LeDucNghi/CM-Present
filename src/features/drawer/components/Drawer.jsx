@@ -8,7 +8,7 @@ import BoxSetting from "./BoxSetting";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import IconButton from "@mui/material/IconButton";
-import LanguageMenus from "features/drawer/components/LanguageDropdown";
+import LanguageMenus from "features/drawer/components/Language";
 import { ListDrawer } from "./DrawerList";
 import MenuIcon from "@mui/icons-material/Menu";
 import ThemeToggle from "features/drawer/components/ThemingToggle";
