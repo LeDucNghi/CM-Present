@@ -1,6 +1,6 @@
 import "./assets/styles/GlobalStyles.scss";
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import Error from "components/Common/NotFound/NotFound";
 import Main from "components/Layouts/Main/Main";
@@ -21,6 +21,8 @@ function App() {
   return (
     <Routes>
       <Route element={<PrivateRoute />}>
+        <Route path="/" element={<Navigate to="main" />} />
+
         <Route path="main/*" element={<Main />} />
       </Route>
 

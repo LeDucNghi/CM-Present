@@ -14,6 +14,11 @@ export default function BoxSetting() {
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+  const handleSettingChange = (setting) => {
+    setAnchorElUser(null);
+    if (setting === "Logout") dispatch(handleLogout());
+  };
+
   return (
     <>
       <Box sx={{ flexGrow: 0 }}>
@@ -41,17 +46,16 @@ export default function BoxSetting() {
           open={Boolean(anchorElUser)}
           onClose={() => setAnchorElUser(null)}
         >
-          {settings.map((setting) => (
-            <MenuItem key={setting} onClick={() => setAnchorElUser(null)}>
+          <MenuItem>
+            {settings.map((setting) => (
               <ListItem
-                onClick={
-                  setting === "Logout" ? () => dispatch(handleLogout()) : null
-                }
+                key={setting}
+                onClick={() => handleSettingChange(setting)}
               >
                 <Typography textAlign="center">{setting}</Typography>
               </ListItem>
-            </MenuItem>
-          ))}
+            ))}
+          </MenuItem>
         </Menu>
       </Box>
     </>
