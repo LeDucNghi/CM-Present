@@ -105,3 +105,18 @@ export const userRows = [
     role: "member",
   },
 ];
+
+export const teamMenu = [
+  {
+    id: 1,
+    teamName: "React",
+  },
+  {
+    id: 2,
+    teamName: "Vue",
+  },
+  {
+    id: 3,
+    teamName: "Angular",
+  },
+];

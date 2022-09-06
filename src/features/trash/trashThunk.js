@@ -16,11 +16,10 @@ export const fetchTrashList = () => async (dispatch, getState) => {
 };
 
 export const handleRestoreUser =
-  ({ row, selectedRow, list }) =>
+  ({ row, selectedRow }) =>
   (dispatch, getState) => {
     const mode = getState().drawer.mode;
     const languages = getState().drawer.language;
-    // const deletedList = getState().trash.deletedUserList;
     const userList = getState().user.userList;
 
     const checkDiffElement = row.filter(
@@ -98,17 +97,9 @@ export const handleDeleteUser =
     const checkDiffElement = row.filter(
       (x) => !selectedRow.some((x1) => x.id === x1.id)
     );
-    console.log(
-      "🚀 ~ file: trashThunk.js ~ line 99 ~ checkDiffElement",
-      checkDiffElement
-    );
 
     const checkSameElement = row.filter((x) =>
       selectedRow.some((x1) => x.id === x1.id)
-    );
-    console.log(
-      "🚀 ~ file: trashThunk.js ~ line 104 ~ checkSameElement",
-      checkSameElement
     );
 
     Swal.fire({

@@ -6,7 +6,6 @@ import {
 } from "./userSlice";
 
 import Swal from "sweetalert2";
-import { Toast } from "utils";
 import { userApi } from "api/userApi";
 
 export const fetchUserList = () => async (dispatch, getState) => {
@@ -27,7 +26,6 @@ export const handleAddUser =
     try {
       // call api
       const res = await userApi.addNewUser(values);
-      console.log("🚀 ~ file: userThunk.js ~ line 31 ~ res", res.status);
 
       dispatch(addUser(values));
       if (res) {

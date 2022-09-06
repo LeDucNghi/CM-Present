@@ -50,25 +50,6 @@ export const columns = [
     width: 150,
   },
 
-  // {
-  //   field: "fullName",
-  //   renderHeader: () => {
-  //     const languages = store.getState().drawer.language;
-  //     return <p>{languages === "VN" ? "Tên đầy đủ" : "Full name"} </p>;
-  //   },
-  //   description: "This column has a value getter and is not sortable.",
-  //   sortable: false,
-  //   width: 300,
-
-  //   renderCell: (cellValues) => {
-  //     return (
-  //       <Button>
-  //         {cellValues.row.firstName || ""} {cellValues.row.lastName || ""}
-  //       </Button>
-  //     );
-  //   },
-  // },
-
   {
     field: "role",
     renderHeader: () => {
@@ -105,18 +86,3 @@ export const columns = [
 ];
 
 export const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-export const teamMenu = [
-  {
-    id: 1,
-    teamName: "React",
-  },
-  {
-    id: 2,
-    teamName: "Vue",
-  },
-  {
-    id: 3,
-    teamName: "Angular",
-  },
-];

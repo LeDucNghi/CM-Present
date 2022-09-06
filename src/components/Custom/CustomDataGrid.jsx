@@ -28,7 +28,7 @@ export default function DataGrid({ row, setRow, setSelectedRow }) {
     const selectedIDs = new Set(id);
     const selectedRowData = row.filter((row1) => selectedIDs.has(row1.id));
     setSelectedRow(selectedRowData);
-    console.log(selectedRowData);
+    // console.log(selectedRowData);
   };
 
   return (

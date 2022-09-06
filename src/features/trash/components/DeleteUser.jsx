@@ -5,13 +5,14 @@ import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { handleDeleteUser } from "../trashThunk";
 import { selectDeletedList } from "../trashSlice";
-import { selectUserList } from "features/user/userSlice";
+
+// import { selectUserList } from "features/user/userSlice";
 
 export default function DeleteUser({ row, selectedRow }) {
   const dispatch = useDispatch();
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
-  const userList = useSelector(selectUserList);
+  // const userList = useSelector(selectUserList);
   const deletedUserList = useSelector(selectDeletedList);
 
   const handleDeleteArgs = {

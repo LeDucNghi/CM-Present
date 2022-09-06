@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +5,7 @@ import { Images } from "constants/images";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { onImageChange } from "../profileThunk";
 import { selectImage } from "../profileSlice";
+import { useEffect } from "react";
 
 export const Avatar = ({ data, setFieldValue }) => {
   const dispatch = useDispatch();
@@ -14,8 +14,6 @@ export const Avatar = ({ data, setFieldValue }) => {
   useEffect(() => {
     if (image) setFieldValue("image", image);
   }, [image]);
-
-  // var [image, setImage] = useState(null);
 
   return (
     <>

@@ -4,19 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import { handleRestoreUser } from "../trashThunk";
-import { selectUserList } from "features/user/userSlice";
 
 export default function RestoreUser({ row, selectedRow }) {
   const dispatch = useDispatch();
-  const userList = useSelector(selectUserList);
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
-
-  const handleRestoreArgs = {
-    row,
-    selectedRow,
-    list: userList,
-  };
 
   return (
     <Button
@@ -31,7 +23,7 @@ export default function RestoreUser({ row, selectedRow }) {
           cursor: "not-allowed",
         },
       }}
-      onClick={() => dispatch(handleRestoreUser(handleRestoreArgs))}
+      onClick={() => dispatch(handleRestoreUser({ row, selectedRow }))}
       disabled={selectedRow.length === 0}
     >
       {languages === "VN" ? `Khôi phục!` : `Restore!`}

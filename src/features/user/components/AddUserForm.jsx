@@ -32,8 +32,6 @@ export default function AddUserForm({ open, setOpen }) {
     p: 4,
   };
 
-  // const [postNewUser] = usePostNewUserMutation();
-
   return (
     <>
       <Modal

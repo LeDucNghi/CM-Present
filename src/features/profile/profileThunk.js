@@ -11,14 +11,9 @@ import Swal from "sweetalert2";
 import { userApi } from "api/userApi";
 
 export const fetchUserById = (id) => async (dispatch, getState) => {
-  console.log("🚀 ~ file: profileThunk.js ~ line 7 ~ fetchUserById ~ id", id);
   dispatch(fetchingUser());
   try {
     const res = await userApi.getUserById(id);
-    console.log(
-      "🚀 ~ file: profileThunk.js ~ line 18 ~ fetchUserById ~ res",
-      res
-    );
 
     dispatch(fetchUserByIdSuccess(res));
   } catch (error) {
@@ -34,7 +29,6 @@ export const handleUpdateUser = (id, values) => async (dispatch, getState) => {
 
   try {
     const res = await userApi.updateUser({ ...values, id: id });
-    console.log("🚀 ~ file: profileThunk.js ~ line 11 ~ res", res);
 
     if (res) {
       dispatch(updateUserSuccess());
