@@ -1,24 +1,27 @@
 import DataGrid from "components/Custom/CustomDataGrid";
 import DeleteUser from "features/trash/components/DeleteUser";
-import { Loading } from "components/Common/Loading/Loading";
 import React from "react";
 import RestoreUser from "features/trash/components/RestoreUser";
 
-const a11yProps = (index) => {
-  return {
-    id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
-  };
-};
+// import { Loading } from "components/Common/Loading/Loading";
+
+
+
+// const a11yProps = (index) => {
+//   return {
+//     id: `vertical-tab-${index}`,
+//     "aria-controls": `vertical-tabpanel-${index}`,
+//   };
+// };
 
 function Trash() {
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
-  const [value, setValue] = React.useState(0);
+  // const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
 
   return (
     <div style={{ height: 400, width: "100%" }}>

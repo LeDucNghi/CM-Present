@@ -1,14 +1,10 @@
-import { login, loginFailed, loginSuccess, logout } from "./authSlice";
+import { loginFailed, loginSuccess } from "./authSlice";
 
+import { Toast } from "utils";
 import history from "utils/history";
 
 export const handleLogin = (payload) => (dispatch, getState) => {
-  console.log(
-    "🚀 ~ file: authSaga.js ~ line 7 ~ function*handleLogin ~ payload",
-    payload
-  );
   try {
-    console.log("vào handleLogin thành công");
     const email = "testing@gmail.com";
     const password = "123456789Test";
 
@@ -24,21 +20,31 @@ export const handleLogin = (payload) => (dispatch, getState) => {
     };
 
     if (checkMail) {
-      console.log("invalid account!!");
+      Toast.fire({
+        icon: "error",
+        title: "Invalid email",
+      });
       dispatch(loginFailed());
     } else if (checkPass) {
-      console.log("invalid password!!");
+      Toast.fire({
+        icon: "error",
+        title: "Invalid password",
+      });
       dispatch(loginFailed());
     } else {
-      console.log("login success");
-
-      localStorage.setItem("account", JSON.stringify(items));
-
-      // dispatchay(2000);
+      Toast.fire({
+        icon: "success",
+        title: "Signin success",
+      });
       dispatch(loginSuccess());
       dispatch(history.push(`/main/user`));
+      localStorage.setItem("account", JSON.stringify(items));
     }
   } catch (error) {
+    console.log(
+      "🚀 ~ file: authThunk.js ~ line 45 ~ handleLogin ~ error",
+      error
+    );
     dispatch(loginFailed());
   }
 };

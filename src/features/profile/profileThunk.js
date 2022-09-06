@@ -7,7 +7,7 @@ import {
   updateUserSuccess,
 } from "./profileSlice";
 
-import Swal from "sweetalert2";
+import { Toast } from "utils";
 import { userApi } from "api/userApi";
 
 export const fetchUserById = (id) => async (dispatch, getState) => {
@@ -36,15 +36,22 @@ export const handleUpdateUser = (id, values) => async (dispatch, getState) => {
     const res = await userApi.updateUser({ ...values, id: id });
     console.log("🚀 ~ file: profileThunk.js ~ line 11 ~ res", res);
 
-    setTimeout(() => {
+    if (res) {
       dispatch(updateUserSuccess());
-      Swal.fire("Update user successfully!", "", "success");
-    }, 2000);
+      Toast.fire({
+        icon: "success",
+        title: "Update successfully",
+      });
+    }
   } catch (error) {
     console.log(
       "🚀 ~ file: profileThunk.js ~ line 31 ~ handleUpdateUser ~ error",
       error
     );
+    Toast.fire({
+      icon: "error",
+      title: `${error.response.statusText}`,
+    });
   }
 };
 

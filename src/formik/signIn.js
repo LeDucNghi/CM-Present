@@ -5,7 +5,7 @@ export const initialValues = {
   password: "",
 };
 
-export const validationSchema = Yup.object({
+export const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email !!")
     .required("Please enter your email 🤔"),

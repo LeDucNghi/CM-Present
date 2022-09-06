@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import { Toast } from "utils";
 import { fetchDeletedListSuccess } from "features/trash/trashSlice";
 import { fetchUserListSuccess } from "features/user/userSlice";
 import { trashApi } from "api/trashApi";
@@ -56,26 +57,33 @@ export const handleRestoreUser =
 
       background: `${mode === "dark" ? "#121212" : ""}`,
       color: `${mode === "dark" ? "#fff" : ""}`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        checkSameElement.forEach((element) => {
-          const { id, ...rest } = element;
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          checkSameElement.forEach((element) => {
+            const { id, ...rest } = element;
 
-          trashApi.deleteUser(id);
-          userApi.addNewUser({ ...rest });
+            trashApi.deleteUser(id);
+            userApi.addNewUser({ ...rest });
 
-          dispatch(fetchUserListSuccess({ element }));
+            dispatch(fetchUserListSuccess({ element }));
+          });
+
+          dispatch(fetchDeletedListSuccess(checkDiffElement));
+
+          Toast.fire({
+            icon: "success",
+            title: `${languages === "VN" ? `Đã khôi phục!` : `Restored!`}`,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("🚀 ~ file: trashThunk.js ~ line 79 ~ error", error);
+        Toast.fire({
+          icon: "error",
+          title: `${error.message}`,
         });
-
-        dispatch(fetchDeletedListSuccess(checkDiffElement));
-
-        Swal.fire(
-          `${languages === "VN" ? `Đã khôi phục!` : `Restored!`}`,
-          "",
-          "success"
-        );
-      }
-    });
+      });
   };
 
 export const handleDeleteUser =
@@ -135,9 +143,9 @@ export const handleDeleteUser =
       if (result.isConfirmed) {
         // move to trash in user page
         // delete permanently in trash page
+        const newDeletedList = [...deletedList];
 
         if (isDenied) {
-          const newDeletedList = [...deletedList];
           checkSameElement.forEach((element) => {
             const { id, ...rest } = element;
 
@@ -149,15 +157,36 @@ export const handleDeleteUser =
               id: newDeletedList.length + 1,
             });
           });
+          // add new user to trash list
           dispatch(fetchDeletedListSuccess(newDeletedList));
+
+          // delete user from user list
           dispatch(fetchUserListSuccess(checkDiffElement));
+        } else {
+          checkSameElement.forEach((element) => {
+            const { id, ...rest } = element;
+
+            trashApi.deleteUser(id);
+          });
+
+          dispatch(fetchDeletedListSuccess(checkDiffElement));
         }
 
-        Swal.fire(
-          `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
-          "",
-          "success"
-        );
+        Toast.fire({
+          icon: "success",
+          title: `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
+          text: isDenied
+            ? `${
+                languages === `VN`
+                  ? `Bạn có thể khôi phục ${
+                      selectedRow.length === 1 ? "" : "những"
+                    } người dùng ở thùng rác!`
+                  : `You can restore ${
+                      selectedRow.length === 1 ? `this` : `these`
+                    } user${selectedRow.length === 1 ? `` : `s`} in trash`
+              }`
+            : ``,
+        });
       } else if (result.isDenied) {
         // delete permanently in user page
 

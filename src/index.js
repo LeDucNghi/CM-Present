@@ -6,6 +6,7 @@ import ErrorBoundary from "app/errorBoundary";
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
+import { ToastContainer } from "react-toastify";
 import history from "utils/history";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "app/store";
@@ -18,6 +19,18 @@ root.render(
         <CssBaseline />
         <App />
       </HistoryRouter>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </ErrorBoundary>
   </Provider>
 );
