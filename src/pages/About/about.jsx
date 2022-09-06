@@ -1,5 +1,6 @@
 import "./About.scss";
 
+import { Button, CircularProgress } from "@mui/material";
 import { Form, Formik } from "formik";
 import { fetchUserById, handleUpdateUser } from "features/profile/profileThunk";
 import {
@@ -10,9 +11,12 @@ import {
 } from "features/profile/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import { Avatar } from "features/profile/components/Avatar";
 import { Images } from "constants/images";
+import { InputField } from "features/profile/components/InputField";
 import { Loading } from "components/Common/Loading/Loading";
-import { ProfileForm } from "features/profile/components/ProfileForm";
+import { selectLanguage } from "features/drawer/drawerSlice";
+import { selectLoading } from "features/profile/profileSlice";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { validationSchema } from "formik/profile";
@@ -25,6 +29,8 @@ function About() {
   const message = useSelector(selectMessage);
   const data = useSelector(selectUserProfile);
   const isFetching = useSelector(selectFetching);
+  const isLoading = useSelector(selectLoading);
+  const languages = useSelector(selectLanguage);
 
   useEffect(() => {
     dispatch(fetchUserById(id));
@@ -66,19 +72,40 @@ function About() {
               touched,
               errors,
               handleChange,
+              handleBlur,
               setFieldValue,
             } = formikProps;
             return (
               <Form>
-                <ProfileForm
-                  data={data}
-                  values={values}
-                  isValid={isValid}
-                  touched={touched}
-                  errors={errors}
-                  handleChange={handleChange}
-                  setFieldValue={setFieldValue}
-                />
+                <div className="account_info">
+                  <InputField
+                    values={values}
+                    touched={touched}
+                    errors={errors}
+                    handleBlur={handleBlur}
+                    handleChange={handleChange}
+                  />
+                </div>
+
+                <div className="user_avatar">
+                  <Avatar data={data} setFieldValue={setFieldValue} />
+                </div>
+
+                <div className="account_btn">
+                  <Button
+                    disabled={isLoading || !isValid}
+                    type="submit"
+                    className="apply"
+                  >
+                    {isLoading ? (
+                      <CircularProgress color="success" />
+                    ) : languages === "Eng" ? (
+                      "Save"
+                    ) : (
+                      "Lưu"
+                    )}
+                  </Button>
+                </div>
               </Form>
             );
           }}

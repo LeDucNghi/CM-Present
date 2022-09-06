@@ -22,7 +22,8 @@ export default function SigninForm() {
       }}
     >
       {(formikProps) => {
-        const { values, touched, errors, handleChange } = formikProps;
+        const { values, touched, errors, handleChange, handleBlur } =
+          formikProps;
         return (
           <Form>
             <Field
@@ -31,6 +32,7 @@ export default function SigninForm() {
               type="text"
               value={values.email}
               onChange={handleChange}
+              onBlur={handleBlur}
               error={
                 errors && touched
                   ? touched.email && Boolean(errors.email)
@@ -46,6 +48,7 @@ export default function SigninForm() {
               type="password"
               value={values.password}
               onChange={handleChange}
+              onBlur={handleBlur}
               error={
                 errors && touched
                   ? touched.password && Boolean(errors.password)

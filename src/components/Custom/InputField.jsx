@@ -14,6 +14,7 @@ export const Field = ({
   error,
   autoComplete,
   autoFocus,
+  onBlur,
 }) => {
   const mode = useSelector(selectMode);
 
@@ -34,6 +35,7 @@ export const Field = ({
         margin="normal"
         id="outlined-error-helper-text"
         color="secondary"
+        onBlur={onBlur}
       />
       <ErrorMessage name={name}>
         {(msg) => (
@@ -57,6 +59,7 @@ Field.propTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
   autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
 };

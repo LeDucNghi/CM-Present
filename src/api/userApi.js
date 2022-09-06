@@ -7,20 +7,16 @@ export const userApi = {
   },
 
   getUserTeam: (team) => {
-    console.log("🚀 ~ file: userApi.js ~ line 10 ~ team", team);
     const url = `users?team=${team}`;
     return axiosClient.get(url);
   },
 
   getUserById: (userId) => {
-    console.log("🚀 ~ file: userApi.js ~ line 16 ~ userId", userId);
     const url = `users/${userId}`;
-
     return axiosClient.get(url);
   },
 
   addNewUser: (data) => {
-    console.log("🚀 ~ file: userApi.js ~ line 22 ~ data", data);
     const url = `users`;
     return axiosClient.post(url, data);
   },
@@ -31,8 +27,6 @@ export const userApi = {
   },
 
   deleteUser: (id) => {
-    console.log("🚀 ~ file: userApi.js ~ line 34 ~ id", id);
-
     const url = `users/${id}`;
     return axiosClient.delete(url);
   },

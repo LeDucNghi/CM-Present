@@ -11,7 +11,7 @@ export const initialValues = {
   project: "",
 };
 
-export const validationSchema = Yup.object({
+export const validationSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(1, "Please enter your real name 😒")
     .required("Please enter your first name 🤔"),
@@ -26,9 +26,15 @@ export const validationSchema = Yup.object({
 
   age: Yup.string().required("Please enter your age 🤔"),
 
-  role: Yup.string().required("Please enter your role 🤔"),
+  role: Yup.string()
+    .min(1, "Invalid role!")
+    .required("Please enter your role 🤔"),
 
-  team: Yup.string().required("Please enter your team 🤔"),
+  team: Yup.string()
+    .min(1, "Invalid team!")
+    .required("Please enter your team 🤔"),
 
-  project: Yup.string().required("Please enter your project 🤔"),
+  project: Yup.string()
+    .min(1, "Invalid project!")
+    .required("Please enter your project 🤔"),
 });

@@ -58,8 +58,14 @@ export default function AddUserForm({ open, setOpen }) {
               }}
             >
               {(formikProps) => {
-                const { isValid, values, touched, errors, handleChange } =
-                  formikProps;
+                const {
+                  isValid,
+                  values,
+                  touched,
+                  errors,
+                  handleChange,
+                  handleBlur,
+                } = formikProps;
                 return (
                   <Form>
                     <Field
@@ -68,6 +74,7 @@ export default function AddUserForm({ open, setOpen }) {
                       type="text"
                       value={values.firstName}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       error={touched.firstName && Boolean(errors.firstName)}
                     />
 
@@ -77,6 +84,7 @@ export default function AddUserForm({ open, setOpen }) {
                       type="text"
                       value={values.lastName}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       error={touched.lastName && Boolean(errors.lastName)}
                     />
 
@@ -86,6 +94,7 @@ export default function AddUserForm({ open, setOpen }) {
                       type="text"
                       value={values.email}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       error={touched.email && Boolean(errors.email)}
                     />
 
@@ -95,6 +104,7 @@ export default function AddUserForm({ open, setOpen }) {
                       type="text"
                       value={values.age}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       error={touched.age && Boolean(errors.age)}
                     />
 
@@ -104,6 +114,7 @@ export default function AddUserForm({ open, setOpen }) {
                       type="text"
                       value={values.role}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       error={touched.role && Boolean(errors.role)}
                     />
 
@@ -113,6 +124,7 @@ export default function AddUserForm({ open, setOpen }) {
                       type="text"
                       value={values.team}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       error={touched.team && Boolean(errors.team)}
                     />
 
@@ -122,6 +134,7 @@ export default function AddUserForm({ open, setOpen }) {
                       type="text"
                       value={values.project}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       error={touched.project && Boolean(errors.project)}
                     />
 

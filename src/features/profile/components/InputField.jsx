@@ -3,7 +3,13 @@ import React from "react";
 import { selectLanguage } from "features/drawer/drawerSlice";
 import { useSelector } from "react-redux";
 
-export const InputField = ({ values, touched, errors, handleChange }) => {
+export const InputField = ({
+  values,
+  touched,
+  errors,
+  handleBlur,
+  handleChange,
+}) => {
   const languages = useSelector(selectLanguage);
 
   return (
@@ -14,6 +20,7 @@ export const InputField = ({ values, touched, errors, handleChange }) => {
         type="text"
         value={values ? values.firstName : ""}
         onChange={handleChange}
+        onBlur={handleBlur}
         error={
           errors && touched
             ? touched.firstName && Boolean(errors.firstName)
@@ -27,6 +34,7 @@ export const InputField = ({ values, touched, errors, handleChange }) => {
         type="text"
         value={values ? values.lastName : ""}
         onChange={handleChange}
+        onBlur={handleBlur}
         error={
           errors && touched
             ? touched.lastName && Boolean(errors.lastName)
@@ -40,6 +48,7 @@ export const InputField = ({ values, touched, errors, handleChange }) => {
         type="text"
         value={values ? values.email : ""}
         onChange={handleChange}
+        onBlur={handleBlur}
         error={
           errors && touched ? touched.email && Boolean(errors.email) : null
         }
@@ -51,6 +60,7 @@ export const InputField = ({ values, touched, errors, handleChange }) => {
         type="text"
         value={values ? values.age : ""}
         onChange={handleChange}
+        onBlur={handleBlur}
         error={errors && touched ? touched.age && Boolean(errors.age) : null}
       />
 
@@ -60,6 +70,7 @@ export const InputField = ({ values, touched, errors, handleChange }) => {
         type="text"
         value={values ? values.team : ""}
         onChange={handleChange}
+        onBlur={handleBlur}
         error={errors && touched ? touched.team && Boolean(errors.team) : null}
       />
 
@@ -69,6 +80,7 @@ export const InputField = ({ values, touched, errors, handleChange }) => {
         type="text"
         value={values ? values.role : ""}
         onChange={handleChange}
+        onBlur={handleBlur}
         error={errors && touched ? touched.role && Boolean(errors.role) : null}
       />
     </>
