@@ -3,7 +3,7 @@ import { loginFailed, loginSuccess } from "./authSlice";
 import { Toast } from "utils";
 import history from "utils/history";
 
-export const handleLogin = (payload) => (dispatch, getState) => {
+export const handleLogin = (payload) => async (dispatch, getState) => {
   try {
     const email = "testing@gmail.com";
     const password = "123456789Test";
@@ -32,12 +32,12 @@ export const handleLogin = (payload) => (dispatch, getState) => {
       });
       dispatch(loginFailed());
     } else {
-      Toast.fire({
+      await Toast.fire({
         icon: "success",
         title: "Signin success",
       });
+      await history.push(`/main/user`);
       dispatch(loginSuccess());
-      dispatch(history.push(`/main/user`));
       localStorage.setItem("account", JSON.stringify(items));
     }
   } catch (error) {

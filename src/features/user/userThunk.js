@@ -5,6 +5,7 @@ import {
   fetchUserListSuccess,
 } from "./userSlice";
 
+import Swal from "sweetalert2";
 import { Toast } from "utils";
 import { userApi } from "api/userApi";
 
@@ -32,11 +33,11 @@ export const handleAddUser =
       if (res) {
         dispatch(addUserSuccess());
         setOpen(false);
-        Toast.fire("Added user successfully!", "", "success");
+        Swal.fire("Added user successfully!", "", "success");
       }
     } catch (error) {
       setOpen(false);
       console.log("🚀 ~ file: userThunk.js ~ line 45 ~ error", error);
-      Toast.fire(`${error.message}`, "", "error");
+      Swal.fire(`${error.message}`, "", "error");
     }
   };

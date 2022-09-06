@@ -16,6 +16,10 @@ export const userSlice = createSlice({
     },
 
     fetchUserListSuccess: (state, action) => {
+      console.log(
+        "🚀 ~ file: userSlice.js ~ line 21 ~ action.payload",
+        action.payload
+      );
       state.loading = false;
       state.userList = action.payload;
       state.success = true;

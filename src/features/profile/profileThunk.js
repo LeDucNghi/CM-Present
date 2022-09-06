@@ -7,7 +7,7 @@ import {
   updateUserSuccess,
 } from "./profileSlice";
 
-import { Toast } from "utils";
+import Swal from "sweetalert2";
 import { userApi } from "api/userApi";
 
 export const fetchUserById = (id) => async (dispatch, getState) => {
@@ -38,7 +38,7 @@ export const handleUpdateUser = (id, values) => async (dispatch, getState) => {
 
     if (res) {
       dispatch(updateUserSuccess());
-      Toast.fire({
+      Swal.fire({
         icon: "success",
         title: "Update successfully",
       });
@@ -48,7 +48,7 @@ export const handleUpdateUser = (id, values) => async (dispatch, getState) => {
       "🚀 ~ file: profileThunk.js ~ line 31 ~ handleUpdateUser ~ error",
       error
     );
-    Toast.fire({
+    Swal.fire({
       icon: "error",
       title: `${error.response.statusText}`,
     });

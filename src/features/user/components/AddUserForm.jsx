@@ -159,9 +159,9 @@ export default function AddUserForm({ open, setOpen }) {
                         variant="contained"
                         type="submit"
                       >
-                        {isLoading ? (
+                        {isLoading === true ? (
                           <CircularProgress size={25} />
-                        ) : mode === "dark" ? (
+                        ) : languages === "VN" ? (
                           "Thêm"
                         ) : (
                           "Add"

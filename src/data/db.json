@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "firstName": "Johnnnn",
+      "firstName": "John",
       "lastName": "Cena",
       "email": "phunghung210@gmail.com",
       "age": "29",
@@ -88,17 +88,6 @@
       "project": "Zalo App"
     },
     {
-      "id": 9,
-      "lastName": "Roxie",
-      "firstName": "Harvey",
-      "age": 65,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "image": null,
-      "role": "member",
-      "team": "Angular",
-      "project": "Zalo App"
-    },
-    {
       "firstName": "Duc",
       "lastName": "Nghi",
       "email": "leducnghi28122000@gmail.com",
@@ -106,21 +95,30 @@
       "role": "member",
       "team": "React Native",
       "project": "Zalo App",
-      "id": 10
+      "id": 9
+    },
+    {
+      "id": 10,
+      "firstName": "Anh",
+      "lastName": "Tuấn",
+      "email": "phamanhtuan01789@gmail.com",
+      "age": "22",
+      "role": "member",
+      "team": "React",
+      "project": "Facebook app"
+    },
+    {
+      "id": 11,
+      "firstName": "Đức",
+      "lastName": "Long",
+      "email": "vuduclong@gmail.com",
+      "age": "22",
+      "role": "member",
+      "team": "React",
+      "project": "Zalo app"
     }
   ],
   "trash": [
-    {
-      "id": 1,
-      "lastName": "Phung",
-      "firstName": "Hung",
-      "age": 69,
-      "email": "leducnghi28122000hiie@gmail.com",
-      "image": null,
-      "role": "member",
-      "team": "React",
-      "project": "Error"
-    },
     {
       "id": 2,
       "lastName": "Phung",
@@ -131,6 +129,17 @@
       "role": "member",
       "team": "React",
       "project": "Error"
+    },
+    {
+      "lastName": "Roxie",
+      "firstName": "Harvey",
+      "age": 65,
+      "email": "leducnghi28122000hiie@gmail.com",
+      "image": null,
+      "role": "member",
+      "team": "Angular",
+      "project": "Zalo App",
+      "id": 3
     }
   ]
 }

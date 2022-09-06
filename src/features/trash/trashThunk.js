@@ -21,7 +21,7 @@ export const handleRestoreUser =
     const mode = getState().drawer.mode;
     const languages = getState().drawer.language;
     // const deletedList = getState().trash.deletedUserList;
-    // const userList = getState().user.userList;
+    const userList = getState().user.userList;
 
     const checkDiffElement = row.filter(
       (x) => !selectedRow.some((x1) => x.id === x1.id)
@@ -60,14 +60,16 @@ export const handleRestoreUser =
     })
       .then((result) => {
         if (result.isConfirmed) {
+          const newUserList = [...userList];
           checkSameElement.forEach((element) => {
             const { id, ...rest } = element;
 
             trashApi.deleteUser(id);
             userApi.addNewUser({ ...rest });
 
-            dispatch(fetchUserListSuccess({ element }));
+            newUserList.push({ ...rest, id: newUserList.length + 1 });
           });
+          dispatch(fetchUserListSuccess(newUserList));
 
           dispatch(fetchDeletedListSuccess(checkDiffElement));
 
@@ -176,7 +178,7 @@ export const handleDeleteUser =
             checkSameElement.forEach((element) => {
               const { id, ...rest } = element;
 
-              // trashApi.deleteUser(id);
+              trashApi.deleteUser(id);
             });
 
             dispatch(fetchDeletedListSuccess(checkDiffElement));
