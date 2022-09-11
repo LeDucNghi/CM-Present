@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { MaterialUISwitch } from "constants/styledMUI";
+import { MaterialUISwitch } from "utils/styledMUI";
 import { selectMode } from "../drawerSlice";
 import { toggleSwitch } from "../drawerThunk";
 

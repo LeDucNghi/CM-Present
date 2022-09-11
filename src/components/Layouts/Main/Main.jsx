@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import About from "pages/About/About";
 import Box from "@mui/material/Box";
 import Dashboard from "pages/DashBoard/Dashboard";
-import { DrawerHeader } from "constants/styledMUI";
+import { DrawerHeader } from "utils/styledMUI";
 import Error from "components/Common/NotFound/NotFound";
 import MiniDrawer from "features/drawer/components/Drawer";
 import Projects from "pages/Projects/Projects";

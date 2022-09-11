@@ -12,7 +12,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { Avatar } from "features/profile/components/Avatar";
-import { Images } from "constants/images";
+import { Images } from "utils/images";
 import { InputField } from "features/profile/components/InputField";
 import { Loading } from "components/Common/Loading/Loading";
 import { selectLanguage } from "features/drawer/drawerSlice";

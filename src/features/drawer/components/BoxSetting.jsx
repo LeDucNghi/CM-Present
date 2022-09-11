@@ -6,13 +6,14 @@ import ListItem from "@mui/material/ListItem";
 import React from "react";
 import Typography from "@mui/material/Typography";
 import { handleLogout } from "features/auth/authThunk";
-import { settings } from "constants/global";
 import { useDispatch } from "react-redux";
 
 export default function BoxSetting() {
   const dispatch = useDispatch();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
   const handleSettingChange = (setting) => {
     setAnchorElUser(null);
