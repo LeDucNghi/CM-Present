@@ -1,5 +1,7 @@
+import { rootReducer, sagaMiddleware } from "./rootReducer";
+
 import { configureStore } from "@reduxjs/toolkit";
-import { rootReducer } from "./rootReducer";
+import rootSaga from "./rootSaga";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import thunk from "redux-thunk";
 
@@ -8,12 +10,9 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(
-      // sagaMiddleware,
-      thunk
-    ),
+    }).concat(sagaMiddleware, thunk),
 });
 
-// sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga);
 
 setupListeners(store.dispatch);

@@ -15,7 +15,7 @@ export const trashSlice = createSlice({
       state.loading = true;
     },
 
-    fetchDeletedList: (state, action) => {
+    fetchingDeletedList: (state, action) => {
       state.loading = true;
     },
 
@@ -41,7 +41,7 @@ export const trashSlice = createSlice({
 
 export const {
   restoreUser,
-  fetchDeletedList,
+  fetchingDeletedList,
   fetchDeletedListFailed,
   fetchDeletedListSuccess,
   deleteUser,

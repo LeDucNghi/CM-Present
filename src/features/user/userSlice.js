@@ -11,7 +11,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    fetchUserList: (state) => {
+    fetchingUserList: (state) => {
       state.loading = true;
     },
 
@@ -22,6 +22,7 @@ export const userSlice = createSlice({
     },
 
     fetchUserListFailed: (state, action) => {
+      state.loading = false;
       state.message = action.payload;
     },
 
@@ -44,7 +45,7 @@ export const userSlice = createSlice({
 });
 
 export const {
-  fetchUserList,
+  fetchingUserList,
   addUser,
   addUserSuccess,
   fetchUserListFailed,

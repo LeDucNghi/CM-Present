@@ -4,6 +4,7 @@ import { Button, CircularProgress } from "@mui/material";
 import { Form, Formik } from "formik";
 import { fetchUserById, handleUpdateUser } from "features/profile/profileThunk";
 import {
+  fetchingUser,
   selectError,
   selectFetching,
   selectMessage,
@@ -34,6 +35,7 @@ function About() {
 
   useEffect(() => {
     dispatch(fetchUserById(id));
+    dispatch(fetchingUser(id));
   }, [dispatch, id]);
 
   const initialValues = {

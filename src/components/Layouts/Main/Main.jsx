@@ -14,6 +14,8 @@ import Trash from "pages/Trash/Trash";
 import User from "pages/Users/User";
 import { fetchTrashList } from "features/trash/trashThunk";
 import { fetchUserList } from "features/user/userThunk";
+import { fetchingDeletedList } from "features/trash/trashSlice";
+import { fetchingUserList } from "features/user/userSlice";
 import { selectMode } from "features/drawer/drawerSlice";
 import { useEffect } from "react";
 
@@ -24,6 +26,8 @@ export default function Main() {
   useEffect(() => {
     dispatch(fetchUserList());
     dispatch(fetchTrashList());
+    dispatch(fetchingUserList());
+    dispatch(fetchingDeletedList());
   }, [dispatch]);
 
   return (
