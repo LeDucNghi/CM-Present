@@ -3,22 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteUser } from "../trashSlice";
 import { handleDeleteUser } from "../trashThunk";
-import { selectDeletedList } from "../trashSlice";
-
-// import { selectUserList } from "features/user/userSlice";
 
 export default function DeleteUser({ row, selectedRow }) {
   const dispatch = useDispatch();
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
-  // const userList = useSelector(selectUserList);
-  const deletedUserList = useSelector(selectDeletedList);
 
   const handleDeleteArgs = {
     row,
     selectedRow,
-    list: deletedUserList,
     isDenied: false,
   };
 
@@ -26,7 +21,8 @@ export default function DeleteUser({ row, selectedRow }) {
     <>
       <Button
         startIcon={<DeleteIcon />}
-        onClick={() => dispatch(handleDeleteUser(handleDeleteArgs))}
+        // onClick={() => dispatch(handleDeleteUser(handleDeleteArgs))}
+        onClick={() => dispatch(deleteUser(handleDeleteArgs))}
         variant="contained"
         color="error"
         disabled={selectedRow.length === 0}

@@ -2,11 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   image: null,
+  file: null,
   loading: false,
   userProfile: null,
   message: "",
   error: false,
   isFetching: false,
+  id: null,
 };
 
 export const profileSlice = createSlice({
@@ -21,10 +23,8 @@ export const profileSlice = createSlice({
       state.loading = true;
     },
 
-    updateUserSuccess: (state, action) => {
+    updateUserSuccess: (state) => {
       state.loading = false;
-      state.error = false;
-      state.message = action.payload;
     },
 
     fetchingUser: (state) => {
@@ -52,6 +52,7 @@ export const profileSlice = createSlice({
 
 export const {
   setImage,
+  setNewImage,
   updateUser,
   updateUserSuccess,
   fetchingUser,

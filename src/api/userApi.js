@@ -23,7 +23,7 @@ export const userApi = {
 
   updateUser: (data) => {
     const url = `users/${data.id}`;
-    return axiosClient.put(url, data);
+    return axiosClient.put(url, data.values);
   },
 
   deleteUser: (id) => {

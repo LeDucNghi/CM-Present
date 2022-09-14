@@ -1,19 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Images } from "utils/images";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import { onImageChange } from "../profileThunk";
-import { selectImage } from "../profileSlice";
-import { useEffect } from "react";
+import { useState } from "react";
 
 export const Avatar = ({ data, setFieldValue }) => {
-  const dispatch = useDispatch();
-  const image = useSelector(selectImage);
+  var [image, setImage] = useState(null);
 
-  useEffect(() => {
-    if (image) setFieldValue("image", image);
-  }, [image]);
+  const onImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      // const img = URL.createObjectURL(e.target.files[0]);
+
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+        image = reader.result;
+        setImage(image);
+        setFieldValue("image", image);
+      };
+    }
+  };
 
   return (
     <>
@@ -34,11 +39,7 @@ export const Avatar = ({ data, setFieldValue }) => {
           size="3x"
           style={{ color: "#464646" }}
         />
-        <input
-          onChange={(e) => dispatch(onImageChange(e))}
-          name="file_avt"
-          type="file"
-        />
+        <input onChange={(e) => onImageChange(e)} name="file_avt" type="file" />
       </label>
     </>
   );

@@ -1,7 +1,7 @@
 import { CustomDataGrid } from "utils/styledMUI";
 import PropTypes from "prop-types";
 import React from "react";
-import { columns } from "utils";
+import { columns } from "utils/columns";
 import { selectDeletedList } from "features/trash/trashSlice";
 import { selectMode } from "features/drawer/drawerSlice";
 import { selectUserList } from "features/user/userSlice";

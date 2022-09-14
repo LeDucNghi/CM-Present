@@ -8,8 +8,10 @@ import { Button } from "@mui/material";
 import DataGrid from "components/Custom/CustomDataGrid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { handleDeleteUser } from "features/trash/trashThunk";
+import { handleDeleteUser } from "utils";
 import { selectDeletedList } from "features/trash/trashSlice";
+
+// import { handleDeleteUser } from "features/trash/trashThunk";
 
 export default function User() {
   const dispatch = useDispatch();
@@ -63,7 +65,8 @@ export default function User() {
         </Button>
         <Button
           startIcon={<DeleteIcon />}
-          onClick={() => dispatch(handleDeleteUser(handleDeleteUserArgs))}
+          // onClick={() => dispatch(handleDeleteUser(handleDeleteUserArgs))}
+          onClick={() => handleDeleteUser(handleDeleteUserArgs)}
           variant="contained"
           color="error"
           sx={{

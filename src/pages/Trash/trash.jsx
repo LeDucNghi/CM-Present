@@ -2,10 +2,11 @@ import DataGrid from "components/Custom/CustomDataGrid";
 import DeleteUser from "features/trash/components/DeleteUser";
 import React from "react";
 import RestoreUser from "features/trash/components/RestoreUser";
+import { deleteUser } from "features/trash/trashSlice";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 // import { Loading } from "components/Common/Loading/Loading";
-
-
 
 // const a11yProps = (index) => {
 //   return {
@@ -15,6 +16,8 @@ import RestoreUser from "features/trash/components/RestoreUser";
 // };
 
 function Trash() {
+  const dispatch = useDispatch();
+
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
   // const [value, setValue] = React.useState(0);
@@ -22,6 +25,10 @@ function Trash() {
   // const handleChange = (event, newValue) => {
   //   setValue(newValue);
   // };
+
+  useEffect(() => {
+    dispatch(deleteUser());
+  }, []);
 
   return (
     <div style={{ height: 400, width: "100%" }}>

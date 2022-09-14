@@ -5,12 +5,17 @@ const initialState = {
   deletedUserList: [],
   loading: false,
   message: "",
+  isError: false,
 };
 
 export const trashSlice = createSlice({
   name: "trash",
   initialState,
   reducers: {
+    removeToTrash: (state, action) => {
+      state.loading = true;
+    },
+
     restoreUser: (state, action) => {
       state.loading = true;
     },
@@ -22,11 +27,13 @@ export const trashSlice = createSlice({
     fetchDeletedListSuccess: (state, action) => {
       state.deletedUserList = action.payload;
       state.loading = false;
+      state.isError = false;
     },
 
     fetchDeletedListFailed: (state, action) => {
       state.loading = false;
       state.message = action.payload;
+      state.isError = true;
     },
 
     deleteUser: (state, action) => {
@@ -41,6 +48,7 @@ export const trashSlice = createSlice({
 
 export const {
   restoreUser,
+  removeToTrash,
   fetchingDeletedList,
   fetchDeletedListFailed,
   fetchDeletedListSuccess,

@@ -9,6 +9,7 @@ import {
   selectFetching,
   selectMessage,
   selectUserProfile,
+  updateUser,
 } from "features/profile/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -34,7 +35,7 @@ function About() {
   const languages = useSelector(selectLanguage);
 
   useEffect(() => {
-    dispatch(fetchUserById(id));
+    // dispatch(fetchUserById(id));
     dispatch(fetchingUser(id));
   }, [dispatch, id]);
 
@@ -64,7 +65,13 @@ function About() {
           validationSchema={validationSchema}
           initialValues={initialValues}
           onSubmit={(values) => {
-            dispatch(handleUpdateUser(id, values));
+            // dispatch(handleUpdateUser(id, values));
+            dispatch(
+              updateUser({
+                id,
+                values,
+              })
+            );
           }}
         >
           {(formikProps) => {

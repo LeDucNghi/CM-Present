@@ -88,7 +88,7 @@ export const handleRestoreUser =
   };
 
 export const handleDeleteUser =
-  ({ row, selectedRow, list, isDenied }) =>
+  ({ row, selectedRow, isDenied }) =>
   (dispatch, getState) => {
     const languages = getState().drawer.language;
     const mode = getState().drawer.mode;

@@ -1,4 +1,5 @@
 import { Form, Formik } from "formik";
+import { addUser, selectIsLoading, selectOpen } from "../userSlice";
 import { initialValues, validationSchema } from "formik/addUser";
 import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +12,7 @@ import Fade from "@mui/material/Fade";
 import { Field } from "components/Custom/InputField";
 import Modal from "@mui/material/Modal";
 import { handleAddUser } from "../userThunk";
-import { selectIsLoading } from "../userSlice";
+import { useEffect } from "react";
 
 export default function AddUserForm({ open, setOpen }) {
   const dispatch = useDispatch();
@@ -19,6 +20,11 @@ export default function AddUserForm({ open, setOpen }) {
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
   const isLoading = useSelector(selectIsLoading);
+  const isOpened = useSelector(selectOpen);
+
+  useEffect(() => {
+    setOpen(isOpened);
+  }, [isOpened]);
 
   const style = {
     position: "absolute",
@@ -52,7 +58,8 @@ export default function AddUserForm({ open, setOpen }) {
               validationSchema={validationSchema}
               initialValues={initialValues}
               onSubmit={(values) => {
-                dispatch(handleAddUser(values, setOpen));
+                // dispatch(handleAddUser(values, setOpen));
+                dispatch(addUser(values));
               }}
             >
               {(formikProps) => {

@@ -1,20 +1,21 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { fetchUserByIdFailed, fetchingUser } from "./profileSlice";
+import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import {
+  fetchUserByIdFailed,
+  fetchUserByIdSuccess,
+  fetchingUser,
+  setImage,
+  setNewImage,
+  updateUser,
+  updateUserFailed,
+  updateUserSuccess,
+} from "./profileSlice";
 
 import { userApi } from "api/userApi";
 
 function* fetchUserById(action) {
-  console.log(
-    "🚀 ~ file: profileSaga.js ~ line 7 ~ function*fetchUserById ~ payload",
-    action.payload
-  );
-
   try {
     const res = yield call(userApi.getUserById, action.payload);
-    console.log(
-      "🚀 ~ file: profileSaga.js ~ line 9 ~ function*fetchUserById ~ res",
-      res
-    );
+    yield put(fetchUserByIdSuccess(res));
   } catch (error) {
     console.log(
       "🚀 ~ file: profileSaga.js ~ line 11 ~ function*fetchUserById ~ error",
@@ -24,6 +25,21 @@ function* fetchUserById(action) {
   }
 }
 
+function* handleUpdateUser(action) {
+  const { payload } = action;
+  try {
+    yield call(userApi.updateUser, payload);
+    yield put(updateUserSuccess());
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: profileSaga.js ~ line 35 ~ function*handleUpdateUser ~ error",
+      error
+    );
+    yield put(updateUserFailed(error.message));
+  }
+}
+
 export default function* profileSaga() {
+  yield takeEvery(updateUser.type, handleUpdateUser);
   yield takeLatest(fetchingUser.type, fetchUserById);
 }
