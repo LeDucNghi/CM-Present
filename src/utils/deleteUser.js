@@ -1,4 +1,3 @@
-import { checkDiffElement, checkSameElement } from "./common";
 import { deleteUser, removeToTrash } from "features/trash/trashSlice";
 
 import Swal from "sweetalert2";
@@ -8,10 +7,6 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
   const mode = store.getState().drawer.mode;
   const languages = store.getState().drawer.language;
   const isSuccess = store.getState().user.success;
-  const isError = store.getState().user.isError;
-
-  const sameList = checkSameElement(row, selectedRow);
-  const diffList = checkDiffElement(row, selectedRow);
 
   Swal.fire({
     title: `${
@@ -51,58 +46,46 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
 
     background: `${mode === "dark" ? "#121212" : ""}`,
     color: `${mode === "dark" ? "#fff" : ""}`,
-  })
-    .then((result) => {
-      if (result.isConfirmed) {
-        // if isDenied === true > remove to trash
-        // else > delete permanently
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // if isDenied === true > remove to trash
+      // else > delete permanently
 
-        if (isDenied) {
-          store.dispatch(
-            removeToTrash({ row, selectedRow, sameList, diffList })
-          );
-        } else {
-          store.dispatch(
-            deleteUser({ row, selectedRow, sameList, diffList, isDenied })
-          );
-        }
-
-        if (isSuccess) {
-          Swal.fire({
-            icon: "success",
-            title: `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
-            text: isDenied
-              ? `${
-                  languages === `VN`
-                    ? `Bạn có thể khôi phục ${
-                        selectedRow.length === 1 ? "" : "những"
-                      } người dùng ở thùng rác!`
-                    : `You can restore ${
-                        selectedRow.length === 1 ? `this` : `these`
-                      } user${selectedRow.length === 1 ? `` : `s`} in trash`
-                }`
-              : ``,
-          });
-        }
-      } else if (result.isDenied) {
-        // delete permanently in user page
-
-        store.dispatch(
-          deleteUser({ row, selectedRow, sameList, diffList, isDenied })
-        );
-        if (isSuccess) {
-          Swal.fire({
-            icon: "success",
-            title: `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
-          });
-        }
+      if (isDenied) {
+        // user page > remove to trash
+        store.dispatch(removeToTrash({ row, selectedRow }));
+      } else {
+        // trash page > delete permanently
+        store.dispatch(deleteUser({ row, selectedRow, isDenied }));
       }
-    })
-    .catch((error) => {
-      console.log("🚀 ~ file: trashThunk.js ~ line 210 ~ error", error);
-      Swal.fire({
-        icon: "error",
-        title: `${error.message}`,
-      });
-    });
+
+      if (isSuccess) {
+        Swal.fire({
+          icon: "success",
+          title: `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
+          text: isDenied
+            ? `${
+                languages === `VN`
+                  ? `Bạn có thể khôi phục ${
+                      selectedRow.length === 1 ? "" : "những"
+                    } người dùng ở thùng rác!`
+                  : `You can restore ${
+                      selectedRow.length === 1 ? `this` : `these`
+                    } user${selectedRow.length === 1 ? `` : `s`} in trash`
+              }`
+            : ``,
+        });
+      }
+    } else if (result.isDenied) {
+      // delete permanently in user page
+
+      store.dispatch(deleteUser({ row, selectedRow, isDenied }));
+      if (isSuccess) {
+        Swal.fire({
+          icon: "success",
+          title: `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
+        });
+      }
+    }
+  });
 }

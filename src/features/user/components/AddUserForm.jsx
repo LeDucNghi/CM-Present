@@ -11,7 +11,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Fade from "@mui/material/Fade";
 import { Field } from "components/Custom/InputField";
 import Modal from "@mui/material/Modal";
-import { handleAddUser } from "../userThunk";
 import { useEffect } from "react";
 
 export default function AddUserForm({ open, setOpen }) {

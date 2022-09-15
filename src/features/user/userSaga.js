@@ -6,9 +6,23 @@ import {
   fetchUserListSuccess,
   fetchingUserList,
 } from "./userSlice";
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import {
+  all,
+  call,
+  put,
+  select,
+  takeEvery,
+  takeLatest,
+} from "redux-saga/effects";
+import { checkDiffElement, checkSameElement } from "utils";
+import {
+  fetchDeletedListSuccess,
+  removeToTrash,
+  selectDeletedList,
+} from "features/trash/trashSlice";
 
 import Swal from "sweetalert2";
+import { trashApi } from "api/trashApi";
 import { userApi } from "api/userApi";
 
 function* fetchUserList() {
@@ -50,7 +64,45 @@ function* handleAddUser(action) {
   }
 }
 
+function* handleRemoveToTrash(action) {
+  const { payload } = action;
+
+  const deletedList = yield select(selectDeletedList);
+  const sameList = checkSameElement(payload.row, payload.selectedRow);
+  const diffList = checkDiffElement(payload.row, payload.selectedRow);
+
+  try {
+    const newDeletedList = [...deletedList];
+
+    yield all(
+      sameList.map((x) => {
+        const { id, ...rest } = x;
+        return all([
+          newDeletedList.push({
+            ...rest,
+            id: newDeletedList.length + 1,
+          }),
+          call(trashApi.addNewUser, { ...rest }),
+          call(userApi.deleteUser, x.id),
+        ]);
+      })
+    );
+
+    yield put(fetchDeletedListSuccess(newDeletedList));
+    yield put(fetchUserListSuccess(diffList));
+
+    // yield delay(200);
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: trashSaga.js ~ line 51 ~ function*handleRemoveToTrash ~ error",
+      error
+    );
+  }
+}
+
 export default function* userSaga() {
   yield takeEvery(addUser.type, handleAddUser);
+  yield takeEvery(removeToTrash.type, handleRemoveToTrash);
+
   yield takeLatest(fetchingUserList.type, fetchUserList);
 }

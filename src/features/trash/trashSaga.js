@@ -1,7 +1,6 @@
 import {
   all,
   call,
-  delay,
   put,
   select,
   takeEvery,
@@ -13,14 +12,10 @@ import {
   fetchDeletedListFailed,
   fetchDeletedListSuccess,
   fetchingDeletedList,
-  removeToTrash,
   restoreUser,
-  selectDeletedList,
 } from "./trashSlice";
 import { fetchUserListSuccess, selectUserList } from "features/user/userSlice";
-import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
 
-import Swal from "sweetalert2";
 import { trashApi } from "api/trashApi";
 import { userApi } from "api/userApi";
 
@@ -38,45 +33,10 @@ function* fetchDeletedList() {
   }
 }
 
-function* handleRemoveToTrash(action) {
-  const { payload } = action;
-
-  const deletedList = yield select(selectDeletedList);
-
-  try {
-    const newDeletedList = [...deletedList];
-
-    yield all(
-      payload.sameList.map((x) => {
-        const { id, ...rest } = x;
-        return all([
-          newDeletedList.push({
-            ...rest,
-            id: newDeletedList.length + 1,
-          }),
-          // call(trashApi.addNewUser, { ...rest }),
-          // call(userApi.deleteUser, x.id),
-        ]);
-      })
-    );
-
-    // add new user to trash list
-    yield put(fetchDeletedListSuccess(newDeletedList));
-
-    // delete user from user list
-    yield put(fetchUserListSuccess(payload.diffList));
-
-    // yield delay(200);
-  } catch (error) {
-    console.log(
-      "🚀 ~ file: trashSaga.js ~ line 51 ~ function*handleRemoveToTrash ~ error",
-      error
-    );
-  }
-}
-
 function* handleDeletePermanent(action) {
   const { payload } = action;
+
+  const diffList = checkDiffElement(payload.row, payload.selectedRow);
   try {
     yield all(
       payload.sameList.map((x) => {
@@ -88,8 +48,8 @@ function* handleDeletePermanent(action) {
     );
 
     if (payload.isDenied === true) {
-      yield put(fetchUserListSuccess(payload.diffList));
-    } else yield put(fetchDeletedListSuccess(payload.diffList));
+      yield put(fetchUserListSuccess(diffList));
+    } else yield put(fetchDeletedListSuccess(diffList));
   } catch (error) {
     console.log(
       "🚀 ~ file: trashSaga.js ~ line 60 ~ function*handleDeletePermanent ~ error",
@@ -103,8 +63,11 @@ function* handleRestoreUser(action) {
   const userList = yield select(selectUserList);
   const newUserList = [...userList];
 
+  const sameList = checkSameElement(payload.row, payload.selectedRow);
+  const diffList = checkDiffElement(payload.row, payload.selectedRow);
+
   yield all(
-    payload.sameList.map((x) => {
+    sameList.map((x) => {
       const { id, ...rest } = x;
       return all([
         call(trashApi.deleteUser, x.id),
@@ -116,12 +79,11 @@ function* handleRestoreUser(action) {
   );
 
   yield put(fetchUserListSuccess(newUserList));
-  yield put(fetchDeletedListSuccess(payload.diffList));
+  yield put(fetchDeletedListSuccess(diffList));
 }
 
 export default function* trashSaga() {
   yield takeLatest(fetchingDeletedList.type, fetchDeletedList);
   yield takeEvery(deleteUser.type, handleDeletePermanent);
   yield takeEvery(restoreUser.type, handleRestoreUser);
-  yield takeEvery(removeToTrash.type, handleRemoveToTrash);
 }
