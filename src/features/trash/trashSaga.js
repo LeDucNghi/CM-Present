@@ -17,10 +17,10 @@ import {
   restoreUser,
   selectDeletedList,
 } from "./trashSlice";
+import { fetchUserListSuccess, selectUserList } from "features/user/userSlice";
 import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
 
 import Swal from "sweetalert2";
-import { fetchUserListSuccess, selectUserList } from "features/user/userSlice";
 import { trashApi } from "api/trashApi";
 import { userApi } from "api/userApi";
 

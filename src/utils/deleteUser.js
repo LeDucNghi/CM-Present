@@ -54,8 +54,8 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
   })
     .then((result) => {
       if (result.isConfirmed) {
-        // move to trash in user page
-        // delete permanently in trash page
+        // if isDenied === true > remove to trash
+        // else > delete permanently
 
         if (isDenied) {
           store.dispatch(

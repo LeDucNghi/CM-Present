@@ -1,11 +1,11 @@
-import "./NotFound.scss";
+import "assets/styles/NotFound.scss";
 
 import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
 
 import React from "react";
 import { useSelector } from "react-redux";
 
-function Error() {
+export function Error() {
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
 
@@ -51,5 +51,3 @@ function Error() {
     </div>
   );
 }
-
-export default Error;

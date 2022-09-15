@@ -1,10 +1,10 @@
-import "./ThemingToggle.scss";
+import "assets/styles/ThemingToggle.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { MaterialUISwitch } from "utils/styledMUI";
+import { MaterialUISwitch } from "constants/styledMUI";
 import { selectMode } from "../drawerSlice";
 import { toggleSwitch } from "../drawerThunk";
 

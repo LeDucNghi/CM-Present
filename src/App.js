@@ -2,9 +2,9 @@ import "./assets/styles/GlobalStyles.scss";
 
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import Error from "components/Common/NotFound/NotFound";
+import { Error } from "components/Common";
 import Main from "components/Layouts/Main/Main";
-import PrivateRoute from "components/Common/PrivateRoute/PrivateRoute";
+import PrivateRoute from "components/Common/PrivateRoute";
 import SignIn from "pages/SignIn/Signin";
 import SignUp from "pages/SignUp/Signup";
 import { useEffect } from "react";

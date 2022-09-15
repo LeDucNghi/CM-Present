@@ -14,9 +14,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { Avatar } from "features/profile/components/Avatar";
-import { Images } from "utils/images";
+import { Images } from "constants/images";
 import { InputField } from "features/profile/components/InputField";
-import { Loading } from "components/Common/Loading/Loading";
+import { Loading } from "components/Common/Loading";
 import { selectLanguage } from "features/drawer/drawerSlice";
 import { selectLoading } from "features/profile/profileSlice";
 import { useEffect } from "react";

@@ -1,5 +1,11 @@
+import {
+  Toast,
+  checkDiffElement,
+  checkSameElement,
+  getArrayElement,
+} from "utils";
+
 import Swal from "sweetalert2";
-import { Toast } from "utils";
 import { fetchDeletedListSuccess } from "features/trash/trashSlice";
 import { fetchUserListSuccess } from "features/user/userSlice";
 import { trashApi } from "api/trashApi";
@@ -22,13 +28,8 @@ export const handleRestoreUser =
     const languages = getState().drawer.language;
     const userList = getState().user.userList;
 
-    const checkDiffElement = row.filter(
-      (x) => !selectedRow.some((x1) => x.id === x1.id)
-    );
-
-    const checkSameElement = row.filter((x) =>
-      selectedRow.some((x1) => x.id === x1.id)
-    );
+    const diffList = checkDiffElement(row, selectedRow);
+    const sameList = checkSameElement(row, selectedRow);
 
     Swal.fire({
       title: `${
@@ -60,17 +61,23 @@ export const handleRestoreUser =
       .then((result) => {
         if (result.isConfirmed) {
           const newUserList = [...userList];
-          checkSameElement.forEach((element) => {
-            const { id, ...rest } = element;
+          // checkSameElement.forEach((element) => {
+          //   const { id, ...rest } = element;
 
-            trashApi.deleteUser(id);
-            userApi.addNewUser({ ...rest });
+          //   trashApi.deleteUser(id);
+          //   userApi.addNewUser({ ...rest });
 
-            newUserList.push({ ...rest, id: newUserList.length + 1 });
-          });
-          dispatch(fetchUserListSuccess(newUserList));
+          //   newUserList.push({ ...rest, id: newUserList.length + 1 });
+          // });
 
-          dispatch(fetchDeletedListSuccess(checkDiffElement));
+          const newElement = getArrayElement(sameList);
+          console.log(
+            "🚀 ~ file: trashThunk.js ~ line 76 ~ .then ~ newElement",
+            newElement
+          );
+          // dispatch(fetchUserListSuccess(newUserList));
+
+          // dispatch(fetchDeletedListSuccess(checkDiffElement));
 
           Swal.fire({
             icon: "success",

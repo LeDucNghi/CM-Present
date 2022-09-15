@@ -6,14 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import About from "pages/About/About";
 import Box from "@mui/material/Box";
 import Dashboard from "pages/DashBoard/Dashboard";
-import { DrawerHeader } from "utils/styledMUI";
-import Error from "components/Common/NotFound/NotFound";
+import { DrawerHeader } from "constants/styledMUI";
+import { Error } from "components/Common";
 import MiniDrawer from "features/drawer/components/Drawer";
 import Projects from "pages/Projects/Projects";
 import Trash from "pages/Trash/Trash";
 import User from "pages/Users/User";
-import { fetchTrashList } from "features/trash/trashThunk";
-import { fetchUserList } from "features/user/userThunk";
 import { fetchingDeletedList } from "features/trash/trashSlice";
 import { fetchingUserList } from "features/user/userSlice";
 import { selectMode } from "features/drawer/drawerSlice";
@@ -24,8 +22,8 @@ export default function Main() {
   const mode = useSelector(selectMode);
 
   useEffect(() => {
-    dispatch(fetchUserList());
-    dispatch(fetchTrashList());
+    // dispatch(fetchUserList());
+    // dispatch(fetchTrashList());
     dispatch(fetchingUserList());
     dispatch(fetchingDeletedList());
   }, [dispatch]);

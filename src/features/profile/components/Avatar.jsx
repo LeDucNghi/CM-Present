@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Images } from "utils/images";
+import { Images } from "constants/images";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 

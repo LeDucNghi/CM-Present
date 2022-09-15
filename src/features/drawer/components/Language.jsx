@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LanguageIcon from "@mui/icons-material/Language";
 import MenuItem from "@mui/material/MenuItem";
-import { StyledMenu } from "utils/styledMUI";
+import { StyledMenu } from "constants/styledMUI";
 import { handleChangeLanguage } from "../drawerThunk";
 import { useDispatch } from "react-redux";
 
