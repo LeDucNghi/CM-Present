@@ -1,12 +1,11 @@
 import { Form, Formik } from "formik";
 import { initialValues, validationSchema } from "formik/signIn";
+import { login, selectIsLogging } from "features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "@mui/material/Button";
 import { CircularProgress } from "@mui/material";
 import { Field } from "components/Custom/InputField";
-import { handleLogin } from "../authThunk";
-import { selectIsLogging } from "features/auth/authSlice";
 
 export default function SigninForm() {
   const dispatch = useDispatch();
@@ -18,7 +17,8 @@ export default function SigninForm() {
       validationSchema={validationSchema}
       initialValues={initialValues}
       onSubmit={(values) => {
-        dispatch(handleLogin(values));
+        // dispatch(handleLogin(values));
+        dispatch(login(values));
       }}
     >
       {(formikProps) => {

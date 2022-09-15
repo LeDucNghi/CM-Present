@@ -5,7 +5,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LanguageIcon from "@mui/icons-material/Language";
 import MenuItem from "@mui/material/MenuItem";
 import { StyledMenu } from "constants/styledMUI";
-import { handleChangeLanguage } from "../drawerThunk";
+import { postLanguage } from "../drawerSlice";
 import { useDispatch } from "react-redux";
 
 export default function LanguageMenus() {
@@ -13,6 +13,19 @@ export default function LanguageMenus() {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [language, setLanguage] = React.useState("Eng");
+
+  const handleChangeLanguage = (id) => {
+    if (id === 1) {
+      dispatch(postLanguage("VN"));
+      setLanguage("VN");
+      localStorage.setItem("language", "VN");
+    } else {
+      dispatch(postLanguage("Eng"));
+      setLanguage("Eng");
+      localStorage.setItem("language", "Eng");
+    }
+    setAnchorEl(null);
+  };
 
   return (
     <div>
@@ -47,9 +60,7 @@ export default function LanguageMenus() {
           <p>VN</p>
         </MenuItem>
         <MenuItem
-          onClick={() =>
-            dispatch(handleChangeLanguage(2, setLanguage, setAnchorEl))
-          }
+          onClick={() => dispatch(handleChangeLanguage(2))}
           disableRipple
         >
           <LanguageIcon />

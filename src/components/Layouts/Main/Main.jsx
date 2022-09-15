@@ -22,8 +22,6 @@ export default function Main() {
   const mode = useSelector(selectMode);
 
   useEffect(() => {
-    // dispatch(fetchUserList());
-    // dispatch(fetchTrashList());
     dispatch(fetchingUserList());
     dispatch(fetchingDeletedList());
   }, [dispatch]);

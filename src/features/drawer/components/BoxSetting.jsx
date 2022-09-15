@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import React from "react";
 import Typography from "@mui/material/Typography";
-import { handleLogout } from "features/auth/authThunk";
+import { logout } from "features/auth/authSlice";
 import { useDispatch } from "react-redux";
 
 export default function BoxSetting() {
@@ -17,7 +17,7 @@ export default function BoxSetting() {
 
   const handleSettingChange = (setting) => {
     setAnchorElUser(null);
-    if (setting === "Logout") dispatch(handleLogout());
+    if (setting === "Logout") dispatch(logout());
   };
 
   return (
