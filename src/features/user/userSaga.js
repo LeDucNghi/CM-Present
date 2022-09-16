@@ -42,14 +42,12 @@ function* handleAddUser(action) {
   const { payload } = action;
   try {
     const res = yield call(userApi.addNewUser, payload);
-    console.log(
-      "🚀 ~ file: userSaga.js ~ line 45 ~ function*handleAddUser ~ res",
-      res
-    );
 
-    yield put(addUserSuccess(payload));
+    if (res) {
+      yield put(addUserSuccess(payload));
 
-    yield Swal.fire("Added user successfully!", "", "success");
+      yield Swal.fire("Added user successfully!", "", "success");
+    }
   } catch (error) {
     console.log(
       "🚀 ~ file: userSaga.js ~ line 28 ~ function*handleAddUser ~ error",

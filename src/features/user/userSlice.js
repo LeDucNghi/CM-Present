@@ -5,7 +5,7 @@ const initialState = {
   message: "",
   loading: false,
   success: false,
-  isOpen: false,
+  isOpen: Boolean,
 };
 
 export const userSlice = createSlice({
