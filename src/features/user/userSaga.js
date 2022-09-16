@@ -40,14 +40,10 @@ function* fetchUserList() {
 
 function* handleAddUser(action) {
   const { payload } = action;
-  console.log(
-    "🚀 ~ file: userSaga.js ~ line 29 ~ function*handleAddUser ~ payload",
-    payload
-  );
   try {
     const res = yield call(userApi.addNewUser, payload);
     console.log(
-      "🚀 ~ file: userSaga.js ~ line 30 ~ function*handleAddUser ~ res",
+      "🚀 ~ file: userSaga.js ~ line 45 ~ function*handleAddUser ~ res",
       res
     );
 

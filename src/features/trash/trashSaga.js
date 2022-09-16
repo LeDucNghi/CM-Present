@@ -36,10 +36,13 @@ function* fetchDeletedList() {
 function* handleDeletePermanent(action) {
   const { payload } = action;
 
+  if (!payload) return;
   const diffList = checkDiffElement(payload.row, payload.selectedRow);
+  const sameList = checkSameElement(payload.row, payload.selectedRow);
+
   try {
     yield all(
-      payload.sameList.map((x) => {
+      sameList.map((x) => {
         const { id, ...rest } = x;
         return payload.isDenied === true
           ? call(userApi.deleteUser, x.id)

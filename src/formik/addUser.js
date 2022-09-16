@@ -24,7 +24,13 @@ export const validationSchema = Yup.object().shape({
     .email("Invalid email !!")
     .required("Please enter your email 🤔"),
 
-  age: Yup.string().required("Please enter your age 🤔"),
+  age: Yup.number()
+    .positive("Please enter a positive number.")
+    .min(18, "Min is 18")
+    .max(60, "Max is 60")
+    .integer("Please enter an integer.")
+    .required("Please enter age.")
+    .typeError("Please enter a valid number."),
 
   role: Yup.string()
     .min(1, "Invalid role!")
