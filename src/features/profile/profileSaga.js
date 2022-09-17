@@ -3,13 +3,12 @@ import {
   fetchUserByIdFailed,
   fetchUserByIdSuccess,
   fetchingUser,
-  setImage,
-  setNewImage,
   updateUser,
   updateUserFailed,
   updateUserSuccess,
 } from "./profileSlice";
 
+import Swal from "sweetalert2";
 import { userApi } from "api/userApi";
 
 function* fetchUserById(action) {
@@ -29,7 +28,12 @@ function* handleUpdateUser(action) {
   const { payload } = action;
   try {
     yield call(userApi.updateUser, payload);
+
     yield put(updateUserSuccess());
+    yield Swal.fire({
+      icon: "success",
+      title: "Update successfully",
+    });
   } catch (error) {
     console.log(
       "🚀 ~ file: profileSaga.js ~ line 35 ~ function*handleUpdateUser ~ error",

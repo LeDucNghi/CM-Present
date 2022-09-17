@@ -1,9 +1,8 @@
+import { fork, put, take } from "redux-saga/effects";
 import { login, loginFailed, loginSuccess, logout } from "./authSlice";
 
 import { Toast } from "utils";
 import history from "utils/history";
-
-const { put, fork, take } = require("redux-saga/effects");
 
 function* handleLogin(payload) {
   const email = "testing@gmail.com";
@@ -50,9 +49,10 @@ function* handleLogout() {
 }
 
 function* watchLoginFlow() {
+  console.log("vào watch login flow");
   while (true) {
     const isLoggedIn = Boolean(localStorage.getItem("account"));
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       const action = yield take(login.type);
       yield fork(handleLogin, action.payload);
     }

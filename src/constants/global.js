@@ -74,7 +74,9 @@ export const columns = [
             color="success"
             sx={{ fontWeight: 600, margin: "0 auto" }}
             onClick={() => {
-              store.dispatch(routesName("About"));
+              store.dispatch(
+                routesName(languages === "VN" ? "Giới thiệu" : "About")
+              );
             }}
           >
             {languages === "Eng" ? "View" : "Xem chi tiết"}

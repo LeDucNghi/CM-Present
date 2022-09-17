@@ -50,19 +50,11 @@ export default function LanguageMenus() {
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem
-          onClick={() =>
-            dispatch(handleChangeLanguage(1, setLanguage, setAnchorEl))
-          }
-          disableRipple
-        >
+        <MenuItem onClick={() => handleChangeLanguage(1)} disableRipple>
           <LanguageIcon />
           <p>VN</p>
         </MenuItem>
-        <MenuItem
-          onClick={() => dispatch(handleChangeLanguage(2))}
-          disableRipple
-        >
+        <MenuItem onClick={() => handleChangeLanguage(2)} disableRipple>
           <LanguageIcon />
           <p>Eng</p>
         </MenuItem>

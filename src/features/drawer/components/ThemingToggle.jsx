@@ -39,7 +39,7 @@ export default function ThemeToggle() {
             sx={{ m: 1 }}
             checked={isOn}
             ison={isOn}
-            onClick={() => dispatch(toggleSwitch(isOn, setIsOn))}
+            onClick={() => toggleSwitch(isOn, setIsOn)}
           />
         }
         // label="MUI switch"

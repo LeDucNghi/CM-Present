@@ -13,16 +13,7 @@ export const getArrayElement = (arr) => {
   var newEl;
   if (Array.isArray(arr) && arr.length > 0) {
     arr.forEach((el) => {
-      const { id, ...rest } = el;
-      console.log(
-        "🚀 ~ file: common.js ~ line 17 ~ arr.forEach ~ id, ...rest",
-        id,
-        { ...rest }
-      );
-      return (newEl = {
-        id: id,
-        values: { ...rest },
-      });
+      newEl = el;
     });
     return newEl;
   }
