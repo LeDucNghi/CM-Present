@@ -16,6 +16,7 @@ import {
 } from "./trashSlice";
 import { fetchUserListSuccess, selectUserList } from "features/user/userSlice";
 
+import Swal from "sweetalert2";
 import { trashApi } from "api/trashApi";
 import { userApi } from "api/userApi";
 
@@ -58,6 +59,10 @@ function* handleDeletePermanent(action) {
       "🚀 ~ file: trashSaga.js ~ line 60 ~ function*handleDeletePermanent ~ error",
       error
     );
+    Swal.fire({
+      icon: "error",
+      title: `${error.message}`,
+    });
   }
 }
 
@@ -69,20 +74,31 @@ function* handleRestoreUser(action) {
   const sameList = checkSameElement(payload.row, payload.selectedRow);
   const diffList = checkDiffElement(payload.row, payload.selectedRow);
 
-  yield all(
-    sameList.map((x) => {
-      const { id, ...rest } = x;
-      return all([
-        call(trashApi.deleteUser, x.id),
-        call(userApi.addNewUser, { ...rest }),
+  try {
+    yield all(
+      sameList.map((x) => {
+        const { id, ...rest } = x;
+        return all([
+          call(trashApi.deleteUser, x.id),
+          call(userApi.addNewUser, { ...rest }),
 
-        newUserList.push({ ...rest, id: newUserList.length + 1 }),
-      ]);
-    })
-  );
+          newUserList.push({ ...rest, id: newUserList.length + 1 }),
 
-  yield put(fetchUserListSuccess(newUserList));
-  yield put(fetchDeletedListSuccess(diffList));
+          put(fetchUserListSuccess(newUserList)),
+          put(fetchDeletedListSuccess(diffList)),
+        ]);
+      })
+    );
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: trashSaga.js ~ line 88 ~ function*handleRestoreUser ~ error",
+      error
+    );
+    Swal.fire({
+      icon: "error",
+      title: `${error.message}`,
+    });
+  }
 }
 
 export default function* trashSaga() {

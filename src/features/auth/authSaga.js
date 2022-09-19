@@ -3,6 +3,7 @@ import { login, loginFailed, loginSuccess, logout } from "./authSlice";
 
 import { Toast } from "utils";
 import history from "utils/history";
+import moment from "moment";
 
 function* handleLogin(payload) {
   const email = "testing@gmail.com";
@@ -17,6 +18,7 @@ function* handleLogin(payload) {
   const items = {
     values: payload,
     expired: expiredTime,
+    timeOut: moment(expiredTime).format("llll"),
   };
 
   if (checkMail) {
@@ -33,12 +35,12 @@ function* handleLogin(payload) {
     });
   } else {
     localStorage.setItem("account", JSON.stringify(items));
-    put(loginSuccess());
-    Toast.fire({
+    yield put(loginSuccess());
+    yield Toast.fire({
       icon: "success",
       title: "Signin success",
     });
-    history.push(`/main/user`);
+    yield history.push(`/main/user`);
   }
 }
 
@@ -49,7 +51,6 @@ function* handleLogout() {
 }
 
 function* watchLoginFlow() {
-  console.log("vào watch login flow");
   while (true) {
     const isLoggedIn = Boolean(localStorage.getItem("account"));
     if (!isLoggedIn) {

@@ -54,7 +54,10 @@ function* handleAddUser(action) {
       error
     );
     yield put(addUserFailed());
-    yield Swal.fire(`${error.message}`, "", "error");
+    Swal.fire({
+      icon: "error",
+      title: `${error.message}`,
+    });
   }
 }
 
@@ -72,25 +75,28 @@ function* handleRemoveToTrash(action) {
       sameList.map((x) => {
         const { id, ...rest } = x;
         return all([
+          call(trashApi.addNewUser, { ...rest }),
+          call(userApi.deleteUser, x.id),
+
           newDeletedList.push({
             ...rest,
             id: newDeletedList.length + 1,
           }),
-          call(trashApi.addNewUser, { ...rest }),
-          call(userApi.deleteUser, x.id),
+
+          put(fetchDeletedListSuccess(newDeletedList)),
+          put(fetchUserListSuccess(diffList)),
         ]);
       })
     );
-
-    yield put(fetchDeletedListSuccess(newDeletedList));
-    yield put(fetchUserListSuccess(diffList));
-
-    // yield delay(200);
   } catch (error) {
     console.log(
       "🚀 ~ file: trashSaga.js ~ line 51 ~ function*handleRemoveToTrash ~ error",
       error
     );
+    Swal.fire({
+      icon: "error",
+      title: `${error.message}`,
+    });
   }
 }
 

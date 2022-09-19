@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 import AddUserForm from "features/user/components/AddUserForm";
 import { Button } from "@mui/material";
@@ -10,11 +9,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { handleDeleteUser } from "utils";
 import { selectDeletedList } from "features/trash/trashSlice";
-
-// import { handleDeleteUser } from "features/trash/trashThunk";
+import { useSelector } from "react-redux";
 
 export default function User() {
-  const dispatch = useDispatch();
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
   const deletedUserList = useSelector(selectDeletedList);
