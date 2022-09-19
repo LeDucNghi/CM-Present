@@ -9,7 +9,6 @@ export const checkSameElement = (row, selectedRow) => {
 };
 
 export const getArrayElement = (arr) => {
-  console.log("🚀 ~ file: common.js ~ line 12 ~ getArrayElement ~ arr", arr);
   var newEl;
   if (Array.isArray(arr) && arr.length > 0) {
     arr.forEach((el) => {

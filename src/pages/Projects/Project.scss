@@ -1,0 +1,11 @@
+@import "../../assets/styles/GlobalStyles.scss";
+
+.project_container {
+    @include posCenter;
+    @include flexCenter;
+}
+
+.project_text {
+    color: $text-color-test;
+    font-weight: $font-weight;
+}

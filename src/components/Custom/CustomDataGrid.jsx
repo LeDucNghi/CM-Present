@@ -1,7 +1,7 @@
-import { CustomDataGrid } from "constants";
+import { CustomDataGrid } from "constants/styledMUI";
 import PropTypes from "prop-types";
 import React from "react";
-import { columns } from "constants";
+import { columns } from "constants/global";
 import { selectDeletedList } from "features/trash/trashSlice";
 import { selectMode } from "features/drawer/drawerSlice";
 import { selectUserList } from "features/user/userSlice";
