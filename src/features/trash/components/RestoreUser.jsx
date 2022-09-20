@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import Swal from "sweetalert2";
 import { restoreUser } from "../trashSlice";
+import { successPopup } from "utils";
 
 export default function RestoreUser({ row, selectedRow }) {
   const dispatch = useDispatch();
@@ -42,10 +43,10 @@ export default function RestoreUser({ row, selectedRow }) {
       if (result.isConfirmed) {
         dispatch(restoreUser({ row, selectedRow }));
 
-        Swal.fire({
-          icon: "success",
-          title: `${languages === "VN" ? `Đã khôi phục!` : `Restored!`}`,
-        });
+        // Swal.fire({
+        //   icon: "success",
+        //   title: `${languages === "VN" ? `Đã khôi phục!` : `Restored!`}`,
+        // });
       }
     });
   };

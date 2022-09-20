@@ -14,12 +14,18 @@ import {
   takeEvery,
   takeLatest,
 } from "redux-saga/effects";
-import { checkDiffElement, checkSameElement } from "utils";
+import {
+  checkDiffElement,
+  checkSameElement,
+  failedPopup,
+  successPopup,
+} from "utils";
 import {
   fetchDeletedListSuccess,
   removeToTrash,
   selectDeletedList,
 } from "features/trash/trashSlice";
+import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
 
 import Swal from "sweetalert2";
 import { trashApi } from "api/trashApi";
@@ -40,24 +46,19 @@ function* fetchUserList() {
 
 function* handleAddUser(action) {
   const { payload } = action;
+
   try {
     const res = yield call(userApi.addNewUser, payload);
 
     if (res) {
       yield put(addUserSuccess(payload));
 
-      yield Swal.fire("Added user successfully!", "", "success");
+      yield successPopup("Thêm user thành công!", "Added user successfully!");
     }
   } catch (error) {
-    console.log(
-      "🚀 ~ file: userSaga.js ~ line 28 ~ function*handleAddUser ~ error",
-      error
-    );
     yield put(addUserFailed());
-    Swal.fire({
-      icon: "error",
-      title: `${error.message}`,
-    });
+
+    yield failedPopup(error.message);
   }
 }
 
@@ -82,21 +83,15 @@ function* handleRemoveToTrash(action) {
             ...rest,
             id: newDeletedList.length + 1,
           }),
-
-          put(fetchDeletedListSuccess(newDeletedList)),
-          put(fetchUserListSuccess(diffList)),
         ]);
       })
     );
+
+    yield put(fetchDeletedListSuccess(newDeletedList));
+    yield put(fetchUserListSuccess(diffList));
+    yield successPopup(`Đã xóa!`, `Deleted!`, payload.isDenied);
   } catch (error) {
-    console.log(
-      "🚀 ~ file: trashSaga.js ~ line 51 ~ function*handleRemoveToTrash ~ error",
-      error
-    );
-    Swal.fire({
-      icon: "error",
-      title: `${error.message}`,
-    });
+    yield failedPopup(error.message);
   }
 }
 

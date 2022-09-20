@@ -106,16 +106,6 @@
       "role": "member",
       "team": "React",
       "project": "Facebook app"
-    },
-    {
-      "firstName": "Phung",
-      "lastName": "Hung",
-      "email": "phunghung210@gmail.com",
-      "age": "22",
-      "role": "member",
-      "team": "React",
-      "project": "Cake website",
-      "id": 11
     }
   ],
   "trash": [
@@ -150,6 +140,16 @@
       "team": "Angular",
       "project": "Zalo App",
       "id": 3
+    },
+    {
+      "firstName": "Phung",
+      "lastName": "Hung",
+      "email": "phunghung210@gmail.com",
+      "age": "22",
+      "role": "member",
+      "team": "React",
+      "project": "Cake website",
+      "id": 4
     }
   ]
 }

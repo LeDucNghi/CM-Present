@@ -1,4 +1,5 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { failedPopup, successPopup } from "utils";
 import {
   fetchUserByIdFailed,
   fetchUserByIdSuccess,
@@ -26,20 +27,24 @@ function* fetchUserById(action) {
 
 function* handleUpdateUser(action) {
   const { payload } = action;
+
   try {
     yield call(userApi.updateUser, payload);
 
     yield put(updateUserSuccess());
-    yield Swal.fire({
-      icon: "success",
-      title: "Update successfully",
-    });
+    // yield Swal.fire({
+    //   icon: "success",
+    //   title: "Update successfully",
+    // });
+
+    yield successPopup("Cập nhật thành công", "Update successfully");
   } catch (error) {
     console.log(
       "🚀 ~ file: profileSaga.js ~ line 35 ~ function*handleUpdateUser ~ error",
       error
     );
     yield put(updateUserFailed(error.message));
+    yield failedPopup(error.message);
   }
 }
 

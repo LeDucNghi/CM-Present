@@ -2,10 +2,12 @@ import { deleteUser, removeToTrash } from "features/trash/trashSlice";
 
 import Swal from "sweetalert2";
 import { store } from "app/store";
+import { successPopup } from "./common";
 
 export function handleDeleteUser({ row, selectedRow, isDenied }) {
   const mode = store.getState().drawer.mode;
   const languages = store.getState().drawer.language;
+  const userList = store.getState().user.userList;
   const isSuccess = store.getState().user.success;
 
   Swal.fire({
@@ -22,7 +24,10 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
     }`,
     text: "",
     icon: "warning",
+
+    showLoaderOnConfirm: true,
     showCancelButton: true,
+    showLoaderOnDeny: true,
     showDenyButton: isDenied,
 
     confirmButtonColor: "#3085d6",
@@ -46,46 +51,29 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
 
     background: `${mode === "dark" ? "#121212" : ""}`,
     color: `${mode === "dark" ? "#fff" : ""}`,
+
+    preConfirm: () => {
+      return store.dispatch(removeToTrash({ row, selectedRow, isDenied }));
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
   }).then((result) => {
     if (result.isConfirmed) {
       // if isDenied === true > remove to trash
       // else > delete permanently
 
-      if (isDenied) {
-        // user page > remove to trash
-        store.dispatch(removeToTrash({ row, selectedRow }));
-      } else {
-        // trash page > delete permanently
-        store.dispatch(deleteUser({ row, selectedRow, isDenied }));
-      }
+      console.log("result", result);
 
-      if (isSuccess) {
-        Swal.fire({
-          icon: "success",
-          title: `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
-          text: isDenied
-            ? `${
-                languages === `VN`
-                  ? `Bạn có thể khôi phục ${
-                      selectedRow.length === 1 ? "" : "những"
-                    } người dùng ở thùng rác!`
-                  : `You can restore ${
-                      selectedRow.length === 1 ? `this` : `these`
-                    } user${selectedRow.length === 1 ? `` : `s`} in trash`
-              }`
-            : ``,
-        });
-      }
+      // if (isDenied) {
+      //   // user page > remove to trash
+      //   store.dispatch(removeToTrash({ row, selectedRow, isDenied }));
+      // } else {
+      //   // trash page > delete permanently
+      //   store.dispatch(deleteUser({ row, selectedRow, isDenied }));
+      // }
     } else if (result.isDenied) {
       // delete permanently in user page
 
       store.dispatch(deleteUser({ row, selectedRow, isDenied }));
-      if (isSuccess) {
-        Swal.fire({
-          icon: "success",
-          title: `${languages === `VN` ? `Đã xóa!` : `Deleted!`}`,
-        });
-      }
     }
   });
 }
