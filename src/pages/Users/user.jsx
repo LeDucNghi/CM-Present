@@ -14,7 +14,6 @@ import { useSelector } from "react-redux";
 export default function User() {
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
-  const deletedUserList = useSelector(selectDeletedList);
 
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
@@ -23,7 +22,6 @@ export default function User() {
   const handleDeleteUserArgs = {
     row,
     selectedRow,
-    list: deletedUserList,
     isDenied: true,
   };
 
