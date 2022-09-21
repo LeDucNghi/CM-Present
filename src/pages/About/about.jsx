@@ -35,7 +35,6 @@ function About() {
   const languages = useSelector(selectLanguage);
 
   useEffect(() => {
-    // dispatch(fetchUserById(id));
     dispatch(fetchingUser(id));
   }, [dispatch, id]);
 

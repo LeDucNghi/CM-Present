@@ -12,7 +12,6 @@ import { trashApi } from "api/trashApi";
 import { userApi } from "api/userApi";
 
 export const fetchTrashList = () => async (dispatch, getState) => {
-  // const teamName = getState().trash.tabs;
   try {
     const res = await trashApi.getDeletedList();
     dispatch(fetchDeletedListSuccess(res));
@@ -28,7 +27,6 @@ export const handleRestoreUser =
     const languages = getState().drawer.language;
     const userList = getState().user.userList;
 
-    const diffList = checkDiffElement(row, selectedRow);
     const sameList = checkSameElement(row, selectedRow);
 
     Swal.fire({

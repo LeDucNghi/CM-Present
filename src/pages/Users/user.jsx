@@ -8,7 +8,6 @@ import DataGrid from "components/Custom/CustomDataGrid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { handleDeleteUser } from "utils";
-import { selectDeletedList } from "features/trash/trashSlice";
 import { useSelector } from "react-redux";
 
 export default function User() {
@@ -18,12 +17,6 @@ export default function User() {
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-
-  const handleDeleteUserArgs = {
-    row,
-    selectedRow,
-    isDenied: true,
-  };
 
   return (
     <div
@@ -60,8 +53,13 @@ export default function User() {
         </Button>
         <Button
           startIcon={<DeleteIcon />}
-          // onClick={() => dispatch(handleDeleteUser(handleDeleteUserArgs))}
-          onClick={() => handleDeleteUser(handleDeleteUserArgs)}
+          onClick={() =>
+            handleDeleteUser({
+              row,
+              selectedRow,
+              isDenied: true,
+            })
+          }
           variant="contained"
           color="error"
           sx={{

@@ -9,8 +9,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import SigninForm from "features/auth/components/SigninForm";
 import Typography from "@mui/material/Typography";
 
-// import moment from "moment";
-
 function Copyright(props) {
   return (
     <Typography

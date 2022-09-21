@@ -9,18 +9,17 @@ export default function DeleteUser({ row, selectedRow }) {
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
 
-  const handleDeleteArgs = {
-    row,
-    selectedRow,
-    isDenied: false,
-  };
-
   return (
     <>
       <Button
         startIcon={<DeleteIcon />}
-        // onClick={() => dispatch(handleDeleteUser(handleDeleteArgs))}
-        onClick={() => handleDeleteUser(handleDeleteArgs)}
+        onClick={() =>
+          handleDeleteUser({
+            row,
+            selectedRow,
+            isDenied: false,
+          })
+        }
         variant="contained"
         color="error"
         disabled={selectedRow.length === 0}

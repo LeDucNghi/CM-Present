@@ -6,12 +6,7 @@ import {
   takeEvery,
   takeLatest,
 } from "redux-saga/effects";
-import {
-  checkDiffElement,
-  checkSameElement,
-  failedPopup,
-  successPopup,
-} from "utils";
+import { checkDiffElement, checkSameElement, failedPopup } from "utils";
 import {
   deleteUser,
   fetchDeletedListFailed,
@@ -21,7 +16,6 @@ import {
 } from "./trashSlice";
 import { fetchUserListSuccess, selectUserList } from "features/user/userSlice";
 
-import Swal from "sweetalert2";
 import { trashApi } from "api/trashApi";
 import { userApi } from "api/userApi";
 
@@ -59,18 +53,7 @@ function* handleDeletePermanent(action) {
     if (payload.isDenied === true) {
       yield put(fetchUserListSuccess(diffList));
     } else yield put(fetchDeletedListSuccess(diffList));
-
-    yield successPopup(`Đã xóa!`, `Deleted!`);
   } catch (error) {
-    // console.log(
-    //   "🚀 ~ file: trashSaga.js ~ line 60 ~ function*handleDeletePermanent ~ error",
-    //   error
-    // );
-    // Swal.fire({
-    //   icon: "error",
-    //   title: `${error.message}`,
-    // });
-
     yield failedPopup(error.message);
   }
 }
@@ -81,6 +64,7 @@ function* handleRestoreUser(action) {
   const userList = yield select(selectUserList);
 
   const newUserList = [...userList];
+
   const sameList = checkSameElement(payload.row, payload.selectedRow);
   const diffList = checkDiffElement(payload.row, payload.selectedRow);
 
@@ -89,27 +73,20 @@ function* handleRestoreUser(action) {
       sameList.map((x) => {
         const { id, ...rest } = x;
         return all([
-          call(trashApi.deleteUser, x.id),
           call(userApi.addNewUser, { ...rest }),
+          call(trashApi.deleteUser, x.id),
 
-          newUserList.push({ ...rest, id: newUserList.length + 1 }),
+          newUserList.push({
+            ...rest,
+            id: newUserList[newUserList.length - 1].id + 1,
+          }),
         ]);
       })
     );
 
     yield put(fetchDeletedListSuccess(diffList));
     yield put(fetchUserListSuccess(newUserList));
-
-    yield successPopup(`Đã khôi phục!`, `Restored!`);
   } catch (error) {
-    // console.log(
-    //   "🚀 ~ file: trashSaga.js ~ line 88 ~ function*handleRestoreUser ~ error",
-    //   error
-    // );
-    // Swal.fire({
-    //   icon: "error",
-    //   title: `${error.message}`,
-    // });
     yield failedPopup(error.message);
   }
 }

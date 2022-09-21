@@ -9,7 +9,6 @@ import {
   updateUserSuccess,
 } from "./profileSlice";
 
-import Swal from "sweetalert2";
 import { userApi } from "api/userApi";
 
 function* fetchUserById(action) {
@@ -32,10 +31,6 @@ function* handleUpdateUser(action) {
     yield call(userApi.updateUser, payload);
 
     yield put(updateUserSuccess());
-    // yield Swal.fire({
-    //   icon: "success",
-    //   title: "Update successfully",
-    // });
 
     yield successPopup("Cập nhật thành công", "Update successfully");
   } catch (error) {

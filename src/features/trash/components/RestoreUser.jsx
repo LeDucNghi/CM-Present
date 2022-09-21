@@ -27,7 +27,9 @@ export default function RestoreUser({ row, selectedRow }) {
       }`,
       text: "",
       icon: "warning",
+
       showCancelButton: true,
+      showLoaderOnConfirm: true,
 
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -39,14 +41,13 @@ export default function RestoreUser({ row, selectedRow }) {
 
       background: `${mode === "dark" ? "#121212" : ""}`,
       color: `${mode === "dark" ? "#fff" : ""}`,
+
+      preConfirm: () => {
+        dispatch(restoreUser({ row, selectedRow }));
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(restoreUser({ row, selectedRow }));
-
-        // Swal.fire({
-        //   icon: "success",
-        //   title: `${languages === "VN" ? `Đã khôi phục!` : `Restored!`}`,
-        // });
+        successPopup(`Đã khôi phục!`, `Restored!`);
       }
     });
   };

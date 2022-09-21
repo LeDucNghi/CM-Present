@@ -7,8 +7,6 @@ import { successPopup } from "./common";
 export function handleDeleteUser({ row, selectedRow, isDenied }) {
   const mode = store.getState().drawer.mode;
   const languages = store.getState().drawer.language;
-  const userList = store.getState().user.userList;
-  const isSuccess = store.getState().user.success;
 
   Swal.fire({
     title: `${
@@ -26,8 +24,8 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
     icon: "warning",
 
     showLoaderOnConfirm: true,
-    showCancelButton: true,
     showLoaderOnDeny: true,
+    showCancelButton: true,
     showDenyButton: isDenied,
 
     confirmButtonColor: "#3085d6",
@@ -53,7 +51,12 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
     color: `${mode === "dark" ? "#fff" : ""}`,
 
     preConfirm: () => {
-      return store.dispatch(removeToTrash({ row, selectedRow, isDenied }));
+      if (isDenied)
+        return store.dispatch(removeToTrash({ row, selectedRow, isDenied }));
+      else return store.dispatch(deleteUser({ row, selectedRow, isDenied }));
+    },
+    preDeny: () => {
+      return store.dispatch(deleteUser({ row, selectedRow, isDenied }));
     },
     allowOutsideClick: () => !Swal.isLoading(),
   }).then((result) => {
@@ -61,19 +64,19 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
       // if isDenied === true > remove to trash
       // else > delete permanently
 
-      console.log("result", result);
+      if (isDenied) {
+        // user page > remove to trash
 
-      // if (isDenied) {
-      //   // user page > remove to trash
-      //   store.dispatch(removeToTrash({ row, selectedRow, isDenied }));
-      // } else {
-      //   // trash page > delete permanently
-      //   store.dispatch(deleteUser({ row, selectedRow, isDenied }));
-      // }
+        successPopup(`Đã xóa!`, `Deleted!`, isDenied);
+      } else {
+        // trash page > delete permanently
+
+        successPopup(`Đã xóa!`, `Deleted!`);
+      }
     } else if (result.isDenied) {
       // delete permanently in user page
 
-      store.dispatch(deleteUser({ row, selectedRow, isDenied }));
+      successPopup(`Đã xóa!`, `Deleted!`, isDenied);
     }
   });
 }

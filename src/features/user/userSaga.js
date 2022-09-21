@@ -25,9 +25,7 @@ import {
   removeToTrash,
   selectDeletedList,
 } from "features/trash/trashSlice";
-import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
 
-import Swal from "sweetalert2";
 import { trashApi } from "api/trashApi";
 import { userApi } from "api/userApi";
 
@@ -81,15 +79,13 @@ function* handleRemoveToTrash(action) {
 
           newDeletedList.push({
             ...rest,
-            id: newDeletedList.length + 1,
+            id: newDeletedList[newDeletedList.length - 1].id + 1,
           }),
         ]);
       })
     );
-
     yield put(fetchDeletedListSuccess(newDeletedList));
     yield put(fetchUserListSuccess(diffList));
-    yield successPopup(`Đã xóa!`, `Deleted!`, payload.isDenied);
   } catch (error) {
     yield failedPopup(error.message);
   }

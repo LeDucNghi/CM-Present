@@ -77,7 +77,6 @@
       "project": "Zalo App"
     },
     {
-      "id": 8,
       "lastName": "Frances",
       "firstName": "Rossini",
       "age": 36,
@@ -85,42 +84,10 @@
       "image": null,
       "role": "member",
       "team": "Angular",
-      "project": "Zalo App"
-    },
-    {
-      "firstName": "Duc",
-      "lastName": "Nghi",
-      "email": "leducnghi28122000@gmail.com",
-      "age": "22",
-      "role": "member",
-      "team": "React Native",
       "project": "Zalo App",
-      "id": 9
+      "id": 8
     },
     {
-      "id": 10,
-      "firstName": "Anh",
-      "lastName": "Tuấn",
-      "email": "phamanhtuan01789@gmail.com",
-      "age": "22",
-      "role": "member",
-      "team": "React",
-      "project": "Facebook app"
-    }
-  ],
-  "trash": [
-    {
-      "id": 1,
-      "firstName": "John",
-      "lastName": "Cena",
-      "email": "phunghung210@gmail.com",
-      "image": null,
-      "age": "29",
-      "team": "React",
-      "role": "member"
-    },
-    {
-      "id": 2,
       "lastName": "Phung",
       "firstName": "Hung",
       "age": 69,
@@ -128,7 +95,8 @@
       "image": null,
       "role": "member",
       "team": "React",
-      "project": "Error"
+      "project": "Error",
+      "id": 9
     },
     {
       "lastName": "Roxie",
@@ -139,16 +107,48 @@
       "role": "member",
       "team": "Angular",
       "project": "Zalo App",
-      "id": 3
+      "id": 10
     },
     {
-      "firstName": "Phung",
-      "lastName": "Hung",
-      "email": "phunghung210@gmail.com",
-      "age": "22",
+      "firstName": "Anh",
+      "lastName": "Tuấn",
+      "email": "phamanhtuan01789@gmail.com",
+      "age": "23",
+      "role": "member",
+      "team": "React",
+      "project": "Zalo app",
+      "id": 11
+    }
+  ],
+  "trash": [
+    {
+      "firstName": "Đức",
+      "lastName": "Nghị",
+      "email": "leducnghi2812200hiie@gmail.com",
+      "age": "28",
       "role": "member",
       "team": "React",
       "project": "Cake website",
+      "id": 2
+    },
+    {
+      "firstName": "John",
+      "lastName": "Cena",
+      "email": "phunghung210@gmail.com",
+      "image": null,
+      "age": "29",
+      "team": "React",
+      "role": "member",
+      "id": 3
+    },
+    {
+      "firstName": "Duc",
+      "lastName": "Nghi",
+      "email": "leducnghi28122000@gmail.com",
+      "age": "22",
+      "role": "member",
+      "team": "React Native",
+      "project": "Zalo App",
       "id": 4
     }
   ]
