@@ -19,7 +19,7 @@ export const getArrayElement = (arr) => {
   }
 };
 
-export const successPopup = (VN, Eng, isDenied) => {
+export const successPopup = (VN, Eng) => {
   const languages = store.getState().drawer.language;
   const mode = store.getState().drawer.mode;
   var newPopup;
@@ -30,14 +30,6 @@ export const successPopup = (VN, Eng, isDenied) => {
 
     background: mode === "dark" ? "#19191a" : "",
     color: mode === "dark" ? "#e1e1e1" : "",
-
-    text: isDenied
-      ? `${
-          languages === `VN`
-            ? `Bạn có thể khôi phục ở thùng rác!`
-            : `You can restore in trash`
-        }`
-      : ``,
   });
 
   return newPopup;

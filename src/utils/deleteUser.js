@@ -51,8 +51,7 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
     color: `${mode === "dark" ? "#fff" : ""}`,
 
     preConfirm: () => {
-      if (isDenied)
-        return store.dispatch(removeToTrash({ row, selectedRow, isDenied }));
+      if (isDenied) return store.dispatch(removeToTrash({ row, selectedRow }));
       else return store.dispatch(deleteUser({ row, selectedRow, isDenied }));
     },
     preDeny: () => {
@@ -61,22 +60,9 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
     allowOutsideClick: () => !Swal.isLoading(),
   }).then((result) => {
     if (result.isConfirmed) {
-      // if isDenied === true > remove to trash
-      // else > delete permanently
-
-      if (isDenied) {
-        // user page > remove to trash
-
-        successPopup(`Đã xóa!`, `Deleted!`, isDenied);
-      } else {
-        // trash page > delete permanently
-
-        successPopup(`Đã xóa!`, `Deleted!`);
-      }
+      successPopup(`Đã xóa!`, `Deleted!`);
     } else if (result.isDenied) {
-      // delete permanently in user page
-
-      successPopup(`Đã xóa!`, `Deleted!`, isDenied);
+      successPopup(`Đã xóa!`, `Deleted!`);
     }
   });
 }

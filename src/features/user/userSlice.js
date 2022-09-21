@@ -17,6 +17,10 @@ export const userSlice = createSlice({
     },
 
     fetchUserListSuccess: (state, action) => {
+      console.log(
+        "🚀 ~ file: userSlice.js ~ line 22 ~ action.payload",
+        action.payload
+      );
       state.loading = false;
       state.userList = action.payload;
       state.success = true;
@@ -35,7 +39,7 @@ export const userSlice = createSlice({
     addUserSuccess: (state, action) => {
       state.userList.push({
         ...action.payload,
-        id: state.userList.length + 1,
+        id: state.userList[state.userList.length - 1].id + 1,
       });
       state.loading = false;
       state.isOpen = false;
