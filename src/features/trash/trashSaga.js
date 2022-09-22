@@ -41,21 +41,12 @@ function* handleDeletePermanent(action) {
   const sameList = checkSameElement(payload.row, payload.selectedRow);
 
   try {
-    yield all(
-      sameList.map((x) => {
-        const { id, ...rest } = x;
-        return payload.isDenied === true
-          ? call(userApi.deleteUser, x.id)
-          : call(trashApi.deleteUser, x.id);
-      })
-    );
+    for (const el of sameList) {
+      const { id, ...rest } = el;
 
-    // for (const el of sameList){
-    //   const { id, ...rest } = el;
-
-    //   if(payload.isDenied === true) yield call(userApi.deleteUser, el.id)
-    //   else yield call(trashApi.deleteUser, x.id);
-    // }
+      if (payload.isDenied === true) yield call(userApi.deleteUser, el.id);
+      else yield call(trashApi.deleteUser, el.id);
+    }
 
     if (payload.isDenied === true) {
       yield put(fetchUserListSuccess(diffList));
@@ -76,32 +67,19 @@ function* handleRestoreUser(action) {
   const diffList = checkDiffElement(payload.row, payload.selectedRow);
 
   try {
-    yield all(
-      sameList.map((x) => {
-        const { id, ...rest } = x;
-        return all([
-          newUserList.push({
-            ...rest,
-            id: newUserList[newUserList.length - 1].id + 1,
-          }),
-          call(userApi.addNewUser, { ...rest }),
-          call(trashApi.deleteUser, x.id),
-        ]);
-      })
-    );
+    for (const el of sameList) {
+      const { id, ...rest } = el;
 
-    //     for (const el of sameList){
-    //   const { id, ...rest } = el;
+      newUserList.push({
+        ...rest,
+        id: newUserList[newUserList.length - 1].id + 1,
+      });
 
-    //   yield all([
-    //     newUserList.push({
-    //         ...rest,
-    //         id: newUserList[newUserList.length - 1].id + 1,
-    //       }),
-    //       call(userApi.addNewUser, { ...rest }),
-    //       call(trashApi.deleteUser, el.id),
-    //   ])
-    // }
+      yield all([
+        call(userApi.addNewUser, { ...rest }),
+        call(trashApi.deleteUser, el.id),
+      ]);
+    }
 
     yield put(fetchDeletedListSuccess(diffList));
     yield put(fetchUserListSuccess(newUserList));
