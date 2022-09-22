@@ -22,7 +22,7 @@ export default function AddUserForm({ open, setOpen }) {
   const isOpened = useSelector(selectOpen);
 
   useEffect(() => {
-    if (isOpened === false) setOpen(false);
+    if (isOpened === false) setOpen(isOpened);
   }, [isOpened]);
 
   const style = {

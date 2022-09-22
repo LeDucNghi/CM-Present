@@ -8,15 +8,22 @@ import DataGrid from "components/Custom/CustomDataGrid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { handleDeleteUser } from "utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setOpenModal } from "features/user/userSlice";
 
 export default function User() {
+  const dispatch = useDispatch();
   const mode = useSelector(selectMode);
   const languages = useSelector(selectLanguage);
 
   const [selectedRow, setSelectedRow] = React.useState([]);
   const [row, setRow] = React.useState([]);
   const [open, setOpen] = React.useState(false);
+
+  const handleAddUser = () => {
+    dispatch(setOpenModal());
+    setOpen(true);
+  };
 
   return (
     <div
@@ -46,7 +53,7 @@ export default function User() {
               cursor: "not-allowed",
             },
           }}
-          onClick={() => setOpen(true)}
+          onClick={() => handleAddUser()}
           disabled={selectedRow.length > 0}
         >
           {languages === "VN" ? "Thêm" : "Add"}

@@ -57,7 +57,6 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
     preDeny: () => {
       return store.dispatch(deleteUser({ row, selectedRow, isDenied }));
     },
-    allowOutsideClick: () => !Swal.isLoading(),
   }).then((result) => {
     if (result.isConfirmed) {
       successPopup(`Đã xóa!`, `Deleted!`);

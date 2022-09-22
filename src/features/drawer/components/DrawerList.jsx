@@ -12,6 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import PersonIcon from "@mui/icons-material/Person";
 import { routesName } from "../drawerSlice";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 export const ListDrawer = ({ mode, languages, open }) => {
   const drawer = [
@@ -89,6 +90,19 @@ export const ListDrawer = ({ mode, languages, open }) => {
     dispatch(routesName(pageName));
     navigate(pathName);
   };
+
+  useEffect(() => {
+    if (pathname === "/main/user" && languages === "VN")
+      dispatch(routesName(`Thành viên`));
+    if (pathname === "/main/dashboard" && languages === "VN")
+      dispatch(routesName(`Bảng tin`));
+    if (pathname === "/main/project" && languages === "VN")
+      dispatch(routesName(`Dự án`));
+    if (pathname === "/main/about" && languages === "VN")
+      dispatch(routesName(`Giới thiệu`));
+    if (pathname === "/main/trash" && languages === "VN")
+      dispatch(routesName(`Thùng rác`));
+  }, [pathname, languages, dispatch]);
 
   return (
     <List>

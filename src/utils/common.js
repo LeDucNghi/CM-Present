@@ -22,17 +22,14 @@ export const getArrayElement = (arr) => {
 export const successPopup = (VN, Eng) => {
   const languages = store.getState().drawer.language;
   const mode = store.getState().drawer.mode;
-  var newPopup;
 
-  newPopup = Swal.fire({
+  return Swal.fire({
     icon: "success",
     title: languages === "VN" ? `${VN}` : `${Eng}`,
 
     background: mode === "dark" ? "#19191a" : "",
     color: mode === "dark" ? "#e1e1e1" : "",
   });
-
-  return newPopup;
 };
 
 export const failedPopup = (message) => {

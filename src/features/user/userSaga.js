@@ -67,6 +67,10 @@ function* handleRemoveToTrash(action) {
   const sameList = checkSameElement(payload.row, payload.selectedRow);
   const diffList = checkDiffElement(payload.row, payload.selectedRow);
 
+  console.log(
+    "🚀 ~ file: userSaga.js ~ line 68 ~ function*handleRemoveToTrash ~ sameList",
+    sameList
+  );
   try {
     const newDeletedList = [...deletedList];
 
@@ -76,7 +80,6 @@ function* handleRemoveToTrash(action) {
         return all([
           call(trashApi.addNewUser, { ...rest }),
           call(userApi.deleteUser, x.id),
-
           newDeletedList.push({
             ...rest,
             id: newDeletedList[newDeletedList.length - 1].id + 1,
@@ -84,8 +87,10 @@ function* handleRemoveToTrash(action) {
         ]);
       })
     );
-    yield put(fetchDeletedListSuccess(newDeletedList));
+
     yield put(fetchUserListSuccess(diffList));
+    yield put(fetchDeletedListSuccess(newDeletedList));
+    // successPopup(`Đã xóa!`, `Deleted!`);
   } catch (error) {
     yield failedPopup(error.message);
   }

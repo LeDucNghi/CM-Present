@@ -104,16 +104,6 @@
       "team": "React Native",
       "project": "Zalo App",
       "id": 10
-    },
-    {
-      "firstName": "Đức",
-      "lastName": "Long",
-      "email": "vuduclong@gmail.com",
-      "age": "29",
-      "role": "member",
-      "team": "React",
-      "project": "Zalo",
-      "id": 14
     }
   ],
   "trash": [

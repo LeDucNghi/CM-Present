@@ -17,10 +17,6 @@ export const userSlice = createSlice({
     },
 
     fetchUserListSuccess: (state, action) => {
-      console.log(
-        "🚀 ~ file: userSlice.js ~ line 22 ~ action.payload",
-        action.payload
-      );
       state.loading = false;
       state.userList = action.payload;
       state.success = true;
@@ -53,6 +49,10 @@ export const userSlice = createSlice({
     deleteFromUserList: (state) => {
       state.loading = true;
     },
+
+    setOpenModal: (state) => {
+      state.isOpen = true;
+    },
   },
 });
 
@@ -64,6 +64,7 @@ export const {
   fetchUserListFailed,
   fetchUserListSuccess,
   deleteFromUserList,
+  setOpenModal,
 } = userSlice.actions;
 
 export const selectUserList = (state) => state.user.userList;

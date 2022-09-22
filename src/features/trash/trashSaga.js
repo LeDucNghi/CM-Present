@@ -50,6 +50,13 @@ function* handleDeletePermanent(action) {
       })
     );
 
+    // for (const el of sameList){
+    //   const { id, ...rest } = el;
+
+    //   if(payload.isDenied === true) yield call(userApi.deleteUser, el.id)
+    //   else yield call(trashApi.deleteUser, x.id);
+    // }
+
     if (payload.isDenied === true) {
       yield put(fetchUserListSuccess(diffList));
     } else yield put(fetchDeletedListSuccess(diffList));
@@ -73,16 +80,28 @@ function* handleRestoreUser(action) {
       sameList.map((x) => {
         const { id, ...rest } = x;
         return all([
-          call(userApi.addNewUser, { ...rest }),
-          call(trashApi.deleteUser, x.id),
-
           newUserList.push({
             ...rest,
             id: newUserList[newUserList.length - 1].id + 1,
           }),
+          call(userApi.addNewUser, { ...rest }),
+          call(trashApi.deleteUser, x.id),
         ]);
       })
     );
+
+    //     for (const el of sameList){
+    //   const { id, ...rest } = el;
+
+    //   yield all([
+    //     newUserList.push({
+    //         ...rest,
+    //         id: newUserList[newUserList.length - 1].id + 1,
+    //       }),
+    //       call(userApi.addNewUser, { ...rest }),
+    //       call(trashApi.deleteUser, el.id),
+    //   ])
+    // }
 
     yield put(fetchDeletedListSuccess(diffList));
     yield put(fetchUserListSuccess(newUserList));
