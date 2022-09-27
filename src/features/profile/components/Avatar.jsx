@@ -4,6 +4,8 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 export const Avatar = ({ data, setFieldValue }) => {
+  const account = JSON.parse(localStorage.getItem("account"));
+
   var [image, setImage] = useState(null);
 
   const onImageChange = (e) => {
@@ -39,7 +41,12 @@ export const Avatar = ({ data, setFieldValue }) => {
           size="3x"
           style={{ color: "#464646" }}
         />
-        <input onChange={(e) => onImageChange(e)} name="file_avt" type="file" />
+        <input
+          disabled={account.values.role === "admin" ? false : true}
+          onChange={(e) => onImageChange(e)}
+          name="file_avt"
+          type="file"
+        />
       </label>
     </>
   );

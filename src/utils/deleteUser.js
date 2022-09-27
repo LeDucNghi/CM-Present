@@ -2,11 +2,13 @@ import { deleteUser, removeToTrash } from "features/trash/trashSlice";
 
 import Swal from "sweetalert2";
 import { store } from "app/store";
-import { successPopup } from "./common";
 
 export function handleDeleteUser({ row, selectedRow, isDenied }) {
   const mode = store.getState().drawer.mode;
   const languages = store.getState().drawer.language;
+
+  // var isConfirmed;
+  // var isDeny;
 
   Swal.fire({
     title: `${
@@ -45,23 +47,28 @@ export function handleDeleteUser({ row, selectedRow, isDenied }) {
             ? `Có, hãy xóa vĩnh viễn`
             : `Yes, delete it permanently!`
         }`,
-    cancelButtonText: `${languages === "VN" ? `Hủy` : `Cancel`}`,
+    cancelButtonText: languages === "VN" ? `Hủy` : `Cancel`,
 
-    background: `${mode === "dark" ? "#121212" : ""}`,
-    color: `${mode === "dark" ? "#fff" : ""}`,
+    background: mode === "dark" ? "#121212" : "",
+    color: mode === "dark" ? "#fff" : "",
 
     preConfirm: () => {
-      if (isDenied) return store.dispatch(removeToTrash({ row, selectedRow }));
-      else return store.dispatch(deleteUser({ row, selectedRow, isDenied }));
+      if (isDenied) {
+        store.dispatch(removeToTrash({ row, selectedRow }));
+        return false;
+      } else {
+        store.dispatch(deleteUser({ row, selectedRow, isDenied }));
+        return false;
+      }
     },
     preDeny: () => {
-      return store.dispatch(deleteUser({ row, selectedRow, isDenied }));
+      store.dispatch(deleteUser({ row, selectedRow, isDenied }));
+      return false;
     },
-  }).then((result) => {
-    if (result.isConfirmed) {
-      successPopup(`Đã xóa!`, `Deleted!`);
-    } else if (result.isDenied) {
-      successPopup(`Đã xóa!`, `Deleted!`);
-    }
+
+    // didOpen: () => {
+    //   if (isConfirmed === true) Swal.showLoading(Swal.getConfirmButton());
+    //   if (isDeny === true) Swal.showLoading(Swal.getDenyButton());
+    // },
   });
 }

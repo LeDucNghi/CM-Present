@@ -6,7 +6,12 @@ import {
   takeEvery,
   takeLatest,
 } from "redux-saga/effects";
-import { checkDiffElement, checkSameElement, failedPopup } from "utils";
+import {
+  checkDiffElement,
+  checkSameElement,
+  failedPopup,
+  successPopup,
+} from "utils";
 import {
   deleteUser,
   fetchDeletedListFailed,
@@ -48,9 +53,10 @@ function* handleDeletePermanent(action) {
       else yield call(trashApi.deleteUser, el.id);
     }
 
-    if (payload.isDenied === true) {
-      yield put(fetchUserListSuccess(diffList));
-    } else yield put(fetchDeletedListSuccess(diffList));
+    if (payload.isDenied === true) yield put(fetchUserListSuccess(diffList));
+    else yield put(fetchDeletedListSuccess(diffList));
+
+    successPopup(`Đã xóa!`, `Deleted!`);
   } catch (error) {
     yield failedPopup(error.message);
   }
@@ -75,7 +81,7 @@ function* handleRestoreUser(action) {
         id: newUserList[newUserList.length - 1].id + 1,
       });
 
-      yield all([
+      const res = yield all([
         call(userApi.addNewUser, { ...rest }),
         call(trashApi.deleteUser, el.id),
       ]);
@@ -83,8 +89,13 @@ function* handleRestoreUser(action) {
 
     yield put(fetchDeletedListSuccess(diffList));
     yield put(fetchUserListSuccess(newUserList));
+    successPopup(`Đã khôi phục!`, `Restored!`);
   } catch (error) {
-    yield failedPopup(error.message);
+    console.log(
+      "🚀 ~ file: trashSaga.js ~ line 88 ~ function*handleRestoreUser ~ error",
+      error
+    );
+    yield failedPopup(`Please try again 🤧`);
   }
 }
 

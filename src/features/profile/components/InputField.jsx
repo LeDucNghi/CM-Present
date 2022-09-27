@@ -1,6 +1,7 @@
 import { Field } from "components/Custom/InputField";
 import React from "react";
 import { selectLanguage } from "features/drawer/drawerSlice";
+import { selectUserProfile } from "../profileSlice";
 import { useSelector } from "react-redux";
 
 export const InputField = ({
@@ -11,10 +12,12 @@ export const InputField = ({
   handleChange,
 }) => {
   const languages = useSelector(selectLanguage);
+  const account = JSON.parse(localStorage.getItem("account"));
 
   return (
     <>
       <Field
+        disabled={account.values.role === "admin" ? false : true}
         name="firstName"
         label={languages === "VN" ? "Tên họ" : "First name"}
         type="text"
@@ -29,6 +32,7 @@ export const InputField = ({
       />
 
       <Field
+        disabled={account.values.role === "admin" ? false : true}
         name="lastName"
         label={languages === "VN" ? "Tên cuối" : "Last name"}
         type="text"
@@ -43,6 +47,7 @@ export const InputField = ({
       />
 
       <Field
+        disabled={account.values.role === "admin" ? false : true}
         name="email"
         label="email"
         type="text"
@@ -55,6 +60,7 @@ export const InputField = ({
       />
 
       <Field
+        disabled={account.values.role === "admin" ? false : true}
         name="age"
         label={languages === "VN" ? "Tuổi" : "Age"}
         type="text"
@@ -65,6 +71,7 @@ export const InputField = ({
       />
 
       <Field
+        disabled={account.values.role === "admin" ? false : true}
         name="team"
         label={languages === "VN" ? "Nhóm" : "Team"}
         type="text"
@@ -75,6 +82,7 @@ export const InputField = ({
       />
 
       <Field
+        disabled={account.values.role === "admin" ? false : true}
         name="role"
         label={languages === "VN" ? "Chức vụ" : "Role"}
         type="text"

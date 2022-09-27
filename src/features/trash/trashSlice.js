@@ -6,6 +6,8 @@ const initialState = {
   loading: false,
   message: "",
   isError: false,
+  isConfirmed: false,
+  isDeny: false,
 };
 
 export const trashSlice = createSlice({
@@ -43,6 +45,14 @@ export const trashSlice = createSlice({
     setTabs: (state, action) => {
       state.tabs = action.payload;
     },
+
+    setConfirm: (state) => {
+      state.isConfirmed = true;
+    },
+
+    setDenied: (state) => {
+      state.isDeny = true;
+    },
   },
 });
 
@@ -54,6 +64,8 @@ export const {
   fetchDeletedListSuccess,
   deleteUser,
   setTabs,
+  setConfirm,
+  setDenied,
 } = trashSlice.actions;
 
 // export const selectTrashList = (state) => state.trash.trashList;
@@ -61,5 +73,7 @@ export const selectDeletedList = (state) => state.trash.deletedUserList;
 export const selectIsLoading = (state) => state.trash.loading;
 export const selectMessage = (state) => state.trash.message;
 export const selectTabs = (state) => state.trash.tabs;
+export const selectConfirmed = (state) => state.trash.isConfirmed;
+export const selectDenied = (state) => state.trash.isDeny;
 
 export const trashReducer = trashSlice.reducer;

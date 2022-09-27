@@ -55,6 +55,16 @@
       "id": 5
     },
     {
+      "firstName": "Quang",
+      "lastName": "Hoàng",
+      "email": "lequanghoang@gmail.com",
+      "age": "29",
+      "role": "member",
+      "team": "React",
+      "project": "Zalo",
+      "id": 8
+    },
+    {
       "firstName": "Anh",
       "lastName": "Tuấn",
       "email": "phamanhtuan01789@gmail.com",
@@ -62,37 +72,7 @@
       "role": "member",
       "team": "React",
       "project": "Zalo app",
-      "id": 7
-    },
-    {
-      "firstName": "John",
-      "lastName": "Cena",
-      "email": "phunghung210@gmail.com",
-      "image": null,
-      "age": "29",
-      "team": "React",
-      "role": "member",
-      "id": 8
-    },
-    {
-      "id": 9,
-      "firstName": "Đức",
-      "lastName": "Nghị",
-      "email": "leducnghi28122000hiie@gmail.com",
-      "age": "30",
-      "role": "member",
-      "team": "React",
-      "project": "Cake website"
-    },
-    {
-      "id": 10,
-      "firstName": "Quang",
-      "lastName": "Hoàng",
-      "email": "lequanghoang@gmail.com",
-      "age": "29",
-      "role": "member",
-      "team": "React",
-      "project": "Zalo"
+      "id": 9
     }
   ],
   "trash": [
@@ -127,6 +107,26 @@
       "team": "React",
       "project": "Facebook App",
       "id": 3
+    },
+    {
+      "firstName": "John",
+      "lastName": "Cena",
+      "email": "phunghung210@gmail.com",
+      "image": null,
+      "age": "29",
+      "team": "React",
+      "role": "member",
+      "id": 4
+    },
+    {
+      "firstName": "Đức",
+      "lastName": "Nghị",
+      "email": "leducnghi28122000hiie@gmail.com",
+      "age": "30",
+      "role": "member",
+      "team": "React",
+      "project": "Cake website",
+      "id": 5
     }
   ]
 }

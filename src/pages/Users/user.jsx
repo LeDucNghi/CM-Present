@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { selectLanguage, selectMode } from "features/drawer/drawerSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import AddUserForm from "features/user/components/AddUserForm";
 import { Button } from "@mui/material";
@@ -8,7 +9,6 @@ import DataGrid from "components/Custom/CustomDataGrid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { handleDeleteUser } from "utils";
-import { useDispatch, useSelector } from "react-redux";
 import { setOpenModal } from "features/user/userSlice";
 
 export default function User() {

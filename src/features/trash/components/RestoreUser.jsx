@@ -45,11 +45,12 @@ export default function RestoreUser({ row, selectedRow }) {
       preConfirm: () => {
         dispatch(restoreUser({ row, selectedRow }));
       },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        successPopup(`Đã khôi phục!`, `Restored!`);
-      }
     });
+    // .then((result) => {
+    //   if (result.isConfirmed) {
+    //     successPopup(`Đã khôi phục!`, `Restored!`);
+    //   }
+    // });
   };
 
   return (

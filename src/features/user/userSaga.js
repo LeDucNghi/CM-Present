@@ -24,6 +24,7 @@ import {
   fetchDeletedListSuccess,
   removeToTrash,
   selectDeletedList,
+  setConfirm,
 } from "features/trash/trashSlice";
 
 import { trashApi } from "api/trashApi";
@@ -69,6 +70,8 @@ function* handleRemoveToTrash(action) {
   const sameList = checkSameElement(payload.row, payload.selectedRow);
   const diffList = checkDiffElement(payload.row, payload.selectedRow);
 
+  yield put(setConfirm());
+
   try {
     for (const el of sameList) {
       const { id, ...rest } = el;
@@ -86,8 +89,13 @@ function* handleRemoveToTrash(action) {
 
     yield put(fetchUserListSuccess(diffList));
     yield put(fetchDeletedListSuccess(newDeletedList));
+    successPopup(`Đã xóa!`, `Deleted!`);
   } catch (error) {
-    yield failedPopup(error.message);
+    console.log(
+      "🚀 ~ file: userSaga.js ~ line 94 ~ function*handleRemoveToTrash ~ error",
+      error
+    );
+    yield failedPopup(`Please try again 🤧`);
   }
 }
 

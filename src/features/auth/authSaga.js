@@ -6,28 +6,38 @@ import history from "utils/history";
 import moment from "moment";
 
 function* handleLogin(payload) {
-  const email = "testing@gmail.com";
-  const password = "123456789Test";
+  const adminAccount = {
+    email: "admin@gmail.com",
+    password: "123456789Test",
+    role: "admin",
+  };
 
-  const checkMail = email !== payload.email;
-  const checkPass = password !== payload.password;
+  const userAccount = {
+    email: "user@gmail.com",
+    password: "123456789Test",
+    role: "user",
+  };
+
+  const checkMail = adminAccount.email || userAccount.email !== payload.email;
+  const checkPass =
+    adminAccount.password || userAccount.password !== payload.password;
 
   const now = new Date();
   const expiredTime = now.getTime() + 86400000;
 
   const items = {
-    values: payload,
+    values: payload.email === `user@gmail.com` ? userAccount : adminAccount,
     expired: expiredTime,
     timeOut: moment(expiredTime).format("llll"),
   };
 
-  if (checkMail) {
+  if (!checkMail) {
     yield put(loginFailed());
     yield Toast.fire({
       icon: "error",
       title: "Invalid email",
     });
-  } else if (checkPass) {
+  } else if (!checkPass) {
     yield put(loginFailed());
     yield Toast.fire({
       icon: "error",
